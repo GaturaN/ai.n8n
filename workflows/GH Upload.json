@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "On clicking 'execute'": {
       "main": [
@@ -490,7 +490,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-09-01T11:24:35.000Z",
+  "triggerCount": 1,
+  "updatedAt": "2024-09-01T11:24:45.000Z",
   "versionId": "a2a8efa3-bcb4-421d-92fc-94aa9eb7e30b"
 }
