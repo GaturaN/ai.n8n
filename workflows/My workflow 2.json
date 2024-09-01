@@ -1,0 +1,55 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "CloudConvert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-01T10:22:12.138Z",
+  "id": "oicA1afZPDGpznbf",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "340cce37-b312-4222-a32b-14d728b7ea39",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        600,
+        280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "cb9088db-f815-47ec-bb4c-02a33dfe8b93",
+      "name": "CloudConvert",
+      "type": "@cloudconvert/n8n-nodes-cloudconvert.cloudConvert",
+      "typeVersion": 1,
+      "position": [
+        820,
+        280
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-01T10:50:56.000Z",
+  "versionId": "7c12d41b-28cf-40ff-97b6-08154c906c06"
+}
