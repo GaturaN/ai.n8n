@@ -1,0 +1,512 @@
+{
+  "active": true,
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Xero",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get Xero Tenant ID1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Xero Tenant ID1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ceate_all-attachments_array": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Upload file2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Xero": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "ceate_all-attachments_array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-08-30T08:15:32.918Z",
+  "id": "SXqt7nC1B8Jrx1ZS",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Sheets => Xero",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0",
+          "mode": "list",
+          "cachedResultName": "Supplier_Bills",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1834874338,
+          "mode": "list",
+          "cachedResultName": "Test",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0/edit#gid=1834874338"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "id": "f4576eeb-b2f9-4785-b0aa-2f921840406b",
+      "name": "Google Sheets Trigger",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        700
+      ],
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "RCHdJHAopRvrEMZD",
+          "name": "Google Sheets n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "all_attachments",
+        "options": {}
+      },
+      "id": "320fc955-4197-4c90-9f19-127ffb7c9a45",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        420,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const all_attachments = [];\nconst keys = Object.keys(items[0].json);\n\nkeys.forEach(key => {\n    if (key.startsWith(\"Attachment\")) {\n        const link = items[0].json[key] || \"\"; // Include empty attachments\n        all_attachments.push({ key, url: link });\n    }\n});\n\n// Return the structured output with the named array\nreturn [{\n    json: {\n        all_attachments: all_attachments\n    }\n}];\n"
+      },
+      "id": "b412f501-8c3c-4a66-8533-2bc2ae9ce615",
+      "name": "ceate_all-attachments_array",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        180,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "3a39247d-3545-4932-9409-afe8ef948558",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        680,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "6089c524-a5e0-43fc-b779-91606287f4a4",
+              "leftValue": "={{ $json.url }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b09695f0-4256-4605-b826-557687a556f0",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        940,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('If').item.json.url }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "id": "eff25eab-15ad-496a-aaed-279f5368b728",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1400,
+        840
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "organizationId": "40c98685-d0d0-420f-af21-7a3826ef914d",
+        "type": "ACCPAY",
+        "contactId": "2bd87bd3-7b2c-4784-b3cd-cb072745889f",
+        "lineItemsUi": {
+          "lineItemsValues": [
+            {
+              "itemCode": "0001",
+              "accountCode": "400",
+              "taxType": "NONE"
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "id": "19b654ca-e8be-48af-a9d7-b8647f864891",
+      "name": "Xero",
+      "type": "n8n-nodes-base.xero",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        700
+      ],
+      "credentials": {
+        "xeroOAuth2Api": {
+          "id": "ogNv2lJWSPRBGZq4",
+          "name": "Xero account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/connections",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "7ec54289-ccf0-4604-9fbb-a5329b9de4d0",
+      "name": "Get Xero Tenant ID1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1180,
+        820
+      ],
+      "credentials": {
+        "xeroOAuth2Api": {
+          "id": "ogNv2lJWSPRBGZq4",
+          "name": "Xero account"
+        },
+        "oAuth2Api": {
+          "id": "NesCzE0QCeleMCY9",
+          "name": "Xero App"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.xero.com/api.xro/2.0/Invoices/{{ $('Xero').item.json.InvoiceID }}/Attachments/{{$binary.data.fileName}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Xero-tenant-id",
+              "value": "={{ $('Get Xero Tenant ID1').item.json.body[0].tenantId }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "id": "0bcd92c5-1037-4e7e-a003-6ea0f457f35e",
+      "name": "Upload file2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1640,
+        860
+      ],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "NesCzE0QCeleMCY9",
+          "name": "Xero App"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0",
+          "mode": "list",
+          "cachedResultName": "Supplier_Bills",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1834874338,
+          "mode": "list",
+          "cachedResultName": "Test",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0/edit#gid=1834874338"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Invoice Number",
+              "lookupValue": "={{ $('Google Sheets Trigger').item.json[\"Invoice Number\"] }}"
+            },
+            {
+              "lookupColumn": "Supplier Name",
+              "lookupValue": "={{ $('Google Sheets Trigger').item.json[\"Supplier Name\"] }}"
+            },
+            {
+              "lookupColumn": "Invoice Date",
+              "lookupValue": "={{ $('Google Sheets Trigger').item.json[\"Invoice Date\"] }}"
+            },
+            {
+              "lookupColumn": "Invoice Due Date",
+              "lookupValue": "={{ $('Google Sheets Trigger').item.json[\"Invoice Due Date\"] }}"
+            },
+            {
+              "lookupColumn": "Tax",
+              "lookupValue": "={{ $('Google Sheets Trigger').item.json.Tax }}"
+            },
+            {
+              "lookupColumn": "Qty",
+              "lookupValue": "={{ $('Google Sheets Trigger').item.json.Qty }}"
+            },
+            {
+              "lookupColumn": "Project",
+              "lookupValue": "={{ $('Google Sheets Trigger').item.json.Project }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dc874364-4271-438e-b4d8-1511694e9378",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -40,
+        700
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Epe0euL6qKcOzKeG",
+          "name": "google"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "organizationId": "40c98685-d0d0-420f-af21-7a3826ef914d",
+        "invoiceId": "740d371c-aab1-490c-9c1a-481323dbb41d"
+      },
+      "id": "bcc2d72c-9dc4-414b-a9b0-19b87c533de2",
+      "name": "Xero1",
+      "type": "n8n-nodes-base.xero",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        300
+      ],
+      "credentials": {
+        "xeroOAuth2Api": {
+          "id": "ogNv2lJWSPRBGZq4",
+          "name": "Xero account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "9218146f-226e-4800-ba56-1b2d10bd23ab",
+      "name": "Read PDF",
+      "type": "n8n-nodes-base.readPDF",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        320
+      ],
+      "disabled": true
+    }
+  ],
+  "pinData": {
+    "Google Sheets Trigger": [
+      {
+        "json": {
+          "Invoice Number": 4555,
+          "Supplier Name": "Company 1234",
+          "Invoice Date": "08/06/2024",
+          "Invoice Due Date": "21/07/2023",
+          "Tax": "No Tax",
+          "Qty": 1,
+          "Unit Price": 60000,
+          "Account Code": 494,
+          "Department": "Commercial",
+          "Project": "LA 2028",
+          "Currency": "",
+          "Attachment 1": "https://drive.google.com/file/d/1lochXVsy4fgzc--S4tkIJyXhYvhnVCeo/view?usp=drive_link",
+          "Attachment 2": "https://drive.google.com/file/d/18vi7zWxFVSdbh-9jx4wlWOtMI4eT2NRn/view?usp=drive_link",
+          "Attachment 3": "https://drive.google.com/file/d/1BhzdPnvgdiqPL6Ozswry9itHoskSOu40/view?usp=drive_link",
+          "Attachment 4": ""
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Africa/Nairobi",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Google Sheets Trigger": {
+      "documentId": "1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0",
+      "sheetId": 1834874338,
+      "lastIndexChecked": 5
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-01T11:16:04.000Z",
+  "versionId": "a23eb156-7d7b-4f3b-ad02-cb3e61d4c8e4"
+}
