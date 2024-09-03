@@ -118,6 +118,11 @@
           }
         ]
       ]
+    },
+    "CloudConvert": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2024-08-30T08:15:32.918Z",
@@ -359,8 +364,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1640,
-        860
+        1620,
+        840
       ],
       "credentials": {
         "oAuth2Api": {
@@ -467,6 +472,25 @@
         320
       ],
       "disabled": true
+    },
+    {
+      "parameters": {
+        "outputFormat": "jpg"
+      },
+      "id": "2e0cbbb1-c2fa-48a4-ae8b-c6dd96fb129c",
+      "name": "CloudConvert",
+      "type": "@cloudconvert/n8n-nodes-cloudconvert.cloudConvert",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        440
+      ],
+      "credentials": {
+        "cloudConvertOAuth2Api": {
+          "id": "BIFtDmqmhGNjTmA0",
+          "name": "CloudConvert & n8n"
+        }
+      }
     }
   ],
   "pinData": {
@@ -507,6 +531,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-01T11:16:04.000Z",
-  "versionId": "a23eb156-7d7b-4f3b-ad02-cb3e61d4c8e4"
+  "updatedAt": "2024-09-03T06:14:36.000Z",
+  "versionId": "16304d12-5eb5-45db-9087-ef85a5eb63e4"
 }
