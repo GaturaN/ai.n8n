@@ -1,0 +1,610 @@
+{
+  "active": true,
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get Xero Tenant ID1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Xero Tenant ID1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ceate_all-attachments_array": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Upload file2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Xero": {
+      "main": [
+        [
+          {
+            "node": "Google Cloud Firestore1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Google Cloud Firestore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Cloud Firestore": {
+      "main": [
+        [
+          {
+            "node": "Xero",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Docs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Cloud Firestore1": {
+      "main": [
+        [
+          {
+            "node": "ceate_all-attachments_array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-06T13:31:33.636Z",
+  "id": "lNgrFtbMDKLjTdPO",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Firestore => Xero",
+  "nodes": [
+    {
+      "parameters": {
+        "fieldToSplitOut": "all_attachments",
+        "options": {}
+      },
+      "id": "3a93f339-3875-466b-b2ad-b836ed575aed",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        640,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const all_attachments = [];\nconst keys = Object.keys(items[0].json);\n\nkeys.forEach(key => {\n    if (key.startsWith(\"Attachment\")) {\n        const link = items[0].json[key] || \"\"; // Include empty attachments\n        all_attachments.push({ key, url: link });\n    }\n});\n\n// Return the structured output with the named array\nreturn [{\n    json: {\n        all_attachments: all_attachments\n    }\n}];\n"
+      },
+      "id": "02ad0f35-da69-44ae-81cd-7a1beb93f1d0",
+      "name": "ceate_all-attachments_array",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "02f3c05c-a13e-4fcb-92f5-83818cf87593",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        900,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "6089c524-a5e0-43fc-b779-91606287f4a4",
+              "leftValue": "={{ $json.url }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "691747c2-6ed5-437d-b986-30c89a9cb9a4",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('If').item.json.url }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "id": "cf18e3ea-d138-4fb4-b7a3-80edf0fec0cb",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1620,
+        840
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "organizationId": "40c98685-d0d0-420f-af21-7a3826ef914d",
+        "type": "ACCPAY",
+        "contactId": "2bd87bd3-7b2c-4784-b3cd-cb072745889f",
+        "lineItemsUi": {
+          "lineItemsValues": [
+            {
+              "itemCode": "0001",
+              "accountCode": "400",
+              "taxType": "NONE"
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "id": "c51ad73c-f3ff-4cd3-bfa3-bcd9acce07de",
+      "name": "Xero",
+      "type": "n8n-nodes-base.xero",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        700
+      ],
+      "credentials": {
+        "xeroOAuth2Api": {
+          "id": "ogNv2lJWSPRBGZq4",
+          "name": "Xero account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/connections",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "1ec35ee8-9618-4523-a30b-e9296eec4576",
+      "name": "Get Xero Tenant ID1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1400,
+        820
+      ],
+      "credentials": {
+        "xeroOAuth2Api": {
+          "id": "ogNv2lJWSPRBGZq4",
+          "name": "Xero account"
+        },
+        "oAuth2Api": {
+          "id": "NesCzE0QCeleMCY9",
+          "name": "Xero App"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.xero.com/api.xro/2.0/Invoices/{{ $('Xero').item.json.InvoiceID }}/Attachments/{{$binary.data.fileName}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Xero-tenant-id",
+              "value": "={{ $('Get Xero Tenant ID1').item.json.body[0].tenantId }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "id": "9fc0a727-06dc-49c6-baed-d77f80681b18",
+      "name": "Upload file2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1840,
+        840
+      ],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "NesCzE0QCeleMCY9",
+          "name": "Xero App"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "926be84b-27f4-4090-85a0-3195ec6c60ed",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1160,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": "={{ $json.body.id }}"
+      },
+      "id": "f75c21fa-0796-4640-b416-4a00bb03ae23",
+      "name": "Google Cloud Firestore",
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        700
+      ],
+      "credentials": {
+        "googleFirebaseCloudFirestoreOAuth2Api": {
+          "id": "36nuvIJU1YioZiou",
+          "name": "Google Firebase Cloud Firestore account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Webhook with document id created in firestore",
+        "height": 364.26442253214475,
+        "width": 187.4407333835417
+      },
+      "id": "be82a832-6e01-4b1b-a1db-233800efa311",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -920,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Accessing the document from firestore using the document id",
+        "height": 444.2978512435699,
+        "width": 176.27963330822917
+      },
+      "id": "0c153970-a3a3-4da1-857f-60e78df9a71a",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        460
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ff535ed8-a9e6-4479-8026-0f05aced7a0d",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -660,
+        700
+      ],
+      "webhookId": "194d419c-650b-4d18-ba3f-68c72d2eb867"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "3025f823-f74b-4846-953f-a92ea204fec4",
+        "options": {}
+      },
+      "id": "844dda78-e9d9-4086-aaf2-9ebf4daf4797",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -880,
+        700
+      ],
+      "webhookId": "3025f823-f74b-4846-953f-a92ea204fec4"
+    },
+    {
+      "parameters": {
+        "documentId": "={{ $json.body.id }}"
+      },
+      "id": "3f498eb9-29d7-4e9d-b5d2-3e295bad704c",
+      "name": "Google Cloud Firestore1",
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        120,
+        700
+      ],
+      "credentials": {
+        "googleFirebaseCloudFirestoreOAuth2Api": {
+          "id": "36nuvIJU1YioZiou",
+          "name": "Google Firebase Cloud Firestore account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Get Invoice Details from firestore and create Xero Invoice",
+        "height": 390.54405584037386,
+        "width": 304.50455448383514
+      },
+      "id": "5859748c-384c-442c-b98a-09cd77b10322",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Get Details and all attachment array, split the array to work with them in batches",
+        "height": 357.0972498117187,
+        "width": 433.51366345150547
+      },
+      "id": "f197331b-89bb-4963-8527-4a0c18f7f334",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Download each attachment and upload it to the Xero Invoice",
+        "height": 247.2006014318512,
+        "width": 597.164107234569
+      },
+      "id": "a8d3a307-32bb-473d-a156-6f0b6d30ab49",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## After Creation of Invoice, Send email to approver ",
+        "height": 240.03342871142513,
+        "width": 210.1367803315577
+      },
+      "id": "c2b1dad5-431f-445f-b53a-2bac0057c7df",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        360
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "85913bc9-4a78-416d-86a3-454634dc0853",
+      "name": "Google Docs",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        -100,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Create google doc using tamplate to be provided",
+        "height": 282.43920064061314,
+        "width": 232.53419508288945
+      },
+      "id": "b67d855b-3dfc-471e-bca5-a72d5ebc5bcb",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        940
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "ai.gatuservices.info",
+            "x-forwarded-scheme": "http",
+            "x-forwarded-proto": "http",
+            "x-forwarded-for": "195.26.248.51, 172.70.176.39",
+            "x-real-ip": "172.70.176.39",
+            "content-length": "13",
+            "accept-encoding": "gzip, br",
+            "cf-ray": "8beee3d44ce1d1ab-MCI",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
+            "content-type": "application/json",
+            "user-agent": "axios/1.7.4",
+            "cf-connecting-ip": "195.26.248.51",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-ipcountry": "US"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": "test"
+          },
+          "webhookUrl": "https://ai.gatuservices.info/webhook/3025f823-f74b-4846-953f-a92ea204fec4",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Africa/Nairobi",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Google Sheets Trigger": {
+      "documentId": "1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0",
+      "sheetId": 1834874338,
+      "lastIndexChecked": 5
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-09T14:13:35.000Z",
+  "versionId": "4161457a-e471-4e49-8d54-bf4299c04f6d"
+}
