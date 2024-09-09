@@ -1,0 +1,413 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "CloudConvert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CloudConvert": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Cloud Firestore": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Set fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set fields": {
+      "main": [
+        [
+          {
+            "node": "Google Cloud Firestore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-05T06:51:31.709Z",
+  "id": "EPLYAzNDJz51Oo41",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Invoice Extraction with Vision GPT",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7e809a3e-fab4-494a-9ecc-c7d72a6666d3",
+        "options": {}
+      },
+      "id": "3479dae1-9fe1-4985-8f5e-aae1ae3b5388",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        340,
+        540
+      ],
+      "webhookId": "7e809a3e-fab4-494a-9ecc-c7d72a6666d3"
+    },
+    {
+      "parameters": {
+        "outputFormat": "jpg"
+      },
+      "id": "25a1bc57-8a88-4fbc-a26c-c53604504d51",
+      "name": "CloudConvert",
+      "type": "@cloudconvert/n8n-nodes-cloudconvert.cloudConvert",
+      "typeVersion": 1,
+      "position": [
+        760,
+        540
+      ],
+      "credentials": {
+        "cloudConvertOAuth2Api": {
+          "id": "DFGJeJnkgJHXCmfv",
+          "name": "CloudConvert account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.code }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "id": "f5487d28-ba53-48ff-b1ee-617f458992e3",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        540,
+        540
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "text": "What's in this image?\nInclude the items and its quantity in tabular form that can be extracted.",
+        "inputType": "base64",
+        "simplify": false,
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "id": "e1d7e2bf-0a4f-4c91-b6ab-25873070fd29",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [
+        980,
+        540
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create"
+      },
+      "id": "de8d0d1d-e681-4c5e-8dca-aacdf7b39b15",
+      "name": "Google Cloud Firestore",
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        1800,
+        540
+      ],
+      "credentials": {
+        "googleFirebaseCloudFirestoreOAuth2Api": {
+          "id": "36nuvIJU1YioZiou",
+          "name": "Google Firebase Cloud Firestore account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ai.gatuservices.info/webhook/3025f823-f74b-4846-953f-a92ea204fec4",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "id",
+              "value": "test"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d4cdfd40-ef39-4f40-95bb-db60010e060a",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Receives data from flutter flow\n-  Workflow assumes the saved files are in a shared folder in google drive",
+        "height": 333
+      },
+      "id": "0ca16266-ddcf-4cc1-ab64-97e032de92fb",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        240,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Downloads the pdf file from drive then parses it through cloud convert to get jpg format",
+        "height": 398,
+        "width": 316
+      },
+      "id": "d7eb0908-5b7e-4301-8d7f-cb8c0e8a8107",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        540,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Give a result of the items and their quantities from this response {{ $json.choices[0].message.content }}",
+              "role": "assistant"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "id": "bf3a0dd3-d9d8-4734-8e21-9ee2f44a97c3",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [
+        1200,
+        540
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Gets details from the image using api and ahve it formatted as json",
+        "height": 271,
+        "width": 514
+      },
+      "id": "6aeb45c7-6394-43b9-9668-8dbe7f9f633c",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        960,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5eb4a131-5391-47bb-afb7-3ccf2a060e26",
+              "name": "item",
+              "value": "={{ $json.message.content.items[0].description }}",
+              "type": "string"
+            },
+            {
+              "id": "c23c13d1-d847-4997-b2c3-db58b7187823",
+              "name": "qty",
+              "value": "={{ $json.message.content.items[0].quantity }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b233eb49-2202-4246-aeeb-fa40b2f60843",
+      "name": "Set fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1580,
+        540
+      ],
+      "notesInFlow": true,
+      "notes": "Set fields from the openai chat\n"
+    },
+    {
+      "parameters": {
+        "content": "## Creat Record in Firestore. Need to configure the fields and record details",
+        "height": 315,
+        "width": 224
+      },
+      "id": "4456178a-71fa-4c30-a9a8-b69214857106",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        369
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Send the data to webhook to creat invice in Xero",
+        "height": 324,
+        "width": 172
+      },
+      "id": "e10a98da-e40c-404c-853a-985a5409d8e3",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1980,
+        380
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "name": "pdf_url",
+          "code": "https://drive.google.com/file/d/18vi7zWxFVSdbh-9jx4wlWOtMI4eT2NRn/view?usp=drive_link"
+        }
+      }
+    ],
+    "OpenAI": [
+      {
+        "json": {
+          "id": "chatcmpl-A46I6Fm9g884TbMKzSWFKnllg1cqP",
+          "object": "chat.completion",
+          "created": 1725540858,
+          "model": "gpt-4o-2024-05-13",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "Certainly! Here is the information extracted in a tabular form:\n\n| Sr | Description                      | Quantity | Rate     | Amount    |\n|----|----------------------------------|----------|----------|-----------|\n| 1  | Bio Maziwa Lala Nature Plain 500ml | -1       | KSh 87.73 | KSh -87.73 |\n\nAdditional Information:\n- Total Quantity: -1\n- Subtotal: KSh -87.73\n\n| Sr | Description       | Amount    |\n|----|-------------------|-----------|\n| 1  | Zero Rated Tax    | KSh 0.00  |\n| 2  | VAT - 16%         | KSh -14.04|\n\n- Grand Total: KSh -101.77",
+                "refusal": null
+              },
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 1132,
+            "completion_tokens": 159,
+            "total_tokens": 1291
+          },
+          "system_fingerprint": "fp_992d1ea92d"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-09T14:13:16.000Z",
+  "versionId": "944f9556-b589-49b1-beaf-7dca434859a7"
+}
