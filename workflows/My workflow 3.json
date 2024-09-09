@@ -1,0 +1,65 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Cloud Firestore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-05T14:28:29.476Z",
+  "id": "y9xdCTZ5e2PhfXYq",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "66eee4ce-da26-4800-aea3-8f28b5339ff2",
+      "name": "Google Cloud Firestore",
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        1280,
+        520
+      ],
+      "credentials": {
+        "googleFirebaseCloudFirestoreOAuth2Api": {
+          "id": "36nuvIJU1YioZiou",
+          "name": "Google Firebase Cloud Firestore account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "392419cc-d613-4efa-a463-63ce5db4b75b",
+        "options": {}
+      },
+      "id": "ec6588c2-f29d-4edf-92ee-330f7848a81b",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1060,
+        520
+      ],
+      "webhookId": "392419cc-d613-4efa-a463-63ce5db4b75b"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-05T14:28:29.476Z",
+  "versionId": "9356b38f-6e4f-49ca-bb34-4ff79d21d6c4"
+}
