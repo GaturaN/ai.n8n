@@ -14,7 +14,13 @@
     },
     "Loop Over Items": {
       "main": [
-        [],
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "If",
@@ -117,11 +123,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "CloudConvert": {
-      "main": [
-        []
       ]
     }
   },
@@ -441,40 +442,6 @@
     },
     {
       "parameters": {
-        "operation": "get",
-        "organizationId": "40c98685-d0d0-420f-af21-7a3826ef914d",
-        "invoiceId": "740d371c-aab1-490c-9c1a-481323dbb41d"
-      },
-      "id": "bcc2d72c-9dc4-414b-a9b0-19b87c533de2",
-      "name": "Xero1",
-      "type": "n8n-nodes-base.xero",
-      "typeVersion": 1,
-      "position": [
-        -520,
-        300
-      ],
-      "credentials": {
-        "xeroOAuth2Api": {
-          "id": "ogNv2lJWSPRBGZq4",
-          "name": "Xero account"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {},
-      "id": "9218146f-226e-4800-ba56-1b2d10bd23ab",
-      "name": "Read PDF",
-      "type": "n8n-nodes-base.readPDF",
-      "typeVersion": 1,
-      "position": [
-        -340,
-        320
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
         "outputFormat": "jpg"
       },
       "id": "2e0cbbb1-c2fa-48a4-ae8b-c6dd96fb129c",
@@ -491,6 +458,19 @@
           "name": "CloudConvert & n8n"
         }
       }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "aa1cd566-4213-44ca-8391-5df49b485043",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        940,
+        600
+      ]
     }
   ],
   "pinData": {
@@ -531,6 +511,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-03T06:14:36.000Z",
-  "versionId": "16304d12-5eb5-45db-9087-ef85a5eb63e4"
+  "updatedAt": "2024-09-05T14:34:31.000Z",
+  "versionId": "d34ca650-26b2-4781-a689-4e6bc81e12b9"
 }
