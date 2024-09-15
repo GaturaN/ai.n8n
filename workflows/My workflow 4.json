@@ -1,0 +1,936 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Whether email contains n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PDF": {
+      "main": [
+        [
+          {
+            "node": "Insert into Pinecone vector store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Book appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "Appointment booking agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDFs to download": {
+      "main": [
+        [
+          {
+            "node": "Download PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert into Pinecone vector store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Read Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Assign label with AI",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert into Pinecone vector store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Appointment booking agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Appointment booking agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store Retriever": {
+      "ai_retriever": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "ai_retriever",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get calendar availability": {
+      "ai_tool": [
+        [
+          {
+            "node": "Appointment booking agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Pinecone Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Retriever",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Whether email contains n8n": {
+      "main": [
+        [
+          {
+            "node": "Execute JavaScript",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On new email to nathan's inbox": {
+      "main": [
+        [
+          {
+            "node": "Assign label with AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assign label with AI": {
+      "main": [
+        [
+          {
+            "node": "Add automation label",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Add music label",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-15T07:25:03.181Z",
+  "id": "cuF23wUsEoAKTZeX",
+  "meta": null,
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "C079GL6K3U6",
+          "cachedResultName": "general"
+        },
+        "text": "=Data from webhook:  {{ $json.query.email }}",
+        "otherOptions": {}
+      },
+      "id": "4f5ceb53-27d1-4171-89c4-3a5bad7d476c",
+      "name": "Send message",
+      "type": "n8n-nodes-base.slack",
+      "position": [
+        -220,
+        820
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "content": "![h](https://i.postimg.cc/9XLvL5dL/slide-sf-talk.png#full-width)",
+        "height": 677.0358687053997,
+        "width": 1163.3132111854613,
+        "color": 7
+      },
+      "id": "ac9fa95e-1cd1-4a16-988f-d70207c9c171",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2180,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# What is n8n?\n### Low-code Automation Platform for technical teams",
+        "height": 99,
+        "width": 437,
+        "color": 7
+      },
+      "id": "d086a6b1-1687-4b01-a1ff-03a404e241ec",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -700,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "id": "d7d35899-4406-4bda-ae1f-4bb0f8c8bba4",
+      "name": "Execute JavaScript",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -220,
+        620
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "content": "# Example #2\n### RAG with PDF as source",
+        "height": 106,
+        "width": 318,
+        "color": 6
+      },
+      "id": "4a39273f-8726-45aa-9548-f878225da0e5",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1880,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "chunkSize": 3000,
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "id": "b547e0f9-3835-4230-aef3-80b7336d4514",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "position": [
+        2560,
+        1240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "aa81327e-152c-4187-bf82-7c2a1d518359",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "position": [
+        2320,
+        1060
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "loader": "pdfLoader",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "document-title",
+                "value": "={{ $('PDFs to download').item.json.whitepaper_title }}"
+              },
+              {
+                "name": "document-publish-year",
+                "value": "={{ $('PDFs to download').item.json.publish_year }}"
+              },
+              {
+                "name": "document-author",
+                "value": "={{ $('PDFs to download').item.json.author }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "a261f218-5415-4cc8-b044-8d3dfa34b293",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "position": [
+        2540,
+        1060
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "id": "b7550718-c8d8-4e7a-b9dd-9d8b2671167b",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        3280,
+        1080
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ef150418-3b95-49db-81d3-178bb10925f0",
+      "name": "Embeddings OpenAI2",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "position": [
+        3420,
+        1380
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "f4634323-6b96-459c-a5d0-067824666f1e",
+      "name": "Vector Store Retriever",
+      "type": "@n8n/n8n-nodes-langchain.retrieverVectorStore",
+      "position": [
+        3480,
+        1080
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.file_url }}",
+        "options": {}
+      },
+      "id": "18c09cb3-24be-4355-86b7-4edbf3b1ba07",
+      "name": "Download PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2140,
+        840
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {},
+      "id": "0ab7a7a0-fa3d-4c24-aef8-95538d3028e8",
+      "name": "PDFs to download",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        1880,
+        840
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "notes": "BTC Whitepaper + metadata"
+    },
+    {
+      "parameters": {
+        "content": "## A. Load PDF into Pinecone\nDownload the PDF, then text embeddings into Pincecone",
+        "height": 91.0723900084547,
+        "width": 414.36616595939887,
+        "color": 4
+      },
+      "id": "5a3c6b91-7b19-447f-9c06-7cb7328be204",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1880,
+        680
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## B. Chat with PDF\nUse GPT4o to chat with Pinecone index",
+        "height": 86.95121951219511,
+        "width": 284.62109466374466,
+        "color": 4
+      },
+      "id": "b05561e6-a67b-45e0-b5b6-b3b26d84a17c",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3040,
+        700
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "mode": "list",
+          "value": "whitepapers",
+          "cachedResultName": "whitepapers"
+        },
+        "options": {
+          "pineconeNamespace": "whitepaper"
+        }
+      },
+      "id": "b856233b-47d7-4441-9102-3299d0c92bfc",
+      "name": "Read Pinecone Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "position": [
+        3420,
+        1220
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}. \nOnly use vector store knowledge to answer the question. Don't make anything up. If you don't know the answer, tell the user that you don't know."
+      },
+      "id": "1190766a-aeb0-4a78-b2d2-fe591e08d5a9",
+      "name": "Question and Answer Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+      "position": [
+        3280,
+        860
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "content": "# Example #3\n### AI Assistant that knows how to use predefined API endpoints ",
+        "height": 106,
+        "width": 504.25,
+        "color": 6
+      },
+      "id": "dc1a0234-e19f-44a9-beef-52edf9158a8b",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4820,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# Example #1\n### Categorize incoming emails with AI",
+        "height": 111,
+        "width": 318,
+        "color": 6
+      },
+      "id": "1f58637c-8f1b-4ed8-b389-433bf73ffc1e",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        460,
+        460
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "id": "277cd1a0-cef7-4cf7-96a6-a5e5455b57b7",
+      "name": "Anthropic Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "position": [
+        5020,
+        940
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "toolDescription": "Call this tool to get the appointment availability for a particular period on the calendar. The tool may refer to availability as \"Free\" or \"Busy\". \n\nUse {timeMin} and {timeMax} to specify the window for the availability query. For example, to get availability for 25 July, 2024 the {timeMin} would be 2024-07-25T09:00:00+02:00 and {timeMax} would be 2024-07-25T17:00:00+02:00.\n\nIf the tool returns an empty response, it means that something went wrong. It does not mean that there is no availability.",
+        "method": "POST",
+        "url": "https://www.googleapis.com/calendar/v3/freeBusy",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleCalendarOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"timeMin\": \"{timeMin}\",\n  \"timeMax\": \"{timeMax}\",\n  \"timeZone\": \"Europe/Berlin\",\n  \"groupExpansionMax\": 20,\n  \"calendarExpansionMax\": 10,\n  \"items\": [\n    {\n      \"id\": \"max@n8n.io\"\n    }\n  ]\n}"
+      },
+      "id": "07c90c4e-2986-4da1-a6cd-2bb35aac9778",
+      "name": "Get calendar availability",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "position": [
+        5340,
+        940
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are an efficient and courteous assistant tasked with scheduling appointments with Max Tkacz.\n\nWhen users mention an appointment or meeting, they are referring to a meeting with Max.\nWhen users refer to the calendar or \"your schedule,\" they are referring to Max's calendar. \n\nYou can use various tools to access and manage Max's calendar. Your primary goal is to assist users in successfully booking an appointment with Max, ensuring no scheduling conflicts. Only book an appointment if the requested time slot is available (the tool may refer to this as \"Free\")\n\nToday's date is {{ $today.format('dd LLL yyyy') }}.\nAppointments are always 30 minutes in length. \n\n\nProvide accurate information at all times. If the tools are not functioning correctly, inform the user that you are unable to assist them at the moment.\n"
+        }
+      },
+      "id": "2712ac73-57e8-4b90-a977-ba0b0945f462",
+      "name": "Appointment booking agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        5120,
+        720
+      ],
+      "typeVersion": 1.6
+    },
+    {
+      "parameters": {
+        "content": "![h](https://i.imghippo.com/files/d9Bgv1721858679.png#full-width)\n[Open Calendar](https://calendar.google.com/calendar/u/0/r/day/2024/7/26)",
+        "height": 571.8601927804875,
+        "width": 327.46658341463433,
+        "color": 7
+      },
+      "id": "4081b06c-14ea-4371-b53d-17ce28bf6880",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        5740,
+        680
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "id": "cb7b2c63-3fb0-4280-9395-020fb52172aa",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        5160,
+        940
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "content": "![h](https://i.postimg.cc/kXW9XrZt/Screenshot-2024-07-24-at-15-18-27.png#full-width)\nBTC Whitepaper references",
+        "height": 403.1877919219511,
+        "width": 615.2162978341456,
+        "color": 7
+      },
+      "id": "1f6f5887-2ae2-4d85-aa72-1a4e0a5d924d",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3820,
+        880
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Connect with me or explore this demo 👇\n![QR](https://i.postimg.cc/VNkdCLQh/frame.png#full-width)",
+        "height": 398.9629539487597,
+        "width": 345.33741540309194,
+        "color": 7
+      },
+      "id": "712308c8-9920-45a7-9b08-3f775eeb73f5",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        7100,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# Thank you and happy flowgramming 🤘\n\n### Max Tkacz | Senior Developer Advocate @ n8n",
+        "height": 197.19036476628202,
+        "width": 411.2946586626259,
+        "color": 7
+      },
+      "id": "ca7564a9-1c0e-42ce-8dc7-90a7f5f873e7",
+      "name": "Sticky Note10",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        6660,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "mode": "list",
+          "value": "whitepapers",
+          "cachedResultName": "whitepapers"
+        },
+        "options": {
+          "clearNamespace": true,
+          "pineconeNamespace": "whitepaper"
+        }
+      },
+      "id": "edd7103c-8802-4a18-acae-885fd4630422",
+      "name": "Insert into Pinecone vector store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "position": [
+        2360,
+        840
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "toolDescription": "Call this tool to book an appointment in the calendar. ",
+        "method": "POST",
+        "url": "https://www.googleapis.com/calendar/v3/calendars/max@n8n.io/events",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleCalendarOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"summary\": \"Appointment with {userName}\",\n  \"start\": {\n    \"dateTime\": \"{startTime}\",\n    \"timeZone\": \"Europe/Berlin\"\n  },\n  \"end\": {\n    \"dateTime\": \"{endTime}\",\n    \"timeZone\": \"Europe/Berlin\"\n  },\n  \"attendees\": [\n    {\"email\": \"max@n8n.io\"},\n    {\"email\": \"{userEmail}\"}\n  ]\n}",
+        "placeholderDefinitions": {
+          "values": [
+            {
+              "name": "userName",
+              "description": "The full name of the user making the appointment. Like John Doe"
+            },
+            {
+              "name": "startTime",
+              "description": "The start time of the event in Europe/Berlin timezone. For example, 2024-07-24T10:00:00+02:00"
+            },
+            {
+              "name": "endTime",
+              "description": "The end time of the event in Europe/Berlin timezone. It should always be 30 minutes after the startTime. "
+            },
+            {
+              "name": "userEmail",
+              "description": "The email address of the user making the appointment"
+            }
+          ]
+        }
+      },
+      "id": "9c315e86-166f-44d1-bcb5-26dbcc1d93d9",
+      "name": "Book appointment",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "position": [
+        5500,
+        940
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nI can help you schedule an appointment with Max Tkacz. On which day would you like to meet?",
+        "options": {
+          "title": "Book an appointment with Max"
+        }
+      },
+      "id": "f18916f2-979a-4781-8bc7-e1ed05d72227",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        3040,
+        860
+      ],
+      "webhookId": "c348693e-9c43-4bf2-90a5-23786273e809",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "content": "### Explore 100+ AI Workflow templates on n8n.io\n[Open Templates Library](https://n8n.io/workflows)",
+        "height": 80,
+        "width": 411.2946586626259,
+        "color": 7
+      },
+      "id": "f0e1bd1e-d4da-4156-a5ec-b76f43d629fd",
+      "name": "Sticky Note11",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        6660,
+        700
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Ask a question in our community (13k+ members)\n[Explore n8n community](https://community.n8n.io/)",
+        "height": 80,
+        "width": 411.2946586626259,
+        "color": 7
+      },
+      "id": "9c96c24a-688e-4220-9874-f372e8eff5e2",
+      "name": "Sticky Note12",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        6660,
+        800
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "temperature": 0.5
+        }
+      },
+      "id": "5d1a559d-1dd4-43df-ae79-7b97fec677e4",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        700,
+        900
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_4763053241338138112"
+        ]
+      },
+      "id": "4478b88f-ef45-41a1-aac1-2ad7393352d5",
+      "name": "Add automation label",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        1200,
+        540
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {},
+        "options": {}
+      },
+      "id": "94bebbb2-27e1-4cea-a3ee-91b9a4478db8",
+      "name": "On new email to nathan's inbox",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "position": [
+        480,
+        700
+      ],
+      "typeVersion": 1.1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_6822395192337188416"
+        ]
+      },
+      "id": "3219dfcc-e844-4e3d-855b-829a398c9dd7",
+      "name": "Add music label",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        1200,
+        740
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "path": "74facfd7-0f51-4605-9724-2c300594fcf9",
+        "options": {}
+      },
+      "id": "59a3c3dc-eac4-4325-bf73-73c5d1a5da2e",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        -700,
+        700
+      ],
+      "webhookId": "74facfd7-0f51-4605-9724-2c300594fcf9",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "a0b16c44-03ea-4e96-9671-7b168697186d",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "leftValue": "={{ $json.query.email }}",
+              "rightValue": "@n8n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1ccb6ab0-883c-4a05-987c-166f93d46d0d",
+      "name": "Whether email contains n8n",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -500,
+        700
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "automation",
+              "description": "email on the topic of automation or workflows and automated processes, includes newsletters on this topic"
+            },
+            {
+              "category": "music",
+              "description": "email on the topic of music, for example from an artist "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "23be7ec5-e655-434a-816e-a6e3b03affac",
+      "name": "Assign label with AI",
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "position": [
+        720,
+        700
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-15T07:29:16.000Z",
+  "versionId": "833fd4eb-8fe5-48ef-9906-f6a9b639377f"
+}
