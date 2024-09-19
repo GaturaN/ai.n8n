@@ -34,17 +34,6 @@
         ]
       ]
     },
-    "OpenAI": {
-      "main": [
-        [
-          {
-            "node": "OpenAI1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Google Cloud Firestore": {
       "main": [
         [
@@ -56,22 +45,33 @@
         ]
       ]
     },
-    "OpenAI1": {
+    "Set fields": {
       "main": [
         [
           {
-            "node": "Set fields",
+            "node": "Google Cloud Firestore",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set fields": {
+    "OpenAI": {
       "main": [
         [
           {
-            "node": "Google Cloud Firestore",
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Set fields",
             "type": "main",
             "index": 0
           }
@@ -143,38 +143,6 @@
         "googleDriveOAuth2Api": {
           "id": "MHcgKR744VHXSe3X",
           "name": "Drive n8n"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "image",
-        "operation": "analyze",
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-4o",
-          "mode": "list",
-          "cachedResultName": "GPT-4O"
-        },
-        "text": "What's in this image?\nInclude the items and its quantity in tabular form that can be extracted.",
-        "inputType": "base64",
-        "simplify": false,
-        "options": {
-          "maxTokens": 200
-        }
-      },
-      "id": "e1d7e2bf-0a4f-4c91-b6ab-25873070fd29",
-      "name": "OpenAI",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.4,
-      "position": [
-        980,
-        540
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "lcpI0YZU9bebg3uW",
-          "name": "OpenAi account"
         }
       }
     },
@@ -252,43 +220,6 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-4o",
-          "mode": "list",
-          "cachedResultName": "GPT-4O"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "=Give a result of the items and their quantities from this response {{ $json.choices[0].message.content }}",
-              "role": "assistant"
-            }
-          ]
-        },
-        "jsonOutput": true,
-        "options": {
-          "maxTokens": 1024,
-          "temperature": 0.3
-        }
-      },
-      "id": "bf3a0dd3-d9d8-4734-8e21-9ee2f44a97c3",
-      "name": "OpenAI1",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.4,
-      "position": [
-        1200,
-        540
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "lcpI0YZU9bebg3uW",
-          "name": "OpenAi account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "content": "## Gets details from the image using api and ahve it formatted as json",
         "height": 271,
         "width": 514
@@ -362,6 +293,75 @@
         1980,
         380
       ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "text": "What's in this image?\nInclude the items and its quantity in tabular form that can be extracted.",
+        "inputType": "base64",
+        "simplify": false,
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "id": "e1d7e2bf-0a4f-4c91-b6ab-25873070fd29",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [
+        980,
+        540
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Give a result of the items and their quantities from this response {{ $json.choices[0].message.content }}",
+              "role": "assistant"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "id": "bf3a0dd3-d9d8-4734-8e21-9ee2f44a97c3",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [
+        1200,
+        540
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
     }
   ],
   "pinData": {
@@ -408,6 +408,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-09T14:13:16.000Z",
-  "versionId": "944f9556-b589-49b1-beaf-7dca434859a7"
+  "updatedAt": "2024-09-19T14:16:00.000Z",
+  "versionId": "c2d59c82-2006-4d5b-8823-bbe8cdf45e68"
 }
