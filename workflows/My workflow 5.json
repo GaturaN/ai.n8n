@@ -1,0 +1,517 @@
+{
+  "active": false,
+  "connections": {
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request | convert to IMG1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request | convert to IMG1": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List of Items": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "List of Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "createdAt": "2024-09-19T11:56:02.228Z",
+  "id": "oeCzkPP5sbwuSfXu",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 5",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {
+          "sender": "gaturanjenga@gmail.com"
+        }
+      },
+      "id": "55ac8fd9-a9cd-4567-be3b-926bcf586380",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        920,
+        600
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "t4ErLuuSTxO9S1Yx",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "627786cc-456a-4a1c-a4ac-9587ef2ae377",
+              "leftValue": "={{ $json.Subject }}",
+              "rightValue": "Order",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "id": "57642160-b682-48d3-90c0-c2102cab9ed1",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.id }}",
+        "simple": false,
+        "options": {
+          "dataPropertyAttachmentsPrefixName": "data",
+          "downloadAttachments": true
+        }
+      },
+      "id": "03501845-4ba0-4f31-93f7-1eb9c844a7c1",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1380,
+        600
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "t4ErLuuSTxO9S1Yx",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://pdf.gatuservices.info/api/v1/convert/pdf/img",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "multipart/form-data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "imageFormat",
+              "value": "png"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "fileInput",
+              "inputDataFieldName": "data0"
+            },
+            {
+              "name": "singleOrMultiple",
+              "value": "single"
+            },
+            {
+              "name": "colorType",
+              "value": "color"
+            },
+            {
+              "name": "dpi",
+              "value": "72"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "50665a4a-9b02-49ee-be75-cbfaa405be91",
+      "name": "HTTP Request | convert to IMG1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1600,
+        600
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "25e6de5e-66dc-4ccf-8e75-314d7a9aea78",
+      "name": "Compression",
+      "type": "n8n-nodes-base.compression",
+      "typeVersion": 1.1,
+      "position": [
+        820,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3ed9563f-ac28-4bca-a429-6dc33a18d228",
+              "name": "Items",
+              "value": "={{ $json.message.content.items }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9bb1caca-a3f7-4fbc-b386-d81c8f162fea",
+      "name": "List of Items",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2440,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "Items",
+        "options": {}
+      },
+      "id": "0645d424-6f9c-4df1-93c5-a6fcac699806",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2660,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "62132be7-ea18-4dba-bbee-e8431fd53b49",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2880,
+        600
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "4f318625-dda0-4464-a460-5b2cfac238a6",
+      "name": "Replace Me",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        3140,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "=Extract only the items ordered and their quantities in tabular form. If the Item Code, SKU or Supplier SKU is present, retun it under \"Item Code\". Important: Always use the Supplier SKU if present.\n\nALso, format the item name be in the format as the example below.\nExample: Bio Yoghurt Strawberry 1L",
+        "inputType": "base64",
+        "options": {}
+      },
+      "id": "4ebdce96-5aed-40fb-bd19-bb34afd5db49",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [
+        1840,
+        600
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-3.5-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Give a result of the items and their quantities from this response \n\n{{ $json.content }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "id": "2d409032-9470-4dd7-8e58-bbdba1161ad4",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [
+        2060,
+        600
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "bbad6ada-82da-4d07-a6b1-68a7b9300903",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3160,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a0399ea5-bb7c-4259-8345-02d2533c82ea",
+              "name": "item_code",
+              "value": "={{ $json['Item Code'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5f4e7615-f0b5-4792-a99a-0b34279a0de3",
+              "name": "qty",
+              "value": "={{ $('Split Out').item.json.quantity }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f165dfa5-7c27-4b3b-990d-89c50634657c",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3580,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSCi0a1zPuJizxg",
+          "mode": "list",
+          "cachedResultName": "Bulkbox Final Master",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl2hGiQmpSg73Una",
+          "mode": "list",
+          "cachedResultName": "MASTER",
+          "cachedResultUrl": "https://airtable.com/appSCi0a1zPuJizxg/tbl2hGiQmpSg73Una"
+        },
+        "filterByFormula": "=FIND(\"{{ $json.item_name}}\", {item_name}) > 0",
+        "options": {}
+      },
+      "id": "55857da5-e1a8-45db-8851-e3c10f807eb6",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        3360,
+        680
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "blvSm7WeFyd9XQFi",
+          "name": "bulkbox"
+        }
+      },
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-19T13:23:22.000Z",
+  "versionId": "e4dadf18-018b-4c9c-bdbb-619e23e79e35"
+}
