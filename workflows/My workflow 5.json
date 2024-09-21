@@ -137,8 +137,7 @@
             "type": "main",
             "index": 0
           }
-        ],
-        []
+        ]
       ]
     }
   },
@@ -503,6 +502,21 @@
         }
       },
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "resource": "list",
+        "operation": "get",
+        "additionalFields": {}
+      },
+      "id": "4e6d6fe0-783e-4eaf-974c-e48d1eac3dd6",
+      "name": "Trello",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ]
     }
   ],
   "pinData": {},
@@ -512,6 +526,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-19T13:23:22.000Z",
-  "versionId": "e4dadf18-018b-4c9c-bdbb-619e23e79e35"
+  "updatedAt": "2024-09-21T12:38:35.000Z",
+  "versionId": "f84d46b2-4c36-493d-b797-2c258467b93c"
 }
