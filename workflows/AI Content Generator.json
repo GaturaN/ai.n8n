@@ -1,0 +1,1027 @@
+{
+  "active": false,
+  "connections": {
+    "n8n Form Trigger": {
+      "main": [
+        [
+          {
+            "node": "Add Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Fields": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Row": {
+      "main": [
+        [
+          {
+            "node": "Set Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Google Docs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Content": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Docs": {
+      "main": [
+        [
+          {
+            "node": "Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Google Docs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Docs1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        []
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Google Docs4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-26T19:44:46.487Z",
+  "id": "BuohNSKBGD4Gz9M0",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "AI Content Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "generator",
+        "formTitle": "Content Genrator",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "What is the title of the content?",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "How many words should the content have?",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What is the primary keyword for the content?",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What are the secondary keywords for the content?"
+            },
+            {
+              "fieldLabel": "Are there any internal links that should be included in the content?",
+              "placeholder": "If so, list here. Including multiple? Separate using commas (link1.com, link2.com)"
+            },
+            {
+              "fieldLabel": "Are there any external links that should be included in the content?",
+              "placeholder": "If so, list here. Including multiple? Separate using commas (link1.com, link2.com)"
+            },
+            {
+              "fieldLabel": "Additional instructions or specific requirements for the content."
+            }
+          ]
+        },
+        "options": {
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "={{ \"Nice work! Your content is generating.\".bold()}} Allow 3-5 minutes for your finished article."
+            }
+          }
+        }
+      },
+      "id": "1902e5e3-10c2-49e8-8da1-9d1cd6ae681c",
+      "name": "n8n Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.1,
+      "position": [
+        -380,
+        460
+      ],
+      "webhookId": "578f48e7-78a0-4450-b301-a66ca5fe822d"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dae56384-1e23-46c7-923f-7635d45eaa35",
+              "name": "Title",
+              "value": "={{ $('n8n Form Trigger').item.json['What is the title of the content?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "2c0ac2a3-6b45-4b63-b9f6-c3d51d064203",
+              "name": "Word Count",
+              "value": "={{ $('n8n Form Trigger').item.json['How many words should the content have?'] }}",
+              "type": "number"
+            },
+            {
+              "id": "c05d869d-098e-442a-ab8b-21e6feea5987",
+              "name": "Primary Keyword",
+              "value": "={{ $('n8n Form Trigger').item.json['What is the primary keyword for the content?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "133a25e4-8f18-44c3-b743-9dee224688e3",
+              "name": "Secondary Keywords",
+              "value": "={{ $if($('n8n Form Trigger').item.json['What are the secondary keywords for the content?'].includes(','),$('n8n Form Trigger').item.json['What are the secondary keywords for the content?'].split(','),$('n8n Form Trigger').item.json['What are the secondary keywords for the content?']) }}",
+              "type": "array"
+            },
+            {
+              "id": "9d77b794-445d-4613-aa04-01ebe004f454",
+              "name": "Internal Links",
+              "value": "={{ $if($('n8n Form Trigger').item.json['Are there any external links that should be included in the content?'].includes(','),$('n8n Form Trigger').item.json['Are there any internal links that should be included in the content?'].split(','),$('n8n Form Trigger').item.json['Are there any internal links that should be included in the content?']) }}",
+              "type": "array"
+            },
+            {
+              "id": "24e92ba2-2448-40b6-af62-749351ff1483",
+              "name": "External Links",
+              "value": "={{ $if($('n8n Form Trigger').item.json['Are there any external links that should be included in the content?'].includes(','),$('n8n Form Trigger').item.json['Are there any external links that should be included in the content?'].split(','),$('n8n Form Trigger').item.json['Are there any external links that should be included in the content?']) }}",
+              "type": "array"
+            },
+            {
+              "id": "7466794b-7994-4d54-a72e-feab7d383556",
+              "name": "Additional Instructions",
+              "value": "={{ $('n8n Form Trigger').item.json['Additional instructions or specific requirements for the content.'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3f240ed3-9eff-4ae1-91ec-689a96f1c97e",
+      "name": "Set Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc",
+          "mode": "list",
+          "cachedResultName": " Generator",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Title": "={{ $json['What is the title of the content?'] }}",
+            "Word Count": "={{ $json['How many words should the content have?'] }}",
+            "Primary Keyword": "={{ $json['What is the primary keyword for the content?'] }}",
+            "Secondary Keyword(s)": "={{ $json['What are the secondary keywords for the content?'] }}",
+            "Internal Links": "={{ $json['Are there any internal links that should be included in the content?'] }}",
+            "External Links": "={{ $json['Are there any external links that should be included in the content?'] }}",
+            "Additional Instructions": "={{ $json['Additional instructions or specific requirements for the content.'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Word Count",
+              "displayName": "Word Count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Primary Keyword",
+              "displayName": "Primary Keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Secondary Keyword(s)",
+              "displayName": "Secondary Keyword(s)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Internal Links",
+              "displayName": "Internal Links",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "External Links",
+              "displayName": "External Links",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Additional Instructions",
+              "displayName": "Additional Instructions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Outline Doc",
+              "displayName": "Outline Doc",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Article Doc",
+              "displayName": "Article Doc",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Website URL",
+              "displayName": "Website URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "af8d14aa-d095-4bce-a525-8427e0f450e2",
+      "name": "Add Row",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -180,
+        460
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Epe0euL6qKcOzKeG",
+          "name": "google"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc",
+          "mode": "list",
+          "cachedResultName": " Generator",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "be8422b7-2082-4597-931d-761c9263ee1a",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        400,
+        200
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Epe0euL6qKcOzKeG",
+          "name": "google"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.message.content }}",
+        "options": {
+          "simplifiedAutoLink": false,
+          "emoji": true
+        }
+      },
+      "id": "a081da9f-fc25-4c97-b328-bdbeed061484",
+      "name": "Markdown",
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        580,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('Set Fields').item.json.Title }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "=1p2ykobU-TXZW24Ie32efSVbp7L_XKOW3",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "11abe711-000c-4960-9f07-4e124532ba83",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        600,
+        460
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "folderId": "={{ $json.id }}",
+        "title": "={{ $('Set Fields').item.json.Title }}"
+      },
+      "id": "cc957191-a106-4d28-8240-35b1f2c5ed22",
+      "name": "Google Docs",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        780,
+        460
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "zF1VnrEp6I9Pfxn8",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $json.sectionContent }}"
+            }
+          ]
+        }
+      },
+      "id": "53d1d3ca-549a-4a90-b283-a7498104af3b",
+      "name": "Google Docs1",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1900,
+        560
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "zF1VnrEp6I9Pfxn8",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert"
+            }
+          ]
+        }
+      },
+      "id": "509b5b21-5630-437e-b03f-f089c2b84c81",
+      "name": "Google Docs2",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        1140
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "zF1VnrEp6I9Pfxn8",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "01386de6-5fce-4202-80ca-c30bbc8e26f9",
+              "name": "content",
+              "value": "={{ $('OpenAI').item.json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9403611c-3c33-4aef-9118-24a43b24c036",
+      "name": "Content",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1020,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "21f3dd4b-db14-472b-94b6-7165206f94e7",
+              "name": "message.content",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "771f197a-02e1-4809-9505-e1a3900581f0",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2400,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a4a4c77a-6392-4eaf-8776-c270d48a9e58",
+              "name": "category",
+              "value": "={{ $json.category }}",
+              "type": "string"
+            },
+            {
+              "id": "06632770-e459-459a-b785-15e087be7f7e",
+              "name": "sectionContent",
+              "value": "={{ $json.sectionContent }}",
+              "type": "string"
+            },
+            {
+              "id": "73f026eb-dd92-4c3d-ac18-b138af0210d9",
+              "name": "id",
+              "value": "={{ $('Google Docs').item.json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "36386ba6-a196-4987-a396-bf20e19931a4",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1680,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You're a helpful, intelligent writing assistant",
+              "role": "system"
+            },
+            {
+              "content": "Use the following JSON brief to write an engaging, comprehensive outline in Markdown format (atx). Tone of voice 50% spartan, casual."
+            },
+            {
+              "content": "={\n\"title\": \"Accessibility in Retail: How to Make Ypur Store More Accessible\",\n\"wordCount\": 1000,\n\"primaryKeword\":\"accessibility in retail\",\n\"secondaryKeywords\":[\"accessible e-commerce\", \"how to make your website more accessible\"],\n\"internalLinks\": [\"https://www.ontario.ca/page/how-make-websites-accessible\"],\n\"externalLinks\": [\"https://www.forbes.com/sites/forbesbusinesscouncil/2023/03/20/understanding-the-importance-of-web-accessibility/\"]\n\"additionalinstructions\": \"Don't pitch the company at all - make it very informative and provide sa uch value as you can.\"\n}"
+            },
+            {
+              "content": "=# Accessibility in Retail: How to Make Your Store More Accessible.\n\nOnline arketplaces have become more popular since the mid-90swjen retail juggernauts like Amazon intially burst onto the scene. Amd while it's true that nearly everybody buyd products in e-commerce store these days, it's crucial to understand that not all consumers have the same needs. \n\nOver one billion people have diabilities worldwide, meaning up to 15% of the globale population may need assistive technology to use online shopping platforms. Addressing thei needs is critical if you want to maximize your reach & customer experience. \n\nSo, how exactly does digital accessibility impact businesses, and what can we (practically) do bout it? Read on for answers below.\n\n## Introduction\n\n- Briefly define what \"accessibility in retail\" means.\n- Highlight the importance of retail accessibility.\n\n## Significance of Accessility in Retail\n\n- Discuss how creating an accessible retail space can broaden market reach.\n- Discuss some benefits of retail accessibility. \n- Share valuable insights about retail accessibility from [forbes](https://www.forbes.com/sites/forbesbusinesscouncil/2023/03/20/understanding-the-importance-of-web-accessibility/))\n\n## Exploring Accessible E-comerce: The New Normal in Retail\n\n- Explain the rise and importance of e-commerce in today's retail landscape.\n- Highlight how e-commerce has opened up more possibilities for accessibility in retail.\n\n## Guidance to Make E-commerce Stores Accessible\n\n- Present some of the key accessibility standards for online stores.\n- Offer brief step-by-step guide on how to make your website accessible.\n- INdicate the best practices in creating accessible e-commerce stores, citing resources from [\"Ontario.ca\"](https://www.ontario.ca/page/how-make-websites-accessible))\n\n## Physical Store Accessibility: Not to be Overlooked\n\n- Assert the need for physical store accessibility in addition to online stores.\n- Enumerate practical solutions for enhancing physical store accessibility.\n\n## Encouraging Continuous Efforts for Accessibility\n\n- Inspire readers to continually strive for better accessibility in theire retail environments.\n- Reiterate the benefits of and the need for accessibility in the retail sector for a more inclusive feature.\n\n## Conclusion\n\n- Sumarixe the key points and lessons learned about retail accessibility. \n- Encourage readers to implement the suggestions provided.",
+              "role": "assistant"
+            },
+            {
+              "content": "={\n\"title\": \"{{ $json.Title }}\",\n\"wordCount\": {{ $json['Word Count'] }},\n\"primaryKeyword\":\"{{ $json['Primary Keyword'] }}\",\n\"secondaryKeywords\": {{ $json['Secondary Keywords'] }},\n\"internaLinks\": {{ $json['Internal Links'] }},\n\"externalLinks\": {{ $json['External Links'] }},\n\"additionalinstructions\":\"{{ $json['Additional Instructions'] }}\"\n}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "eecf903b-3d60-4c6e-9972-78803e34682a",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        240,
+        480
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the content from the previous node\nconst content = items[0].json.content;\n\n// Split the content by double newlines\nconst sections = content.split(\"\\n\\n\");\n\n// Create an array of objects to return each section\nreturn sections.map((section, index) => {\n  return {\n    json: {\n      sectionNumber: index + 1,\n      sectionContent: section\n    }\n  };\n});\n"
+      },
+      "id": "e52253ba-b027-4646-8f79-06b8b6a29e7c",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You're a helpful, intelligent writing assistant",
+              "role": "system"
+            },
+            {
+              "content": "=Extract structured content from the provided chatbot guide into a list of dictionaries based on specific format options such as Footer, Header, Named Range, Page Break, Paragraph Bullets, Positioned Object, Table, Table Column, Table Row, and Text. Each section of the content should be categorized using these options."
+            },
+            {
+              "content": "=Example Expected Format: # Build Your Own Chatbot\\n\\nCreating a chatbot can transform the way you interact with customers, automate repetitive tasks, and enhance user experiences. With the rise of artificial intelligence (AI), building a custom chatbot is more achievable than ever. This guide will walk you through the essentials of developing your own chatbot, covering the basics, tools needed, and practical tips to succeed.\\n\\n## Introduction\\n\\n- Define what a chatbot is and its purpose in various applications.\\n- Briefly overview the benefits of chatbots in automating communication and improving efficiency.\\n\\n## Why Build Your Own Chatbot?\\n\\n- Discuss the advantages of having a self-hosted chatbot.\\n - Control over data and privacy.\\n - Customization to meet specific needs.\\n- Compare self-hosted chatbots to third-party solutions and their pros and cons. \\n- Explain the growing relevance of chatbots in businesses.\\n\\n## Getting Started: What You Need\\n\\n- Outline the basic requirements for building a chatbot.\\n - Define your chatbot's purpose and target audience.\\n - Identify the technical skills required (e.g., programming languages, platforms).\\n- List popular tools and frameworks for building chatbots.\\n - Highlight some open-source options for self-hosting.\\n - Provide links to resources and external references, such as [n8n](https://blog.n8n.io/best-ai-chatbot/).\\n\\n## Step-by-Step Guide to Building a Chatbot\\n\\n### Step 1: Plan and Design\\n\\n- Discuss the importance of planning the structure of your chatbot.\\n - Define conversation flows and user engagement.\\n - Create a roadmap of features (e.g., FAQs, user queries).\\n\\n### Step 2: Choose Your Technology Stack\\n\\n- List technology options for chatbot development: \\n - Programming languages (Python, JavaScript).\\n - Platforms (Dialogflow, Microsoft Bot Framework).\\n- Mention hosting options (cloud services, on-premises).\\n\\n### Step 3: Develop Your Chatbot\\n\\n- Provide an overview of the development process:\\n - Setting up the development environment.\\n - Coding the bot using chosen frameworks.\\n- Recommend using a version control system for collaborative development.\\n\\n### Step 4: Test and Iterate\\n\\n- Explain the importance of thorough testing before launch.\\n - Cover strategies for user testing and feedback collection.\\n - Discuss how to iterate based on user interactions.\\n\\n## Automate Your Chatbot for Maximum Efficiency\\n\\n- Introduce automation features to improve functionality.\\n - Discuss integrating APIs for real-time responses.\\n - Mention workflow automation tools (like n8n and other options).\\n- Explore how automating interactions can enhance the user experience.\\n\\n## Deploying and Maintaining Your Chatbot\\n\\n- Describe the deployment process.\\n - How to host your chatbot on your chosen platform.\\n - Ensure security and compliance with user data.\\n- Emphasize the need for regular maintenance and updates.\\n - Review interactions and adjust responses.\\n - Keep your knowledge base up-to-date.\\n\\n## Resources for Building a Chatbot\\n\\n- Suggest additional resources and communities for support.\\n - Highlight forums, tutorials, and documentation.\\n - Provide links to helpful articles like [Building an AI Assistant with Custom Knowledge](https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255).\\n\\n## Conclusion\\n\\n- Summarize the key points on building a chatbot.\\n- Encourage readers to take the first steps in creating their own chatbot and highlight the potential impact on their businesses.\\n- Inspire ongoing learning and adaptation to new technologies and trends in chatbot development."
+            },
+            {
+              "content": "={\n  \"chatbotGuideData\": [\n    {\n      \"Header\": \"Build Your Own Chatbot\",\n      \"Text\": \"Creating a chatbot can transform the way you interact with customers...\"\n    },\n    {\n      \"Header\": \"Introduction\",\n      \"Paragraph Bullets\": [\n        \"Define what a chatbot is and its purpose in various applications.\",\n        \"Briefly overview the benefits of chatbots in automating communication and improving efficiency.\"\n      ]\n    },\n    {\n      \"Header\": \"Why Build Your Own Chatbot?\",\n      \"Paragraph Bullets\": [\n        \"Discuss the advantages of having a self-hosted chatbot.\",\n        \"Control over data and privacy.\",\n        \"Customization to meet specific needs.\"\n      ]\n    },\n    {\n      \"Header\": \"Getting Started: What You Need\",\n      \"Paragraph Bullets\": [\n        \"Outline the basic requirements for building a chatbot.\",\n        \"Define your chatbot's purpose and target audience.\"\n      ]\n    },\n    {\n      \"Header\": \"Step-by-Step Guide to Building a Chatbot\",\n      \"Text\": \"This section provides a guide through the steps required to successfully build and deploy your own chatbot.\"\n    },\n    {\n      \"Header\": \"Step 1: Plan and Design\",\n      \"Paragraph Bullets\": [\n        \"Discuss the importance of planning the structure of your chatbot.\",\n        \"Define conversation flows and user engagement.\"\n      ]\n    },\n    {\n      \"Header\": \"Step 2: Choose Your Technology Stack\",\n      \"Paragraph Bullets\": [\n        \"List technology options for chatbot development.\",\n        \"Programming languages (Python, JavaScript).\"\n      ]\n    },\n    {\n      \"Header\": \"Step 3: Develop Your Chatbot\",\n      \"Paragraph Bullets\": [\n        \"Provide an overview of the development process.\",\n        \"Setting up the development environment.\"\n      ]\n    },\n    {\n      \"Header\": \"Step 4: Test and Iterate\",\n      \"Paragraph Bullets\": [\n        \"Explain the importance of thorough testing before launch.\",\n        \"Cover strategies for user testing and feedback collection.\"\n      ]\n    },\n    {\n      \"Header\": \"Automate Your Chatbot for Maximum Efficiency\",\n      \"Paragraph Bullets\": [\n        \"Introduce automation features to improve functionality.\",\n        \"Discuss integrating APIs for real-time responses.\"\n      ]\n    },\n    {\n      \"Header\": \"Deploying and Maintaining Your Chatbot\",\n      \"Paragraph Bullets\": [\n        \"Describe the deployment process.\",\n        \"Ensure security and compliance with user data.\"\n      ]\n    },\n    {\n      \"Header\": \"Resources for Building a Chatbot\",\n      \"Paragraph Bullets\": [\n        \"Suggest additional resources and communities for support.\",\n        \"Highlight forums, tutorials, and documentation.\"\n      ]\n    },\n    {\n      \"Header\": \"Conclusion\",\n      \"Paragraph Bullets\": [\n        \"Summarize the key points on building a chatbot.\",\n        \"Encourage readers to take the first steps in creating their own chatbot.\"\n      ]\n    }\n  ]\n}\n",
+              "role": "assistant"
+            },
+            {
+              "content": "={{ $json.content }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "87cf609d-682d-4e17-a1a4-185908a2411c",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        2060,
+        80
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the content from the previous node\nconst content = items[0].json.content;\n\n// Split the content into sections based on newlines followed by additional newlines\nconst sections = content.split(/\\n{2,}/);\n\n// Create a mapping for content categorization\nconst categorizedSections = sections.map((section, index) => {\n    // Trim leading and trailing whitespace\n    const trimmedSection = section.trim();\n\n    // Initialize the category as \"Text\"\n    let category = \"Text\";\n\n    // Determine the category based on content patterns\n    if (trimmedSection.startsWith(\"# \")) {\n        category = \"Header\"; // Header identified by a single #\n    } else if (trimmedSection.startsWith(\"## \")) {\n        category = \"Named Range\"; // Named Range identified by ##\n    } else if (trimmedSection.startsWith(\"### \")) {\n        category = \"Subheader\"; // Subheader identified by ###\n    } else if (trimmedSection.startsWith(\"- \") || trimmedSection.startsWith(\"* \")) {\n        category = \"Paragraph Bullets\"; // Bulleted list identified by - or *\n    } else if (trimmedSection.includes(\"Table:\")) {\n        category = \"Table\"; // Table identified by a specific prefix\n    } else if (trimmedSection.includes(\"Page Break\")) {\n        category = \"Page Break\"; // Page Break keyword\n    } else if (trimmedSection.includes(\"Footer\")) {\n        category = \"Footer\"; // Footer keyword\n    } else if (trimmedSection.includes(\"Positioned Object\")) {\n        category = \"Positioned Object\"; // Positioned Object keyword\n    } else if (trimmedSection.includes(\"Table Column\")) {\n        category = \"Table Column\"; // Table Column keyword\n    } else if (trimmedSection.includes(\"Table Row\")) {\n        category = \"Table Row\"; // Table Row keyword\n    }\n\n    // Append two new lines before and one new line after headings and subheadings (except the first heading)\n    let sectionContent = trimmedSection;\n    if ((category === \"Header\" || category === \"Named Range\" || category === \"Subheader\") && index !== 0) {\n        sectionContent = `\\n\\n${trimmedSection}\\n`; // Two new lines before and one after\n    } else {\n        sectionContent += '\\n'; // One new line after for other content\n    }\n\n    return {\n        json: {\n            category: category,\n            sectionContent: sectionContent // Updated section content with new lines\n        }\n    };\n});\n\n// Return categorized sections\nreturn categorizedSections;\n"
+      },
+      "id": "2280e9fa-d952-41aa-a88f-dc5bcee96939",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7a3543de-b9fa-4576-b9da-992d50ccc03a",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const htmlContent = $json[\"data\"]; // Extract the HTML content from the input\n\nfunction formatHtmlToText(html) {\n    // Basic replacements for HTML tags\n    html = html.replace(/<h1>(.*?)<\\/h1>/g, '# $1\\n\\n');  // Convert H1\n    html = html.replace(/<h2>(.*?)<\\/h2>/g, '## $1\\n\\n');  // Convert H2\n    html = html.replace(/<h3>(.*?)<\\/h3>/g, '### $1\\n\\n');  // Convert H3\n    html = html.replace(/<p>(.*?)<\\/p>/g, '$1\\n\\n');         // Convert paragraphs\n    html = html.replace(/<li>(.*?)<\\/li>/g, '- $1\\n');       // Convert list items\n    html = html.replace(/<ul>(.*?)<\\/ul>/g, '');             // Remove <ul> tags\n    html = html.replace(/<a href=\"(.*?)\">(.*?)<\\/a>/g, '[$2]($1)'); // Convert links\n\n    // Remove any remaining HTML tags\n    html = html.replace(/<[^>]+>/g, ''); \n\n    return html.trim();\n}\n\n// Return formatted text as output\nreturn [{ text: formatHtmlToText(htmlContent) }];\n"
+      },
+      "id": "9a5e689b-441a-4d2c-a7f6-c4ad26df934e",
+      "name": "Code2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        1160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "=164ns_fZPAJHbiXTJV85P1jxjx0TaWvTS6fUylBwbE1U",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $json.text }}"
+            }
+          ]
+        }
+      },
+      "id": "9c4bd471-4465-4101-869e-25a963943e6c",
+      "name": "Google Docs3",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        1220
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "zF1VnrEp6I9Pfxn8",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const htmlContent = $json[\"data\"]; // Extract the HTML content from the input\n\nfunction formatHtmlToText(html) {\n    // Your existing logic to convert HTML to a plain text structure\n    // As per previous instructions, but this time we will prepare it for Google Docs\n    return [\n        { \"insertText\": { \"text\": \"Build Your Own Chatbot\\n\\n\", \"location\": { \"index\": 1 }} },\n        { \"insertText\": { \"text\": \"Creating a chatbot can transform the way you interact with customers...\\n\\n\", \"location\": { \"index\": 2 }} },\n        { \"insertText\": { \"text\": \"## Introduction\\n\\n\", \"location\": { \"index\": 3 }} },\n        // Add similar entries for other sections, replacing index with the desired position\n        // Example for lists\n        { \"insertText\": { \"text\": \"- Define what a chatbot is and its purpose in various applications.\\n\", \"location\": { \"index\": 4 }} },\n        { \"insertText\": { \"text\": \"- Briefly overview the benefits of chatbots in automating communication and improving efficiency.\\n\\n\", \"location\": { \"index\": 5 }} },\n        // Continue for other sections\n    ];\n}\n\n// Construct the request for Google Docs API\nconst requests = formatHtmlToText(htmlContent);\n\n// Return the structured requests to be used in the Google Docs node\nreturn [{ requests }];\n"
+      },
+      "id": "acc22e35-23b7-43a2-8c50-20bbefa4978d",
+      "name": "Code3",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "requests",
+        "options": {}
+      },
+      "id": "b9561d02-7d5f-4058-b13c-a023a8d4b29b",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "=164ns_fZPAJHbiXTJV85P1jxjx0TaWvTS6fUylBwbE1U",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "locationChoice": "location",
+              "index": "={{ $json.insertText.location.index }}",
+              "text": "={{ $json.insertText.text }}"
+            }
+          ]
+        }
+      },
+      "id": "821b4057-2315-4fca-b28b-16d6f8617728",
+      "name": "Google Docs4",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        660
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "zF1VnrEp6I9Pfxn8",
+          "name": "Google Docs account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "n8n Form Trigger": [
+      {
+        "json": {
+          "What is the title of the content?": "Build your own chatbot",
+          "How many words should the content have?": 1000,
+          "What is the primary keyword for the content?": "Chatbot",
+          "What are the secondary keywords for the content?": "Automate, Self-host, Build chatbot",
+          "Are there any internal links that should be included in the content?": "",
+          "Are there any external links that should be included in the content?": "https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255,  https://blog.n8n.io/best-ai-chatbot/",
+          "Additional instructions or specific requirements for the content.": "",
+          "submittedAt": "2024-09-28T05:46:43.155-04:00",
+          "formMode": "test"
+        }
+      }
+    ],
+    "Add Row": [
+      {
+        "json": {
+          "Title": "Build your own chatbot",
+          "Word Count": 1000,
+          "Primary Keyword": "Chatbot",
+          "Secondary Keyword(s)": "Automate, Self-host, Build chatbot",
+          "Internal Links": "",
+          "External Links": "https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255,  https://blog.n8n.io/best-ai-chatbot/",
+          "Additional Instructions": ""
+        }
+      }
+    ],
+    "Set Fields": [
+      {
+        "json": {
+          "Title": "Build your own chatbot",
+          "Word Count": 1000,
+          "Primary Keyword": "Chatbot",
+          "Secondary Keywords": [
+            "Automate",
+            " Self-host",
+            " Build chatbot"
+          ],
+          "Internal Links": [
+            ""
+          ],
+          "External Links": [
+            "https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255",
+            "  https://blog.n8n.io/best-ai-chatbot/"
+          ],
+          "Additional Instructions": ""
+        }
+      }
+    ],
+    "Markdown": [
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "# Build Your Own Chatbot\n\nCreating a chatbot can transform the way you interact with customers, automate repetitive tasks, and enhance user experiences. With the rise of artificial intelligence (AI), building a custom chatbot is more achievable than ever. This guide will walk you through the essentials of developing your own chatbot, covering the basics, tools needed, and practical tips to succeed.\n\n## Introduction\n\n- Define what a chatbot is and its purpose in various applications.\n- Briefly overview the benefits of chatbots in automating communication and improving efficiency.\n\n## Why Build Your Own Chatbot?\n\n- Discuss the advantages of having a self-hosted chatbot.\n  - Control over data and privacy.\n  - Customization to meet specific needs.\n- Compare self-hosted chatbots to third-party solutions and their pros and cons. \n- Explain the growing relevance of chatbots in businesses.\n\n## Getting Started: What You Need\n\n- Outline the basic requirements for building a chatbot.\n  - Define your chatbot's purpose and target audience.\n  - Identify the technical skills required (e.g., programming languages, platforms).\n- List popular tools and frameworks for building chatbots.\n  - Highlight some open-source options for self-hosting.\n  - Provide links to resources and external references, such as [n8n](https://blog.n8n.io/best-ai-chatbot/).\n\n## Step-by-Step Guide to Building a Chatbot\n\n### Step 1: Plan and Design\n\n- Discuss the importance of planning the structure of your chatbot.\n  - Define conversation flows and user engagement.\n  - Create a roadmap of features (e.g., FAQs, user queries).\n\n### Step 2: Choose Your Technology Stack\n\n- List technology options for chatbot development: \n  - Programming languages (Python, JavaScript).\n  - Platforms (Dialogflow, Microsoft Bot Framework).\n- Mention hosting options (cloud services, on-premises).\n\n### Step 3: Develop Your Chatbot\n\n- Provide an overview of the development process:\n  - Setting up the development environment.\n  - Coding the bot using chosen frameworks.\n- Recommend using a version control system for collaborative development.\n\n### Step 4: Test and Iterate\n\n- Explain the importance of thorough testing before launch.\n  - Cover strategies for user testing and feedback collection.\n  - Discuss how to iterate based on user interactions.\n\n## Automate Your Chatbot for Maximum Efficiency\n\n- Introduce automation features to improve functionality.\n  - Discuss integrating APIs for real-time responses.\n  - Mention workflow automation tools (like n8n and other options).\n- Explore how automating interactions can enhance the user experience.\n\n## Deploying and Maintaining Your Chatbot\n\n- Describe the deployment process.\n  - How to host your chatbot on your chosen platform.\n  - Ensure security and compliance with user data.\n- Emphasize the need for regular maintenance and updates.\n  - Review interactions and adjust responses.\n  - Keep your knowledge base up-to-date.\n\n## Resources for Building a Chatbot\n\n- Suggest additional resources and communities for support.\n  - Highlight forums, tutorials, and documentation.\n  - Provide links to helpful articles like [Building an AI Assistant with Custom Knowledge](https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255).\n\n## Conclusion\n\n- Summarize the key points on building a chatbot.\n- Encourage readers to take the first steps in creating their own chatbot and highlight the potential impact on their businesses.\n- Inspire ongoing learning and adaptation to new technologies and trends in chatbot development.",
+            "refusal": null
+          },
+          "logprobs": null,
+          "finish_reason": "stop",
+          "data": "<h1 id=\"buildyourownchatbot\">Build Your Own Chatbot</h1>\n<p>Creating a chatbot can transform the way you interact with customers, automate repetitive tasks, and enhance user experiences. With the rise of artificial intelligence (AI), building a custom chatbot is more achievable than ever. This guide will walk you through the essentials of developing your own chatbot, covering the basics, tools needed, and practical tips to succeed.</p>\n<h2 id=\"introduction\">Introduction</h2>\n<ul>\n<li>Define what a chatbot is and its purpose in various applications.</li>\n<li>Briefly overview the benefits of chatbots in automating communication and improving efficiency.</li>\n</ul>\n<h2 id=\"whybuildyourownchatbot\">Why Build Your Own Chatbot?</h2>\n<ul>\n<li>Discuss the advantages of having a self-hosted chatbot.</li>\n<li>Control over data and privacy.</li>\n<li>Customization to meet specific needs.</li>\n<li>Compare self-hosted chatbots to third-party solutions and their pros and cons. </li>\n<li>Explain the growing relevance of chatbots in businesses.</li>\n</ul>\n<h2 id=\"gettingstartedwhatyouneed\">Getting Started: What You Need</h2>\n<ul>\n<li>Outline the basic requirements for building a chatbot.</li>\n<li>Define your chatbot's purpose and target audience.</li>\n<li>Identify the technical skills required (e.g., programming languages, platforms).</li>\n<li>List popular tools and frameworks for building chatbots.</li>\n<li>Highlight some open-source options for self-hosting.</li>\n<li>Provide links to resources and external references, such as <a href=\"https://blog.n8n.io/best-ai-chatbot/\">n8n</a>.</li>\n</ul>\n<h2 id=\"stepbystepguidetobuildingachatbot\">Step-by-Step Guide to Building a Chatbot</h2>\n<h3 id=\"step1plananddesign\">Step 1: Plan and Design</h3>\n<ul>\n<li>Discuss the importance of planning the structure of your chatbot.</li>\n<li>Define conversation flows and user engagement.</li>\n<li>Create a roadmap of features (e.g., FAQs, user queries).</li>\n</ul>\n<h3 id=\"step2chooseyourtechnologystack\">Step 2: Choose Your Technology Stack</h3>\n<ul>\n<li>List technology options for chatbot development: </li>\n<li>Programming languages (Python, JavaScript).</li>\n<li>Platforms (Dialogflow, Microsoft Bot Framework).</li>\n<li>Mention hosting options (cloud services, on-premises).</li>\n</ul>\n<h3 id=\"step3developyourchatbot\">Step 3: Develop Your Chatbot</h3>\n<ul>\n<li>Provide an overview of the development process:</li>\n<li>Setting up the development environment.</li>\n<li>Coding the bot using chosen frameworks.</li>\n<li>Recommend using a version control system for collaborative development.</li>\n</ul>\n<h3 id=\"step4testanditerate\">Step 4: Test and Iterate</h3>\n<ul>\n<li>Explain the importance of thorough testing before launch.</li>\n<li>Cover strategies for user testing and feedback collection.</li>\n<li>Discuss how to iterate based on user interactions.</li>\n</ul>\n<h2 id=\"automateyourchatbotformaximumefficiency\">Automate Your Chatbot for Maximum Efficiency</h2>\n<ul>\n<li>Introduce automation features to improve functionality.</li>\n<li>Discuss integrating APIs for real-time responses.</li>\n<li>Mention workflow automation tools (like n8n and other options).</li>\n<li>Explore how automating interactions can enhance the user experience.</li>\n</ul>\n<h2 id=\"deployingandmaintainingyourchatbot\">Deploying and Maintaining Your Chatbot</h2>\n<ul>\n<li>Describe the deployment process.</li>\n<li>How to host your chatbot on your chosen platform.</li>\n<li>Ensure security and compliance with user data.</li>\n<li>Emphasize the need for regular maintenance and updates.</li>\n<li>Review interactions and adjust responses.</li>\n<li>Keep your knowledge base up-to-date.</li>\n</ul>\n<h2 id=\"resourcesforbuildingachatbot\">Resources for Building a Chatbot</h2>\n<ul>\n<li>Suggest additional resources and communities for support.</li>\n<li>Highlight forums, tutorials, and documentation.</li>\n<li>Provide links to helpful articles like <a href=\"https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255\">Building an AI Assistant with Custom Knowledge</a>.</li>\n</ul>\n<h2 id=\"conclusion\">Conclusion</h2>\n<ul>\n<li>Summarize the key points on building a chatbot.</li>\n<li>Encourage readers to take the first steps in creating their own chatbot and highlight the potential impact on their businesses.</li>\n<li>Inspire ongoing learning and adaptation to new technologies and trends in chatbot development.</li>\n</ul>"
+        }
+      }
+    ],
+    "OpenAI": [
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "# Build Your Own Chatbot\n\nCreating a chatbot can transform the way you interact with customers, automate repetitive tasks, and enhance user experiences. With the rise of artificial intelligence (AI), building a custom chatbot is more achievable than ever. This guide will walk you through the essentials of developing your own chatbot, covering the basics, tools needed, and practical tips to succeed.\n\n## Introduction\n\n- Define what a chatbot is and its purpose in various applications.\n- Briefly overview the benefits of chatbots in automating communication and improving efficiency.\n\n## Why Build Your Own Chatbot?\n\n- Discuss the advantages of having a self-hosted chatbot.\n  - Control over data and privacy.\n  - Customization to meet specific needs.\n- Compare self-hosted chatbots to third-party solutions and their pros and cons. \n- Explain the growing relevance of chatbots in businesses.\n\n## Getting Started: What You Need\n\n- Outline the basic requirements for building a chatbot.\n  - Define your chatbot's purpose and target audience.\n  - Identify the technical skills required (e.g., programming languages, platforms).\n- List popular tools and frameworks for building chatbots.\n  - Highlight some open-source options for self-hosting.\n  - Provide links to resources and external references, such as [n8n](https://blog.n8n.io/best-ai-chatbot/).\n\n## Step-by-Step Guide to Building a Chatbot\n\n### Step 1: Plan and Design\n\n- Discuss the importance of planning the structure of your chatbot.\n  - Define conversation flows and user engagement.\n  - Create a roadmap of features (e.g., FAQs, user queries).\n\n### Step 2: Choose Your Technology Stack\n\n- List technology options for chatbot development: \n  - Programming languages (Python, JavaScript).\n  - Platforms (Dialogflow, Microsoft Bot Framework).\n- Mention hosting options (cloud services, on-premises).\n\n### Step 3: Develop Your Chatbot\n\n- Provide an overview of the development process:\n  - Setting up the development environment.\n  - Coding the bot using chosen frameworks.\n- Recommend using a version control system for collaborative development.\n\n### Step 4: Test and Iterate\n\n- Explain the importance of thorough testing before launch.\n  - Cover strategies for user testing and feedback collection.\n  - Discuss how to iterate based on user interactions.\n\n## Automate Your Chatbot for Maximum Efficiency\n\n- Introduce automation features to improve functionality.\n  - Discuss integrating APIs for real-time responses.\n  - Mention workflow automation tools (like n8n and other options).\n- Explore how automating interactions can enhance the user experience.\n\n## Deploying and Maintaining Your Chatbot\n\n- Describe the deployment process.\n  - How to host your chatbot on your chosen platform.\n  - Ensure security and compliance with user data.\n- Emphasize the need for regular maintenance and updates.\n  - Review interactions and adjust responses.\n  - Keep your knowledge base up-to-date.\n\n## Resources for Building a Chatbot\n\n- Suggest additional resources and communities for support.\n  - Highlight forums, tutorials, and documentation.\n  - Provide links to helpful articles like [Building an AI Assistant with Custom Knowledge](https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255).\n\n## Conclusion\n\n- Summarize the key points on building a chatbot.\n- Encourage readers to take the first steps in creating their own chatbot and highlight the potential impact on their businesses.\n- Inspire ongoing learning and adaptation to new technologies and trends in chatbot development.",
+            "refusal": null
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      }
+    ],
+    "OpenAI1": [
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"chatbotGuideData\": [\n    {\n      \"Header\": \"Build Your Own Chatbot\",\n      \"Text\": \"Creating a chatbot can transform the way you interact with customers, automate repetitive tasks, and enhance user experiences. With the rise of artificial intelligence (AI), building a custom chatbot is more achievable than ever. This guide will walk you through the essentials of developing your own chatbot, covering the basics, tools needed, and practical tips to succeed.\"\n    },\n    {\n      \"Header\": \"Introduction\",\n      \"Paragraph Bullets\": [\n        \"Define what a chatbot is and its purpose in various applications.\",\n        \"Briefly overview the benefits of chatbots in automating communication and improving efficiency.\"\n      ]\n    },\n    {\n      \"Header\": \"Why Build Your Own Chatbot?\",\n      \"Paragraph Bullets\": [\n        \"Discuss the advantages of having a self-hosted chatbot.\",\n        \"Control over data and privacy.\",\n        \"Customization to meet specific needs.\"\n      ],\n      \"Text\": \"Compare self-hosted chatbots to third-party solutions and their pros and cons. Explain the growing relevance of chatbots in businesses.\"\n    },\n    {\n      \"Header\": \"Getting Started: What You Need\",\n      \"Paragraph Bullets\": [\n        \"Outline the basic requirements for building a chatbot.\",\n        \"Define your chatbot's purpose and target audience.\",\n        \"Identify the technical skills required (e.g., programming languages, platforms).\"\n      ],\n      \"Text\": \"List popular tools and frameworks for building chatbots, highlight some open-source options for self-hosting, and provide links to resources and external references, such as [n8n](https://blog.n8n.io/best-ai-chatbot/).\"\n    },\n    {\n      \"Header\": \"Step-by-Step Guide to Building a Chatbot\",\n      \"Text\": \"This section provides a structured approach to building your chatbot through several key steps.\"\n    },\n    {\n      \"Header\": \"Step 1: Plan and Design\",\n      \"Paragraph Bullets\": [\n        \"Discuss the importance of planning the structure of your chatbot.\",\n        \"Define conversation flows and user engagement.\",\n        \"Create a roadmap of features (e.g., FAQs, user queries).\"\n      ]\n    },\n    {\n      \"Header\": \"Step 2: Choose Your Technology Stack\",\n      \"Paragraph Bullets\": [\n        \"List technology options for chatbot development.\",\n        \"Programming languages (Python, JavaScript).\",\n        \"Platforms (Dialogflow, Microsoft Bot Framework).\"\n      ],\n      \"Text\": \"Mention hosting options (cloud services, on-premises).\"\n    },\n    {\n      \"Header\": \"Step 3: Develop Your Chatbot\",\n      \"Paragraph Bullets\": [\n        \"Provide an overview of the development process.\",\n        \"Setting up the development environment.\",\n        \"Coding the bot using chosen frameworks.\"\n      ],\n      \"Text\": \"Recommend using a version control system for collaborative development.\"\n    },\n    {\n      \"Header\": \"Step 4: Test and Iterate\",\n      \"Paragraph Bullets\": [\n        \"Explain the importance of thorough testing before launch.\",\n        \"Cover strategies for user testing and feedback collection.\",\n        \"Discuss how to iterate based on user interactions.\"\n      ]\n    },\n    {\n      \"Header\": \"Automate Your Chatbot for Maximum Efficiency\",\n      \"Paragraph Bullets\": [\n        \"Introduce automation features to improve functionality.\",\n        \"Discuss integrating APIs for real-time responses.\",\n        \"Mention workflow automation tools (like n8n and other options).\"\n      ],\n      \"Text\": \"Explore how automating interactions can enhance the user experience.\"\n    },\n    {\n      \"Header\": \"Deploying and Maintaining Your Chatbot\",\n      \"Paragraph Bullets\": [\n        \"Describe the deployment process.\",\n        \"How to host your chatbot on your chosen platform.\",\n        \"Ensure security and compliance with user data.\"\n      ],\n      \"Text\": \"Emphasize the need for regular maintenance and updates; review interactions and adjust responses; keep your knowledge base up-to-date.\"\n    },\n    {\n      \"Header\": \"Resources for Building a Chatbot\",\n      \"Paragraph Bullets\": [\n        \"Suggest additional resources and communities for support.\",\n        \"Highlight forums, tutorials, and documentation.\"\n      ],\n      \"Text\": \"Provide links to helpful articles like [Building an AI Assistant with Custom Knowledge](https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255).\"\n    },\n    {\n      \"Header\": \"Conclusion\",\n      \"Paragraph Bullets\": [\n        \"Summarize the key points on building a chatbot.\",\n        \"Encourage readers to take the first steps in creating their own chatbot and highlight the potential impact on their businesses.\",\n        \"Inspire ongoing learning and adaptation to new technologies and trends in chatbot development.\"\n      ]\n    }\n  ]\n}\n```",
+            "refusal": null
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      }
+    ],
+    "Google Docs": [
+      {
+        "json": {
+          "kind": "drive#file",
+          "id": "164ns_fZPAJHbiXTJV85P1jxjx0TaWvTS6fUylBwbE1U",
+          "name": "Build your own chatbot",
+          "mimeType": "application/vnd.google-apps.document"
+        }
+      }
+    ],
+    "Google Drive": [
+      {
+        "json": {
+          "kind": "drive#file",
+          "id": "1xkH93Fbyl8nX0fViWNSUpY1Cs6XBo-mJ",
+          "name": "Build your own chatbot",
+          "mimeType": "application/vnd.google-apps.folder"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-29T08:15:46.000Z",
+  "versionId": "4a1636db-8cc1-4fc2-bf90-bcd4a7f1cbe5"
+}
