@@ -11,6 +11,181 @@
           }
         ]
       ]
+    },
+    "Trello": {
+      "main": [
+        [
+          {
+            "node": "Trello1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trello1": {
+      "main": [
+        [
+          {
+            "node": "Trello2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Trello2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare chunks": {
+      "main": [
+        [
+          {
+            "node": "Answer the query based on chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Get top chunks matching query",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Answer the query based on chunks",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set max chunks to send to model": {
+      "main": [
+        [
+          {
+            "node": "Get top chunks matching query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Answer the query based on chunks",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compose citations": {
+      "main": [
+        [
+          {
+            "node": "Generate response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer the query based on chunks": {
+      "main": [
+        [
+          {
+            "node": "Compose citations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get top chunks matching query": {
+      "main": [
+        [
+          {
+            "node": "Prepare chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-21T12:39:15.741Z",
@@ -33,21 +208,18 @@
     },
     {
       "parameters": {
-        "resource": "board",
-        "operation": "get",
-        "id": {
-          "__rl": true,
-          "value": "JgD11F5G",
-          "mode": "id"
-        },
+        "resource": "list",
+        "operation": "getAll",
+        "id": "JgD11F5G",
+        "returnAll": true,
         "additionalFields": {}
       },
-      "id": "c6ceb2f1-f181-4f89-a37e-c8c658661c82",
+      "id": "eb928ad6-6674-412e-9687-b9355723b190",
       "name": "Trello",
       "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        1280,
+        1360,
         520
       ],
       "credentials": {
@@ -56,6 +228,365 @@
           "name": "bulkbox"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "list",
+        "operation": "getCards",
+        "id": "={{ $json.id }}",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "id": "538b6bb6-e5af-4679-a6cc-966e327659e0",
+      "name": "Trello1",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        600
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "28KcZZoExcvdC6un",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "b2d06f14-1e51-4ed7-82e2-0431bce173c8",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2440,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "checklist",
+        "cardId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "additionalFields": {}
+      },
+      "id": "3205ac66-3e4f-44a9-8ec7-200d74a67b1d",
+      "name": "Trello2",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        720
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "28KcZZoExcvdC6un",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "id": "6be810a1-b72a-49bf-aee8-f0105e8ae27b",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        2080,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "d2d1113d-8edf-4a17-afe9-b54d588fcffb",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        2300,
+        760
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1dd68a98-cc5e-49b3-9995-97340a6ac2e2",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        2500,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7102766f-ae8e-410f-86e3-d9e9c5f64359",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        2500,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "trello-data",
+          "mode": "list",
+          "cachedResultName": "trello-data"
+        },
+        "options": {}
+      },
+      "id": "54811083-0b5b-47e6-84f8-2c1211f4ba7d",
+      "name": "Pinecone Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        2300,
+        540
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let out = \"\"\nfor (const i in $input.all()) {\n  let itemText = \"--- CHUNK \" + i + \" ---\\n\"\n  itemText += $input.all()[i].json.document.pageContent + \"\\n\"\n  itemText += \"\\n\"\n  out += itemText\n}\n\nreturn {\n  'context': out\n};"
+      },
+      "id": "6cde51ef-f2a3-4484-819c-ca803b8171ae",
+      "name": "Prepare chunks",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1640,
+        1540
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ef45a282-8628-448c-abd9-c3ccb7e0d25b",
+      "name": "Embeddings OpenAI2",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "position": [
+        1260,
+        1760
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 100
+        }
+      },
+      "id": "b222f5d1-23c2-4e26-a81f-9c4c40afe3dc",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        1880,
+        1760
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "236047ff-75a2-47fd-b338-1e9763c4015e",
+              "name": "chunks",
+              "type": "number",
+              "value": 2
+            },
+            {
+              "id": "3babab92-c278-48d4-aa97-668e448fd452",
+              "name": "question",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "c40ce0f5-1e39-4d86-82c9-6363a4c53eb4",
+      "name": "Set max chunks to send to model",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1040,
+        1540
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"answer\": {\n      \"type\": \"string\"\n    },\n    \"citations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"number\"\n      }\n    }\n  }\n}"
+      },
+      "id": "11b8319e-321b-43ef-b163-83a737ee25ef",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "position": [
+        2060,
+        1760
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "67ecefcf-a30c-4cc4-89ca-b9b23edd6585",
+              "name": "citations",
+              "type": "array",
+              "value": "={{ $json.citations.map(i => '[' + $('Get top chunks matching query').all()[$json.citations].json.document.metadata.file_name + ', lines ' + $('Get top chunks matching query').all()[$json.citations].json.document.metadata['loc.lines.from'] + '-' + $('Get top chunks matching query').all()[$json.citations].json.document.metadata['loc.lines.to'] + ']') }}"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "64518273-24f2-4bdb-adcb-f4695c169500",
+      "name": "Compose citations",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2240,
+        1540
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d77956c4-0ff4-4c64-80c2-9da9d4c8ad34",
+              "name": "text",
+              "type": "string",
+              "value": "={{ $json.answer }} {{ $if(!$json.citations.isEmpty(), \"\\n\" + $json.citations.join(\"\"), '') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "07a93292-38f4-4505-948f-327d749f6173",
+      "name": "Generate response",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2460,
+        1540
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "content": "## 2. Chat with file, getting citations in reponse",
+        "height": 548.5086735412393,
+        "width": 1693.989843925635,
+        "color": 7
+      },
+      "id": "ae2ebf3c-42ab-46ef-abcd-8defc99b1fe9",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -180,
+        860
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Important: In your response, also include the the indexes of the chunks you used to generate the answer.\n\n{{ $json.context }}\n\nQuestion: {{ $('Webhook').first().json[\"body\"][\"text\"] }}\nHelpful Answer:",
+        "hasOutputParser": true
+      },
+      "id": "7ca608f7-7e71-4c60-89ed-600a31836936",
+      "name": "Answer the query based on chunks",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        1860,
+        1540
+      ],
+      "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8nhrmanual",
+          "mode": "list",
+          "cachedResultName": "n8nhrmanual"
+        },
+        "prompt": "={{ $('Webhook').item.json.body.text }}",
+        "topK": "={{ $json.chunks }}",
+        "options": {}
+      },
+      "id": "bb1c94a2-742c-46ec-97a7-6ca702b7bc4b",
+      "name": "Get top chunks matching query",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "position": [
+        1260,
+        1540
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "id": "4ade8f0e-ad79-4741-97d1-600c7676a4ab",
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        780,
+        1540
+      ],
+      "webhookId": "1727c687-aed0-49cf-96af-e7796819fbb3",
+      "typeVersion": 1,
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -65,6 +596,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-21T13:23:44.000Z",
-  "versionId": "5a828b98-63e4-40f5-b5ce-7dc5504d307e"
+  "updatedAt": "2024-09-26T11:40:50.000Z",
+  "versionId": "996c3624-b060-434e-b339-7936e9ee828f"
 }
