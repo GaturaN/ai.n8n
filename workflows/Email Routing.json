@@ -1,0 +1,461 @@
+{
+  "active": false,
+  "connections": {
+    "contains_return?": {
+      "main": [
+        [
+          {
+            "node": "confirm_is_return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "incoming_message": {
+      "main": [
+        [
+          {
+            "node": "get_message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_message": {
+      "main": [
+        [
+          {
+            "node": "set_fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_fields": {
+      "main": [
+        [
+          {
+            "node": "contains_return?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "confirm_is_return": {
+      "main": [
+        [
+          {
+            "node": "send_message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_return_details": {
+      "main": [
+        [
+          {
+            "node": "add_row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-01T12:41:07.585Z",
+  "id": "D9YJr7DXAumczK9I",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Email Routing",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const phrases = [\n  \"return\", \"send a return\", \"return product\", \"return label\", \n  \"send back\", \"cancel\", \"cancellation\", \n  \"stop order\", \"cancel order\", \"stop\", \"order cancelled\"\n];\n\nconst inputString = $('set_fields').first().json.message; // Get the email message\n\n// Check if the email message contains any phrase\nconst containsPhrase = phrases.some(phrase => inputString.toLowerCase().includes(phrase.toLowerCase()));\n\nreturn [\n  {\n    json: {\n      containsPhrase\n    }\n  }\n];\n"
+      },
+      "id": "daf7c6e8-335a-4630-92e0-fcdf036f70af",
+      "name": "contains_return?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1180,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "6e86fa3c-0fe5-4531-bee2-c188cbcc64f5",
+      "name": "incoming_message",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        340
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "t4ErLuuSTxO9S1Yx",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "return-details",
+        "formTitle": "Request Additonal Info",
+        "formDescription": "process your request under the best conditions, please provide us with the following additional information",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "email_id",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Exact reason for your return",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Order number concerned",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Any other information or details that can help us better understand your request"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bf542dfb-4aec-40e1-aaf7-076b10791f2a",
+      "name": "get_return_details",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.1,
+      "position": [
+        580,
+        600
+      ],
+      "webhookId": "8729cadf-7234-4796-8b53-5776d4133dab"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('incoming_message').item.json.From }}",
+        "subject": "Request for Additional Information Regarding Your Return",
+        "emailType": "text",
+        "message": "=Hello,\n\nWe have received your return request. To process your request under the best conditions, please provide us with the following additional information:\n\n- The exact reason for your return (defective product, order error, dissatisfaction, etc.).\n\n- The order number concerned.\n\n- Any other information or details that can help us better understand your request.\n\nKindly use this form to fill in the details: https://ai.gatuservices.info/form/return-details?email_id={{ $('set_fields').item.json.from }}\n\nThis information will help us expedite the return process and find the best solution for you.\n\nThank you for your cooperation. We remain at your disposal for any further questions.\n\nBest regards,",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "8ef62320-e8b3-48e0-839a-a240a975b922",
+      "name": "send_message",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1580,
+        340
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "t4ErLuuSTxO9S1Yx",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.id }}",
+        "simple": false,
+        "options": {}
+      },
+      "id": "60e38092-71b0-4b90-a538-88abfc8ac4fc",
+      "name": "get_message",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        780,
+        340
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "t4ErLuuSTxO9S1Yx",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6ae726be-7a78-40a1-a223-253fc38a61d9",
+              "name": "from",
+              "value": "={{ $('incoming_message').item.json.From.extractEmail() }}",
+              "type": "string"
+            },
+            {
+              "id": "9f3b676c-2828-4638-9ef1-b5dbcc36202e",
+              "name": "message",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a46edc51-8b7c-4625-a13c-8aedb8414371",
+      "name": "set_fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        980,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ee99e9b2-8373-4cbf-8843-b1ce0f26ef7e",
+              "leftValue": "={{ $json.containsPhrase }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3ad2f4ca-5101-4097-bbea-b05828eadba3",
+      "name": "confirm_is_return",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1380,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1YqnvARy48_exrX4T5tNm0M8RdksSgdUh9T_AYfr83-o",
+          "mode": "list",
+          "cachedResultName": "returns",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YqnvARy48_exrX4T5tNm0M8RdksSgdUh9T_AYfr83-o/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YqnvARy48_exrX4T5tNm0M8RdksSgdUh9T_AYfr83-o/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email Id": "={{ $json.email_id }}",
+            "Order ID": "={{ $json['Order number concerned'] }}",
+            "Return Reason": "={{ $json['Exact reason for your return'] }}",
+            "Any other information": "={{ $json['Any other information or details that can help us better understand your request'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Email Id",
+              "displayName": "Email Id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Order ID",
+              "displayName": "Order ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Return Reason",
+              "displayName": "Return Reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Any other information",
+              "displayName": "Any other information",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Actions",
+              "displayName": "Actions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e3c9af9d-f83d-4a49-a6b5-c0ba1cae001e",
+      "name": "add_row",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        800,
+        600
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Epe0euL6qKcOzKeG",
+          "name": "google"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "event": "rowUpdate",
+        "options": {}
+      },
+      "id": "73a35ba5-722b-45d1-9162-4e2f14d38cf1",
+      "name": "Google Sheets Trigger",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        580,
+        840
+      ],
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "RCHdJHAopRvrEMZD",
+          "name": "Google Sheets n8n"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "incoming_message": [
+      {
+        "json": {
+          "id": "192485b49ae94670",
+          "threadId": "192485b49ae94670",
+          "snippet": "This is a very long message to check if any of the phrases are in here. return",
+          "payload": {
+            "mimeType": "multipart/alternative"
+          },
+          "sizeEstimate": 5394,
+          "historyId": "445035",
+          "internalDate": "1727790783000",
+          "labels": [
+            {
+              "id": "INBOX",
+              "name": "INBOX"
+            },
+            {
+              "id": "IMPORTANT",
+              "name": "IMPORTANT"
+            },
+            {
+              "id": "CATEGORY_PERSONAL",
+              "name": "CATEGORY_PERSONAL"
+            },
+            {
+              "id": "UNREAD",
+              "name": "UNREAD"
+            }
+          ],
+          "From": "Francis Njenga <gaturanjenga@gmail.com>",
+          "Subject": "Test",
+          "To": "gatura@bulkbox.co.ke"
+        }
+      }
+    ],
+    "get_return_details": [
+      {
+        "json": {
+          "email_id": "gaturanjenga@gmail.com",
+          "Exact reason for your return": "change if mind",
+          "Order number concerned": "1221",
+          "Any other information or details that can help us better understand your request": "",
+          "submittedAt": "2024-10-01T10:24:49.277-04:00",
+          "formMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:incoming_message": {
+      "incoming_message": {
+        "lastTimeChecked": 1727792648,
+        "possibleDuplicates": [
+          "192487792bf81537"
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "triggerCount": 3,
+  "updatedAt": "2024-10-01T14:45:31.000Z",
+  "versionId": "8be72439-b885-4d64-8e61-65f34d7fa234"
+}
