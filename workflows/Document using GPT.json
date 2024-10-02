@@ -1,0 +1,241 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "n8n": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-01T18:56:13.378Z",
+  "id": "7z9ullpVMNSkPngi",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Document using GPT",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "0b5df4fb-a60b-4c1a-b508-d06fc1c6bd8f",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        800,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "workflowId": {
+          "__rl": true,
+          "value": "D9YJr7DXAumczK9I",
+          "mode": "list",
+          "cachedResultName": "Email Routing (#D9YJr7DXAumczK9I)"
+        },
+        "requestOptions": {}
+      },
+      "id": "8d90ceea-6b5a-40e1-a381-7fcff0e7a6c0",
+      "name": "n8n",
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        420
+      ],
+      "credentials": {
+        "n8nApi": {
+          "id": "mD9deQoldOjwf6Ue",
+          "name": "n8n account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "cef2ac85-4c52-43a3-b59b-e9dd221b3ec2",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1240,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "905bf60f-dc86-490c-a362-6abb4239ef16",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "2bc2ecc5-0d31-4e35-bf68-30149b3599a9",
+              "name": "nodes",
+              "value": "={{ $json.nodes }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d3b70707-0d50-4ad1-9d58-9db0e5ff4432",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1460,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ff73c808-96dd-42ed-b563-881011a4d01e",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2040,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-3.5-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Generate a detailed and structured documentation in Markdown format for the following workflow. Include an overview, each node's functionality, the connections between nodes, and any important parameters or settings:\n\nWorkflow Name:\n{{ $json.name }}\n\nWorkflow Data:\n{{ $json.nodes }}"
+            }
+          ]
+        },
+        "simplify": false,
+        "options": {
+          "maxTokens": 2500,
+          "temperature": 0.1
+        }
+      },
+      "id": "61805cbb-7d14-4e39-99b4-747f86cacaa0",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        1660,
+        520
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "OpenAI": [
+      {
+        "json": {
+          "id": "chatcmpl-ADcTxdW86fY4yyi5ni2M8nMzMVmpe",
+          "object": "chat.completion",
+          "created": 1727809553,
+          "model": "gpt-3.5-turbo-0125",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "# Email Routing Workflow\n\n## Overview\nThis workflow is designed to route incoming email messages based on specific phrases contained within the message. If the email contains phrases related to returns or cancellations, additional information is requested from the sender. Once the necessary details are provided, the workflow updates a Google Sheets document with the return information. The workflow also includes approval and rejection processes for refund requests based on the information provided in the Google Sheets document.\n\n## Nodes Functionality\n\n1. **incoming_message**\n   - Triggers the workflow when a new email is received.\n   \n2. **get_message**\n   - Retrieves the content of the incoming email message.\n   \n3. **set_fields**\n   - Extracts the sender's email address and the email message text.\n   \n4. **contains_return?**\n   - Checks if the email message contains specific return-related phrases.\n   \n5. **confirm_is_return**\n   - Filters the email messages that contain return-related phrases.\n   \n6. **get_return_details**\n   - Requests additional information from the sender regarding the return.\n   \n7. **send_message**\n   - Sends an email to the sender requesting additional return details.\n   \n8. **add_row**\n   - Adds a new row to a Google Sheets document with the return details provided by the sender.\n   \n9. **Google Sheets Trigger**\n   - Triggers the workflow when a row is updated in the Google Sheets document.\n   \n10. **approve_reject**\n    - Switch node to determine whether to approve or reject a refund request based on the actions in the Google Sheets document.\n    \n11. **refund_approved**\n    - Sends an email notification to the sender informing them that their refund request has been approved.\n    \n12. **refund_rejected**\n    - Sends an email notification to the sender informing them that their refund request has been rejected.\n\n## Connections\n- **incoming_message** triggers the workflow and passes the email content to **get_message**.\n- **get_message** extracts the email content and passes it to **set_fields** to extract sender information and message text.\n- **set_fields** passes the extracted information to **contains_return?** to check for return-related phrases.\n- If the email contains return-related phrases, the workflow proceeds to **confirm_is_return** to filter the messages.\n- If the message is confirmed to be a return request, the workflow proceeds to **get_return_details** to request additional information from the sender.\n- **send_message** sends an email to the sender requesting additional return details.\n- Once the sender provides the necessary details, the workflow updates the Google Sheets document using **add_row**.\n- The Google Sheets Trigger **Google Sheets Trigger** monitors the document for updates and triggers the workflow accordingly.\n- Based on the actions in the Google Sheets document, the workflow routes to either **refund_approved** or **refund_rejected** to notify the sender of the refund status.\n\n## Important Parameters/Settings\n- **Google Sheets Document ID**: Used to specify the Google Sheets document where return details are stored.\n- **Phrases**: Defined phrases related to returns that are checked in the email content.\n- **Email Templates**: Predefined email templates for requesting additional information and notifying the sender of refund status.",
+                "refusal": null
+              },
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 2721,
+            "completion_tokens": 649,
+            "total_tokens": 3370,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            }
+          },
+          "system_fingerprint": null
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-01T19:21:38.000Z",
+  "versionId": "c97ab1b7-8d36-4770-9359-0a164e149617"
+}
