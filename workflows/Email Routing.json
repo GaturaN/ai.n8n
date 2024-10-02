@@ -66,6 +66,35 @@
           }
         ]
       ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "approve_reject",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "approve_reject": {
+      "main": [
+        [
+          {
+            "node": "refund_approved",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "refund_rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-10-01T12:41:07.585Z",
@@ -364,16 +393,24 @@
         },
         "documentId": {
           "__rl": true,
+          "value": "1YqnvARy48_exrX4T5tNm0M8RdksSgdUh9T_AYfr83-o",
           "mode": "list",
-          "value": ""
+          "cachedResultName": "returns",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YqnvARy48_exrX4T5tNm0M8RdksSgdUh9T_AYfr83-o/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
+          "value": "gid=0",
           "mode": "list",
-          "value": ""
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YqnvARy48_exrX4T5tNm0M8RdksSgdUh9T_AYfr83-o/edit#gid=0"
         },
         "event": "rowUpdate",
-        "options": {}
+        "options": {
+          "columnsToWatch": [
+            "Actions"
+          ]
+        }
       },
       "id": "73a35ba5-722b-45d1-9162-4e2f14d38cf1",
       "name": "Google Sheets Trigger",
@@ -387,6 +424,122 @@
         "googleSheetsTriggerOAuth2Api": {
           "id": "RCHdJHAopRvrEMZD",
           "name": "Google Sheets n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Actions }}",
+                    "rightValue": "Approve",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Approve"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2ab86cc2-ff63-4cca-aa15-5d10b864e658",
+                    "leftValue": "={{ $json.Actions }}",
+                    "rightValue": "Reject",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Reject"
+            }
+          ]
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "id": "4348cf12-df06-43b6-9e24-7b96f1a98261",
+      "name": "approve_reject",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        800,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Google Sheets Trigger').item.json['Email Id'] }}",
+        "subject": "Refund Not Approved",
+        "emailType": "text",
+        "message": "=Hello,\n\nAfter reviewing your refund request for order number {{ $('Google Sheets Trigger').item.json['Order ID'] }}, we regret to inform you that your request has not been approved.\n\nWe remain at your disposal for any questions or to discuss other possible solutions, such as an exchange or a credit note.\n\nThank you for your understanding.\n\nBest regards,",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "4214da87-0556-4cc5-8524-01fc9a3d57d8",
+      "name": "refund_rejected",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1060,
+        940
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "t4ErLuuSTxO9S1Yx",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Google Sheets Trigger').item.json['Email Id'] }}",
+        "subject": "Refund Approved",
+        "emailType": "text",
+        "message": "=Hello,\n\nWe would like to inform you that your refund request for order number {{ $('Google Sheets Trigger').item.json['Order ID'] }} has been approved.\n\nThe amount corresponding to your purchase will be credited to your original payment method within 14 business days. You will receive a confirmation email once the refund has been processed.\n\nThank you for your trust, and feel free to contact us if you have any further questions.\n\nBest regards,",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "9bfde760-a333-4370-ad7b-eed821d7c420",
+      "name": "refund_approved",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1060,
+        760
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "t4ErLuuSTxO9S1Yx",
+          "name": "bulkbox"
         }
       }
     }
@@ -447,8 +600,9 @@
   "staticData": {
     "node:incoming_message": {
       "incoming_message": {
-        "lastTimeChecked": 1727792648,
+        "lastTimeChecked": 1727795561,
         "possibleDuplicates": [
+          "19248a407c8f7886",
           "192487792bf81537"
         ]
       }
@@ -456,6 +610,6 @@
   },
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2024-10-01T14:45:31.000Z",
-  "versionId": "8be72439-b885-4d64-8e61-65f34d7fa234"
+  "updatedAt": "2024-10-01T18:54:53.000Z",
+  "versionId": "049ac37e-d1ee-4ec2-8b65-13b96e0ce2ea"
 }
