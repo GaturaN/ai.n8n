@@ -233,22 +233,6 @@
         ]
       ]
     },
-    "OpenAI2": {
-      "main": [
-        [
-          {
-            "node": "section_text",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "section_text": {
-      "main": [
-        []
-      ]
-    },
     "Loop Over Items1": {
       "main": [
         [],
@@ -267,6 +251,17 @@
         [
           {
             "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI2": {
+      "main": [
+        [
+          {
+            "node": "section_text",
             "type": "main",
             "index": 0
           }
@@ -1249,42 +1244,6 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-4o-mini",
-          "mode": "list",
-          "cachedResultName": "GPT-4O-MINI"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "You're a helpful, intelligent writing assistant",
-              "role": "system"
-            },
-            {
-              "content": "=The following is an outline of an award winning article. Your task is to write one section and one section only. Tone of voice: 50% spartan, casual.\n\n------\n\n{{ $json.content }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "d1e70bea-ea88-4b02-9516-ea791b569cd8",
-      "name": "OpenAI2",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
-      "position": [
-        2120,
-        440
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "0Q6M4JEKewP9VKl8",
-          "name": "Bulkbox"
-        }
-      }
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -1394,6 +1353,42 @@
         2500,
         900
       ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You're a helpful, intelligent writing assistant",
+              "role": "system"
+            },
+            {
+              "content": "=The following is an outline of an award winning article. Your task is to write one section and one section only. Tone of voice: 50% spartan, casual.\n\n------\n\n{{ $json.content }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d1e70bea-ea88-4b02-9516-ea791b569cd8",
+      "name": "OpenAI2",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        2120,
+        440
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
     }
   ],
   "pinData": {
@@ -1722,6 +1717,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-03T09:50:29.000Z",
-  "versionId": "fe355107-251e-4f93-8fea-958676a07ff1"
+  "updatedAt": "2024-10-04T09:44:28.000Z",
+  "versionId": "e0a5b25b-2944-40c3-8876-176b1961dda3"
 }
