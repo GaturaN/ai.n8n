@@ -45,17 +45,6 @@
           }
         ]
       ]
-    },
-    "OpenAI": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "createdAt": "2024-10-01T18:56:13.378Z",
@@ -81,9 +70,9 @@
         "operation": "get",
         "workflowId": {
           "__rl": true,
-          "value": "D9YJr7DXAumczK9I",
+          "value": "BuohNSKBGD4Gz9M0",
           "mode": "list",
-          "cachedResultName": "Email Routing (#D9YJr7DXAumczK9I)"
+          "cachedResultName": "AI Content Generator (#BuohNSKBGD4Gz9M0)"
         },
         "requestOptions": {}
       },
@@ -153,8 +142,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2040,
-        520
+        2100,
+        500
       ]
     },
     {
@@ -194,48 +183,13 @@
       }
     }
   ],
-  "pinData": {
-    "OpenAI": [
-      {
-        "json": {
-          "id": "chatcmpl-ADcTxdW86fY4yyi5ni2M8nMzMVmpe",
-          "object": "chat.completion",
-          "created": 1727809553,
-          "model": "gpt-3.5-turbo-0125",
-          "choices": [
-            {
-              "index": 0,
-              "message": {
-                "role": "assistant",
-                "content": "# Email Routing Workflow\n\n## Overview\nThis workflow is designed to route incoming email messages based on specific phrases contained within the message. If the email contains phrases related to returns or cancellations, additional information is requested from the sender. Once the necessary details are provided, the workflow updates a Google Sheets document with the return information. The workflow also includes approval and rejection processes for refund requests based on the information provided in the Google Sheets document.\n\n## Nodes Functionality\n\n1. **incoming_message**\n   - Triggers the workflow when a new email is received.\n   \n2. **get_message**\n   - Retrieves the content of the incoming email message.\n   \n3. **set_fields**\n   - Extracts the sender's email address and the email message text.\n   \n4. **contains_return?**\n   - Checks if the email message contains specific return-related phrases.\n   \n5. **confirm_is_return**\n   - Filters the email messages that contain return-related phrases.\n   \n6. **get_return_details**\n   - Requests additional information from the sender regarding the return.\n   \n7. **send_message**\n   - Sends an email to the sender requesting additional return details.\n   \n8. **add_row**\n   - Adds a new row to a Google Sheets document with the return details provided by the sender.\n   \n9. **Google Sheets Trigger**\n   - Triggers the workflow when a row is updated in the Google Sheets document.\n   \n10. **approve_reject**\n    - Switch node to determine whether to approve or reject a refund request based on the actions in the Google Sheets document.\n    \n11. **refund_approved**\n    - Sends an email notification to the sender informing them that their refund request has been approved.\n    \n12. **refund_rejected**\n    - Sends an email notification to the sender informing them that their refund request has been rejected.\n\n## Connections\n- **incoming_message** triggers the workflow and passes the email content to **get_message**.\n- **get_message** extracts the email content and passes it to **set_fields** to extract sender information and message text.\n- **set_fields** passes the extracted information to **contains_return?** to check for return-related phrases.\n- If the email contains return-related phrases, the workflow proceeds to **confirm_is_return** to filter the messages.\n- If the message is confirmed to be a return request, the workflow proceeds to **get_return_details** to request additional information from the sender.\n- **send_message** sends an email to the sender requesting additional return details.\n- Once the sender provides the necessary details, the workflow updates the Google Sheets document using **add_row**.\n- The Google Sheets Trigger **Google Sheets Trigger** monitors the document for updates and triggers the workflow accordingly.\n- Based on the actions in the Google Sheets document, the workflow routes to either **refund_approved** or **refund_rejected** to notify the sender of the refund status.\n\n## Important Parameters/Settings\n- **Google Sheets Document ID**: Used to specify the Google Sheets document where return details are stored.\n- **Phrases**: Defined phrases related to returns that are checked in the email content.\n- **Email Templates**: Predefined email templates for requesting additional information and notifying the sender of refund status.",
-                "refusal": null
-              },
-              "logprobs": null,
-              "finish_reason": "stop"
-            }
-          ],
-          "usage": {
-            "prompt_tokens": 2721,
-            "completion_tokens": 649,
-            "total_tokens": 3370,
-            "prompt_tokens_details": {
-              "cached_tokens": 0
-            },
-            "completion_tokens_details": {
-              "reasoning_tokens": 0
-            }
-          },
-          "system_fingerprint": null
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-01T19:21:38.000Z",
-  "versionId": "c97ab1b7-8d36-4770-9359-0a164e149617"
+  "updatedAt": "2024-10-09T01:52:24.000Z",
+  "versionId": "8cacb3fe-40d4-45e2-89ee-86b6689bcda5"
 }
