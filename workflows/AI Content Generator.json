@@ -1,66 +1,11 @@
 {
   "active": false,
   "connections": {
-    "n8n Form Trigger": {
-      "main": [
-        [
-          {
-            "node": "Add Row",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Fields": {
-      "main": [
-        [
-          {
-            "node": "create_folder",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Add Row": {
-      "main": [
-        [
-          {
-            "node": "Set Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "create_folder": {
       "main": [
         [
           {
-            "node": "OpenAI",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Convert to File": {
-      "main": [
-        [
-          {
-            "node": "Google Drive1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Drive1": {
-      "main": [
-        [
-          {
-            "node": "input_brief",
+            "node": "create_outline",
             "type": "main",
             "index": 0
           }
@@ -82,18 +27,7 @@
       "main": [
         [
           {
-            "node": "Split Out1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split Out1": {
-      "main": [
-        [
-          {
-            "node": "If3",
+            "node": "split_out",
             "type": "main",
             "index": 0
           }
@@ -104,29 +38,7 @@
       "main": [
         [
           {
-            "node": "OpenAI2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI": {
-      "main": [
-        [
-          {
-            "node": "Convert to File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI2": {
-      "main": [
-        [
-          {
-            "node": "section_text",
+            "node": "section_paragraphs",
             "type": "main",
             "index": 0
           }
@@ -137,47 +49,7 @@
       "main": [
         [
           {
-            "node": "If1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If1": {
-      "main": [
-        [
-          {
-            "node": "OpenAI1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "OpenAI1": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields2": {
-      "main": [
-        [
-          {
-            "node": "Merge",
+            "node": "25_percent_chance",
             "type": "main",
             "index": 0
           }
@@ -199,36 +71,7 @@
       "main": [
         [
           {
-            "node": "Code4",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code4": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "If3": {
-      "main": [
-        [
-          {
-            "node": "set_introduction",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "input_sections",
+            "node": "add_2_new_lines",
             "type": "main",
             "index": 0
           }
@@ -272,27 +115,190 @@
       "main": [
         [
           {
-            "node": "Convert to File2",
+            "node": "final_article_file",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Convert to File2": {
+    "receive_topic": {
       "main": [
         [
           {
-            "node": "Markdown",
+            "node": "add_row",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Markdown": {
+    "add_row": {
       "main": [
-        []
+        [
+          {
+            "node": "topic_variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "topic_variables": {
+      "main": [
+        [
+          {
+            "node": "create_folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "markdown_to_file": {
+      "main": [
+        [
+          {
+            "node": "upload_outline_file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "split_out": {
+      "main": [
+        [
+          {
+            "node": "section_starts_with_#",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "section_starts_with_#": {
+      "main": [
+        [
+          {
+            "node": "set_introduction",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "input_sections",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "25_percent_chance": {
+      "main": [
+        [
+          {
+            "node": "change_section_format",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "set_section_content": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "add_2_new_lines": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "final_article_file": {
+      "main": [
+        [
+          {
+            "node": "upload_fiinalArticle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "upload_fiinalArticle": {
+      "main": [
+        [
+          {
+            "node": "update_article_link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "upload_outline_file": {
+      "main": [
+        [
+          {
+            "node": "input_brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_outline": {
+      "main": [
+        [
+          {
+            "node": "markdown_to_file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "section_paragraphs": {
+      "main": [
+        [
+          {
+            "node": "section_text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "change_section_format": {
+      "main": [
+        [
+          {
+            "node": "set_section_content",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -303,6 +309,247 @@
   },
   "name": "AI Content Generator",
   "nodes": [
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('topic_variables').item.json.Title }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "root",
+          "mode": "list",
+          "cachedResultName": "/ (Root folder)",
+          "cachedResultUrl": "https://drive.google.com/drive"
+        },
+        "options": {}
+      },
+      "id": "11abe711-000c-4960-9f07-4e124532ba83",
+      "name": "create_folder",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        20,
+        440
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eff28505-c438-4c44-8db4-188797b1e5f3",
+              "name": "content",
+              "value": "={{ $('create_outline').item.json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8198bcdb-3082-43d8-84aa-77e292b56e05",
+      "name": "input_brief",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1040,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dda6ee09-0629-4ebc-a4cf-80ebe0172dee",
+              "name": "content",
+              "value": "={{ $json.content.split(/(?:\\r?\\n){2}## /) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9b2be845-91c5-4fa8-9007-c0cee4058ddd",
+      "name": "new_lines",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1260,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4b2dbae1-2e78-46f4-8be7-6240abf5c1d6",
+              "name": "content",
+              "value": "={{ $json.content.replace($json.content,$json.content+\"⟵\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e5228041-32e7-4834-9d87-6b7152bf97e3",
+      "name": "input_sections",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1980,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1bc2b4fc-7cc9-4aea-b733-5d062b3ee648",
+              "name": "message",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            },
+            {
+              "id": "3f599644-8c86-46c6-8048-1166cced462a",
+              "name": "idx",
+              "value": "={{ $('section_paragraphs').item.pairedItem.item }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4b7020ae-d38e-437c-871e-02f78012f691",
+      "name": "section_text",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2540,
+        480
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "599af95b-391c-4d57-868d-0db6eaa39da1",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        3660,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "idx"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0aa60c0b-0537-4539-8312-0be3cfa6c4de",
+      "name": "Sort",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        3880,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "message"
+            }
+          ]
+        },
+        "options": {
+          "mergeLists": true
+        }
+      },
+      "id": "f19ef511-bf86-4c4c-9adf-731704bf64ae",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        4500,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f410b139-0e21-41ed-9848-260e4bf7cf33",
+              "name": "article",
+              "value": "={{ $json.message.join() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "568fd895-fce6-4af8-89de-26e51ae5a66d",
+      "name": "final_article",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4700,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "21f3dd4b-db14-472b-94b6-7165206f94e7",
+              "name": "message",
+              "value": "={{ $json.content+\"\\n\\n\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "771f197a-02e1-4809-9505-e1a3900581f0",
+      "name": "set_introduction",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1980,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "3ad780e5-1dcd-43f0-816c-e6f2608461d5",
+      "name": "Merge1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        4280,
+        360
+      ]
+    },
     {
       "parameters": {
         "path": "generator",
@@ -347,7 +594,7 @@
         }
       },
       "id": "1902e5e3-10c2-49e8-8da1-9d1cd6ae681c",
-      "name": "n8n Form Trigger",
+      "name": "receive_topic",
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.1,
       "position": [
@@ -355,65 +602,6 @@
         440
       ],
       "webhookId": "578f48e7-78a0-4450-b301-a66ca5fe822d"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "dae56384-1e23-46c7-923f-7635d45eaa35",
-              "name": "Title",
-              "value": "={{ $('n8n Form Trigger').item.json['What is the title of the content?'] }}",
-              "type": "string"
-            },
-            {
-              "id": "2c0ac2a3-6b45-4b63-b9f6-c3d51d064203",
-              "name": "Word Count",
-              "value": "={{ $('n8n Form Trigger').item.json['How many words should the content have?'] }}",
-              "type": "number"
-            },
-            {
-              "id": "c05d869d-098e-442a-ab8b-21e6feea5987",
-              "name": "Primary Keyword",
-              "value": "={{ $('n8n Form Trigger').item.json['What is the primary keyword for the content?'] }}",
-              "type": "string"
-            },
-            {
-              "id": "133a25e4-8f18-44c3-b743-9dee224688e3",
-              "name": "Secondary Keywords",
-              "value": "={{ $if($('n8n Form Trigger').item.json['What are the secondary keywords for the content?'].includes(','),$('n8n Form Trigger').item.json['What are the secondary keywords for the content?'].split(','),$('n8n Form Trigger').item.json['What are the secondary keywords for the content?']) }}",
-              "type": "array"
-            },
-            {
-              "id": "9d77b794-445d-4613-aa04-01ebe004f454",
-              "name": "Internal Links",
-              "value": "={{ $if($('n8n Form Trigger').item.json['Are there any external links that should be included in the content?'].includes(','),$('n8n Form Trigger').item.json['Are there any internal links that should be included in the content?'].split(','),$('n8n Form Trigger').item.json['Are there any internal links that should be included in the content?']) }}",
-              "type": "array"
-            },
-            {
-              "id": "24e92ba2-2448-40b6-af62-749351ff1483",
-              "name": "External Links",
-              "value": "={{ $if($('n8n Form Trigger').item.json['Are there any external links that should be included in the content?'].includes(','),$('n8n Form Trigger').item.json['Are there any external links that should be included in the content?'].split(','),$('n8n Form Trigger').item.json['Are there any external links that should be included in the content?']) }}",
-              "type": "array"
-            },
-            {
-              "id": "7466794b-7994-4d54-a72e-feab7d383556",
-              "name": "Additional Instructions",
-              "value": "={{ $('n8n Form Trigger').item.json['Additional instructions or specific requirements for the content.'] }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "3f240ed3-9eff-4ae1-91ec-689a96f1c97e",
-      "name": "Set Fields",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -200,
-        440
-      ]
     },
     {
       "parameters": {
@@ -543,7 +731,7 @@
         "options": {}
       },
       "id": "af8d14aa-d095-4bce-a525-8427e0f450e2",
-      "name": "Add Row",
+      "name": "add_row",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
@@ -559,12 +747,71 @@
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dae56384-1e23-46c7-923f-7635d45eaa35",
+              "name": "Title",
+              "value": "={{ $('receive_topic').item.json['What is the title of the content?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "2c0ac2a3-6b45-4b63-b9f6-c3d51d064203",
+              "name": "Word Count",
+              "value": "={{ $('receive_topic').item.json['How many words should the content have?'] }}",
+              "type": "number"
+            },
+            {
+              "id": "c05d869d-098e-442a-ab8b-21e6feea5987",
+              "name": "Primary Keyword",
+              "value": "={{ $('receive_topic').item.json['What is the primary keyword for the content?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "133a25e4-8f18-44c3-b743-9dee224688e3",
+              "name": "Secondary Keywords",
+              "value": "={{ $if($('receive_topic').item.json['What are the secondary keywords for the content?'].includes(','),$('receive_topic').item.json['What are the secondary keywords for the content?'].split(','),$('receive_topic').item.json['What are the secondary keywords for the content?']) }}",
+              "type": "array"
+            },
+            {
+              "id": "9d77b794-445d-4613-aa04-01ebe004f454",
+              "name": "Internal Links",
+              "value": "={{ $if($('receive_topic').item.json['Are there any external links that should be included in the content?'].includes(','),$('receive_topic').item.json['Are there any internal links that should be included in the content?'].split(','),$('receive_topic').item.json['Are there any internal links that should be included in the content?']) }}",
+              "type": "array"
+            },
+            {
+              "id": "24e92ba2-2448-40b6-af62-749351ff1483",
+              "name": "External Links",
+              "value": "={{ $if($('receive_topic').item.json['Are there any external links that should be included in the content?'].includes(','),$('receive_topic').item.json['Are there any external links that should be included in the content?'].split(','),$('receive_topic').item.json['Are there any external links that should be included in the content?']) }}",
+              "type": "array"
+            },
+            {
+              "id": "7466794b-7994-4d54-a72e-feab7d383556",
+              "name": "Additional Instructions",
+              "value": "={{ $('receive_topic').item.json['Additional instructions or specific requirements for the content.'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3f240ed3-9eff-4ae1-91ec-689a96f1c97e",
+      "name": "topic_variables",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -200,
+        440
+      ]
+    },
+    {
+      "parameters": {
         "operation": "toText",
         "sourceProperty": "message.content",
         "options": {}
       },
       "id": "d4715acb-0f04-45e2-a476-32cec57a840a",
-      "name": "Convert to File",
+      "name": "markdown_to_file",
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
@@ -574,7 +821,331 @@
     },
     {
       "parameters": {
-        "name": "={{ $('Set Fields').item.json['Primary Keyword'] }}",
+        "fieldToSplitOut": "content",
+        "options": {}
+      },
+      "id": "58db0daf-09cb-420d-a0a0-1fac4f2d97ea",
+      "name": "split_out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3a8dc0bb-2bcf-416d-b28e-360a1173042c",
+              "leftValue": "={{ $json.content }}",
+              "rightValue": "#",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "02ed3e37-038e-497d-83af-e8f720b3811d",
+      "name": "section_starts_with_#",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1700,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "71cd7f94-f30d-4eb5-8c31-a0674ef3ffc9",
+              "leftValue": "={{ Math.ceil($('section_paragraphs').all().length * 0.25) }}",
+              "rightValue": "={{ $json.idx }}",
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b3b0138a-ca44-411e-8ecd-7a951fe22919",
+      "name": "25_percent_chance",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2760,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "071e977f-6534-4635-a2a5-9178709bdfc9",
+              "name": "message",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            },
+            {
+              "id": "b1678132-2e98-4fc2-b303-7e89083c287e",
+              "name": "=idx",
+              "value": "={{ Math.ceil($('section_paragraphs').all().length * 0.25) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "70015edc-babc-4123-9589-ac4c70345fa7",
+      "name": "set_section_content",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3400,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Create an array to hold the rearranged items\nconst rearrangedItems = [];\n\n// Loop over input items and push each message into the rearrangedItems array\nfor (const item of $input.all()) {\n  rearrangedItems[item.json.idx] = {\n    json: {\n      message: item.json.message + '\\n\\n' // Add two new lines at the end of each message\n    }\n  };\n}\n\n// Return the rearranged items\nreturn rearrangedItems.filter(Boolean); // Filter out any undefined entries\n"
+      },
+      "id": "e413900a-dc61-4150-93ac-308032ec4aed",
+      "name": "add_2_new_lines",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4100,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "article",
+        "binaryPropertyName": "final_article",
+        "options": {}
+      },
+      "id": "25110a53-8627-4598-bc11-f2217856e10d",
+      "name": "final_article_file",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        4940,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "name": "={{ $('topic_variables').item.json['Primary Keyword'] }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('create_folder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "0122e867-252d-4e54-8576-5bd3ddc7a464",
+      "name": "upload_fiinalArticle",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        5160,
+        360
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc",
+          "mode": "list",
+          "cachedResultName": " Generator",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qslCOQCBepqvixsp2RzILDxBlME5siXJRLFF8yC9jlc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Title": "={{ $('add_row').item.json.Title }}",
+            "Outline Doc": "={{ $('upload_outline_file').item.json.webViewLink }}",
+            "Article Doc": "={{ $('upload_fiinalArticle').item.json.webViewLink }}"
+          },
+          "matchingColumns": [
+            "Title"
+          ],
+          "schema": [
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Word Count",
+              "displayName": "Word Count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Primary Keyword",
+              "displayName": "Primary Keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Secondary Keyword(s)",
+              "displayName": "Secondary Keyword(s)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Internal Links",
+              "displayName": "Internal Links",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "External Links",
+              "displayName": "External Links",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Additional Instructions",
+              "displayName": "Additional Instructions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Outline Doc",
+              "displayName": "Outline Doc",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Article Doc",
+              "displayName": "Article Doc",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Website URL",
+              "displayName": "Website URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e4fa62e3-6c05-4e99-a53e-ede197e2ca02",
+      "name": "update_article_link",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        5380,
+        360
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Epe0euL6qKcOzKeG",
+          "name": "google"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "=O: {{ $('topic_variables').item.json['Primary Keyword'] }}",
         "driveId": {
           "__rl": true,
           "mode": "list",
@@ -588,7 +1159,7 @@
         "options": {}
       },
       "id": "578cc443-0261-401c-a948-44f69773cfd7",
-      "name": "Google Drive1",
+      "name": "upload_outline_file",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
@@ -601,151 +1172,6 @@
           "name": "Drive n8n"
         }
       }
-    },
-    {
-      "parameters": {
-        "resource": "folder",
-        "name": "={{ $('Set Fields').item.json.Title }}",
-        "driveId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "My Drive"
-        },
-        "folderId": {
-          "__rl": true,
-          "value": "root",
-          "mode": "list",
-          "cachedResultName": "/ (Root folder)",
-          "cachedResultUrl": "https://drive.google.com/drive"
-        },
-        "options": {}
-      },
-      "id": "11abe711-000c-4960-9f07-4e124532ba83",
-      "name": "create_folder",
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        20,
-        440
-      ],
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "MHcgKR744VHXSe3X",
-          "name": "Drive n8n"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "eff28505-c438-4c44-8db4-188797b1e5f3",
-              "name": "content",
-              "value": "={{ $('OpenAI').item.json.message.content }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "8198bcdb-3082-43d8-84aa-77e292b56e05",
-      "name": "input_brief",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1040,
-        440
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "dda6ee09-0629-4ebc-a4cf-80ebe0172dee",
-              "name": "content",
-              "value": "={{ $json.content.split(/(?:\\r?\\n){2}## /) }}",
-              "type": "array"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "9b2be845-91c5-4fa8-9007-c0cee4058ddd",
-      "name": "new_lines",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1260,
-        440
-      ]
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "content",
-        "options": {}
-      },
-      "id": "58db0daf-09cb-420d-a0a0-1fac4f2d97ea",
-      "name": "Split Out1",
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        1480,
-        440
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "4b2dbae1-2e78-46f4-8be7-6240abf5c1d6",
-              "name": "content",
-              "value": "={{ $json.content.replace($json.content,$json.content+\"⟵\") }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "e5228041-32e7-4834-9d87-6b7152bf97e3",
-      "name": "input_sections",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1980,
-        480
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "1bc2b4fc-7cc9-4aea-b733-5d062b3ee648",
-              "name": "message",
-              "value": "={{ $json.message.content }}",
-              "type": "string"
-            },
-            {
-              "id": "3f599644-8c86-46c6-8048-1166cced462a",
-              "name": "idx",
-              "value": "={{ $('OpenAI2').item.pairedItem.item }}",
-              "type": "number"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "4b7020ae-d38e-437c-871e-02f78012f691",
-      "name": "section_text",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        2540,
-        480
-      ]
     },
     {
       "parameters": {
@@ -772,14 +1198,14 @@
               "role": "assistant"
             },
             {
-              "content": "={\n\"title\": \"{{ $('Set Fields').item.json.Title }}\",\n\"wordCount\": {{ $('Set Fields').item.json['Word Count'] }},\n\"primaryKeyword\":\"{{ $('Set Fields').item.json['Primary Keyword'] }}\",\n\"secondaryKeywords\": {{ $('Set Fields').item.json['Secondary Keywords'] }},\n\"internaLinks\": {{ $('Set Fields').item.json['Internal Links'] }},\n\"externalLinks\": {{ $('Set Fields').item.json['External Links'] }},\n\"additionalinstructions\":\"{{ $('Set Fields').item.json['Additional Instructions'] }}\"\n}"
+              "content": "={\n\"title\": \"{{ $('topic_variables').item.json.Title }}\",\n\"wordCount\": {{ $('topic_variables').item.json['Word Count'] }},\n\"primaryKeyword\":\"{{ $('topic_variables').item.json['Primary Keyword'] }}\",\n\"secondaryKeywords\": {{ $('topic_variables').item.json['Secondary Keywords'] }},\n\"internaLinks\": {{ $('topic_variables').item.json['Internal Links'] }},\n\"externalLinks\": {{ $('topic_variables').item.json['External Links'] }},\n\"additionalinstructions\":\"{{ $('topic_variables').item.json['Additional Instructions'] }}\"\n}"
             }
           ]
         },
         "options": {}
       },
       "id": "eecf903b-3d60-4c6e-9972-78803e34682a",
-      "name": "OpenAI",
+      "name": "create_outline",
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.5,
       "position": [
@@ -815,7 +1241,7 @@
         "options": {}
       },
       "id": "d1e70bea-ea88-4b02-9516-ea791b569cd8",
-      "name": "OpenAI2",
+      "name": "section_paragraphs",
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.5,
       "position": [
@@ -828,68 +1254,6 @@
           "name": "Bulkbox"
         }
       }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "071e977f-6534-4635-a2a5-9178709bdfc9",
-              "name": "message",
-              "value": "={{ $json.message.content }}",
-              "type": "string"
-            },
-            {
-              "id": "b1678132-2e98-4fc2-b303-7e89083c287e",
-              "name": "=idx",
-              "value": "={{ Math.ceil($('OpenAI2').all().length * 0.25) }}",
-              "type": "number"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "70015edc-babc-4123-9589-ac4c70345fa7",
-      "name": "Edit Fields2",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        3400,
-        420
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "71cd7f94-f30d-4eb5-8c31-a0674ef3ffc9",
-              "leftValue": "={{ Math.ceil($('OpenAI2').all().length * 0.25) }}",
-              "rightValue": "={{ $json.idx }}",
-              "operator": {
-                "type": "number",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "b3b0138a-ca44-411e-8ecd-7a951fe22919",
-      "name": "If1",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        2760,
-        480
-      ]
     },
     {
       "parameters": {
@@ -923,7 +1287,7 @@
         "options": {}
       },
       "id": "87cf609d-682d-4e17-a1a4-185908a2411c",
-      "name": "OpenAI1",
+      "name": "change_section_format",
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.5,
       "position": [
@@ -936,518 +1300,15 @@
           "name": "Bulkbox"
         }
       }
-    },
-    {
-      "parameters": {},
-      "id": "599af95b-391c-4d57-868d-0db6eaa39da1",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
-      "position": [
-        3660,
-        480
-      ]
-    },
-    {
-      "parameters": {
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "idx"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "0aa60c0b-0537-4539-8312-0be3cfa6c4de",
-      "name": "Sort",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        3880,
-        480
-      ]
-    },
-    {
-      "parameters": {
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {
-              "fieldToAggregate": "message"
-            }
-          ]
-        },
-        "options": {
-          "mergeLists": true
-        }
-      },
-      "id": "f19ef511-bf86-4c4c-9adf-731704bf64ae",
-      "name": "Aggregate",
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        4500,
-        360
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Create an array to hold the rearranged items\nconst rearrangedItems = [];\n\n// Loop over input items and push each message into the rearrangedItems array\nfor (const item of $input.all()) {\n  rearrangedItems[item.json.idx] = {\n    json: {\n      message: item.json.message + '\\n\\n' // Add two new lines at the end of each message\n    }\n  };\n}\n\n// Return the rearranged items\nreturn rearrangedItems.filter(Boolean); // Filter out any undefined entries\n"
-      },
-      "id": "e413900a-dc61-4150-93ac-308032ec4aed",
-      "name": "Code4",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        4100,
-        480
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "f410b139-0e21-41ed-9848-260e4bf7cf33",
-              "name": "article",
-              "value": "={{ $json.message.join() }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "568fd895-fce6-4af8-89de-26e51ae5a66d",
-      "name": "final_article",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        4700,
-        360
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "3a8dc0bb-2bcf-416d-b28e-360a1173042c",
-              "leftValue": "={{ $json.content }}",
-              "rightValue": "#",
-              "operator": {
-                "type": "string",
-                "operation": "startsWith"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "02ed3e37-038e-497d-83af-e8f720b3811d",
-      "name": "If3",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        1700,
-        440
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "21f3dd4b-db14-472b-94b6-7165206f94e7",
-              "name": "message",
-              "value": "={{ $json.content+\"\\n\\n\" }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "771f197a-02e1-4809-9505-e1a3900581f0",
-      "name": "set_introduction",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1980,
-        300
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "3ad780e5-1dcd-43f0-816c-e6f2608461d5",
-      "name": "Merge1",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
-      "position": [
-        4280,
-        360
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "toText",
-        "sourceProperty": "article",
-        "binaryPropertyName": "final_article",
-        "options": {}
-      },
-      "id": "25110a53-8627-4598-bc11-f2217856e10d",
-      "name": "Convert to File2",
-      "type": "n8n-nodes-base.convertToFile",
-      "typeVersion": 1.1,
-      "position": [
-        4940,
-        360
-      ]
-    },
-    {
-      "parameters": {
-        "mode": "markdownToHtml",
-        "markdown": "={{ $('final_article').item.json.article }}",
-        "options": {
-          "simplifiedAutoLink": true
-        }
-      },
-      "id": "28ce9577-1f55-4b5e-9410-78e0207cf494",
-      "name": "Markdown",
-      "type": "n8n-nodes-base.markdown",
-      "typeVersion": 1,
-      "position": [
-        5200,
-        360
-      ]
     }
   ],
-  "pinData": {
-    "n8n Form Trigger": [
-      {
-        "json": {
-          "What is the title of the content?": "Build your own chatbot",
-          "How many words should the content have?": 1000,
-          "What is the primary keyword for the content?": "Chatbot",
-          "What are the secondary keywords for the content?": "Automate, Self-host, Build chatbot",
-          "Are there any internal links that should be included in the content?": "",
-          "Are there any external links that should be included in the content?": "https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255,  https://blog.n8n.io/best-ai-chatbot/",
-          "Additional instructions or specific requirements for the content.": "",
-          "submittedAt": "2024-09-28T05:46:43.155-04:00",
-          "formMode": "test"
-        }
-      }
-    ],
-    "Add Row": [
-      {
-        "json": {
-          "Title": "Build your own chatbot",
-          "Word Count": 1000,
-          "Primary Keyword": "Chatbot",
-          "Secondary Keyword(s)": "Automate, Self-host, Build chatbot",
-          "Internal Links": "",
-          "External Links": "https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255,  https://blog.n8n.io/best-ai-chatbot/",
-          "Additional Instructions": ""
-        }
-      }
-    ],
-    "Set Fields": [
-      {
-        "json": {
-          "Title": "Build your own chatbot",
-          "Word Count": 1000,
-          "Primary Keyword": "Chatbot",
-          "Secondary Keywords": [
-            "Automate",
-            " Self-host",
-            " Build chatbot"
-          ],
-          "Internal Links": [
-            ""
-          ],
-          "External Links": [
-            "https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255",
-            "  https://blog.n8n.io/best-ai-chatbot/"
-          ],
-          "Additional Instructions": ""
-        }
-      }
-    ],
-    "create_folder": [
-      {
-        "json": {
-          "kind": "drive#file",
-          "id": "1xxgt62fFNWtAn320spExlw5QFeD3W9FZ",
-          "name": "Build your own chatbot",
-          "mimeType": "application/vnd.google-apps.folder"
-        }
-      }
-    ],
-    "OpenAI": [
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "# Build Your Own Chatbot\n\nCreating your own chatbot can seem daunting, but it’s more accessible than ever. Whether you want to automate customer service, enhance user engagement, or simply dabble in AI, building a chatbot can be a rewarding project. This guide will walk you through the process step-by-step.\n\n## Introduction\n- Define what a chatbot is and its common applications.\n- Briefly explain the benefits of automating interactions with a chatbot.\n\n## Why Build Your Own Chatbot?\n- **Personalization:** Tailor it to your specific needs and audience.\n- **Control:** Self-hosting gives you full control over data and functionality.\n- **Cost-Effectiveness:** Avoid subscription fees of pre-built solutions.\n  \n## Understanding the Basics of Chatbot Technology\n- **Natural Language Processing (NLP):** Introduction to how chatbots understand and process human language.\n- **Machine Learning:** Brief explanation of how chatbots learn from user interactions.\n\n## How to Get Started: Planning Your Chatbot\n- **Identify Purpose:** Define what you want your chatbot to achieve (e.g. customer support, lead generation).\n- **Design the User Experience:** Outline potential user interactions, conversation flows, and responses.\n\n## Choosing the Right Tools and Platforms\n- **Development Platforms:** Discuss popular platforms for building chatbots (e.g., n8n, Dialogflow).\n- **Self-Hosting Solutions:** Explain how self-hosting options work and their benefits.\n- Link to a relevant resource on building an AI assistant with your knowledge base: [Building an AI Assistant](https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255).\n\n## Step-by-Step Guide to Build and Automate Your Chatbot\n### Step 1: Select a Framework\n- Provide an overview of popular frameworks and libraries (e.g., Node.js, Python).\n\n### Step 2: Set Up Your Development Environment\n- Introduce the tools needed for development (e.g., code editors, testing frameworks).\n\n### Step 3: Design and Code the Chatbot\n- Walk through coding basics: setting up intents, responses, and handling user input.\n  \n### Step 4: Integrate APIs and External Services\n- Discuss how to connect your chatbot with other services (e.g., databases, external APIs).\n  \n### Step 5: Testing Your Chatbot\n- Tips on testing for functionality and user experience.\n  \n### Step 6: Launching Your Chatbot\n- Guide to deploying your bot to a live environment.\n\n## Best Practices for Maintaining Your Chatbot\n- **Regular Updates:** Encourage periodic reviews and updates for improvements.\n- **Monitoring Performance:** Discuss tools for monitoring user interactions and feedback.\n\n## Resources and Further Reading\n- Link to additional resources that provide deeper insights, such as the best AI chatbot solutions: [Best AI Chatbot Blog](https://blog.n8n.io/best-ai-chatbot/).\n\n## Conclusion\n- Recap key steps and the importance of building a chatbot.\n- Encourage readers to start building their own chatbot for enhanced automation and engagement.\n\n## Next Steps\n- Challenge readers to share their chatbot projects and experiences.",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      }
-    ],
-    "Google Drive1": [
-      {
-        "json": {
-          "kind": "drive#file",
-          "id": "1CNvKWDbr9ExoRQUFodLZGzge7jqBJuCQ",
-          "name": "Chatbot",
-          "mimeType": "text/plain",
-          "starred": false,
-          "trashed": false,
-          "explicitlyTrashed": false,
-          "parents": [
-            "1xxgt62fFNWtAn320spExlw5QFeD3W9FZ"
-          ],
-          "spaces": [
-            "drive"
-          ],
-          "version": "3",
-          "webContentLink": "https://drive.google.com/uc?id=1CNvKWDbr9ExoRQUFodLZGzge7jqBJuCQ&export=download",
-          "webViewLink": "https://drive.google.com/file/d/1CNvKWDbr9ExoRQUFodLZGzge7jqBJuCQ/view?usp=drivesdk",
-          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/text/plain",
-          "hasThumbnail": false,
-          "thumbnailVersion": "0",
-          "viewedByMe": false,
-          "createdTime": "2024-10-08T07:17:53.054Z",
-          "modifiedTime": "2024-10-08T07:17:54.109Z",
-          "modifiedByMeTime": "2024-10-08T07:17:54.109Z",
-          "modifiedByMe": true,
-          "owners": [
-            {
-              "kind": "drive#user",
-              "displayName": "Francis Njenga",
-              "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocIE62GQhdha9jQCZMNtDhN6cmhKV-eqowTXQkBpYk5Jdd_T-Q=s64",
-              "me": true,
-              "permissionId": "08962938271822840358",
-              "emailAddress": "gaturanjenga@gmail.com"
-            }
-          ],
-          "lastModifyingUser": {
-            "kind": "drive#user",
-            "displayName": "Francis Njenga",
-            "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocIE62GQhdha9jQCZMNtDhN6cmhKV-eqowTXQkBpYk5Jdd_T-Q=s64",
-            "me": true,
-            "permissionId": "08962938271822840358",
-            "emailAddress": "gaturanjenga@gmail.com"
-          },
-          "shared": false,
-          "ownedByMe": true,
-          "capabilities": {
-            "canAcceptOwnership": false,
-            "canAddChildren": false,
-            "canAddMyDriveParent": false,
-            "canChangeCopyRequiresWriterPermission": true,
-            "canChangeSecurityUpdateEnabled": false,
-            "canChangeViewersCanCopyContent": true,
-            "canComment": true,
-            "canCopy": true,
-            "canDelete": true,
-            "canDownload": true,
-            "canEdit": true,
-            "canListChildren": false,
-            "canModifyContent": true,
-            "canModifyContentRestriction": true,
-            "canModifyEditorContentRestriction": true,
-            "canModifyOwnerContentRestriction": true,
-            "canModifyLabels": false,
-            "canMoveChildrenWithinDrive": false,
-            "canMoveItemIntoTeamDrive": true,
-            "canMoveItemOutOfDrive": true,
-            "canMoveItemWithinDrive": true,
-            "canReadLabels": false,
-            "canReadRevisions": true,
-            "canRemoveChildren": false,
-            "canRemoveContentRestriction": false,
-            "canRemoveMyDriveParent": true,
-            "canRename": true,
-            "canShare": true,
-            "canTrash": true,
-            "canUntrash": true
-          },
-          "viewersCanCopyContent": true,
-          "copyRequiresWriterPermission": false,
-          "writersCanShare": true,
-          "permissions": [
-            {
-              "kind": "drive#permission",
-              "id": "08962938271822840358",
-              "type": "user",
-              "emailAddress": "gaturanjenga@gmail.com",
-              "role": "owner",
-              "displayName": "Francis Njenga",
-              "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocIE62GQhdha9jQCZMNtDhN6cmhKV-eqowTXQkBpYk5Jdd_T-Q=s64",
-              "deleted": false,
-              "pendingOwner": false
-            }
-          ],
-          "permissionIds": [
-            "08962938271822840358"
-          ],
-          "originalFilename": "Untitled",
-          "fullFileExtension": "",
-          "fileExtension": "",
-          "md5Checksum": "9f40c25e1e084230664ffdd4b696112d",
-          "sha1Checksum": "27b74754f3efd436e8b284d8f550ff07278c73dd",
-          "sha256Checksum": "59fc78e9b91d60ae0688a418cdc6c4410efcaa55a8efa68f2c2f928aa53779d0",
-          "size": "3090",
-          "quotaBytesUsed": "3090",
-          "headRevisionId": "0Bz6brvIdj_6dQ2l4ZWZaUFhVTURQM2pwZVA5NU9RV2VvbURvPQ",
-          "isAppAuthorized": true,
-          "linkShareMetadata": {
-            "securityUpdateEligible": false,
-            "securityUpdateEnabled": true
-          }
-        }
-      }
-    ],
-    "OpenAI2": [
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "Chatbots are designed to streamline communication, and they do it well. By automating interactions, businesses can handle inquiries instantly, providing quick responses without the delays of human operators. This efficiency kills wait times and frees up staff for tasks that require a personal touch.\n\nConsistency is another big win. A chatbot delivers the same answers every time, ensuring customers get reliable information. It’s like having a trusty assistant who never forgets the script.\n\nCost savings also come into play. With a chatbot managing routine questions and tasks, companies can reduce labor costs while still maintaining high levels of customer service. In short, automating with a chatbot makes interactions faster, more accurate, and more affordable—benefits no business can afford to ignore.",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      },
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "### Machine Learning: A Simple Breakdown\n\nAt its core, machine learning in chatbots is all about making them smarter over time. Think of it like training a dog; the more you practice, the better it gets at following commands. For chatbots, every interaction is a chance to learn.\n\nWhen a user sends a message, the chatbot processes that input and determines the best response based on past conversations. It uses algorithms to analyze patterns in how users communicate and what answers they find helpful. As more data comes in, the chatbot refines its responses, leading to more accurate and relevant interactions.\n\nFor example, if users frequently ask about a specific topic and the chatbot provides the wrong answer, it's able to recognize that mistake. Through feedback mechanisms—like upvotes or corrections from users—it adapts its approach. Over time, this results in a chatbot that not only learns from its mistakes but also begins to understand nuances in language, slang, or industry-specific terms.\n\nIn short, machine learning is the secret sauce that helps your chatbot evolve from a basic responder to a savvy conversational partner, boosting user satisfaction and engagement along the way.",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      },
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "### Design the User Experience\n\nWhen it comes to chatbots, the user experience (UX) can make or break your project. Start by thinking of it as a conversation. What do you want your users to feel and accomplish when they interact with your bot? Here are some basic steps to guide you.\n\n1. **Map Out Scenarios:** Draft a list of common questions or requests that users might have. These scenarios act like the backbone of your chatbot. The more specific you get, the easier it will be to anticipate user needs.\n\n2. **Create Conversation Flows:** Design the flow of conversations. This doesn’t have to be complicated—think of it like a choose-your-own-adventure book. Outline paths based on user responses. If a user says “I need help with my order,” what happens next? What options do they have? \n\n3. **Develop Responses:** Write responses that feel natural and friendly. Use a casual tone that matches your brand. Avoid jargon or overly formal language—unless that’s your brand vibe. Make sure to include options for follow-up questions to keep the dialogue flowing.\n\n4. **Test for Clarity:** Run your conversation flow by a few people who know nothing about your chatbot. Can they easily understand and navigate the conversation? Adjust based on their feedback. You want the experience to be intuitive.\n\n5. **Add Personality:** Inject some character into your chatbot. Maybe it’s witty or straightforward—whatever fits your brand. A little humor or a friendly greeting can turn a simple interaction into a memorable experience.\n\n6. **Keep It Simple:** Don't overload users with too many responses or options all at once. Prioritize clarity over complexity. Simple is often better, and users appreciate a direct point.\n\nBy thoughtfully designing user interactions and keeping your audience in mind, you can create a chatbot that not only answers questions but also engages users, making their experience smooth and enjoyable.",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      },
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "### Self-Hosting Solutions\n\nWhen it comes to building a chatbot, going the self-hosting route can be a game changer. Essentially, self-hosting means you’re setting up your chatbot on your own server, rather than relying on a cloud provider. This gives you complete control over your data and how the bot operates, leading to enhanced privacy and customization.\n\nOne of the biggest upsides to self-hosting is that you can tailor everything to fit your specific needs. Want to tweak how the chatbot responds or add unique features? Go for it. With a cloud service, you’re usually stuck with whatever they provide.\n\nMoreover, self-hosting can save you money in the long run, especially if your chatbot gets a lot of traffic. While cloud platforms may charge based on usage, hosting your own solution can often lead to lower costs as you scale up.\n\nOf course, going down this path requires a bit more technical know-how. You’ll need to manage everything from server maintenance to security updates on your own. But if you’re willing to roll up your sleeves, the benefits can be substantial.\n\nIf you're curious about how to set up your own AI assistant using self-hosting, check out this helpful resource: [Building an AI Assistant](https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255). It’s a solid starting point that can guide you through the process and help you get your chatbot up and running.",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      },
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "### Step 6: Launching Your Chatbot\n\nSo you’ve coded, tested, and fine-tuned your chatbot—now it’s time to get it out into the wild. Here’s how to launch your creation:\n\n1. **Choose Your Hosting Platform**: Depending on your framework, you might have several options. For Node.js, platforms like Heroku or DigitalOcean are popular. If you went the Python route, consider using AWS or PythonAnywhere. Evaluate their features, ease of use, and costs to find what fits your needs.\n\n2. **Prepare Your Environment**: Before you go live, make sure all dependencies are installed and your environment variables are set properly. This includes any API keys or database connections your chatbot needs to function. Double-check configuration files to avoid any nasty surprises.\n\n3. **Deploy Your Bot**: Follow the hosting platform's guidelines to deploy your bot. This process usually involves pushing your code to a repository (like GitHub) and linking it with your hosting service. Most platforms have straightforward guides—just follow along step-by-step.\n\n4. **Set Up Webhooks**: If your bot interacts with messaging platforms (like Facebook Messenger or Slack), you’ll need to set up webhooks. This is how these services communicate with your bot. Make sure your bot can receive data and respond if you want it to be interactive.\n\n5. **Monitor Performance**: Once your bot is live, keep an eye on its performance. Most hosting services provide monitoring tools to track usage and errors. This is valuable for identifying issues early and making adjustments as needed.\n\n6. **Get Feedback**: Share your chatbot with a small group of users first. Collect their thoughts—what works, what doesn’t, and what could be improved. Use this feedback to make updates that enhance the user experience.\n\nLaunching your chatbot is just the beginning. Stay engaged, continue to iterate, and watch it grow into something that works for your users!",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      },
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "### Monitoring Performance\n\nKeeping an eye on how your chatbot performs is crucial to its success. Think of it like tuning up a car—you want to know when something’s off before it breaks down. Start by using analytics tools that track user interactions, like how many people are chatting, what questions they ask, and where they drop off. Google Analytics or specialized bot monitoring platforms can give you valuable insights.\n\nDon’t just look at numbers. Pay attention to user feedback, too. Encourage users to rate their experience, and make it easy for them to leave comments. This info can help you spot patterns—maybe your bot struggles with specific questions or users often get frustrated at certain points in the conversation.\n\nSchedule regular check-ins to review this data. It’s better than letting it pile up! After analyzing, don’t be afraid to tweak responses, add new features, or clarify the bot’s language. A chatbot should evolve just like its users do. Keeping tabs on performance not only improves user experience but also ensures your bot stays relevant and useful.",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      },
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "### Resources and Further Reading\n\nIf you're looking to dive deeper into the world of AI chatbots, there are plenty of resources out there to help you navigate your options. From industry trends to practical applications, these links will provide valuable insights. For a comprehensive overview, check out our guide to the best AI chatbot solutions. It outlines different platforms, key features, and user experiences, allowing you to choose the right fit for your needs. Whether you're a business owner exploring automation or a tech enthusiast curious about AI developments, this blog is a solid starting point: [Best AI Chatbot Blog](https://blog.n8n.io/best-ai-chatbot/).",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      },
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "In wrapping things up, we’ve walked through the essential steps to create your very own chatbot. From defining your goals to picking the right platform and designing intuitive conversations, each phase is critical in building a tool that can transform engagement and streamline processes. \n\nThe importance of having a chatbot can’t be overstated; it’s about enhancing automation and improving user experience—whether that’s answering questions, providing support, or collecting feedback. So why not take the plunge? Start building your chatbot today and see just how much easier it can make your life and how much more connected you can be with your audience. Dive in and let the automation do the heavy lifting!",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      },
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "Now that you’ve seen what’s possible with chatbots, it’s your turn. We want to hear from you! Whether you’re just starting out or have been tinkering with chatbot projects for a while, share your journey. What challenges did you face? What successes are you proud of? \n\nPost your project links, insights, and experiences in the comments or on social media using our hashtag. Let’s create a community where we can learn from each other and inspire fresh ideas. So, roll up your sleeves and show us what you’ve got!",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      }
-    ],
-    "OpenAI1": [
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "### Self-Hosting Solutions\n\nWhen it comes to building a chatbot, choosing to self-host can be a game changer. Here are some key points to consider:\n\n#### What is Self-Hosting?\n\nSelf-hosting means setting up your chatbot on your own server instead of relying on a cloud provider. This offers several benefits:\n\n- **Complete Control**: You have full authority over your data and the bot’s operations.\n- **Enhanced Privacy**: Your information is stored securely on your server, reducing exposure to third-party risks.\n- **Customization**: Tailor the chatbot to fit your specific needs without the constraints of a cloud service.\n\n#### Benefits of Self-Hosting\n\n1. **Tailored Features**:\n   - Want to adjust how the chatbot responds? \n   - Looking to integrate unique features? \n   - With self-hosting, you can customize everything as you see fit.\n\n2. **Cost Efficiency**:\n   - Self-hosting can save money in the long run, especially with high traffic.\n   - Unlike cloud platforms that charge based on usage, hosting your own solution typically leads to lower costs as you scale.\n\n#### Technical Considerations\n\nWhile self-hosting offers numerous advantages, it also requires a certain level of technical expertise:\n\n- **Server Maintenance**: You will need to manage server upkeep and ensure consistent uptime.\n- **Security Updates**: Keeping your system secure falls squarely on your shoulders.\n\nIf you’re willing to put in the effort, the benefits can be substantial.\n\n#### Getting Started\n\nCurious about how to set up your own AI assistant using self-hosting? Check out this helpful resource: [Building an AI Assistant](https://community.n8n.io/t/building-an-ai-assistant-with-my-own-knowledge-base/40255). \n\nThis guide is a solid starting point that can walk you through the process of getting your chatbot up and running!",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-08T14:27:14.000Z",
-  "versionId": "ae0148f3-1ab3-42c5-a7da-f89ab87b6858"
+  "updatedAt": "2024-10-09T01:54:59.000Z",
+  "versionId": "00506b01-8e91-4211-bf3d-3e38c85527a1"
 }
