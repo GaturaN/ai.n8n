@@ -262,8 +262,8 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        2440,
-        320
+        2800,
+        160
       ]
     },
     {
@@ -596,6 +596,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-26T11:40:50.000Z",
-  "versionId": "996c3624-b060-434e-b339-7936e9ee828f"
+  "updatedAt": "2024-10-09T02:23:16.000Z",
+  "versionId": "e2516231-59a2-4dac-87c4-a126de380182"
 }
