@@ -1,0 +1,67 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Trello",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-09T02:34:36.952Z",
+  "id": "9nQ6dj9ZxhJ3Mahd",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Trello & Pinecone",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "10ad5be6-01c9-47c2-a797-e0c1a6dc5448",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        480,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "list",
+        "operation": "getCards",
+        "id": "JgD11F5G",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "id": "009f5c01-f383-429f-8ef2-f5595a7e1e05",
+      "name": "Trello",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        700,
+        540
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "28KcZZoExcvdC6un",
+          "name": "bulkbox"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-09T02:36:06.000Z",
+  "versionId": "08e584cd-3bce-45e2-a3f7-1d939711c3bc"
+}
