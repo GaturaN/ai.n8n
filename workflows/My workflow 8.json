@@ -1,0 +1,617 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Mail": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email2": {
+      "main": [
+        [
+          {
+            "node": "IMAP3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Download PJ1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Pushover",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Download PJ2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Download PJ3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PJ1": {
+      "main": [
+        [
+          {
+            "node": "Send Email2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PJ2": {
+      "main": [
+        [
+          {
+            "node": "Send Email1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PJ3": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-17T10:21:50.242Z",
+  "id": "UsX08HjZtmF75Sx4",
+  "meta": null,
+  "name": "My workflow 8",
+  "nodes": [
+    {
+      "parameters": {
+        "fromEmail": "=gestion@spirulinalpes.com",
+        "toEmail": "justif+spirul-in-alpes-54245@tiime.fr",
+        "subject": "=facture",
+        "emailFormat": "text",
+        "options": {
+          "attachments": "attachment"
+        }
+      },
+      "id": "c1c1dc14-6c8e-4b70-8466-63b375564279",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        920,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 2
+            }
+          ]
+        }
+      },
+      "id": "2633255b-0854-40e8-85d7-1c7b8fbea1ef",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "coreImapAccount",
+        "resource": "email",
+        "mailboxPath": {
+          "__rl": true,
+          "value": "INBOX.Factures",
+          "mode": "path"
+        },
+        "emailDateRange": {
+          "since": "=2023-12-01"
+        },
+        "emailFlags": {},
+        "emailSearchFilters": {},
+        "includeParts": [
+          "attachmentsInfo"
+        ]
+      },
+      "id": "203e2fb7-407e-410f-b7e5-f2283c4034f9",
+      "name": "Get Mail",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "=gestion@spirulinalpes.com",
+        "toEmail": "justif+spirul-in-alpes-54245@tiime.fr",
+        "subject": "=facture",
+        "emailFormat": "text",
+        "options": {
+          "attachments": "attachment"
+        }
+      },
+      "id": "ac94d112-baf6-4173-be6f-0fc5376d8753",
+      "name": "Send Email1",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        920,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "=gestion@spirulinalpes.com",
+        "toEmail": "justif+spirul-in-alpes-54245@tiime.fr",
+        "subject": "=facture",
+        "emailFormat": "text",
+        "options": {
+          "attachments": "attachment"
+        }
+      },
+      "id": "8711a331-eb7b-4a6d-9bfe-c34301454341",
+      "name": "Send Email2",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        920,
+        1020
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "255a203e-e771-41ed-9d7c-d167811d2f9c",
+              "leftValue": "={{ $json.attachmentsInfo[0].filename }}",
+              "rightValue": "PDF",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            },
+            {
+              "id": "a5608f99-1444-4774-8610-1518b6cd2367",
+              "leftValue": "={{ $json.attachmentsInfo[0].filename }}",
+              "rightValue": "pdf",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "82c36bb9-2b00-45ae-b363-0433749e3545",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        460,
+        1020
+      ]
+    },
+    {
+      "parameters": {
+        "userKey": "un5u3hfee5rwacp7o33xjhjpzkx8j5",
+        "message": "=n8n n'as pas trouvé de pdf dans ce mail :  {{ $json.envelope.subject }} de {{ $json.envelope.from[0].name }}",
+        "priority": -1,
+        "additionalFields": {}
+      },
+      "id": "2cf20fd0-dc7f-4025-ac95-0513578d429c",
+      "name": "Pushover",
+      "type": "n8n-nodes-base.pushover",
+      "typeVersion": 1,
+      "position": [
+        460,
+        1220
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.attachmentsInfo[2].partId }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "3 Pièce jointes"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "04808681-a78c-4d7c-87eb-ee1ee2d3dbe9",
+                    "leftValue": "={{ $json.attachmentsInfo[1].partId }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "2 PJ"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "053c51d3-4f1c-4efd-84d2-48f68c0c0529",
+                    "leftValue": "={{ $json.attachmentsInfo[0].partId }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "1 PJ"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "7177a30f-d5f3-4617-8051-21a80473d8b2",
+                    "leftValue": "={{ $json.attachmentsInfo[0].partId }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notExists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "pas de PJ"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1140749d-9be1-4f3e-bffb-ced9e97fa220",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        -20,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "255a203e-e771-41ed-9d7c-d167811d2f9c",
+              "leftValue": "={{ $json.attachmentsInfo[1].filename }}",
+              "rightValue": "PDF",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            },
+            {
+              "id": "a5608f99-1444-4774-8610-1518b6cd2367",
+              "leftValue": "={{ $json.attachmentsInfo[1].filename }}",
+              "rightValue": "pdf",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "4685522c-f8e4-4030-8b8f-7dadd454ca53",
+      "name": "If3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        460,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "255a203e-e771-41ed-9d7c-d167811d2f9c",
+              "leftValue": "={{ $json.attachmentsInfo[2].filename }}",
+              "rightValue": "PDF",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            },
+            {
+              "id": "a5608f99-1444-4774-8610-1518b6cd2367",
+              "leftValue": "={{ $json.attachmentsInfo[2].filename }}",
+              "rightValue": "pdf",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "159546af-6b3b-4fba-b377-d1fff20e7174",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "coreImapAccount",
+        "resource": "email",
+        "operation": "downloadAttachment",
+        "mailboxPath": {
+          "__rl": true,
+          "value": "INBOX.Factures",
+          "mode": "path"
+        },
+        "emailUid": "={{ $json.uid }}",
+        "partId": "=2"
+      },
+      "id": "5f60a8c7-e2c0-4afe-8de7-d82e6ee5f305",
+      "name": "Download PJ1",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        700,
+        1020
+      ],
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "authentication": "coreImapAccount",
+        "resource": "email",
+        "operation": "downloadAttachment",
+        "mailboxPath": {
+          "__rl": true,
+          "value": "INBOX.Factures",
+          "mode": "path"
+        },
+        "emailUid": "={{ $json.uid }}",
+        "partId": "=3"
+      },
+      "id": "8365af02-8132-46f9-998e-b64a06652ea1",
+      "name": "Download PJ2",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        700,
+        720
+      ],
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "authentication": "coreImapAccount",
+        "resource": "email",
+        "operation": "downloadAttachment",
+        "mailboxPath": {
+          "__rl": true,
+          "value": "INBOX.Factures",
+          "mode": "path"
+        },
+        "emailUid": "={{ $json.uid }}",
+        "partId": "=4"
+      },
+      "id": "172bc591-b805-4701-816b-2936d8a6ec83",
+      "name": "Download PJ3",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        700,
+        460
+      ],
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "authentication": "coreImapAccount",
+        "resource": "email",
+        "operation": "moveEmail",
+        "sourceMailbox": {
+          "__rl": true,
+          "value": "INBOX.Factures",
+          "mode": "path"
+        },
+        "emailUid": "={{ $('Get Mail').item.json.uid }}",
+        "destinationMailbox": {
+          "__rl": true,
+          "value": "INBOX.Factures.Envoyée à Tiime",
+          "mode": "path"
+        }
+      },
+      "id": "9dd96365-1e17-43de-ba26-bf8f09e73f51",
+      "name": "IMAP3",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        1020
+      ],
+      "alwaysOutputData": false,
+      "credentials": {}
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-17T10:21:50.242Z",
+  "versionId": "65a3ddd4-417d-4605-adab-b3a2f8ed28e9"
+}
