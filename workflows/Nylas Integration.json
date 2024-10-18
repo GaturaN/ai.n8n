@@ -1,0 +1,77 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-17T10:21:50.242Z",
+  "id": "UsX08HjZtmF75Sx4",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Nylas Integration",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const challenge = $('Webhook').first().json.query.challenge;\n\nif (challenge) {\n  return {\n    response: challenge  // Respond with the challenge\n  };\n} else {\n  // Process the webhook normally if not a challenge\n  return $input.all();\n}\n\nconst challenge = $json[\"query\"][\"challenge\"];\n\nif (challenge) {\n  return [\n    {\n      json: {\n        challenge: challenge\n      },\n      response: {\n        body: challenge, // Respond with the challenge in the body\n      }\n    }\n  ];\n} else {\n  return $input.all(); // Continue processing if it's not a challenge request\n}\n\n"
+      },
+      "id": "3ec10604-c734-48d4-9ff4-c27549c26d39",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        740,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "db8491ae-bfa1-4322-b52d-099e971f4d5f",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        580,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "path": "nylas123",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "5bcef8d8-86e7-4f3f-9d2c-e5b9a982541c",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        360,
+        900
+      ],
+      "webhookId": "dc973992-b5b6-4b20-8dad-e0771a30577f"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-18T12:47:53.000Z",
+  "versionId": "85cb9c99-3ea2-424a-9048-56fdd96c3cc0"
+}
