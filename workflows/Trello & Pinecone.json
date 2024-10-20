@@ -5,8 +5,74 @@
       "main": [
         [
           {
+            "node": "board_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "board_id": {
+      "main": [
+        [
+          {
+            "node": "all_lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "all_lists": {
+      "main": [
+        [
+          {
             "node": "Trello",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trello": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
             "index": 0
           }
         ]
@@ -29,28 +95,146 @@
       "position": [
         480,
         540
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "42d8b8d2-4f9d-4214-88c6-d71d5cf0b5be",
+              "name": "b_id",
+              "value": "62b1d3ef56cdca107d3aec95",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "68e10128-173c-4fe3-b897-681c6359258f",
+      "name": "board_id",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        700,
+        540
       ]
     },
     {
       "parameters": {
         "resource": "list",
-        "operation": "getCards",
-        "id": "JgD11F5G",
+        "operation": "getAll",
+        "id": "={{ $json.b_id }}",
         "returnAll": true,
         "additionalFields": {}
       },
       "id": "009f5c01-f383-429f-8ef2-f5595a7e1e05",
-      "name": "Trello",
+      "name": "all_lists",
       "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        700,
+        920,
         540
       ],
       "credentials": {
         "trelloApi": {
           "id": "28KcZZoExcvdC6un",
           "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "list",
+        "operation": "getCards",
+        "id": "={{ $json.id }}",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "id": "f1514be3-a052-48dc-8c44-48c89e53b6eb",
+      "name": "Trello",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        540
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "28KcZZoExcvdC6un",
+          "name": "bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "fd1edf23-6653-4f0a-9d2a-49c17bc792ab",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        760
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c7956e3f-bdc0-488b-b998-78b3be852936",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5bb5d288-7f55-4b11-888a-8d7ea4141f84",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "trello-test",
+          "mode": "list",
+          "cachedResultName": "trello-test"
+        },
+        "options": {}
+      },
+      "id": "2732636c-5290-43fb-a31e-a5a0d76af7e1",
+      "name": "Pinecone Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        540
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
         }
       }
     }
@@ -62,6 +246,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-09T02:36:06.000Z",
-  "versionId": "08e584cd-3bce-45e2-a3f7-1d939711c3bc"
+  "updatedAt": "2024-10-20T15:21:24.000Z",
+  "versionId": "53d97877-47b6-4612-9d1a-2ab9f8bec662"
 }
