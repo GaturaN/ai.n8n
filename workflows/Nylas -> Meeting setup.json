@@ -1,0 +1,37 @@
+{
+  "active": true,
+  "connections": {},
+  "createdAt": "2024-10-21T16:26:05.534Z",
+  "id": "DrWwecGz6gAipuOT",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Nylas -> Meeting setup",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mail",
+        "options": {}
+      },
+      "id": "c937d3a9-aa13-4087-85ab-d8f87e6dd49b",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        840,
+        380
+      ],
+      "webhookId": "977a1d8e-e4bf-4f1e-81a7-b216f9119612"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-21T16:29:57.000Z",
+  "versionId": "41072c45-6b99-4efc-b333-5ec7006fe304"
+}
