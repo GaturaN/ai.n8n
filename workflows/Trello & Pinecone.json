@@ -237,6 +237,28 @@
           "name": "My Account"
         }
       }
+    },
+    {
+      "parameters": {
+        "path": "7dcb1d24-4dba-4fbf-9846-445ead3b027e",
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "file"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1facdc0f-96f1-47ad-8e3e-728076570720",
+      "name": "n8n Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.1,
+      "position": [
+        620,
+        960
+      ],
+      "webhookId": "7dcb1d24-4dba-4fbf-9846-445ead3b027e"
     }
   ],
   "pinData": {},
@@ -246,6 +268,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-20T15:21:24.000Z",
-  "versionId": "53d97877-47b6-4612-9d1a-2ab9f8bec662"
+  "updatedAt": "2024-10-21T15:11:15.000Z",
+  "versionId": "13cdb435-393e-44e6-a2ef-0bf678db0ccf"
 }
