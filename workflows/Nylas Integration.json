@@ -1,11 +1,11 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Webhook": {
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "Code1",
             "type": "main",
             "index": 0
           }
@@ -29,8 +29,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        740,
-        620
+        1100,
+        600
       ]
     },
     {
@@ -44,14 +44,52 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        580,
+        1300,
+        940
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Access the incoming webhook event data\nconst eventQuery =  $('Webhook').first().json.query;\n\n// Check if the query contains a 'challenge' field\n// if (eventQuery?.challenge) {\n//   // If a challenge exists, return it in the response\n//   return {\n//     statusCode: 200,\n//     body: eventQuery.challenge\n//   };\n// } else {\n//   // Otherwise, respond with just a 200 status\n//   return {\n//     statusCode: 200,\n//     body: 'OK'\n//   };\n// }\n\nif (eventQuery?.challenge) {\n  // Return the challenge as an array of objects as required by n8n\n  return [\n    {\n      json: {\n        challenge: eventQuery.challenge\n      }\n    }\n  ];\n} else {\n  // Return OK as an array of objects\n  return [\n    {\n      json: {\n        message: 'OK'\n      }\n    }\n  ];\n}\n"
+      },
+      "id": "8cdb6c29-caec-4367-a09e-204aa3da0a82",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
         900
       ]
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "49435984-e0d4-4938-bcc9-30e0a09af1da",
+              "name": "query",
+              "value": "={{ $json.query }} {{ $('Webhook').item.json.query }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dd4688fb-4db2-4139-8579-ab1f7af9d8e8",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        140,
+        1120
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
         "path": "nylas123",
-        "responseMode": "responseNode",
+        "responseMode": "lastNode",
         "options": {}
       },
       "id": "5bcef8d8-86e7-4f3f-9d2c-e5b9a982541c",
@@ -72,6 +110,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-10-18T12:47:53.000Z",
-  "versionId": "85cb9c99-3ea2-424a-9048-56fdd96c3cc0"
+  "updatedAt": "2024-10-21T16:25:38.000Z",
+  "versionId": "adee13e2-81b1-4e2c-885a-e4b32d8bddc5"
 }
