@@ -1,0 +1,264 @@
+{
+  "active": false,
+  "connections": {
+    "n8n Form Trigger": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Vector Store Tool",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Tool",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-22T13:01:47.829Z",
+  "id": "eG72YwgBuZ3xfllY",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Tasks with AI",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ae2b02d8-bf5a-451f-9013-e5abe64a7a2d",
+        "formTitle": "Project",
+        "formDescription": "Upload the project pdf",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Project",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "aeddbfed-186b-46e4-9d1b-9d701da7075a",
+      "name": "n8n Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.1,
+      "position": [
+        980,
+        500
+      ],
+      "webhookId": "ae2b02d8-bf5a-451f-9013-e5abe64a7a2d"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "Project",
+        "options": {}
+      },
+      "id": "49761132-b188-480b-8eaf-45462d124b5d",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "97362e07-ad12-4ab0-9068-9ce7a1ce212e",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        720
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "trello_cards_and_members",
+        "description": "Trello Cards and Members"
+      },
+      "id": "55958631-6c48-4a7f-a3cb-1fdf5b2a7551",
+      "name": "Vector Store Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "e442679e-78cb-4c94-b136-09aa7cdd824f",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        940
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ecaea7af-7fc0-4d2b-bf80-304c2eccf5c0",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        1160
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "trello-test",
+          "mode": "list",
+          "cachedResultName": "trello-test"
+        },
+        "options": {}
+      },
+      "id": "8e43203b-083d-47f1-852c-9f683761dab5",
+      "name": "Pinecone Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        940
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Hello, you are a helpful assistant.\n\nHelp me create tasks to be uploaded to trello for the following project. Give a timeline and a description for the tasks.\n\n-------\n\n{{ $json.text }}",
+        "options": {}
+      },
+      "id": "4a5b49d7-525f-4d5e-af84-b9caa615c94c",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        1420,
+        500
+      ]
+    }
+  ],
+  "pinData": {
+    "Extract from File": [
+      {
+        "json": {
+          "numpages": 2,
+          "numrender": 2,
+          "info": {
+            "PDFFormatVersion": null,
+            "Language": null,
+            "EncryptFilterName": null,
+            "IsLinearized": false,
+            "IsAcroFormPresent": false,
+            "IsXFAPresent": false,
+            "IsCollectionPresent": false,
+            "IsSignaturesPresent": false,
+            "Producer": "PyFPDF 1.7.2 http://pyfpdf.googlecode.com/",
+            "CreationDate": "D:20241022130023"
+          },
+          "text": "Assist Ticketing System Project Requirements\n1. Project Overview\nThe Assist Ticketing System is an internal tool designed to streamline communication within an\norganization.\nEmployees from different departments will use the system to raise and resolve issues efficiently by\ncreating tickets.\nThe system will not be accessible to external customers or suppliers.\n2. Objectives\n- Develop a web-based system using the Frappe framework.\n- Implement ticket creation, assignment, and resolution workflows.\n- Provide notifications for assigned tickets.\n- Facilitate collaboration between departments.\n3. Functional Requirements\n- User Roles:\n- Employees: Can create and manage tickets within their department.\n- Admins: Can manage users, departments, and system settings.\n- Ticketing System:\n- Create a ticket with details like priority, department, and issue description.\n- Assign tickets to relevant employees.\n- Change ticket statuses (Open, In Progress, Resolved, Closed).\n- Notifications:\n\n- Real-time UI notifications when a user is assigned to a ticket.\n- Reporting:\n- View ticket history.\n- Generate reports for ticket statistics (e.g., number of tickets per department).\n4. Non-Functional Requirements\n- Performance:\n- The system must handle up to 500 concurrent users.\n- Security:\n- Access control for different user roles (Admin, Employee).\n- Use of SSL for secure communications.\n5. Timeline\n- Phase 1: Requirements Gathering & Design - 2 weeks\n- Phase 2: Development - 4 weeks\n- Phase 3: Testing - 2 weeks\n- Phase 4: Deployment - 1 week\n6. Team Roles\n- Project Manager: Oversees the project and ensures deadlines are met.\n- Developers: Build and implement the features.\n- Testers: Ensure the system is bug-free.\n- System Admin: Handles deployment and server configuration.",
+          "version": "2.16.105"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-22T13:18:42.000Z",
+  "versionId": "61afb771-ba14-4ce2-a7cd-cc1f89aba539"
+}
