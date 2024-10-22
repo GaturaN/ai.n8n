@@ -69,7 +69,7 @@
             {
               "id": "49435984-e0d4-4938-bcc9-30e0a09af1da",
               "name": "query",
-              "value": "={{ $json.query }} {{ $('Webhook').item.json.query }}",
+              "value": "=",
               "type": "object"
             }
           ]
@@ -110,6 +110,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-10-21T16:25:38.000Z",
-  "versionId": "adee13e2-81b1-4e2c-885a-e4b32d8bddc5"
+  "updatedAt": "2024-10-22T06:25:32.000Z",
+  "versionId": "8014d99e-1659-420b-8e78-6bed2bfdabbf"
 }
