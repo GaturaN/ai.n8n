@@ -1,0 +1,917 @@
+{
+  "active": true,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "5minAgo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5minAgo": {
+      "main": [
+        [
+          {
+            "node": "Auth",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_messages": {
+      "main": [
+        [
+          {
+            "node": "check_for_messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "thread_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "thread_id": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "unique_threadID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "unique_threadID": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "get_threads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_threads": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get_messages1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_messages1": {
+      "main": [
+        [
+          {
+            "node": "message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "message": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_for_messages": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auth": {
+      "main": [
+        [
+          {
+            "node": "get_messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_calendar_availability": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "send_email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-22T06:19:29.259Z",
+  "id": "8RLPBaJREDnMZAwQ",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Nylas",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "id": "8d7c2dc1-94dd-466c-8152-4b4909aa606b",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -40,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "65873eaf-41ea-48f7-a755-b7f4e91acbbf",
+              "name": "time",
+              "value": "={{ (Math.floor(new Date().getTime()/1000)-5*60) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "24d050f2-47bf-4458-b5a3-feaffe5dca9a",
+      "name": "5minAgo",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        140,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.us.nylas.com/v3/grants/{{ $json.grant_id }}/messages",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit",
+              "value": "100"
+            },
+            {
+              "name": "received_after",
+              "value": "={{ $('5minAgo').item.json.time }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fc092696-f048-4f36-984e-0a53fdab30c2",
+      "name": "get_messages",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6e9f9b01-4d9f-4c93-a76e-25359af593cf",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e9948eff-79d6-49a7-8625-6b2faf9f8a0b",
+      "name": "check_for_messages",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.us.nylas.com/v3/grants/{{ $('Auth').item.json.grant_id }}/threads/{{ $json.threadID }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Auth').item.json.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d3bf5158-84d8-46e3-95ae-3c894db84b81",
+      "name": "get_threads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2000,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "d42700a5-aecd-4a3c-9283-dc40b9f96015",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        900,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "85ad7f92-9c32-48f6-8524-dbb7279b5eb4",
+              "name": "threadID",
+              "value": "={{ $json.thread_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "17131d61-b405-425e-afab-405ca8f088ee",
+      "name": "thread_id",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "9d8b3760-24e5-4d37-8b0e-a34336f93839",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39cd9cc0-f6bd-4aca-a8a2-e1347fb625f9",
+              "name": "data",
+              "value": "={{ $json.data.unique() }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "04036964-e250-4567-9401-36e51fa88e1d",
+      "name": "unique_threadID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1560,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "75b69b27-1eb0-49f7-a76a-bb881eb34643",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "06a9ffb4-3bb9-4f6b-b9f1-ff1f8b6679b4",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2480,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data.message_ids",
+        "options": {}
+      },
+      "id": "747b9559-f1c7-4ed2-9200-a04d9698cabd",
+      "name": "Split Out2",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.us.nylas.com/v3/grants/{{ $('Auth').item.json.grant_id }}/messages/{{ $json['data.message_ids'] }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Auth').item.json.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b3c25b36-7364-4504-88bc-1ba67d9de9e8",
+      "name": "get_messages1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2700,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d338776f-974c-4d62-8db1-be34c7a9cdb5",
+              "name": "data.snippet",
+              "value": "={{ $json.data.snippet }}",
+              "type": "string"
+            },
+            {
+              "id": "ebc414d6-0c89-4307-8e65-1d603110c022",
+              "name": "data.id",
+              "value": "={{ $json.data.id }}",
+              "type": "string"
+            },
+            {
+              "id": "77c7d101-f102-4efc-ad9d-93edc392ef97",
+              "name": "data.thread_id",
+              "value": "={{ $json.data.thread_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a2d33331-ff83-4921-9173-deb716fad243",
+      "name": "message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2920,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "data.snippet"
+            },
+            {
+              "fieldToAggregate": "data.id"
+            },
+            {
+              "fieldToAggregate": "data.thread_id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "386c74cc-80d3-454d-83a4-9cded36af295",
+      "name": "Aggregate1",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2700,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "d5df7d0f-d619-47aa-abd8-caf4f14b03a1",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3360,
+        -360
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3a67c5f6-37c9-4bac-b8db-ca43a686dbca",
+              "name": "grant_id",
+              "value": "d71b64e3-47e8-41d2-9184-a227c391a4ab",
+              "type": "string"
+            },
+            {
+              "id": "ee88b80e-6e8a-4bcc-bef7-242423258d92",
+              "name": "token",
+              "value": "nyk_v0_Z4NKf0hA4VGBuRRUjWQ8GzC4DsG1s5NPbJdpYM3CC6keN8rKcZIlFZBSGi3XrZRX",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fef2b8a3-a521-43e3-a56d-80d464695b57",
+      "name": "Auth",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        340,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a helpful assistant designed to manage email communications effectively.\n\nBelow is a snippet of an email thread. Please follow the instructions carefully and use logical reasoning to complete the tasks outlined below:\n\n  1. Search for the keyword \"Nylas\" in the email thread.\n       - If the keyword does not exist, do nothing.\n       - If the keyword exists, proceed to the next step.\n\n  2. Determine the context of the conversation:\n       - Assess whether the conversation requires setting up a new meeting or rescheduling an existing one based on the email snippets.\n\n  3. Retrieve available times:\n       - Use the HTTP tool to fetch available meeting times based on the context determined in the previous step.\n\n  4. Draft an email:\n       - Create a draft email that includes the recommended meeting times.\n\n   5.  Meeting confirmation:\n       -  If a time has been agreed upon:\n           - Trigger the HTTPS tool to set up the meeting.\n           - Compose an email response to the thread indicating that the meeting has been successfully scheduled.\n\n",
+              "role": "assistant"
+            },
+            {
+              "content": "=Email thread:\n\n{{ $json.snippet }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "232d0ecb-5db0-4fb1-a952-3fa4c379b024",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        2880,
+        -380
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.us.nylas.com/v2/calendar/availability",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Auth').item.json.token }}"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"participants\": [\n    {\n      \"email\": \"gatura@bulkbox.co.ke\",\n      \"calendar_ids\": [\n        \"primary\"\n      ],\n      \"open_hours\": [\n        {\n          \"value\": null,\n          \"days\": [\n            0,\n            1,\n            2\n          ],\n          \"timezone\": \"America/Toronto\",\n          \"start\": \"9:00\",\n          \"end\": \"17:00\"\n        }\n      ]\n    }\n  ],\n  \"start_time\": 1659366000,\n  \"end_time\": 1659733200,\n  \"interval_minutes\": 30,\n  \"duration_minutes\": 30,\n  \"round_to\": 15,\n  \"availability_rules\": {\n    \"availability_method\": \"collective\",\n    \"buffer\": {\n      \"before\": 15,\n      \"after\": 15\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "1321c333-ca9a-45c8-93b3-ce9ea005d530",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3600,
+        -360
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "428c2707-db62-4104-a537-38b428dd39b6",
+              "name": "chatInput",
+              "value": "=Analyze the following email thread and focus on emails where 'Nylas' is mentioned. Based on the emails tagged with 'Nylas,' identify requests for scheduling meetings. Use the Nylas API to retrieve the availability of the sender  and propose meeting times to the recipient. Respond in the same email thread with proposed times. If the recipient confirms a meeting time, use the Nylas API to schedule the meeting and send a confirmation email.\n\n------------------------------------------------------------------------------\n\nEmail thread:\n{{ $json.snippet }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "43ec2c78-01a7-4772-ae18-4b5e86d95363",
+      "name": "Prompt",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2920,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {}
+      },
+      "id": "03298c7a-abd2-41f0-9296-6d411a0d9b84",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        3120,
+        500
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Call this tool to get the available meeting time slots in the user's primary calendar.",
+        "method": "POST",
+        "url": "https://api.us.nylas.com/v3/calendars/availability",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "Authorization",
+              "valueProvider": "fieldValue",
+              "value": "=Bearer {{ $('Auth').item.json.token }}"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"participants\": [\n    {\n      \"email\": \"gatura@bulkbox.co.ke\",\n      \"calendar_ids\": [\n        \"primary\"\n      ],\n      \"open_hours\": [\n        {\n          \"days\": [0, 1, 2],\n          \"timezone\": \"America/Toronto\",\n          \"start\": \"09:00\",\n          \"end\": \"17:00\"\n        }\n      ]\n    }\n  ],\n  \"start_time\": {{ Math.floor(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 9, 0, 0).getTime() / 1000)\n }},\n  \"end_time\": {{ Math.floor(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 17, 0, 0).getTime() / 1000)\n }},\n  \"interval_minutes\": 30,\n  \"duration_minutes\": 30,\n  \"round_to\": 15,\n  \"availability_rules\": {\n    \"availability_method\": \"collective\",\n    \"buffer\": {\n      \"before\": 15,\n      \"after\": 15\n    }\n  }\n}\n"
+      },
+      "id": "e1dc77bf-006d-4f12-9607-4ad6f7377d30",
+      "name": "get_calendar_availability",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        3380,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0968c3a8-502f-4e67-a3a3-fb4253609a77",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        3120,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "100465cb-66f1-4f45-81e0-b06516f1cf51",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e3ac3961-e157-433a-9609-de5f640cb21c",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3500,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.us.nylas.com/v3/grants/{{ $('Auth').item.json.grant_id }}/messages/send",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Auth').item.json.token }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"thread_id\": \"{{ $('unique_threadID').item.json.data[0].threadID }}\",\n  \"to\": [\n    {\n      \"email\": \"gatura@bulkbox.co.ke\"\n    }\n  ],\n  \"subject\": \"Re: [Original Email Subject]\",\n  \"body\": \"{{ $('AI Agent').item.json.output }}\",\n  \"reply_to_message_id\": \"{{ $('get_messages').item.json.data[0].id }}\"\n}\n",
+        "options": {}
+      },
+      "id": "a5adfb1e-64dc-4a1d-bb68-a863c041db7b",
+      "name": "send_email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3720,
+        280
+      ]
+    }
+  ],
+  "pinData": {
+    "get_messages": [
+      {
+        "json": {
+          "request_id": "8333929292-3f3f41ee-8424-42b6-b137-c5abcd84d343",
+          "data": [
+            {
+              "starred": false,
+              "unread": true,
+              "folders": [
+                "UNREAD",
+                "IMPORTANT",
+                "CATEGORY_PERSONAL",
+                "INBOX"
+              ],
+              "subject": "Re: Nylas Test",
+              "thread_id": "192b316c08e90b0e",
+              "body": "<div dir=\"ltr\">Did it work?<div><br></div></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Oct 22, 2024 at 10:21 AM Gatura Francis &lt;<a href=\"mailto:gatura@bulkbox.co.ke\">gatura@bulkbox.co.ke</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\"><div>I have tagged Nylas in this email to help us set up a meeting.</div><div><br></div><div><div><div dir=\"ltr\" class=\"gmail_signature\"><div dir=\"ltr\"><div><font color=\"#666666\" face=\"verdana, sans-serif\"><b>Gatura Francis</b></font></div><div style=\"color:rgb(34,34,34)\"><font face=\"verdana, sans-serif\" color=\"#666666\">Product Engineer </font></div><div style=\"color:rgb(34,34,34)\"><font face=\"verdana, sans-serif\" color=\"#666666\">E | gatura@<a href=\"http://www.bulkbox.co.ke/\" style=\"color:rgb(17,85,204)\" target=\"_blank\">bulkbox.co.ke</a></font></div><div style=\"color:rgb(34,34,34)\"><font color=\"#666666\">T | + 254 707 060 397</font></div><div style=\"color:rgb(34,34,34)\"><img width=\"96\" height=\"23\" src=\"https://ci3.googleusercontent.com/mail-sig/AIorK4zwF36PvF1B2tMLHx4crEQEAGpRAq_AjlJ4MpTyMARpHcQMO_zsdCwbCjwQE2x4btVkrzIo7-6dNUEf\"><br></div><div style=\"color:rgb(34,34,34)\"><br></div><div style=\"color:rgb(34,34,34)\"><span style=\"color:rgb(136,136,136);font-family:Arial,sans-serif;font-size:10px\">The content of this email is confidential and intended for the recipient specified in message only. It is strictly forbidden to share any part of this message with any third party, without a written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.</span></div></div></div></div><br></div></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Oct 22, 2024 at 10:19 AM Francis Njenga &lt;<a href=\"mailto:gaturanjenga@gmail.com\" target=\"_blank\">gaturanjenga@gmail.com</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\">Yes, it works! </div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Oct 22, 2024 at 10:18 AM Gatura Francis &lt;<a href=\"mailto:gatura@bulkbox.co.ke\" target=\"_blank\">gatura@bulkbox.co.ke</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\"><div>Hello,</div><div><br></div><div>Ah yes, let us see if it will work.</div><div><br></div><div><div dir=\"ltr\" class=\"gmail_signature\"><div dir=\"ltr\"><div><font color=\"#666666\" face=\"verdana, sans-serif\"><b>Gatura Francis</b></font></div><div style=\"color:rgb(34,34,34)\"><font face=\"verdana, sans-serif\" color=\"#666666\">Product Engineer </font></div><div style=\"color:rgb(34,34,34)\"><font face=\"verdana, sans-serif\" color=\"#666666\">E | gatura@<a href=\"http://www.bulkbox.co.ke/\" style=\"color:rgb(17,85,204)\" target=\"_blank\">bulkbox.co.ke</a></font></div><div style=\"color:rgb(34,34,34)\"><font color=\"#666666\">T | + 254 707 060 397</font></div><div style=\"color:rgb(34,34,34)\"><img width=\"96\" height=\"23\" src=\"https://ci3.googleusercontent.com/mail-sig/AIorK4zwF36PvF1B2tMLHx4crEQEAGpRAq_AjlJ4MpTyMARpHcQMO_zsdCwbCjwQE2x4btVkrzIo7-6dNUEf\"><br></div><div style=\"color:rgb(34,34,34)\"><br></div><div style=\"color:rgb(34,34,34)\"><span style=\"color:rgb(136,136,136);font-family:Arial,sans-serif;font-size:10px\">The content of this email is confidential and intended for the recipient specified in message only. It is strictly forbidden to share any part of this message with any third party, without a written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.</span></div></div></div></div><br></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Oct 22, 2024 at 10:17 AM Francis Njenga &lt;<a href=\"mailto:gaturanjenga@gmail.com\" target=\"_blank\">gaturanjenga@gmail.com</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\">Hello, <div><br></div><div>This is a test to see if we will be able to schedule a meeting.</div></div>\r\n</blockquote></div>\r\n</blockquote></div>\r\n</blockquote></div>\r\n</blockquote></div>\r\n",
+              "grant_id": "d71b64e3-47e8-41d2-9184-a227c391a4ab",
+              "id": "192b4c7347a6e3e0",
+              "object": "message",
+              "snippet": "Did it work? On Tue, Oct 22, 2024 at 10:21 AM Gatura Francis <gatura@bulkbox.co.ke> wrote: I have tagged Nylas in this email to help us set up a meeting. Gatura Francis Product Engineer E |",
+              "bcc": [],
+              "cc": [],
+              "attachments": [],
+              "from": [
+                {
+                  "name": "Francis Njenga",
+                  "email": "gaturanjenga@gmail.com"
+                }
+              ],
+              "reply_to": [],
+              "to": [
+                {
+                  "name": "Gatura Francis",
+                  "email": "gatura@bulkbox.co.ke"
+                }
+              ],
+              "date": 1729609793
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Africa/Nairobi",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-22T16:16:46.000Z",
+  "versionId": "799e4085-ba4d-4d4e-b4e6-dcb0f75760de"
+}
