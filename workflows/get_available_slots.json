@@ -1,0 +1,139 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-22T09:05:43.553Z",
+  "id": "G6Cde050SRMyWqTq",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "get_available_slots",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1825bd8a-aa7b-463a-8c31-1c2a5afdebcc",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        620,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.us.nylas.com/v3/grants/420095f7-05f0-4058-aa40-e95422ffed3e/calendars/availabilty",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer nyk_v0_Z4NKf0hA4VGBuRRUjWQ8GzC4DsG1s5NPbJdpYM3CC6keN8rKcZIlFZBSGi3XrZRX"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"participants\": [\n    {\n      \"email\": \"gatura@bulkbox.co.ke\",\n      \"calendar_ids\": [\n        \"primary\"\n      ],\n      \"open_hours\": [\n        {\n          \"days\": [\n            0,\n            1,\n            2\n          ],\n          \"timezone\": \"America/Toronto\",\n          \"start\": \"09:00\",\n          \"end\": \"17:00\"\n        }\n      ]\n    }\n  ],\n  \"start_time\": 1659366000,\n  \"end_time\": 1659733200,\n  \"interval_minutes\": 30,\n  \"duration_minutes\": 30,\n  \"round_to\": 15,\n  \"availability_rules\": {\n    \"availability_method\": \"collective\",\n    \"buffer\": {\n      \"before\": 15,\n      \"after\": 15\n    },\n    \"default_open_hours\": [\n      {\n        \"days\": [\n          1,\n          2,\n          3,\n          4,\n          5\n        ],\n        \"timezone\": \"America/Chicago\",\n        \"start\": \"09:00\",\n        \"end\": \"17:00\",\n        \"exdates\": [\n          \"2023-12-24\",\n          \"2023-12-25\",\n          \"2024-01-01\"\n        ]\n      }\n    ]\n  }\n}",
+        "options": {}
+      },
+      "id": "a3957f4d-73bb-41fb-8357-dbba556b8506",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        840,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.us.nylas.com/v3/grants/420095f7-05f0-4058-aa40-e95422ffed3e/calendars/availability",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer nyk_v0_Z4NKf0hA4VGBuRRUjWQ8GzC4DsG1s5NPbJdpYM3CC6keN8rKcZIlFZBSGi3XrZRX"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"start_time\": {{ Math.floor(new Date(new Date().setUTCHours(8, 0, 0, 0)).getTime() / 1000) }},\n  \"end_time\": {{ Math.floor(new Date(new Date().setUTCHours(17, 0, 0, 0)).getTime() / 1000) }},\n  \"interval_minutes\": 30,\n  \"duration_minutes\": 30,\n  \"emails\": [\n    \"gatura@bulkbox.co.ke\"\n  ]\n}",
+        "options": {}
+      },
+      "id": "857a1bda-706e-4e71-8626-d1c146d5e449",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.us.nylas.com/v3/grants/420095f7-05f0-4058-aa40-e95422ffed3e/calendars/availability",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer nyk_v0_Z4NKf0hA4VGBuRRUjWQ8GzC4DsG1s5NPbJdpYM3CC6keN8rKcZIlFZBSGi3XrZRX"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "=json",
+        "specifyBody": "json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "{\n\t\"participants\": [\n\t\t{\n\t\t\t\"email\": \"gatura@bulkbox.co.ke\",\n\t\t\t\"calendar_ids\": [\n\t\t\t\t\"gatura@bulkbox.co.ke\"\n\t\t\t],\n\t\t\t\"open_hours\": [{\n\t\t\t\t\"days\": [\n\t\t\t\t\t0,\n\t\t\t\t\t1,\n\t\t\t\t\t2\n\t\t\t\t],\n\t\t\t\t\"timezone\": \"America/Toronto\",\n\t\t\t\t\"start\": \"9:00\",\n\t\t\t\t\"end\": \"17:00\",\n\t\t\t\t\"exdates\": []\n\t\t\t}]\n\t\t},\n\t\t{\n\t\t\t\"email\": \"gatura@bulkbox.co.ke\"\n\t\t}\n\t],\n\t\"start_time\": 1600890600,\n\t\"end_time\": 1600999200,\n\t\"interval_minutes\": 30,\n\t\"duration_minutes\": 30,\n\t\"round_to\": 15,\n\t\"availability_rules\": {\n\t\t\"availability_method\": \"collective\",\n\t\t\"buffer\": {\n\t\t\t\"before\": 15,\n\t\t\t\"after\": 15\n\t\t},\n\t\t\"default_open_hours\": [\n\t\t\t{\n\t\t\t\t\"days\": [\n\t\t\t\t\t0,\n\t\t\t\t\t1,\n\t\t\t\t\t2\n\t\t\t\t],\n\t\t\t\t\"timezone\": \"America/Toronto\",\n\t\t\t\t\"start\": \"9:00\",\n\t\t\t\t\"end\": \"17:00\",\n\t\t\t\t\"exdates\": []\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"days\": [\n\t\t\t\t\t3,\n\t\t\t\t\t4,\n\t\t\t\t\t5\n\t\t\t\t],\n\t\t\t\t\"timezone\": \"America/Toronto\",\n\t\t\t\t\"start\": \"10:00\",\n\t\t\t\t\"end\": \"18:00\",\n\t\t\t\t\"exdates\": []\n\t\t\t}\n\t\t]\n\t}\n}\n",
+        "options": {}
+      },
+      "id": "b71507df-394f-4fbf-b9c2-9241bcef764c",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        840,
+        640
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-22T10:02:04.000Z",
+  "versionId": "84b97560-5f2a-490a-8d65-ab7311f61d7b"
+}
