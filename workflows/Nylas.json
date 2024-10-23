@@ -217,6 +217,17 @@
         ]
       ]
     },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "AI Agent": {
       "main": [
         [
@@ -228,12 +239,23 @@
         ]
       ]
     },
-    "Edit Fields": {
+    "OpenAI1": {
       "main": [
         [
           {
             "node": "send_email",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "setup_calendar_meeting": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -595,20 +617,6 @@
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "id": "d5df7d0f-d619-47aa-abd8-caf4f14b03a1",
-      "name": "HTTP Request",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3360,
-        -360
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -638,81 +646,12 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-4o-mini",
-          "mode": "list",
-          "cachedResultName": "GPT-4O-MINI"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "=You are a helpful assistant designed to manage email communications effectively.\n\nBelow is a snippet of an email thread. Please follow the instructions carefully and use logical reasoning to complete the tasks outlined below:\n\n  1. Search for the keyword \"Nylas\" in the email thread.\n       - If the keyword does not exist, do nothing.\n       - If the keyword exists, proceed to the next step.\n\n  2. Determine the context of the conversation:\n       - Assess whether the conversation requires setting up a new meeting or rescheduling an existing one based on the email snippets.\n\n  3. Retrieve available times:\n       - Use the HTTP tool to fetch available meeting times based on the context determined in the previous step.\n\n  4. Draft an email:\n       - Create a draft email that includes the recommended meeting times.\n\n   5.  Meeting confirmation:\n       -  If a time has been agreed upon:\n           - Trigger the HTTPS tool to set up the meeting.\n           - Compose an email response to the thread indicating that the meeting has been successfully scheduled.\n\n",
-              "role": "assistant"
-            },
-            {
-              "content": "=Email thread:\n\n{{ $json.snippet }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "232d0ecb-5db0-4fb1-a952-3fa4c379b024",
-      "name": "OpenAI",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
-      "position": [
-        2880,
-        -380
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "0Q6M4JEKewP9VKl8",
-          "name": "Bulkbox"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.us.nylas.com/v2/calendar/availability",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "=Bearer {{ $('Auth').item.json.token }}"
-            },
-            {
-              "name": "Accept",
-              "value": "application/json"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "{\n  \"participants\": [\n    {\n      \"email\": \"gatura@bulkbox.co.ke\",\n      \"calendar_ids\": [\n        \"primary\"\n      ],\n      \"open_hours\": [\n        {\n          \"value\": null,\n          \"days\": [\n            0,\n            1,\n            2\n          ],\n          \"timezone\": \"America/Toronto\",\n          \"start\": \"9:00\",\n          \"end\": \"17:00\"\n        }\n      ]\n    }\n  ],\n  \"start_time\": 1659366000,\n  \"end_time\": 1659733200,\n  \"interval_minutes\": 30,\n  \"duration_minutes\": 30,\n  \"round_to\": 15,\n  \"availability_rules\": {\n    \"availability_method\": \"collective\",\n    \"buffer\": {\n      \"before\": 15,\n      \"after\": 15\n    }\n  }\n}",
-        "options": {}
-      },
-      "id": "1321c333-ca9a-45c8-93b3-ce9ea005d530",
-      "name": "HTTP Request2",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3600,
-        -360
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
               "id": "428c2707-db62-4104-a537-38b428dd39b6",
               "name": "chatInput",
-              "value": "=Analyze the following email thread and focus on emails where 'Nylas' is mentioned. Based on the emails tagged with 'Nylas,' identify requests for scheduling meetings. Use the Nylas API to retrieve the availability of the sender  and propose meeting times to the recipient. Respond in the same email thread with proposed times. If the recipient confirms a meeting time, use the Nylas API to schedule the meeting and send a confirmation email.\n\n------------------------------------------------------------------------------\n\nEmail thread:\n{{ $json.snippet }}",
+              "value": "=Analyze the following email thread and focus on emails where 'Nylas' is mentioned. Based on the emails tagged with 'Nylas,' identify requests for scheduling meetings. Use the Nylas API to retrieve the availability of the sender  and propose meeting times to the recipient. Respond in the same email thread with proposed times. If the recipient confirms a meeting time, use the Nylas API to schedule the meeting and send a confirmation email.\n\n\n------------------------------------------------------------------------------\n\nEmail thread:\n{{ $json.snippet }}",
               "type": "string"
             }
           ]
@@ -782,21 +721,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
       "typeVersion": 1.1,
       "position": [
-        3380,
-        480
-      ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "0968c3a8-502f-4e67-a3a3-fb4253609a77",
-      "name": "AI Agent",
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.6,
-      "position": [
-        3120,
-        280
+        3400,
+        500
       ]
     },
     {
@@ -841,7 +767,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"thread_id\": \"{{ $('unique_threadID').item.json.data[0].threadID }}\",\n  \"to\": [\n    {\n      \"email\": \"gatura@bulkbox.co.ke\"\n    }\n  ],\n  \"subject\": \"Re: [Original Email Subject]\",\n  \"body\": \"{{ $('AI Agent').item.json.output }}\",\n  \"reply_to_message_id\": \"{{ $('get_messages').item.json.data[0].id }}\"\n}\n",
+        "jsonBody": "={{ $json.message.content }}",
         "options": {}
       },
       "id": "a5adfb1e-64dc-4a1d-bb68-a863c041db7b",
@@ -849,8 +775,68 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
+        4100,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0968c3a8-502f-4e67-a3a3-fb4253609a77",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        3120,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-3.5-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=YOU ARE A HELPFUL ASSISTANT. HELP RETURN THE FOLLOWING IN CORRECT JSON DATA TO USE IN NYLAS SEND MESSAGE API.\n\n\n{\n  \"subject\": \"Re: Previous Subject\",\n  \"to\": [\n    {\n      \"name\": \" Gatura Njenga\",\n      \"email\": \"gatura@bulkbox.co.ke\"\n    }\n  ],\n  \"from\": [\n    {\n      \"name\": \"Nyla\",\n      \"email\": \"gatura@bulkbox.co.ke\"\n    }\n  ],\n  \"body\": \"{{ $json.output }}\",\n  \"reply_to_message_id\": \"{{ $('get_messages').item.json.data[0].id }}\",\n  \"thread_id\": \"{{ $('unique_threadID').item.json.data[0].threadID }}\"\n}\n",
+              "role": "assistant"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2ba2560b-4dd5-4fc0-89af-a60c00db3a08",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
         3720,
         280
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Call this tool to set up the meeting with the suggested time in the email.",
+        "url": "=https:"
+      },
+      "id": "8a8952e5-cc47-4ffb-bb70-5b154090815b",
+      "name": "setup_calendar_meeting",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        3260,
+        500
       ]
     }
   ],
@@ -912,6 +898,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-10-22T16:16:46.000Z",
-  "versionId": "799e4085-ba4d-4d4e-b4e6-dcb0f75760de"
+  "updatedAt": "2024-10-22T17:22:40.000Z",
+  "versionId": "3aeb8214-4c8d-4233-85e8-98379656d389"
 }
