@@ -70,9 +70,9 @@
         "operation": "get",
         "workflowId": {
           "__rl": true,
-          "value": "BuohNSKBGD4Gz9M0",
+          "value": "8RLPBaJREDnMZAwQ",
           "mode": "list",
-          "cachedResultName": "AI Content Generator (#BuohNSKBGD4Gz9M0)"
+          "cachedResultName": "Nylas (#8RLPBaJREDnMZAwQ)"
         },
         "requestOptions": {}
       },
@@ -190,6 +190,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-09T01:52:24.000Z",
-  "versionId": "8cacb3fe-40d4-45e2-89ee-86b6689bcda5"
+  "updatedAt": "2024-10-22T17:25:23.000Z",
+  "versionId": "f45bb949-4e37-4d52-86fa-6a344409d14b"
 }
