@@ -19,11 +19,67 @@
             "node": "all_lists",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "get_board_members",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
     },
     "all_lists": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_board_members": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "list_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "list_id": {
       "main": [
         [
           {
@@ -38,19 +94,41 @@
       "main": [
         [
           {
-            "node": "Pinecone Vector Store",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Embeddings OpenAI": {
-      "ai_embedding": [
+    "Aggregate": {
+      "main": [
         [
           {
-            "node": "Pinecone Vector Store",
-            "type": "ai_embedding",
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
             "index": 0
           }
         ]
@@ -77,6 +155,193 @@
           }
         ]
       ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "n8n Form Trigger": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store1": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Tool",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Vector Store Tool",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store Tool1": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store2",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Vector Store Tool1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store2": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Tool1",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-10-09T02:34:36.952Z",
@@ -94,7 +359,7 @@
       "typeVersion": 1,
       "position": [
         480,
-        540
+        660
       ],
       "disabled": true
     },
@@ -118,7 +383,7 @@
       "typeVersion": 3.4,
       "position": [
         700,
-        540
+        660
       ]
     },
     {
@@ -134,8 +399,8 @@
       "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        920,
-        540
+        940,
+        440
       ],
       "credentials": {
         "trelloApi": {
@@ -157,8 +422,8 @@
       "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        1140,
-        540
+        1340,
+        660
       ],
       "credentials": {
         "trelloApi": {
@@ -176,8 +441,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1,
       "position": [
-        1360,
-        760
+        2220,
+        1080
       ],
       "credentials": {
         "openAiApi": {
@@ -188,60 +453,152 @@
     },
     {
       "parameters": {
-        "options": {}
+        "resource": "boardMember",
+        "operation": "getAll",
+        "id": "={{ $json.b_id }}",
+        "returnAll": true
       },
-      "id": "c7956e3f-bdc0-488b-b998-78b3be852936",
-      "name": "Default Data Loader",
-      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "id": "4d24a26d-d8a0-4258-8942-c236947cf7cd",
+      "name": "get_board_members",
+      "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        1560,
-        760
-      ]
+        960,
+        860
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "28KcZZoExcvdC6un",
+          "name": "bulkbox"
+        }
+      }
     },
     {
       "parameters": {
         "options": {}
       },
-      "id": "5bb5d288-7f55-4b11-888a-8d7ea4141f84",
-      "name": "Recursive Character Text Splitter",
-      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
-      "typeVersion": 1,
+      "id": "a10566ee-e8bc-49e5-9957-0590b736a3de",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
       "position": [
-        1560,
-        980
+        1120,
+        440
       ]
     },
     {
       "parameters": {
-        "path": "7dcb1d24-4dba-4fbf-9846-445ead3b027e",
-        "formFields": {
-          "values": [
+        "assignments": {
+          "assignments": [
             {
-              "fieldType": "file"
+              "id": "ee263a89-426d-4a8f-ad6f-4dc98106aaa3",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "1facdc0f-96f1-47ad-8e3e-728076570720",
-      "name": "n8n Form Trigger",
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.1,
+      "id": "db5ecddd-e45e-4ab4-bddc-cc7919ded7c0",
+      "name": "list_id",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        500,
-        1100
-      ],
-      "webhookId": "7dcb1d24-4dba-4fbf-9846-445ead3b027e"
+        1140,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "da7a0b0e-13a8-4afa-a3b5-94c734b9e464",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        520
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "c8dea0fa-f0fb-4871-b578-2d601d32ac1d",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1580,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "358cda97-6ca7-482e-8c8d-35ac1a15d62b",
+      "name": "Aggregate1",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1800,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "id": "6b0d97ab-8ec3-4661-9811-08afb6534590",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 50,
+        "options": {}
+      },
+      "id": "d3027927-2f9e-45a1-a3f1-78cbb0c39902",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        1260
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "data",
+        "options": {}
+      },
+      "id": "5b9776d8-0d58-4c65-a3b0-6f6fe936a703",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2040,
+        780
+      ]
     },
     {
       "parameters": {
         "mode": "insert",
         "pineconeIndex": {
           "__rl": true,
-          "value": "trello-test",
+          "value": "trello",
           "mode": "list",
-          "cachedResultName": "trello-test"
+          "cachedResultName": "trello"
         },
         "options": {}
       },
@@ -250,8 +607,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
       "typeVersion": 1,
       "position": [
-        1360,
-        540
+        2280,
+        780
       ],
       "credentials": {
         "pineconeApi": {
@@ -259,15 +616,377 @@
           "name": "My Account"
         }
       }
+    },
+    {
+      "parameters": {
+        "path": "4b70ce45-2afc-478c-8727-0fcb73811eb6",
+        "formTitle": "Project Document",
+        "formDescription": "Kindly attach the project document Below:",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Doc (pdf)",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1d256646-9aee-4c3d-b2bf-08fe84e47438",
+      "name": "n8n Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.1,
+      "position": [
+        300,
+        1640
+      ],
+      "webhookId": "4b70ce45-2afc-478c-8727-0fcb73811eb6"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {}
+      },
+      "id": "9c1abdfe-78e7-4e1d-b19b-261f71ea066e",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        2720
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "trello_boards_lists_and_members",
+        "description": "Use this tool to get the trello members and reference previous roles they've been assigned."
+      },
+      "id": "a10f4590-37b8-400d-b8b7-87b7e1cbf46d",
+      "name": "Vector Store Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        180,
+        2760
+      ]
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "trello",
+          "mode": "list",
+          "cachedResultName": "trello"
+        },
+        "options": {}
+      },
+      "id": "7516d29e-fde0-4e4d-8685-4e5c404145ca",
+      "name": "Pinecone Vector Store1",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        0,
+        2940
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7db35bc9-2657-4f4e-b5b2-3c764b0729dc",
+      "name": "Embeddings OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        160,
+        3180
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {}
+      },
+      "id": "cf7bfe16-9f04-4a1f-815f-2b1b7e1d6c3f",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        380,
+        3000
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "cf8db3ce-b5d9-418e-b046-a56d71b07cf8",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        2740
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "Doc__pdf_",
+        "options": {}
+      },
+      "id": "d3037916-1fa4-4178-a5d8-8b007540d39c",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        520,
+        1640
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "933307ee-1514-45ac-9720-973cf601331a",
+      "name": "Wikipedia",
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        540,
+        2860
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1550aaa3-093c-4c0d-8489-81eb8c937f24",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "81412926-be22-4ec7-9674-2defe393227b",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        280,
+        2520
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\"Hello, I am working on a project that requires breaking down tasks into actionable items and assigning them to team members using their Trello IDs. The project data will vary, so please ensure that the output is flexible and adaptable to different tasks.\n\nUse the following structure for each task:\n\n - Task Title: A short title summarizing the task\n - Description: A detailed explanation of what needs to be done\n - Assigned To: The Trello member ID of the assigned person\n - Due Date: If applicable, provide a due date\n - Priority: High, Medium, or Low, depending on task urgency\n\nPlease output the data in a structured JSON format that can be split into multiple items and uploaded to Trello, ensuring that each item is a separate task.\n\nToday's data: {{ $now }}\n\nHere is the project data:\n________________________________________________\n\n{{ $json.text }}\n\n_________________________________________________\n\nExample Output Structure:\n\njson\n\n[\n  {\n    \"Task Title\": \"Task 1 Title\",\n    \"Description\": \"Detailed task description.\",\n    \"Assigned To\": \"TrelloMemberID1\",\n    \"Due Date\": \"YYYY-MM-DD\",\n    \"Priority\": \"High\"\n  },\n  {\n    \"Task Title\": \"Task 2 Title\",\n    \"Description\": \"Detailed task description.\",\n    \"Assigned To\": \"TrelloMemberID2\",\n    \"Due Date\": \"YYYY-MM-DD\",\n    \"Priority\": \"Medium\"\n  },\n  ...\n]",
+        "options": {
+          "systemMessage": "You are a helpful assistant"
+        }
+      },
+      "id": "88749892-0d34-4dcd-b748-a9a3ca37d142",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        -80,
+        2520
+      ]
+    },
+    {
+      "parameters": {
+        "name": "trello_boards_lists_and_members",
+        "description": "Use this tool to get the trello members and reference previous roles they've been assigned."
+      },
+      "id": "92eaad6e-33a0-49e3-a5ac-06dc41124fc1",
+      "name": "Vector Store Tool1",
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        840,
+        1860
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "63f2d97e-c578-41ed-887b-b272edd2dd9c",
+      "name": "Embeddings OpenAI2",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        680,
+        2200
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {}
+      },
+      "id": "d91d0adb-b9e8-4b39-9c59-59614fac80b2",
+      "name": "OpenAI Chat Model2",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        940,
+        2080
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "trello",
+          "mode": "list",
+          "cachedResultName": "trello"
+        },
+        "options": {}
+      },
+      "id": "3ca730b8-8779-47ce-8b05-6c01330e3157",
+      "name": "Pinecone Vector Store2",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        680,
+        2020
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6e480efe-c44a-4d58-8f90-23ac1c5f43ab",
+              "name": "message.content",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a38fedfb-1bb7-4fb6-99bd-a18903d68c32",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        1640
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "48ac9cf1-72db-4f15-84e5-c4057a782f17",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        1640
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a helpful assistant\n\nReturn the data in the following format ONLY:\n_____________________________________________________\n\n[\"data\":\n  {\n    \"Task Title\": \"Task 1 Title\",\n    \"Description\": \"Detailed task description.\",\n    \"Assigned To\": \"TrelloMemberID1\",\n    \"Due Date\": \"YYYY-MM-DD\",\n    \"Priority\": \"High\"\n  },\n  {\n    \"Task Title\": \"Task 2 Title\",\n    \"Description\": \"Detailed task description.\",\n    \"Assigned To\": \"TrelloMemberID2\",\n    \"Due Date\": \"YYYY-MM-DD\",\n    \"Priority\": \"Medium\"\n  },\n  ...\n]\n",
+              "role": "assistant"
+            },
+            {
+              "content": "=Hello, I am working on a project that requires breaking down tasks into actionable items and assigning them to team members using their Trello IDs. The project data will vary, so please ensure that the output is flexible and adaptable to different tasks.\n\nUse the following structure for each task:\n\n    Task Title: A short title summarizing the task\n    Description: A detailed explanation of what needs to be done\n    Assigned To: The Trello member ID of the assigned person\n    Due Date: If applicable, provide a due date\n    Priority: High, Medium, or Low, depending on task urgency\n\ntoday's date: {{ $now }}\n\nHere is the project data:\n\n___________________________________________________________________\n\n{{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d55f55f8-f3d6-48f5-bf03-7299da0b482a",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        740,
+        1640
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "AI Agent": [
+      {
+        "json": {
+          "output": "Based on the project requirements for the Assist Ticketing System, here is a structured JSON format for breaking down tasks related to the project, assuming hypothetical Trello member IDs based on role responsibilities. You will need to replace these IDs with actual Trello member IDs once you have them.\n\n```json\n[\n  {\n    \"Task Title\": \"Requirements Gathering\",\n    \"Description\": \"Gather and document all functional and non-functional requirements for the Assist Ticketing System.\",\n    \"Assigned To\": \"TrelloMemberID1\",\n    \"Due Date\": \"2024-11-06\",\n    \"Priority\": \"High\"\n  },\n  {\n    \"Task Title\": \"System Design\",\n    \"Description\": \"Design the architecture for the Assist Ticketing System, including user roles and ticket workflows.\",\n    \"Assigned To\": \"TrelloMemberID1\",\n    \"Due Date\": \"2024-11-13\",\n    \"Priority\": \"High\"\n  },\n  {\n    \"Task Title\": \"Development Phase\",\n    \"Description\": \"Begin development of the web-based system using the Frappe framework and implement ticket management features.\",\n    \"Assigned To\": \"TrelloMemberID2\",\n    \"Due Date\": \"2024-12-11\",\n    \"Priority\": \"Medium\"\n  },\n  {\n    \"Task Title\": \"Testing\",\n    \"Description\": \"Conduct testing of the ticketing system to ensure there are no bugs and all functionalities work as expected.\",\n    \"Assigned To\": \"TrelloMemberID3\",\n    \"Due Date\": \"2024-12-25\",\n    \"Priority\": \"High\"\n  },\n  {\n    \"Task Title\": \"Deployment\",\n    \"Description\": \"Deploy the Assist Ticketing System on the production environment and ensure all configurations are correct.\",\n    \"Assigned To\": \"TrelloMemberID4\",\n    \"Due Date\": \"2025-01-01\",\n    \"Priority\": \"Medium\"\n  },\n  {\n    \"Task Title\": \"User Training\",\n    \"Description\": \"Prepare and conduct training sessions for employees and admins to familiarize them with using the system.\",\n    \"Assigned To\": \"TrelloMemberID5\",\n    \"Due Date\": \"2025-01-05\",\n    \"Priority\": \"Low\"\n  },\n  {\n    \"Task Title\": \"Feedback and Iteration\",\n    \"Description\": \"Gather feedback from users post-deployment and make necessary adjustments to the system.\",\n    \"Assigned To\": \"TrelloMemberID1\",\n    \"Due Date\": \"2025-01-15\",\n    \"Priority\": \"Medium\"\n  }\n]\n```\n\n### Notes:\n- The `Assigned To` values (like \"TrelloMemberID1\") need to be replaced with real Trello member IDs corresponding to the team roles involved in the project.\n- The `Due Date` entries have been filled based on the timeline laid out in the project overview. Adjust these dates based on your project's actual scheduling.\n- Priorities have been assigned based on the urgency of tasks as per project phases. Adjust them as needed.\n\nFeel free to modify any details specific to your project or team!"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-22T17:23:13.000Z",
-  "versionId": "28736f7b-0224-410a-a92c-520fccf17a3f"
+  "updatedAt": "2024-10-23T14:23:13.000Z",
+  "versionId": "6f319fdb-c2fc-4f0e-abdd-0789c54ab300"
 }
