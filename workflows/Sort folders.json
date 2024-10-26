@@ -33,12 +33,14 @@
     },
     {
       "parameters": {
-        "operation": "getAll",
-        "limit": 1,
-        "filtersUI": {
-          "values": {
-            "filters": {}
-          }
+        "resource": "draft",
+        "operation": "get",
+        "draftId": {
+          "__rl": true,
+          "value": "AQMkADAwATMwMAItMmUyZi03MGJkLTAwAi0wMAoARgAAA83xcCiRvg1GkOK-lbQmp_0HAKArloE456BErqFgZqo5k38AAAIBDwAAAKArloE456BErqFgZqo5k38ABCae9vUAAAA=",
+          "mode": "list",
+          "cachedResultName": "Test",
+          "cachedResultUrl": "https://outlook.live.com/owa/?ItemID=AQMkADAwATMwMAItMmUyZi03MGJkLTAwAi0wMAoARgAAA83xcCiRvg1GkOK%2FlbQmp%2B0HAKArloE456BErqFgZqo5k38AAAIBDwAAAKArloE456BErqFgZqo5k38ABCae9vUAAAA%3D&exvsurl=1&viewmodel=ReadMessageItem"
         },
         "options": {}
       },
@@ -70,6 +72,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-10-25T21:33:40.000Z",
-  "versionId": "bd015c4b-c2ae-4b48-9ad2-fff0570ef7d4"
+  "updatedAt": "2024-10-26T05:01:28.000Z",
+  "versionId": "12e2a02c-6c26-4147-9cf0-e695ca874e64"
 }
