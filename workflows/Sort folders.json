@@ -1,0 +1,75 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Microsoft Outlook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-25T21:19:42.365Z",
+  "id": "uEPzHBqXMVZIZSwN",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Sort folders",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "ac3c08aa-d836-4ad3-a89e-e6c73032851e",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        980,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 1,
+        "filtersUI": {
+          "values": {
+            "filters": {}
+          }
+        },
+        "options": {}
+      },
+      "id": "a68e4756-9530-48b4-986e-042b28907522",
+      "name": "Microsoft Outlook",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        500
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "sDrpCBO7HPnTQ65N",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Microsoft Outlook Trigger": {
+      "lastTimeChecked": "2024-10-25T17:20:55.608-04:00"
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-25T21:33:40.000Z",
+  "versionId": "bd015c4b-c2ae-4b48-9ad2-fff0570ef7d4"
+}
