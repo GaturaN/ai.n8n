@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "create_folder": {
       "main": [
@@ -235,17 +235,6 @@
         ]
       ]
     },
-    "final_article_file": {
-      "main": [
-        [
-          {
-            "node": "upload_fiinalArticle",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "upload_fiinalArticle": {
       "main": [
         [
@@ -268,17 +257,6 @@
         ]
       ]
     },
-    "create_outline": {
-      "main": [
-        [
-          {
-            "node": "markdown_to_file",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "section_paragraphs": {
       "main": [
         [
@@ -295,6 +273,17 @@
         [
           {
             "node": "set_section_content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_outline": {
+      "main": [
+        [
+          {
+            "node": "markdown_to_file",
             "type": "main",
             "index": 0
           }
@@ -340,7 +329,8 @@
           "id": "MHcgKR744VHXSe3X",
           "name": "Drive n8n"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -743,7 +733,8 @@
           "id": "Epe0euL6qKcOzKeG",
           "name": "google"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -1171,53 +1162,8 @@
           "id": "MHcgKR744VHXSe3X",
           "name": "Drive n8n"
         }
-      }
-    },
-    {
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-4o-mini",
-          "mode": "list",
-          "cachedResultName": "GPT-4O-MINI"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "You're a helpful, intelligent writing assistant",
-              "role": "system"
-            },
-            {
-              "content": "Use the following JSON brief to write an engaging, comprehensive outline in Markdown format (atx). Tone of voice 50% spartan, casual."
-            },
-            {
-              "content": "={\n\"title\": \"Accessibility in Retail: How to Make Ypur Store More Accessible\",\n\"wordCount\": 1000,\n\"primaryKeword\":\"accessibility in retail\",\n\"secondaryKeywords\":[\"accessible e-commerce\", \"how to make your website more accessible\"],\n\"internalLinks\": [\"https://www.ontario.ca/page/how-make-websites-accessible\"],\n\"externalLinks\": [\"https://www.forbes.com/sites/forbesbusinesscouncil/2023/03/20/understanding-the-importance-of-web-accessibility/\"]\n\"additionalinstructions\": \"Don't pitch the company at all - make it very informative and provide sa uch value as you can.\"\n}"
-            },
-            {
-              "content": "=# Accessibility in Retail: How to Make Your Store More Accessible.\n\nOnline arketplaces have become more popular since the mid-90swjen retail juggernauts like Amazon intially burst onto the scene. Amd while it's true that nearly everybody buyd products in e-commerce store these days, it's crucial to understand that not all consumers have the same needs. \nOver one billion people have diabilities worldwide, meaning up to 15% of the globale population may need assistive technology to use online shopping platforms. Addressing thei needs is critical if you want to maximize your reach & customer experience. \nSo, how exactly does digital accessibility impact businesses, and what can we (practically) do bout it? Read on for answers below.\n\n## Introduction\n- Briefly define what \"accessibility in retail\" means.\n- Highlight the importance of retail accessibility.\n\n## Significance of Accessility in Retail\n- Discuss how creating an accessible retail space can broaden market reach.\n- Discuss some benefits of retail accessibility. \n- Share valuable insights about retail accessibility from [forbes](https://www.forbes.com/sites/forbesbusinesscouncil/2023/03/20/understanding-the-importance-of-web-accessibility/))\n\n## Exploring Accessible E-comerce: The New Normal in Retail\n- Explain the rise and importance of e-commerce in today's retail landscape.\n- Highlight how e-commerce has opened up more possibilities for accessibility in retail.\n\n## Guidance to Make E-commerce Stores Accessible\n- Present some of the key accessibility standards for online stores.\n- Offer brief step-by-step guide on how to make your website accessible.\n- INdicate the best practices in creating accessible e-commerce stores, citing resources from [\"Ontario.ca\"](https://www.ontario.ca/page/how-make-websites-accessible))\n\n## Physical Store Accessibility: Not to be Overlooked\n- Assert the need for physical store accessibility in addition to online stores.\n- Enumerate practical solutions for enhancing physical store accessibility.\n\n## Encouraging Continuous Efforts for Accessibility\n- Inspire readers to continually strive for better accessibility in theire retail environments.\n- Reiterate the benefits of and the need for accessibility in the retail sector for a more inclusive feature.\n\n## Conclusion\n- Sumarixe the key points and lessons learned about retail accessibility. \n- Encourage readers to implement the suggestions provided.",
-              "role": "assistant"
-            },
-            {
-              "content": "={\n\"title\": \"{{ $('topic_variables').item.json.Title }}\",\n\"wordCount\": {{ $('topic_variables').item.json['Word Count'] }},\n\"primaryKeyword\":\"{{ $('topic_variables').item.json['Primary Keyword'] }}\",\n\"secondaryKeywords\": {{ $('topic_variables').item.json['Secondary Keywords'] }},\n\"internaLinks\": {{ $('topic_variables').item.json['Internal Links'] }},\n\"externalLinks\": {{ $('topic_variables').item.json['External Links'] }},\n\"additionalinstructions\":\"{{ $('topic_variables').item.json['Additional Instructions'] }}\"\n}"
-            }
-          ]
-        },
-        "options": {}
       },
-      "id": "eecf903b-3d60-4c6e-9972-78803e34682a",
-      "name": "create_outline",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
-      "position": [
-        220,
-        440
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "0Q6M4JEKewP9VKl8",
-          "name": "Bulkbox"
-        }
-      }
+      "disabled": true
     },
     {
       "parameters": {
@@ -1300,6 +1246,52 @@
           "name": "Bulkbox"
         }
       }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You're a helpful, intelligent writing assistant",
+              "role": "system"
+            },
+            {
+              "content": "Use the following JSON brief to write an engaging, comprehensive outline in Markdown format (atx). Tone of voice 50% spartan, casual."
+            },
+            {
+              "content": "={\n\"title\": \"Accessibility in Retail: How to Make Ypur Store More Accessible\",\n\"wordCount\": 1000,\n\"primaryKeword\":\"accessibility in retail\",\n\"secondaryKeywords\":[\"accessible e-commerce\", \"how to make your website more accessible\"],\n\"internalLinks\": [\"https://www.ontario.ca/page/how-make-websites-accessible\"],\n\"externalLinks\": [\"https://www.forbes.com/sites/forbesbusinesscouncil/2023/03/20/understanding-the-importance-of-web-accessibility/\"]\n\"additionalinstructions\": \"Don't pitch the company at all - make it very informative and provide sa uch value as you can.\"\n}"
+            },
+            {
+              "content": "=# Accessibility in Retail: How to Make Your Store More Accessible.\n\nOnline arketplaces have become more popular since the mid-90swjen retail juggernauts like Amazon intially burst onto the scene. Amd while it's true that nearly everybody buyd products in e-commerce store these days, it's crucial to understand that not all consumers have the same needs. \nOver one billion people have diabilities worldwide, meaning up to 15% of the globale population may need assistive technology to use online shopping platforms. Addressing thei needs is critical if you want to maximize your reach & customer experience. \nSo, how exactly does digital accessibility impact businesses, and what can we (practically) do bout it? Read on for answers below.\n\n## Introduction\n- Briefly define what \"accessibility in retail\" means.\n- Highlight the importance of retail accessibility.\n\n## Significance of Accessility in Retail\n- Discuss how creating an accessible retail space can broaden market reach.\n- Discuss some benefits of retail accessibility. \n- Share valuable insights about retail accessibility from [forbes](https://www.forbes.com/sites/forbesbusinesscouncil/2023/03/20/understanding-the-importance-of-web-accessibility/))\n\n## Exploring Accessible E-comerce: The New Normal in Retail\n- Explain the rise and importance of e-commerce in today's retail landscape.\n- Highlight how e-commerce has opened up more possibilities for accessibility in retail.\n\n## Guidance to Make E-commerce Stores Accessible\n- Present some of the key accessibility standards for online stores.\n- Offer brief step-by-step guide on how to make your website accessible.\n- INdicate the best practices in creating accessible e-commerce stores, citing resources from [\"Ontario.ca\"](https://www.ontario.ca/page/how-make-websites-accessible))\n\n## Physical Store Accessibility: Not to be Overlooked\n- Assert the need for physical store accessibility in addition to online stores.\n- Enumerate practical solutions for enhancing physical store accessibility.\n\n## Encouraging Continuous Efforts for Accessibility\n- Inspire readers to continually strive for better accessibility in theire retail environments.\n- Reiterate the benefits of and the need for accessibility in the retail sector for a more inclusive feature.\n\n## Conclusion\n- Sumarixe the key points and lessons learned about retail accessibility. \n- Encourage readers to implement the suggestions provided.",
+              "role": "assistant"
+            },
+            {
+              "content": "={\n\"title\": \"{{ $('topic_variables').item.json.Title }}\",\n\"wordCount\": {{ $('topic_variables').item.json['Word Count'] }},\n\"primaryKeyword\":\"{{ $('topic_variables').item.json['Primary Keyword'] }}\",\n\"secondaryKeywords\": {{ $('topic_variables').item.json['Secondary Keywords'] }},\n\"internaLinks\": {{ $('topic_variables').item.json['Internal Links'] }},\n\"externalLinks\": {{ $('topic_variables').item.json['External Links'] }},\n\"additionalinstructions\":\"{{ $('topic_variables').item.json['Additional Instructions'] }}\"\n}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "eecf903b-3d60-4c6e-9972-78803e34682a",
+      "name": "create_outline",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        220,
+        440
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1308,7 +1300,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-10-09T01:54:59.000Z",
-  "versionId": "00506b01-8e91-4211-bf3d-3e38c85527a1"
+  "triggerCount": 2,
+  "updatedAt": "2024-10-25T19:45:54.000Z",
+  "versionId": "a51b752d-0e89-46a7-a423-008466ae9409"
 }
