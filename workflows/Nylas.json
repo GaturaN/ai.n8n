@@ -206,28 +206,6 @@
         ]
       ]
     },
-    "OpenAI1": {
-      "main": [
-        [
-          {
-            "node": "send_email",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "setup_calendar_meeting": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Split Out2": {
       "main": [
         [
@@ -258,13 +236,6 @@
             "type": "main",
             "index": 0
           }
-        ],
-        [
-          {
-            "node": "thread_id",
-            "type": "main",
-            "index": 0
-          }
         ]
       ]
     },
@@ -279,11 +250,33 @@
         ]
       ]
     },
-    "HTTP Request": {
+    "OpenAI1": {
       "main": [
         [
           {
-            "node": "HTTP Request1",
+            "node": "send_email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "book meeting": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -680,7 +673,7 @@
             {
               "id": "428c2707-db62-4104-a537-38b428dd39b6",
               "name": "chatInput",
-              "value": "=You work as an email assistant, your job is to handle meeting bookings in a friendly and profesional tone. Analyze the following email thread and focus on emails where a meeting is proposed or asked off. identify requests for scheduling meetings. Use the Nylas API to retrieve the availability of the SENDER and propose meeting times to the recipient. If you're unable to access the availability of anyone in the thread, you should ask. Check for the SENDERS availability and propose good times to the person the sender wants to book a meeting with. Respond in the same email thread with proposed times. If the recipient confirms a meeting time, use the Nylas API to schedule the meeting and send a confirmation email.\n\nNote: When getting availability or scheduling the meetings, kindly include the date in the time.\n\n\n------------------------------------------------------------------------------\n\nEmail thread:\n{{ $json.snippet }}",
+              "value": "=As an email assistant, your role is to handle meeting bookings in a friendly and professional tone. Analyze the email thread for any requests to schedule a meeting, focusing on messages that propose or inquire about setting one up.\n\n   1. Identify Meeting Requests: Look for instances where the sender suggests or asks for a meeting.\n   2. Check Availability: Use the Nylas API to retrieve the sender's availability. If you cannot access someone’s availability, ask for it directly.\n   3. Propose Meeting Times: Based on the sender's availability, suggest suitable times to the intended meeting recipient, and respond within the same email thread. Include specific dates with each proposed time.\n   4. Schedule and Confirm: Once the recipient confirms a time, use the Nylas API to schedule the meeting and send a confirmation email.\n\nEnsure all responses are courteous, professional, and free of tool mentions.\n\n------------------------------------------------------------------------------\n\nEmail thread:\n{{ $json.snippet }}",
               "type": "string"
             }
           ]
@@ -750,7 +743,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
       "typeVersion": 1.1,
       "position": [
-        3420,
+        3260,
         500
       ]
     },
@@ -810,77 +803,6 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-3.5-turbo",
-          "mode": "list",
-          "cachedResultName": "GPT-3.5-TURBO"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "=YOU ARE A HELPFUL ASSISTANT. HELP RETURN THE FOLLOWING IN CORRECT JSON DATA TO USE IN NYLAS SEND MESSAGE API.\n\n\n{\n  \"subject\": \"Re: Previous Subject\",\n  \"to\": [\n    {\n      \"name\": \" Gatura Njenga\",\n      \"email\": \"gatura@bulkbox.co.ke\"\n    }\n  ],\n  \"from\": [\n    {\n      \"name\": \"Nyla\",\n      \"email\": \"gatura@bulkbox.co.ke\"\n    }\n  ],\n  \"body\": \"{{ $json.output }}\",\n  \"reply_to_message_id\": \"{{ $('get_messages').item.json.data[0].id }}\",\n  \"thread_id\": \"{{ $('unique_threadID').item.json.data[0].threadID }}\"\n}\n",
-              "role": "assistant"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "2ba2560b-4dd5-4fc0-89af-a60c00db3a08",
-      "name": "OpenAI1",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
-      "position": [
-        3720,
-        280
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "0Q6M4JEKewP9VKl8",
-          "name": "Bulkbox"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "toolDescription": "Call this tool to set up the meeting with the suggested time in the email.",
-        "method": "POST",
-        "url": "=https://api.us.nylas.com/v3/grants/{{ $('Auth').item.json.grant_id }}/events?calendar_id=gatura@bulkbox.co.ke",
-        "sendHeaders": true,
-        "parametersHeaders": {
-          "values": [
-            {
-              "name": "Accept",
-              "valueProvider": "fieldValue",
-              "value": "application/json"
-            },
-            {
-              "name": "Authorization",
-              "valueProvider": "fieldValue",
-              "value": "=Bearer {{ $('Auth').item.json.token }}"
-            },
-            {
-              "name": "content-Type",
-              "valueProvider": "fieldValue",
-              "value": "application/json"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n    \"title\": \"Project Kickoff Meeting\",\n    \"status\": \"confirmed\",\n    \"busy\": true,\n    \"participants\": [\n      {\n        \"name\": \"Client Name\",\n        \"email\": \"client@example.com\"\n      },\n      {\n        \"name\": \"Gatura Francis\",\n        \"email\": \"gatura@bulkbox.co.ke\"\n      }\n    ],\n    \"resources\": [\n      {\n        \"name\": \"Conference room\",\n        \"email\": \"conference-room@resources.google.com\"\n      }\n    ],\n    \"description\": \"Discussion on project scope, deliverables, and timelines.\",\n    \"when\": {\n      \"start_time\": 1674604800,\n      \"end_time\": 1674608400,\n      \"start_timezone\": \"America/New_York\",\n      \"end_timezone\": \"America/New_York\"\n    },\n    \"location\": \"Zoom link or office address\",\n    \"recurrence\": [\n    ],\n    \"reminders\": [\n      {\n        \"method\": \"email\",\n        \"minutes_before_event\": 30\n      }\n    ]\n  }"
-      },
-      "id": "8a8952e5-cc47-4ffb-bb70-5b154090815b",
-      "name": "setup_calendar_meeting",
-      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
-      "typeVersion": 1.1,
-      "position": [
-        3260,
-        500
-      ]
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -933,38 +855,75 @@
       "typeVersion": 2.2,
       "position": [
         920,
-        360
+        380
       ]
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://api.us.nylas.com/v3/scheduling/bookings",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-3.5-TURBO"
+        },
+        "messages": {
+          "values": [
             {
-              "name": "Accept",
-              "value": "application/json"
-            },
-            {
-              "name": "Authorization",
-              "value": "Bearer <SCHEDULER_SESSION_ID>"
+              "content": "=YOU ARE A HELPFUL ASSISTANT. HELP RETURN THE FOLLOWING IN CORRECT JSON DATA TO USE IN NYLAS SEND MESSAGE API.\n\n\n{\n  \"subject\": \"Re: Previous Subject\",\n  \"to\": [\n    {\n      \"name\": \" Gatura Njenga\",\n      \"email\": \"gatura@bulkbox.co.ke\"\n    }\n  ],\n  \"from\": [\n    {\n      \"name\": \"Nyla\",\n      \"email\": \"gatura@bulkbox.co.ke\"\n    }\n  ],\n  \"body\": \"{{ $json.output }}\",\n  \"reply_to_message_id\": \"{{ $('get_messages').item.json.data[0].id }}\",\n  \"thread_id\": \"{{ $('unique_threadID').item.json.data[0].threadID }}\"\n}\n",
+              "role": "assistant"
             }
           ]
         },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "{\n  \"start_time\": 1709643600,\n  \"end_time\": 1709645400,\n  \"participants\": [],\n  \"guest\": {\n    \"name\": \"Jane Doe\",\n    \"email\": \"jane.doe@example.com\"\n  }\n}",
         "options": {}
       },
-      "id": "d2ecad7f-9fa7-473b-a93b-7b404a2f6949",
-      "name": "HTTP Request",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
+      "id": "2ba2560b-4dd5-4fc0-89af-a60c00db3a08",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
       "position": [
-        3180,
-        100
+        3720,
+        280
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "book_meeting_with_nylas",
+        "description": "This tool is designed to facilitate meeting bookings by setting up confirmed dates and times between the primary user and another party. When using this tool, include:\n\n  -  A brief title describing the purpose or subject of the meeting, if available.\n  -  The agreed start date and time in UNIX timestamp format.\n  -  Participant details for both the primary user and the other party.",
+        "workflowId": {
+          "__rl": true,
+          "value": "UILAsE9Ihm59SLKh",
+          "mode": "id"
+        },
+        "fields": {
+          "values": [
+            {
+              "name": "primary email address",
+              "stringValue": "={{ $('get_messages').item.json.data[0].to[0].email }}"
+            },
+            {
+              "name": "secondary email address",
+              "stringValue": "={{ $('get_messages').item.json.data[0].from[0].email }}"
+            },
+            {
+              "name": "calendarid",
+              "stringValue": "gatura@bulkbox.co.ke"
+            }
+          ]
+        }
+      },
+      "id": "4e9f77c4-972a-48f5-bd62-21ae4222238b",
+      "name": "book meeting",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        3440,
+        500
       ]
     },
     {
@@ -978,55 +937,6 @@
       "position": [
         3120,
         280
-      ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "026fdfae-45ff-4f99-b26a-da113640ca99",
-      "name": "HTTP Request1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3400,
-        100
-      ]
-    },
-    {
-      "parameters": {
-        "url": "=https://api.us.nylas.com/v3/grants/{{ $('Auth').item.json.grant_id }}/calendars",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "limit",
-              "value": "5"
-            }
-          ]
-        },
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "accept",
-              "value": "application/json"
-            },
-            {
-              "name": "authorization",
-              "value": "=Bearer {{ $('Auth').item.json.token }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "7e15b2ad-3e5f-44dd-9028-52eb614b30c4",
-      "name": "HTTP Request2",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        2840,
-        40
       ]
     }
   ],
@@ -1088,6 +998,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-10-29T03:52:53.000Z",
-  "versionId": "7d6b68ce-833c-4e20-969c-8630ac9ea7fb"
+  "updatedAt": "2024-10-29T13:33:54.000Z",
+  "versionId": "8bf82829-fc1e-44d8-a433-c464e8eb85d4"
 }
