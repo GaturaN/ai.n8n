@@ -38,7 +38,7 @@
       "main": [
         [
           {
-            "node": "thread_id",
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -118,17 +118,6 @@
         ]
       ]
     },
-    "Split Out2": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "get_messages1": {
       "main": [
         [
@@ -177,18 +166,7 @@
       "main": [
         [
           {
-            "node": "get_messages",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Prompt": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
+            "node": "cc'd_email",
             "type": "main",
             "index": 0
           }
@@ -228,17 +206,6 @@
         ]
       ]
     },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "OpenAI1": {
       "main": [
         [
@@ -256,6 +223,68 @@
           {
             "node": "AI Agent",
             "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cc'd_email": {
+      "main": [
+        [
+          {
+            "node": "get_messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "thread_id",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "thread_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
             "index": 0
           }
         ]
@@ -284,7 +313,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -40,
+        -480,
         360
       ]
     },
@@ -307,13 +336,13 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        140,
+        -300,
         360
       ]
     },
     {
       "parameters": {
-        "url": "=https://api.us.nylas.com/v3/grants/{{ $json.grant_id }}/messages",
+        "url": "=https://api.us.nylas.com/v3/grants/{{ $('Auth').item.json.grant_id }}/messages",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
@@ -336,7 +365,7 @@
             },
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $json.token }}"
+              "value": "=Bearer {{ $('Auth').item.json.token }}"
             }
           ]
         },
@@ -347,7 +376,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        520,
+        320,
         360
       ]
     },
@@ -381,7 +410,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        720,
+        520,
         360
       ]
     },
@@ -422,7 +451,7 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        900,
+        720,
         360
       ]
     },
@@ -640,7 +669,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        340,
+        -100,
         360
       ]
     },
@@ -651,7 +680,7 @@
             {
               "id": "428c2707-db62-4104-a537-38b428dd39b6",
               "name": "chatInput",
-              "value": "=Analyze the following email thread and focus on emails where 'Nylas' is mentioned. Based on the emails tagged with 'Nylas,' identify requests for scheduling meetings. Use the Nylas API to retrieve the availability of the sender  and propose meeting times to the recipient. Respond in the same email thread with proposed times. If the recipient confirms a meeting time, use the Nylas API to schedule the meeting and send a confirmation email.\n\n\n------------------------------------------------------------------------------\n\nEmail thread:\n{{ $json.snippet }}",
+              "value": "=You work as an email assistant, your job is to handle meeting bookings in a friendly and profesional tone. Analyze the following email thread and focus on emails where a meeting is proposed or asked off. identify requests for scheduling meetings. Use the Nylas API to retrieve the availability of the SENDER and propose meeting times to the recipient. If you're unable to access the availability of anyone in the thread, you should ask. Check for the SENDERS availability and propose good times to the person the sender wants to book a meeting with. Respond in the same email thread with proposed times. If the recipient confirms a meeting time, use the Nylas API to schedule the meeting and send a confirmation email.\n\nNote: When getting availability or scheduling the meetings, kindly include the date in the time.\n\n\n------------------------------------------------------------------------------\n\nEmail thread:\n{{ $json.snippet }}",
               "type": "string"
             }
           ]
@@ -721,7 +750,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
       "typeVersion": 1.1,
       "position": [
-        3400,
+        3420,
         500
       ]
     },
@@ -781,19 +810,6 @@
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "id": "0968c3a8-502f-4e67-a3a3-fb4253609a77",
-      "name": "AI Agent",
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.6,
-      "position": [
-        3120,
-        280
-      ]
-    },
-    {
-      "parameters": {
         "modelId": {
           "__rl": true,
           "value": "gpt-3.5-turbo",
@@ -828,7 +844,31 @@
     {
       "parameters": {
         "toolDescription": "Call this tool to set up the meeting with the suggested time in the email.",
-        "url": "=https:"
+        "method": "POST",
+        "url": "=https://api.us.nylas.com/v3/grants/{{ $('Auth').item.json.grant_id }}/events?calendar_id=gatura@bulkbox.co.ke",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "Accept",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "valueProvider": "fieldValue",
+              "value": "=Bearer {{ $('Auth').item.json.token }}"
+            },
+            {
+              "name": "content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"title\": \"Project Kickoff Meeting\",\n    \"status\": \"confirmed\",\n    \"busy\": true,\n    \"participants\": [\n      {\n        \"name\": \"Client Name\",\n        \"email\": \"client@example.com\"\n      },\n      {\n        \"name\": \"Gatura Francis\",\n        \"email\": \"gatura@bulkbox.co.ke\"\n      }\n    ],\n    \"resources\": [\n      {\n        \"name\": \"Conference room\",\n        \"email\": \"conference-room@resources.google.com\"\n      }\n    ],\n    \"description\": \"Discussion on project scope, deliverables, and timelines.\",\n    \"when\": {\n      \"start_time\": 1674604800,\n      \"end_time\": 1674608400,\n      \"start_timezone\": \"America/New_York\",\n      \"end_timezone\": \"America/New_York\"\n    },\n    \"location\": \"Zoom link or office address\",\n    \"recurrence\": [\n    ],\n    \"reminders\": [\n      {\n        \"method\": \"email\",\n        \"minutes_before_event\": 30\n      }\n    ]\n  }"
       },
       "id": "8a8952e5-cc47-4ffb-bb70-5b154090815b",
       "name": "setup_calendar_meeting",
@@ -837,6 +877,156 @@
       "position": [
         3260,
         500
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "877e1d80-3f40-4c04-b8ea-4c9ae8aedd1e",
+              "name": "email",
+              "value": "francnjenga99@gmail.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "53c36003-a4de-4692-accb-4489d83997be",
+      "name": "cc'd_email",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        120,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4354a75d-8832-4dce-910e-6888346021bc",
+              "leftValue": "={{ $json.cc }}",
+              "rightValue": "={{ $('cc\\'d_email').item.json.email }}",
+              "operator": {
+                "type": "array",
+                "operation": "contains",
+                "rightType": "any"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b1679888-a90e-4642-80d4-d9f828c41dd8",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        920,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.us.nylas.com/v3/scheduling/bookings",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer <SCHEDULER_SESSION_ID>"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"start_time\": 1709643600,\n  \"end_time\": 1709645400,\n  \"participants\": [],\n  \"guest\": {\n    \"name\": \"Jane Doe\",\n    \"email\": \"jane.doe@example.com\"\n  }\n}",
+        "options": {}
+      },
+      "id": "d2ecad7f-9fa7-473b-a93b-7b404a2f6949",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3180,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0968c3a8-502f-4e67-a3a3-fb4253609a77",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        3120,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "026fdfae-45ff-4f99-b26a-da113640ca99",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3400,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.us.nylas.com/v3/grants/{{ $('Auth').item.json.grant_id }}/calendars",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit",
+              "value": "5"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "authorization",
+              "value": "=Bearer {{ $('Auth').item.json.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7e15b2ad-3e5f-44dd-9028-52eb614b30c4",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2840,
+        40
       ]
     }
   ],
@@ -898,6 +1088,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-10-23T04:49:32.000Z",
-  "versionId": "3aeb8214-4c8d-4233-85e8-98379656d389"
+  "updatedAt": "2024-10-29T03:52:53.000Z",
+  "versionId": "7d6b68ce-833c-4e20-969c-8630ac9ea7fb"
 }
