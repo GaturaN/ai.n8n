@@ -70,9 +70,9 @@
         "operation": "get",
         "workflowId": {
           "__rl": true,
-          "value": "8RLPBaJREDnMZAwQ",
+          "value": "UILAsE9Ihm59SLKh",
           "mode": "list",
-          "cachedResultName": "Nylas (#8RLPBaJREDnMZAwQ)"
+          "cachedResultName": "Book Meeeting with Nylas (#UILAsE9Ihm59SLKh)"
         },
         "requestOptions": {}
       },
@@ -150,21 +150,21 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-3.5-turbo",
+          "value": "gpt-4o-mini",
           "mode": "list",
-          "cachedResultName": "GPT-3.5-TURBO"
+          "cachedResultName": "GPT-4O-MINI"
         },
         "messages": {
           "values": [
             {
-              "content": "=Generate a detailed and structured documentation in Markdown format for the following workflow. Include an overview, each node's functionality, the connections between nodes, and any important parameters or settings:\n\nWorkflow Name:\n{{ $json.name }}\n\nWorkflow Data:\n{{ $json.nodes }}"
+              "content": "=Generate a detailed and structured documentation in Markdown format for the following workflow. Include an overview, each node's functionality, the connections between nodes, and any important parameters or settings:\n\nCREATE A VERY DETAILED DOCUMENTATION.\n\nWorkflow Name:\n{{ $json.name }}\n\nWorkflow Data:\n{{ $json.nodes }}"
             }
           ]
         },
         "simplify": false,
         "options": {
-          "maxTokens": 2500,
-          "temperature": 0.1
+          "maxTokens": 3500,
+          "temperature": 0.6
         }
       },
       "id": "61805cbb-7d14-4e39-99b4-747f86cacaa0",
@@ -190,6 +190,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-22T17:25:23.000Z",
-  "versionId": "f45bb949-4e37-4d52-86fa-6a344409d14b"
+  "updatedAt": "2024-10-29T13:49:26.000Z",
+  "versionId": "09fbb580-f26b-4d70-aa6e-dec6b5e9ef61"
 }
