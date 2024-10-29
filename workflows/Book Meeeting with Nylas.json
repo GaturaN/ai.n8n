@@ -1,0 +1,289 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "set_fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_fields": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "start_time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "start_time": {
+      "main": [
+        [
+          {
+            "node": "create_event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_event": {
+      "main": [
+        [
+          {
+            "node": "Success",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-29T12:27:00.200Z",
+  "id": "UILAsE9Ihm59SLKh",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Book Meeeting with Nylas",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "56a3aa09-e50a-4f90-804d-3f3b1ba79bec",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        600,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1444d43a-7726-4e56-bb24-0593ea93bea3",
+              "name": "grant_id",
+              "value": "d71b64e3-47e8-41d2-9184-a227c391a4ab",
+              "type": "string"
+            },
+            {
+              "id": "f43c8592-8dfb-4e26-8572-9f6b275e1e48",
+              "name": "token",
+              "value": "nyk_v0_Z4NKf0hA4VGBuRRUjWQ8GzC4DsG1s5NPbJdpYM3CC6keN8rKcZIlFZBSGi3XrZRX",
+              "type": "string"
+            },
+            {
+              "id": "e095c513-a40f-4f86-8e23-140871ead2a1",
+              "name": "calendar_id",
+              "value": "={{ $json.calendarid }}",
+              "type": "string"
+            },
+            {
+              "id": "eb3c04cf-fb3c-4968-b7b1-31d5a78e108b",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f2966882-58c5-436d-aea0-070a175c7d0b",
+      "name": "set_fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        820,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4",
+          "mode": "list",
+          "cachedResultName": "GPT-4"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Generate the unix time stamp of the date and time in this message as the start time.\n\nOnly return the unix time stamp\n\n-----------------------------------------------------\n\nMessage:  \n{{ $('Execute Workflow Trigger').item.json.query }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4c871d11-595e-4d79-bf74-57ec7c04f55b",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        1040,
+        420
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2031caaf-caac-48ab-8e45-67e557abf015",
+              "name": "startTime",
+              "value": "={{ $json.message.content }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8b62881d-2932-42a4-9a05-300e27e439e3",
+      "name": "start_time",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1420,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d1dc62e0-9484-494b-aca3-87c1e5b931f5",
+              "name": "response",
+              "value": "Success",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "59211fcf-4851-4c81-9ba1-09e9803f7c20",
+      "name": "Success",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1860,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d1dc62e0-9484-494b-aca3-87c1e5b931f5",
+              "name": "response",
+              "value": "Fail",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0dfd0a13-0028-445a-910f-90aa39e40cd8",
+      "name": "Fail",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1860,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.us.nylas.com/v3/grants/{{ $('set_fields').item.json.grant_id }}/events?calendar_id={{ $('set_fields').item.json.calendar_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('set_fields').item.json.token }}"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "=json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n   \"title\":\"Annual Philosophy Club Meeting\",\n   \"status\":\"confirmed\",\n   \"busy\":true,\n   \"participants\":[\n      {\n         \"name\":\"Gatura\",\n         \"email\":\"gatura@bulkbox.co.ke\"\n      },\n      {\n         \"name\":\"Francis\",\n         \"email\":\"francnjenga99@gmail.com\"\n      }\n   ],\n   \"resources\":[\n      {\n         \"name\":\"Conference room\",\n         \"email\":\"conference-room@resources.google.com\"\n      }\n   ],\n   \"description\":\"Come ready to talk philosophy!\",\n   \"when\":{\n      \"start_time\": 1730282400,\n      \"end_time\": 1730284200,\n      \"start_timezone\":\"America/New_York\",\n      \"end_timezone\":\"America/New_York\"\n   },\n   \"location\":\"New York Public Library, Cave room\"\n}",
+        "options": {}
+      },
+      "id": "87547db0-a66a-40c2-add9-8bd58c01742c",
+      "name": "create_event",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1640,
+        420
+      ],
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "query": "Set up the meeting for October 22, 2024, at 10:00 AM.",
+          "primary email address": "gatura@bulkbox.co.ke",
+          "secondary email address": "gaturanjenga@gmail.com",
+          "calendarid": "gatura@bulkbox.co.ke"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-29T13:23:38.000Z",
+  "versionId": "4b306a7e-c4cd-4e7b-9dbe-c31194f281ef"
+}
