@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "create_folder": {
       "main": [
@@ -1301,6 +1301,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-10-25T19:45:54.000Z",
+  "updatedAt": "2024-10-29T13:34:34.000Z",
   "versionId": "a51b752d-0e89-46a7-a423-008466ae9409"
 }
