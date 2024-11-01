@@ -153,6 +153,21 @@
           "name": "My Account"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "# Update trello with information about the trello member id's and their job roles",
+        "height": 690,
+        "width": 971
+      },
+      "id": "506b59b1-869d-4953-adbd-a35fe38cf773",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        800,
+        500
+      ]
     }
   ],
   "pinData": {},
@@ -162,6 +177,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-31T14:13:07.000Z",
-  "versionId": "1352790d-609e-4b56-9f55-bfe4cc391430"
+  "updatedAt": "2024-10-31T17:10:21.000Z",
+  "versionId": "f8ff4bf8-0b59-4f9c-b982-479e08cc9e45"
 }
