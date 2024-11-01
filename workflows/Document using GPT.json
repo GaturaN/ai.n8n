@@ -70,9 +70,9 @@
         "operation": "get",
         "workflowId": {
           "__rl": true,
-          "value": "9nQ6dj9ZxhJ3Mahd",
+          "value": "YGYiq120Ac1zaP97",
           "mode": "list",
-          "cachedResultName": "Trello & Pinecone (#9nQ6dj9ZxhJ3Mahd)"
+          "cachedResultName": "Upload trello members to pinecone (#YGYiq120Ac1zaP97)"
         },
         "requestOptions": {}
       },
@@ -190,6 +190,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-31T17:41:02.000Z",
-  "versionId": "61422ced-f069-463b-9b95-4fc87d02c1e7"
+  "updatedAt": "2024-11-01T14:25:19.000Z",
+  "versionId": "144487e0-569d-4c0f-a829-bf861e46ab54"
 }
