@@ -70,9 +70,9 @@
         "operation": "get",
         "workflowId": {
           "__rl": true,
-          "value": "UILAsE9Ihm59SLKh",
+          "value": "9nQ6dj9ZxhJ3Mahd",
           "mode": "list",
-          "cachedResultName": "Book Meeeting with Nylas (#UILAsE9Ihm59SLKh)"
+          "cachedResultName": "Trello & Pinecone (#9nQ6dj9ZxhJ3Mahd)"
         },
         "requestOptions": {}
       },
@@ -142,8 +142,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2100,
-        500
+        2060,
+        180
       ]
     },
     {
@@ -157,14 +157,14 @@
         "messages": {
           "values": [
             {
-              "content": "=Generate a detailed and structured documentation in Markdown format for the following workflow. Include an overview, each node's functionality, the connections between nodes, and any important parameters or settings:\n\nCREATE A VERY DETAILED DOCUMENTATION.\n\nWorkflow Name:\n{{ $json.name }}\n\nWorkflow Data:\n{{ $json.nodes }}"
+              "content": "=Explain the logic and functionality of this workflow in markdown format.\n\nWorkflow Name:\n{{ $json.name }}\n\nWorkflow Data:\n{{ $json.nodes }}"
             }
           ]
         },
         "simplify": false,
         "options": {
-          "maxTokens": 3500,
-          "temperature": 0.6
+          "maxTokens": 3000,
+          "temperature": 0.1
         }
       },
       "id": "61805cbb-7d14-4e39-99b4-747f86cacaa0",
@@ -190,6 +190,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-29T13:49:26.000Z",
-  "versionId": "09fbb580-f26b-4d70-aa6e-dec6b5e9ef61"
+  "updatedAt": "2024-10-31T17:41:02.000Z",
+  "versionId": "61422ced-f069-463b-9b95-4fc87d02c1e7"
 }
