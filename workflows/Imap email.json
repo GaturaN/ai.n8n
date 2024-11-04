@@ -1,0 +1,323 @@
+{
+  "active": false,
+  "connections": {
+    "Trigger @ 2AM": {
+      "main": [
+        [
+          {
+            "node": "24hrsBefore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "24hrsBefore": {
+      "main": [
+        [
+          {
+            "node": "configurableFields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "configurableFields": {
+      "main": [
+        [
+          {
+            "node": "GetEmails24hrsAgo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetEmails24hrsAgo": {
+      "main": [
+        [
+          {
+            "node": "checkForAttachments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checkForAttachments": {
+      "main": [
+        [
+          {
+            "node": "checkForpdf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checkForpdf": {
+      "main": [
+        [
+          {
+            "node": "loopEmails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "loopEmails": {
+      "main": [
+        [],
+        [
+          {
+            "node": "splitAttachments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-04T11:36:12.956Z",
+  "id": "vVohkgM0uqNSdYmI",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Imap email",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 2
+            }
+          ]
+        }
+      },
+      "id": "0a21fb2e-57c3-41d1-b896-7b0aa3ab9e93",
+      "name": "Trigger @ 2AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5ebcf07b-c9f0-46c8-a6c4-d00c0d0b39f0",
+              "name": "from",
+              "value": "={{ $now.minus(1, \"day\").format('yyyy-MM-dd\\'T\\'HH:mm:ss') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "30a790ec-94ea-4bec-a8e8-c523b2542013",
+      "name": "24hrsBefore",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -180,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "20836f83-2829-4e9f-b691-63cb95c7cbad",
+              "name": "email (email to send the attchment)",
+              "value": "gaturanjenga@gmail.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "32d33bad-9a6c-458d-8c4a-f382aa75a314",
+      "name": "configurableFields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        40,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "email",
+        "mailboxPath": {
+          "__rl": true,
+          "value": "INBOX",
+          "mode": "list",
+          "cachedResultName": "INBOX"
+        },
+        "emailDateRange": {
+          "since": "={{ $('24hrsBefore').item.json.from }}"
+        },
+        "emailFlags": {},
+        "emailSearchFilters": {},
+        "includeParts": [
+          "attachmentsInfo"
+        ]
+      },
+      "id": "d3456753-c48a-4537-b772-b2b59ca98b65",
+      "name": "GetEmails24hrsAgo",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        240,
+        740
+      ],
+      "credentials": {
+        "imapApi": {
+          "id": "7cOl7KbWcNg3Fz8R",
+          "name": "gatura@bulkbox.co.ke - test imap"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Set Trigger\n## Set Time 24 hours ago for filtering when getting emails\n## Set the email Address to send to",
+        "height": 381,
+        "width": 827
+      },
+      "id": "35155997-5e45-4c5d-af28-4af9177c371e",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -440,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fe2d117d-fd3b-48b2-bc61-0c3d261ac3d2",
+              "leftValue": "={{ $json.attachmentsInfo }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d84dac6d-b59e-4f89-ba54-1a53aa893f70",
+      "name": "checkForAttachments",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        460,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c79b97ee-8864-4469-988d-1908be62df8a",
+              "leftValue": "={{ $json.attachmentsInfo[0].filename }}",
+              "rightValue": ".pdf",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "26d14369-229c-4a60-8136-246b42d3d3ce",
+      "name": "checkForpdf",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        680,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Filter for attachments and check for pdf files.",
+        "height": 263,
+        "width": 387,
+        "color": 3
+      },
+      "id": "bb207064-8196-47e9-b1b6-c4d0d373db2f",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        420,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "747aefe3-9ba2-4f04-8c3d-93afd2b47136",
+      "name": "loopEmails",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        900,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "attachmentsInfo",
+        "options": {}
+      },
+      "id": "aa055aa3-0e39-442e-b580-000fd9f18683",
+      "name": "splitAttachments",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        820
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-11-04T12:32:12.000Z",
+  "versionId": "9e9e6896-8bd7-442a-b5f4-0c01b7a19ac2"
+}
