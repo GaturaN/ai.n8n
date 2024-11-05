@@ -72,7 +72,7 @@
         [],
         [
           {
-            "node": "downloadAttachments",
+            "node": "emailUid",
             "type": "main",
             "index": 0
           }
@@ -106,6 +106,17 @@
         [
           {
             "node": "loopEmails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "emailUid": {
+      "main": [
+        [
+          {
+            "node": "downloadAttachments",
             "type": "main",
             "index": 0
           }
@@ -341,8 +352,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1060,
-        760
+        1280,
+        780
       ]
     },
     {
@@ -354,7 +365,7 @@
           "mode": "list",
           "value": "INBOX"
         },
-        "emailUid": "={{ $('loopEmails').item.json.uid }}",
+        "emailUid": "={{ $json.uid }}",
         "allAttachments": true
       },
       "id": "bb578723-91cd-416a-b00a-1d4a13a4bcd3",
@@ -362,7 +373,7 @@
       "type": "n8n-nodes-imap.imap",
       "typeVersion": 1,
       "position": [
-        1140,
+        1360,
         840
       ],
       "credentials": {
@@ -389,7 +400,7 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        1360,
+        1580,
         840
       ],
       "credentials": {
@@ -408,7 +419,7 @@
           "mode": "list",
           "value": "INBOX"
         },
-        "emailUid": "={{ $('loopEmails').item.json.uid }}",
+        "emailUid": "={{ $('emailUid').item.json.uid }}",
         "destinationMailbox": {
           "__rl": true,
           "value": "[Gmail]/Important",
@@ -421,8 +432,8 @@
       "type": "n8n-nodes-imap.imap",
       "typeVersion": 1,
       "position": [
-        1360,
-        1100
+        1660,
+        1060
       ],
       "credentials": {
         "imapApi": {
@@ -442,8 +453,31 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1340,
-        1020
+        1600,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fbb90365-4c07-401b-b497-f4c3aebd424c",
+              "name": "uid",
+              "value": "={{ $json.uid }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4ec21513-4010-4a01-a1f3-8f8de65e443b",
+      "name": "emailUid",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        840
       ]
     }
   ],
@@ -454,6 +488,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-11-04T19:13:39.000Z",
-  "versionId": "0dbe81a1-5d58-4954-bc86-d8b83d17f338"
+  "updatedAt": "2024-11-05T13:24:47.000Z",
+  "versionId": "ad55e211-f3f4-4675-9932-b9e204159c7b"
 }
