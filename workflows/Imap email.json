@@ -72,7 +72,40 @@
         [],
         [
           {
-            "node": "splitAttachments",
+            "node": "downloadAttachments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "downloadAttachments": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "moveFolder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "moveFolder": {
+      "main": [
+        [
+          {
+            "node": "loopEmails",
             "type": "main",
             "index": 0
           }
@@ -188,8 +221,8 @@
     {
       "parameters": {
         "content": "## Set Trigger\n## Set Time 24 hours ago for filtering when getting emails\n## Set the email Address to send to",
-        "height": 381,
-        "width": 827
+        "height": 292.25,
+        "width": 804.5
       },
       "id": "35155997-5e45-4c5d-af28-4af9177c371e",
       "name": "Sticky Note",
@@ -197,7 +230,7 @@
       "typeVersion": 1,
       "position": [
         -440,
-        520
+        600
       ]
     },
     {
@@ -298,16 +331,119 @@
     },
     {
       "parameters": {
-        "fieldToSplitOut": "attachmentsInfo",
-        "options": {}
+        "content": "## Download attachments and send to another email\n",
+        "height": 220,
+        "width": 466.25,
+        "color": 4
       },
-      "id": "aa055aa3-0e39-442e-b580-000fd9f18683",
-      "name": "splitAttachments",
-      "type": "n8n-nodes-base.splitOut",
+      "id": "cfcd73fa-7f82-4013-ac7b-95203fdc52c3",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1120,
-        820
+        1060,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "email",
+        "operation": "downloadAttachment",
+        "mailboxPath": {
+          "__rl": true,
+          "mode": "list",
+          "value": "INBOX"
+        },
+        "emailUid": "={{ $('loopEmails').item.json.uid }}",
+        "allAttachments": true
+      },
+      "id": "bb578723-91cd-416a-b00a-1d4a13a4bcd3",
+      "name": "downloadAttachments",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        840
+      ],
+      "credentials": {
+        "imapApi": {
+          "id": "7cOl7KbWcNg3Fz8R",
+          "name": "gatura@bulkbox.co.ke - test imap"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $('GetEmails24hrsAgo').item.json.envelope.to[0].address }}",
+        "toEmail": "={{ $('configurableFields').item.json['email (email to send the attchment)'] }}",
+        "subject": "=PDFs - {{ $('downloadAttachments').item.binary.attachment_0.fileName }}",
+        "emailFormat": "text",
+        "text": "Find attached pdfs from emails",
+        "options": {
+          "appendAttribution": false,
+          "attachments": "={{ $('downloadAttachments').item.json.attachments.last().binaryFieldName }}"
+        }
+      },
+      "id": "c1c02283-49ce-4195-9295-66602047a63a",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1360,
+        840
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "FRchTiFJGPeC5YNE",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "email",
+        "operation": "moveEmail",
+        "sourceMailbox": {
+          "__rl": true,
+          "mode": "list",
+          "value": "INBOX"
+        },
+        "emailUid": "={{ $('loopEmails').item.json.uid }}",
+        "destinationMailbox": {
+          "__rl": true,
+          "value": "[Gmail]/Important",
+          "mode": "list",
+          "cachedResultName": "[Gmail]/Important"
+        }
+      },
+      "id": "7d8892b1-f0b4-46ce-a2f6-3b6bcab50670",
+      "name": "moveFolder",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        1100
+      ],
+      "credentials": {
+        "imapApi": {
+          "id": "7cOl7KbWcNg3Fz8R",
+          "name": "gatura@bulkbox.co.ke - test imap"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Move mail to another folder\n",
+        "height": 243.75,
+        "color": 5
+      },
+      "id": "a82523b2-7e27-49f2-a21f-b2d2365258e9",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        1020
       ]
     }
   ],
@@ -318,6 +454,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-11-04T12:32:12.000Z",
-  "versionId": "9e9e6896-8bd7-442a-b5f4-0c01b7a19ac2"
+  "updatedAt": "2024-11-04T19:13:39.000Z",
+  "versionId": "0dbe81a1-5d58-4954-bc86-d8b83d17f338"
 }
