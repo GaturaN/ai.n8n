@@ -826,6 +826,24 @@
         80,
         180
       ]
+    },
+    {
+      "parameters": {},
+      "id": "3817bfe1-235f-43d2-a741-813c5f3910ca",
+      "name": "Trello Trigger",
+      "type": "n8n-nodes-base.trelloTrigger",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ],
+      "webhookId": "a32f1987-b54a-4de8-b1a2-e4162a16bf79",
+      "credentials": {
+        "trelloApi": {
+          "id": "28KcZZoExcvdC6un",
+          "name": "bulkbox"
+        }
+      }
     }
   ],
   "pinData": {
@@ -965,6 +983,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-31T17:12:15.000Z",
-  "versionId": "0dc742db-ec05-4a00-9ec0-db2fd3242d80"
+  "updatedAt": "2024-11-05T17:58:25.000Z",
+  "versionId": "544cb865-9a41-41a3-8554-6b2652ded5d4"
 }
