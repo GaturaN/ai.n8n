@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Loop Over Items",
+            "node": "Loop Over Items1",
             "type": "main",
             "index": 0
           }
@@ -40,6 +40,29 @@
         [
           {
             "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
             "type": "main",
             "index": 0
           }
@@ -70,9 +93,9 @@
         "operation": "get",
         "workflowId": {
           "__rl": true,
-          "value": "vVohkgM0uqNSdYmI",
+          "value": "BuohNSKBGD4Gz9M0",
           "mode": "list",
-          "cachedResultName": "Imap email (#vVohkgM0uqNSdYmI)"
+          "cachedResultName": "AI Content Generator (#BuohNSKBGD4Gz9M0)"
         },
         "requestOptions": {}
       },
@@ -181,6 +204,84 @@
           "name": "Bulkbox"
         }
       }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c0951a7a-1125-49fa-962c-52e5ffc8d618",
+      "name": "Loop Over Items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1260,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "905bf60f-dc86-490c-a362-6abb4239ef16",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "2bc2ecc5-0d31-4e35-bf68-30149b3599a9",
+              "name": "nodes",
+              "value": "={{ $json.nodes }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2fb6c8cf-d056-4a5f-ac4f-be66acd765c7",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1480,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=WITHOUT CHANGING ANY OF THE NODES, I WANT YOU TO INCLUDE STICKY NODES THAT EXPPLAIN WHAT IS HAPPENING WITH INSTRUCTIONS OF WHAT THE USER OF THE WORKFLOW SHOULD DO:\n\nWorkflow Name:\n{{ $json.name }}\n\nWorkflow Data:\n{{ $json.nodes }}"
+            }
+          ]
+        },
+        "simplify": false,
+        "options": {
+          "maxTokens": 3000,
+          "temperature": 0.1
+        }
+      },
+      "id": "91ab2bd0-6950-496b-b0ae-3bb2238e3ca4",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        1680,
+        800
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -190,6 +291,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-11-04T19:47:31.000Z",
-  "versionId": "8284d116-2d32-4015-9f3c-cd9e2fc16889"
+  "updatedAt": "2024-11-07T09:52:56.000Z",
+  "versionId": "70002910-337e-4b9f-abda-8a84e9e0c08c"
 }
