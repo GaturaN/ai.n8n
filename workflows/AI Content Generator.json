@@ -1289,37 +1289,6 @@
           "name": "Bulkbox"
         }
       }
-    },
-    {
-      "parameters": {
-        "content": "## - Add topic and links to a form.\n## - Create a google folder.\n## - Prompt GPT to Create an outline for the content.",
-        "height": 387.84074598635897,
-        "width": 1079.564429537969
-      },
-      "id": "07831f22-318e-47d9-a9b9-45e62fdbf520",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -600,
-        220
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Upload outline to drive folder.\n## Split the content by section and prompt GPT to generate content for the sections.",
-        "height": 336.5047795850205,
-        "width": 1038.7589177830591,
-        "color": 4
-      },
-      "id": "1b04e7a9-d6d6-4220-8fee-4f770e734a24",
-      "name": "Sticky Note1",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        560,
-        260
-      ]
     }
   ],
   "pinData": {},
@@ -1329,6 +1298,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-11-04T19:52:40.000Z",
-  "versionId": "f76634ea-979c-4a46-8d3c-7b8821ea3922"
+  "updatedAt": "2024-11-07T09:47:12.000Z",
+  "versionId": "e5689e86-b81a-4ff2-abd0-158ee57a74d3"
 }
