@@ -1,0 +1,247 @@
+{
+  "active": true,
+  "connections": {
+    "Trello Trigger": {
+      "main": [
+        [
+          {
+            "node": "checkComments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checkComments": {
+      "main": [
+        [
+          {
+            "node": "setComment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "setComment": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2024-11-11T21:01:19.737Z",
+  "id": "zkZwIedcngKHf6Hh",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Trello Webhook?",
+  "nodes": [
+    {
+      "parameters": {
+        "id": "62b1d3ef56cdca107d3aec9e"
+      },
+      "id": "88dd099c-ea83-430c-b0d6-8d717a863b6f",
+      "name": "Trello Trigger",
+      "type": "n8n-nodes-base.trelloTrigger",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        500
+      ],
+      "webhookId": "c690cbdc-05e1-486f-a6d4-8e762dea1759",
+      "credentials": {
+        "trelloApi": {
+          "id": "28KcZZoExcvdC6un",
+          "name": "new-bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "64916b5d-59f9-4eb4-97de-c299ac68edd1",
+              "leftValue": "={{ $json.action.type }}",
+              "rightValue": "commentCard",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d11b2f21-e734-4778-820c-15a2966086ed",
+      "name": "checkComments",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1280,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5bbeae53-6817-4ec0-9810-f58cb6e97669",
+              "name": "comment",
+              "value": "={{ $json.action.display.entities.comment.text }}",
+              "type": "string"
+            },
+            {
+              "id": "ad834fb1-de05-4daa-9701-c9f85bfc4f30",
+              "name": "memberCreatorid",
+              "value": "={{ $json.action.memberCreator.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "27f4dc62-cd6d-4f74-a624-2da7e9c694a5",
+      "name": "setComment",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1500,
+        500
+      ]
+    }
+  ],
+  "pinData": {
+    "Trello Trigger": [
+      {
+        "json": {
+          "model": {
+            "id": "62b1d3ef56cdca107d3aec9e",
+            "name": "Projects",
+            "closed": false,
+            "color": null,
+            "idBoard": "62b1d3ef56cdca107d3aec95",
+            "pos": 196607,
+            "type": null,
+            "datasource": {
+              "filter": false
+            }
+          },
+          "action": {
+            "id": "67327c2280c8698dfc471f93",
+            "idMemberCreator": "6501a6ecb0408c17f48ed233",
+            "data": {
+              "idCard": "66db47f38321eb76e80bb4f9",
+              "text": "This is a test comment.",
+              "textData": {
+                "emoji": {}
+              },
+              "card": {
+                "id": "66db47f38321eb76e80bb4f9",
+                "name": "Look into the use of openai to generat invoice from pdf",
+                "idShort": 159,
+                "shortLink": "u5u38xka"
+              },
+              "board": {
+                "id": "62b1d3ef56cdca107d3aec95",
+                "name": "Technology",
+                "shortLink": "JgD11F5G"
+              },
+              "list": {
+                "id": "62b1d3ef56cdca107d3aec9e",
+                "name": "Projects"
+              }
+            },
+            "appCreator": null,
+            "type": "commentCard",
+            "date": "2024-11-11T21:50:26.840Z",
+            "limits": {
+              "reactions": {
+                "perAction": {
+                  "status": "ok",
+                  "disableAt": 900,
+                  "warnAt": 720
+                },
+                "uniquePerAction": {
+                  "status": "ok",
+                  "disableAt": 17,
+                  "warnAt": 14
+                }
+              }
+            },
+            "display": {
+              "translationKey": "action_comment_on_card",
+              "entities": {
+                "contextOn": {
+                  "type": "translatable",
+                  "translationKey": "action_on",
+                  "hideIfContext": true,
+                  "idContext": "66db47f38321eb76e80bb4f9"
+                },
+                "card": {
+                  "type": "card",
+                  "hideIfContext": true,
+                  "id": "66db47f38321eb76e80bb4f9",
+                  "shortLink": "u5u38xka",
+                  "text": "Look into the use of openai to generat invoice from pdf"
+                },
+                "comment": {
+                  "type": "comment",
+                  "text": "This is a test comment."
+                },
+                "memberCreator": {
+                  "type": "member",
+                  "id": "6501a6ecb0408c17f48ed233",
+                  "username": "gaturafrancis",
+                  "text": "Gatura Francis"
+                }
+              }
+            },
+            "memberCreator": {
+              "id": "6501a6ecb0408c17f48ed233",
+              "activityBlocked": false,
+              "avatarHash": "46a990d7692c4cf61068d149c08485ee",
+              "avatarUrl": "https://trello-members.s3.amazonaws.com/6501a6ecb0408c17f48ed233/46a990d7692c4cf61068d149c08485ee",
+              "fullName": "Gatura Francis",
+              "idMemberReferrer": null,
+              "initials": "GF",
+              "nonPublic": {},
+              "nonPublicAvailable": true,
+              "username": "gaturafrancis"
+            }
+          },
+          "webhook": {
+            "id": "6732790e98ec5f8979d08700",
+            "description": "n8n Webhook - 62b1d3ef56cdca107d3aec9e",
+            "idModel": "62b1d3ef56cdca107d3aec9e",
+            "callbackURL": "https://ai.gatuservices.info/webhook/c690cbdc-05e1-486f-a6d4-8e762dea1759/webhook",
+            "active": true,
+            "consecutiveFailures": 0,
+            "firstConsecutiveFailDate": null
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Trello Trigger": {
+      "webhookId": "67327dcd709f9a79e361542f"
+    }
+  },
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2024-11-11T21:57:32.000Z",
+  "versionId": "4935200f-08a4-4f64-a5fa-d0b5e0ca27b6"
+}
