@@ -122,39 +122,6 @@
           }
         ]
       ]
-    },
-    "midnightEveryday": {
-      "main": [
-        [
-          {
-            "node": "24hrsBefore1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "24hrsBefore1": {
-      "main": [
-        [
-          {
-            "node": "configurableFields1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "configurableFields1": {
-      "main": [
-        [
-          {
-            "node": "getMany",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "createdAt": "2024-11-04T11:36:12.956Z",
@@ -387,7 +354,7 @@
       "typeVersion": 1,
       "position": [
         1280,
-        780
+        760
       ]
     },
     {
@@ -513,114 +480,6 @@
         1120,
         840
       ]
-    },
-    {
-      "parameters": {
-        "content": "## Outlook Email\n",
-        "height": 618.140386383021,
-        "width": 2250.727251347702,
-        "color": 7
-      },
-      "id": "62971a52-dc4e-482d-86ef-00ad1a22bfbc",
-      "name": "Sticky Note4",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -420,
-        1580
-      ]
-    },
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {}
-          ]
-        }
-      },
-      "id": "25ea9716-be59-4c62-976f-428d35388b1d",
-      "name": "midnightEveryday",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -380,
-        1820
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "5ebcf07b-c9f0-46c8-a6c4-d00c0d0b39f0",
-              "name": "from",
-              "value": "={{ $now.minus(1, \"day\").format('yyyy-MM-dd\\'T\\'HH:mm:ss+00:00') }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "76b1f345-5963-4665-aad1-22210109f53d",
-      "name": "24hrsBefore1",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -160,
-        1820
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "20836f83-2829-4e9f-b691-63cb95c7cbad",
-              "name": "email (email to send the attchment)",
-              "value": "gaturanjenga@gmail.com",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "ed30393e-48a6-445f-a173-4ae36a0c228b",
-      "name": "configurableFields1",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        60,
-        1820
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "getAll",
-        "returnAll": true,
-        "output": "raw",
-        "filtersUI": {
-          "values": {
-            "filters": {
-              "receivedAfter": "={{ $('24hrsBefore1').item.json.from }}"
-            }
-          }
-        },
-        "options": {}
-      },
-      "id": "5e619f39-a115-46fd-9d19-bd71c2a9ad4b",
-      "name": "getMany",
-      "type": "n8n-nodes-base.microsoftOutlook",
-      "typeVersion": 2,
-      "position": [
-        280,
-        1820
-      ],
-      "credentials": {
-        "microsoftOutlookOAuth2Api": {
-          "id": "sDrpCBO7HPnTQ65N",
-          "name": "Microsoft Outlook account"
-        }
-      }
     }
   ],
   "pinData": {},
@@ -630,6 +489,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-11-05T18:05:21.000Z",
-  "versionId": "e67c3fb6-d453-47d6-b025-122fe96d7de9"
+  "updatedAt": "2024-11-13T13:32:14.000Z",
+  "versionId": "f91a7c7b-73ad-4f12-bba2-834e856b69cd"
 }
