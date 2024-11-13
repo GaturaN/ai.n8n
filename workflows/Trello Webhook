@@ -25,7 +25,123 @@
     },
     "setComment": {
       "main": [
-        []
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Tool",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Vector Store Tool",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store Tool1": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store1": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Tool1",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Vector Store Tool1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "memberID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "memberID": {
+      "main": [
+        [
+          {
+            "node": "updateMemberId",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -118,6 +234,241 @@
         1500,
         500
       ]
+    },
+    {
+      "parameters": {
+        "name": "OrganizationMembers",
+        "description": "Call this tool to get the organization members and their memberIds. Use their profile to determine the best candidate to reassign the board."
+      },
+      "id": "c6340d5d-e3c2-40fd-b77d-4e53595f87dd",
+      "name": "Vector Store Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "trello-members-example",
+          "mode": "list",
+          "cachedResultName": "trello-members-example"
+        },
+        "options": {}
+      },
+      "id": "4e48589c-2859-43ee-bf01-a327940f8c68",
+      "name": "Pinecone Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        860
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "34f78a9d-d318-44ed-a393-7838b74aa104",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        1080
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {}
+      },
+      "id": "c1c5616a-71de-482f-90b0-e0f5480f8b92",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        940
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "ProjectInformation",
+        "description": "Call this tool to get the scope of the different projects and get help with determing who best to assign the task."
+      },
+      "id": "871f6f87-4052-4f46-963f-8447aa296e8c",
+      "name": "Vector Store Tool1",
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        1940,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "trello",
+          "mode": "list",
+          "cachedResultName": "trello"
+        },
+        "options": {}
+      },
+      "id": "132a2d06-3fd3-45da-a11b-878da24923b5",
+      "name": "Pinecone Vector Store1",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        940
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "9e79d518-00fb-482a-8e31-996232c38635",
+      "name": "Embeddings OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1940,
+        1120
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {}
+      },
+      "id": "d5c00403-a45c-4728-a2be-68e8ba65c49b",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        940
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are an assistant. \nYour work is to analyze the comment of this card and using the necessary tools, reassign the card to the most efficient member"
+            },
+            {
+              "content": "=This is the comment:  {{ $json.comment }}\n\nAnd this is the memberid currently assigned: {{ $json.memberCreatorid }}"
+            },
+            {
+              "content": "=Card details:\n\n{{ $('Trello Trigger').item.json.model }}\n{{ $('Trello Trigger').item.json.action }}\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "58b6a742-8bf5-4ac1-9385-7c2c1be51361",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        1720,
+        500
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "a512bc41-1999-43f1-bccf-d3a3ca57642e",
+      "name": "memberID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2100,
+        500
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "id": {
+          "__rl": true,
+          "value": "={{ $('Trello Trigger').item.json.action.data.idCard }}",
+          "mode": "id"
+        },
+        "updateFields": {
+          "idMembers": "={{ $('Trello Trigger').item.json.action.memberCreator.id }}"
+        }
+      },
+      "id": "8f4020a7-36e2-456f-9f98-8a908bdbb5d5",
+      "name": "updateMemberId",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        2320,
+        500
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "28KcZZoExcvdC6un",
+          "name": "new-bulkbox"
+        }
+      }
     }
   ],
   "pinData": {
@@ -237,11 +588,11 @@
   },
   "staticData": {
     "node:Trello Trigger": {
-      "webhookId": "67327dcd709f9a79e361542f"
+      "webhookId": "6734db028dbe2f6da0651362"
     }
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-11-11T21:57:32.000Z",
-  "versionId": "4935200f-08a4-4f64-a5fa-d0b5e0ca27b6"
+  "updatedAt": "2024-11-13T16:59:45.000Z",
+  "versionId": "55af63d3-2360-4b65-82d0-291433569e6f"
 }
