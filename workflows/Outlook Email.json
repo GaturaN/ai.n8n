@@ -1,0 +1,585 @@
+{
+  "active": false,
+  "connections": {
+    "midnightEveryday": {
+      "main": [
+        [
+          {
+            "node": "24hrsBefore1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "24hrsBefore1": {
+      "main": [
+        [
+          {
+            "node": "configurableFields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "configurableFields1": {
+      "main": [
+        [
+          {
+            "node": "getMany",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getMany": {
+      "main": [
+        [
+          {
+            "node": "onlyIncomingMessages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "onlyIncomingMessages": {
+      "main": [
+        [
+          {
+            "node": "checkForAttachments1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checkForAttachments1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "messageID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getAttachments": {
+      "main": [
+        [
+          {
+            "node": "checkFroPDFs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checkFroPDFs": {
+      "main": [
+        [
+          {
+            "node": "downloadAttachments1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "downloadAttachments1": {
+      "main": [
+        [
+          {
+            "node": "sendMessage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "messageID": {
+      "main": [
+        [
+          {
+            "node": "getAttachments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sendMessage": {
+      "main": [
+        [
+          {
+            "node": "Microsoft Outlook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Microsoft Outlook": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-13T13:31:31.933Z",
+  "id": "ty1AiQEthJKwep4e",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Outlook Email",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Outlook Email\n",
+        "height": 704.6894044230679,
+        "width": 3038.2866421994013,
+        "color": 7
+      },
+      "id": "0b7ac427-a0df-4594-9576-3012494ddd34",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        160,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "938860d7-abf8-4078-a0a3-76872e6cfc0c",
+      "name": "midnightEveryday",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5ebcf07b-c9f0-46c8-a6c4-d00c0d0b39f0",
+              "name": "from",
+              "value": "={{ $now.minus(1, \"day\").format('yyyy-MM-dd\\'T\\'HH:mm:ss+00:00') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1dbad4c5-6527-4f39-afb8-907e0791ca5e",
+      "name": "24hrsBefore1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        420,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "20836f83-2829-4e9f-b691-63cb95c7cbad",
+              "name": "email (email to send the attchment)",
+              "value": "gaturanjenga@gmail.com",
+              "type": "string"
+            },
+            {
+              "id": "dbefc55e-fdcd-4141-bba9-3ef97d4bb6c5",
+              "name": "outlookemail",
+              "value": "outlook_093BC60E6446B694@outlook.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "16285b3b-0981-4744-a0c1-5dc578d07dac",
+      "name": "configurableFields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true,
+        "output": "raw",
+        "filtersUI": {
+          "values": {
+            "filters": {
+              "receivedAfter": "={{ $('24hrsBefore1').item.json.from }}"
+            }
+          }
+        },
+        "options": {}
+      },
+      "id": "b350dd15-c802-4b7c-a913-03bdb39e0dbe",
+      "name": "getMany",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        860,
+        280
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "DA6C5nb8Gdhpb1h1",
+          "name": "Use this"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Set email to send the attachments, and the outlook email we are checking.",
+        "height": 288.3565945509174
+      },
+      "id": "c0da31e5-6f08-4077-b42a-14d60866530c",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        580,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92f080be-6d82-4e10-aa76-be9932bb8b3f",
+              "leftValue": "={{ $json.from.emailAddress.address }}",
+              "rightValue": "={{ $('configurableFields1').item.json.outlookemail }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "58ac21b7-d33a-4f78-a0e2-96eae8a6acf7",
+      "name": "onlyIncomingMessages",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fe2d117d-fd3b-48b2-bc61-0c3d261ac3d2",
+              "leftValue": "={{ $('getMany').item.json.hasAttachments }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "808a9c29-3d86-4070-9158-bd3d4a78d3db",
+      "name": "checkForAttachments1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1280,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "d0f6fc1f-0081-418b-84bd-a911f37fa6cd",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1500,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "messageAttachment",
+        "operation": "getAll",
+        "messageId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "9ce2472b-502f-4c2f-a578-37d28cf2cf66",
+      "name": "getAttachments",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        1940,
+        380
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "DA6C5nb8Gdhpb1h1",
+          "name": "Use this"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "25797346-003a-4fd6-b559-e2e8e5de1ce7",
+              "leftValue": "={{ $json.contentType }}",
+              "rightValue": "pdf",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1aa28e1e-e092-461c-b109-069e01cf356c",
+      "name": "checkFroPDFs",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2160,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Download attachments and send to other email.",
+        "height": 176.50299072797506,
+        "width": 383.94275246067133,
+        "color": 4
+      },
+      "id": "fc58ca77-4941-42df-bfb0-9ea8f6471789",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2140,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "messageAttachment",
+        "operation": "download",
+        "messageId": {
+          "__rl": true,
+          "value": "={{ $('messageID').item.json.id }}",
+          "mode": "id"
+        },
+        "attachmentId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        }
+      },
+      "id": "428e3ac4-c095-4072-9522-df5eb66ae995",
+      "name": "downloadAttachments1",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        2380,
+        360
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "DA6C5nb8Gdhpb1h1",
+          "name": "Use this"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "86d2d912-f3e5-4472-bb53-9143585f2feb",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c1618a44-8e94-4dad-8369-1ea256103b94",
+      "name": "messageID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1720,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "toRecipients": "={{ $('configurableFields1').item.json['email (email to send the attchment)'] }}",
+        "subject": "Attachments",
+        "bodyContent": "Find attachments bellow",
+        "additionalFields": {
+          "attachments": {
+            "attachments": [
+              {
+                "binaryPropertyName": "data"
+              }
+            ]
+          }
+        }
+      },
+      "id": "e8e5e3b8-4eb0-4808-b64d-9a4973af8927",
+      "name": "sendMessage",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        360
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "DA6C5nb8Gdhpb1h1",
+          "name": "Use this"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "messageId": {
+          "__rl": true,
+          "value": "={{ $('messageID').item.json.id }}",
+          "mode": "id"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "AQMkADAwATMwMAItMmUyZi03MGJkLTAwAi0wMAoALgAAA83xcCiRvg1GkOK-lbQmp_0BAKArloE456BErqFgZqo5k38AAAIBDAAAAA==",
+          "mode": "list",
+          "cachedResultName": "Inbox",
+          "cachedResultUrl": "https://outlook.office365.com/mail/AQMkADAwATMwMAItMmUyZi03MGJkLTAwAi0wMAoALgAAA83xcCiRvg1GkOK%2FlbQmp_0BAKArloE456BErqFgZqo5k38AAAIBDAAAAA%3D%3D"
+        }
+      },
+      "id": "7266f2a3-55b3-4b9d-b3fc-11614121cee6",
+      "name": "Microsoft Outlook",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        560
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "DA6C5nb8Gdhpb1h1",
+          "name": "Use this"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### Move to Folder",
+        "width": 174.9048699063206
+      },
+      "id": "51a827fb-21c1-445d-8863-73a1a0d14064",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2560,
+        520
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-11-13T13:31:41.000Z",
+  "versionId": "53d60880-3c88-4df1-a381-a109560ac462"
+}
