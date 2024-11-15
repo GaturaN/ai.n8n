@@ -1,0 +1,97 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "dateTime",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "dateTime": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-15T17:44:15.442Z",
+  "id": "OvSPFXnB3W6BZTdP",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "getTime",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "45ff65fe-01ee-43d5-b2e8-7b26ba602fa8",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "aa8fbdab-9ef8-4690-b2c8-bbad416dc389",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        560,
+        420
+      ],
+      "webhookId": "45ff65fe-01ee-43d5-b2e8-7b26ba602fa8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5ab20b4a-294e-4e9e-ba10-b191315caac4",
+              "name": "date&time",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "20517999-b596-41c9-8d22-28ab84f9cb24",
+      "name": "dateTime",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        780,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1363605a-2c2d-433e-aed4-72eb142b1de2",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1000,
+        420
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-11-15T17:49:03.000Z",
+  "versionId": "fe482a59-b14b-4777-a752-bf52919bcfb9"
+}
