@@ -1,0 +1,766 @@
+{
+  "active": true,
+  "connections": {
+    "details": {
+      "main": [
+        [
+          {
+            "node": "Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "createEvent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getEvents": {
+      "ai_tool": [
+        [
+          {
+            "node": "Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sendeMail": {
+      "ai_tool": [
+        [
+          {
+            "node": "Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assistant": {
+      "main": [
+        [
+          {
+            "node": "response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-15T14:58:28.779Z",
+  "id": "Bqq5NlZ09U1WAgRo",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Personal Assistant (meeting_scheduler)",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e2d79854-5f63-4e7e-ae21-295b1a9bc29e",
+              "name": "action",
+              "value": "={{ $json.body.message.toolCalls[0].function.arguments.action }}",
+              "type": "string"
+            },
+            {
+              "id": "0b64fa88-99d5-43df-b8f4-c96ea435ebbc",
+              "name": "date",
+              "value": "={{ $json.body.message.toolCalls[0].function.arguments.date }}",
+              "type": "string"
+            },
+            {
+              "id": "a7f51a60-1ca1-465f-925e-8b141421884b",
+              "name": "time",
+              "value": "={{ $json.body.message.toolCalls[0].function.arguments.time }}",
+              "type": "string"
+            },
+            {
+              "id": "2a4917d1-b7b6-4d74-92a0-c6c70abf97b0",
+              "name": "email",
+              "value": "={{ $json.body.message.toolCalls[0].function.arguments.email }}",
+              "type": "string"
+            },
+            {
+              "id": "a7b7bd80-6395-400b-b8b0-6dc7e3415880",
+              "name": "details",
+              "value": "={{ $json.body.message.toolCalls[0].function.arguments.details }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6db25b23-5daa-4eb7-b094-08b1f1eebfa5",
+      "name": "details",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {}
+      },
+      "id": "2692bb2d-edf7-4275-bbd9-b2375debeb89",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        740
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "gatura@bulkbox.co.ke",
+          "mode": "list",
+          "cachedResultName": "gatura@bulkbox.co.ke"
+        },
+        "start": "={{ $fromAI(\"startTime\") }}",
+        "end": "={{ $fromAI(\"endTime\") }}",
+        "additionalFields": {
+          "description": "={{ $fromAI(\"description\") }}",
+          "summary": "={{ $fromAI(\"agenda\") }}"
+        }
+      },
+      "id": "69b5d1c3-309e-4e86-a428-b4d4bf5028e4",
+      "name": "createEvent",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        1660,
+        740
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "udkO4XUKHWrdkGpa",
+          "name": "ToBeDeleted"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "gatura@bulkbox.co.ke",
+          "mode": "list",
+          "cachedResultName": "gatura@bulkbox.co.ke"
+        },
+        "returnAll": true,
+        "options": {
+          "timeMin": "={{ $fromAI(\"till\") }}",
+          "timeMax": "={{ $fromAI(\"from\") }}",
+          "timeZone": {
+            "__rl": true,
+            "value": "Africa/Nairobi",
+            "mode": "list",
+            "cachedResultName": "Africa/Nairobi"
+          }
+        }
+      },
+      "id": "5954aecc-9550-4543-a377-b3b23523b516",
+      "name": "getEvents",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        1540,
+        740
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "udkO4XUKHWrdkGpa",
+          "name": "ToBeDeleted"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "gaturanjenga@gmail.com",
+        "subject": "={{ $fromAI(\"subject\") }}",
+        "emailType": "text",
+        "message": "={{ $fromAI(\"message\") }}",
+        "options": {}
+      },
+      "id": "f9f3664c-8cd3-45fe-a107-be0cbba931db",
+      "name": "sendeMail",
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        1780,
+        740
+      ],
+      "webhookId": "ebfb87e8-80bd-4024-a527-9d5c818f9213",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Sl6Ly5PwfaJ7GBZC",
+          "name": "ToBeDeleted"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "30f6e7ea-4646-42d1-b8c6-334c63a69b67",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a4842f4e-344c-4b1a-a701-892dc7fcbff6",
+      "name": "response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1860,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "861b8b98-890b-4601-8586-94f1511b6c96",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "25f999f0-dc2a-4217-9224-4f13104d8783",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "27fddd77-44ee-4b1a-9799-fb7a0e098064",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1060,
+        480
+      ],
+      "webhookId": "25f999f0-dc2a-4217-9224-4f13104d8783"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are Francis's personal assistant, with access to his calendar and email. Your primary tasks are checking availability, scheduling meetings, and sending confirmation emails. Always begin by confirming the purpose of Francis's request and then proceed based on the actions listed below. Ensure that each action is performed efficiently and without overlap.\nInstructions\n\n  1. Checking the Schedule: If Francis requests to check his schedule, retrieve calendar events for the specified date or time range.\n  2. Scheduling a Meeting:\n\n    - When Francis asks to schedule a meeting, first gather the requested date, time, participants, and other relevant details.\n    - Conflict Check: Check if there are any existing meetings at the suggested time.\n       - If there is a conflict: Find the nearest available time and suggest it to Francis.\n       - If no conflict exists: Proceed to book the meeting at the requested time.\n\n  3. Sending a Confirmation Email: If Francis needs to send a confirmation email, collect the recipient’s email, message content, and any other necessary details. Then, send the email and confirm the action has been completed.\n  4. Handling Other Requests: For any other task, clarify the requirements and assess whether they fit within your capabilities.\n\nImportant Notes\n\n  - Avoid Scheduling Overlaps: Always ensure that there are no overlapping meetings when scheduling.\n  - Timezone: All times are managed in Nairobi Time Zone.\n  - Current Date: Today’s date is {{ $now }}.\n  - User Response Data:\n        Action: {{ $json.action }}\n        Date: {{ $json.date }}\n        Time: {{ $json.time }}\n        Email: {{ $json.email }}\n        Details: {{ $json.details }}",
+        "options": {}
+      },
+      "id": "bb9b1f15-5b8d-44de-a951-dc2663b347b9",
+      "name": "Assistant",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        1480,
+        480
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "ai.gatuservices.info",
+            "x-forwarded-scheme": "http",
+            "x-forwarded-proto": "http",
+            "x-forwarded-for": "44.242.155.72, 162.158.41.58",
+            "x-real-ip": "162.158.41.58",
+            "content-length": "11054",
+            "cf-ray": "8e30a55d7869a341-SEA",
+            "tracestate": "dd=t.tid:673777f500000000;t.dm:-1;s:0;p:38ff3664550d2c34",
+            "cf-ipcountry": "US",
+            "accept-encoding": "gzip, br",
+            "traceparent": "00-673777f50000000038ff3664550d2c34-38ff3664550d2c34-00",
+            "x-datadog-tags": "_dd.p.tid=673777f500000000",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "x-datadog-sampling-priority": "0",
+            "x-datadog-parent-id": "4107061189736737844",
+            "cf-connecting-ip": "44.242.155.72",
+            "cdn-loop": "cloudflare; loops=1",
+            "x-datadog-trace-id": "4107061189736737844",
+            "baggage": "sentry-environment=production,sentry-public_key=a0021577936aec367b16615ad816c078,sentry-trace_id=76af7cfce06f4895a5db21fef4384d5f",
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "x-vapi-secret": "",
+            "user-agent": "axios/1.7.7",
+            "sentry-trace": "76af7cfce06f4895a5db21fef4384d5f-acbdbc274901eac2"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "message": {
+              "timestamp": 1731688437277,
+              "type": "tool-calls",
+              "toolCalls": [
+                {
+                  "id": "call_6u7AVTsOxVOloXfbczjVLbDx",
+                  "type": "function",
+                  "function": {
+                    "name": "calendarAssistant",
+                    "arguments": {
+                      "date": "2023-11-16",
+                      "time": "08:00",
+                      "email": "",
+                      "action": "book_meeting",
+                      "details": "Meeting with assistant to discuss NSN in the office."
+                    }
+                  }
+                }
+              ],
+              "toolCallList": [
+                {
+                  "id": "call_6u7AVTsOxVOloXfbczjVLbDx",
+                  "type": "function",
+                  "function": {
+                    "name": "calendarAssistant",
+                    "arguments": {
+                      "date": "2023-11-16",
+                      "time": "08:00",
+                      "email": "",
+                      "action": "book_meeting",
+                      "details": "Meeting with assistant to discuss NSN in the office."
+                    }
+                  }
+                }
+              ],
+              "toolWithToolCallList": [
+                {
+                  "type": "function",
+                  "function": {
+                    "name": "calendarAssistant",
+                    "async": false,
+                    "parameters": {
+                      "type": "object",
+                      "required": [
+                        "action",
+                        "date",
+                        "time",
+                        "email",
+                        "details"
+                      ],
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "The date for the meeting or for retrieving events"
+                        },
+                        "time": {
+                          "type": "string",
+                          "description": "The time for the meeting"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "The email address fro sending confirmatio"
+                        },
+                        "action": {
+                          "type": "string",
+                          "description": "book_meeting, get_events, send_email"
+                        },
+                        "details": {
+                          "type": "string",
+                          "description": "Additional details like meeting title or agenda"
+                        }
+                      }
+                    },
+                    "description": "Access calendar data (view and retrieve calendar events).\nBook meetings (create new calendar events).\nSend email confirmations after a meeting is scheduled."
+                  },
+                  "async": false,
+                  "server": {
+                    "url": "https://ai.gatuservices.info/webhook/25f999f0-dc2a-4217-9224-4f13104d8783"
+                  },
+                  "messages": [],
+                  "toolCall": {
+                    "id": "call_6u7AVTsOxVOloXfbczjVLbDx",
+                    "type": "function",
+                    "function": {
+                      "name": "calendarAssistant",
+                      "arguments": {
+                        "date": "2023-11-16",
+                        "time": "08:00",
+                        "email": "",
+                        "action": "book_meeting",
+                        "details": "Meeting with assistant to discuss NSN in the office."
+                      }
+                    }
+                  }
+                }
+              ],
+              "artifact": {
+                "messages": [
+                  {
+                    "role": "system",
+                    "message": "You are Francis's personal assistant, Ava. You have access to his calendar and email and can help with tasks like checking availability, scheduling meetings, and sending confirmation emails. Always start by understanding the purpose of Francis's request and then select the appropriate tool or action.\n\n    If Francis asks to check his schedule: Retrieve his calendar events for the specified date or time range.\n    If Francis wants to schedule a meeting: Gather the date, time, participants, and details, then book it in the calendar.\n    If Francis needs an email confirmation sent: Collect the relevant details (recipient, message content) and send the email.\n    For any other task: Clarify the requirements and determine if they fit within your capabilities.\n\nAlways confirm the details of each action before proceeding, and let Francis know when a task is complete.",
+                    "time": 1731688363802,
+                    "secondsFromStart": 0
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Hello.",
+                    "time": 1731688366610,
+                    "endTime": 1731688367050,
+                    "secondsFromStart": 2.3999999,
+                    "duration": 440,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "Hello.",
+                    "time": 1731688369029.9998,
+                    "endTime": 1731688369529.9998,
+                    "secondsFromStart": 4.8199997,
+                    "duration": 500
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Hi, Francis. How can I assist you today?",
+                    "time": 1731688370569.9998,
+                    "endTime": 1731688373370,
+                    "secondsFromStart": 6.3599997,
+                    "duration": 2260,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "I am looking to set up a meeting tomorrow",
+                    "time": 1731688375080.001,
+                    "endTime": 1731688379020,
+                    "secondsFromStart": 10.870001,
+                    "duration": 3209.9990234375
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Sure. I can help with that. Could you please provide the following details for the meeting? 1, date and time of the meeting, 2 to participants, email addresses or names. 3. Meeting title or agenda. 4. Any specific details or notes for the meeting?",
+                    "time": 1731688381489.999,
+                    "endTime": 1731688395740,
+                    "secondsFromStart": 17.279999,
+                    "duration": 11620.00390625,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "November 16, 8 AM in the morning. Uh, just myself and my assistant in the office.",
+                    "time": 1731688398539.998,
+                    "endTime": 1731688406920.003,
+                    "secondsFromStart": 34.329998,
+                    "duration": 6060
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Please provide the meeting",
+                    "time": 1731688409020,
+                    "endTime": 1731688410160,
+                    "secondsFromStart": 44.81,
+                    "duration": 1140,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "Seeking to discuss about NSN.",
+                    "time": 1731688409080.003,
+                    "endTime": 1731688412120,
+                    "secondsFromStart": 44.870003,
+                    "duration": 1679.9970703125
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Just to confirm, here are the details for the meeting. Date, November sixteenth. Time, 8 AM. Participants, Francis and your assistant, Location, office. Agenda, discuss NSN. Is this correct? Shall I go ahead and schedule the meeting?",
+                    "time": 1731688413930,
+                    "endTime": 1731688428980,
+                    "secondsFromStart": 49.72,
+                    "duration": 11800,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "Yeah. Please. Please do that.",
+                    "time": 1731688430050,
+                    "endTime": 1731688431390,
+                    "secondsFromStart": 65.84,
+                    "duration": 1340
+                  },
+                  {
+                    "toolCalls": [
+                      {
+                        "id": "call_6u7AVTsOxVOloXfbczjVLbDx",
+                        "type": "function",
+                        "function": {
+                          "name": "calendarAssistant",
+                          "arguments": "{\n  \"date\": \"2023-11-16\",\n  \"time\": \"08:00\",\n  \"email\": \"\",\n  \"action\": \"book_meeting\",\n  \"details\": \"Meeting with assistant to discuss NSN in the office.\"\n}"
+                        }
+                      }
+                    ],
+                    "role": "tool_calls",
+                    "message": "",
+                    "time": 1731688437275,
+                    "secondsFromStart": 66.485
+                  }
+                ],
+                "messagesOpenAIFormatted": [
+                  {
+                    "role": "system",
+                    "content": "You are Francis's personal assistant, Ava. You have access to his calendar and email and can help with tasks like checking availability, scheduling meetings, and sending confirmation emails. Always start by understanding the purpose of Francis's request and then select the appropriate tool or action.\n\n    If Francis asks to check his schedule: Retrieve his calendar events for the specified date or time range.\n    If Francis wants to schedule a meeting: Gather the date, time, participants, and details, then book it in the calendar.\n    If Francis needs an email confirmation sent: Collect the relevant details (recipient, message content) and send the email.\n    For any other task: Clarify the requirements and determine if they fit within your capabilities.\n\nAlways confirm the details of each action before proceeding, and let Francis know when a task is complete."
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Hello."
+                  },
+                  {
+                    "role": "user",
+                    "content": "Hello."
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Hi, Francis. How can I assist you today?"
+                  },
+                  {
+                    "role": "user",
+                    "content": "I am looking to set up a meeting tomorrow"
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Sure. I can help with that. Could you please provide the following details for the meeting? 1, date and time of the meeting, 2 to participants, email addresses or names. 3. Meeting title or agenda. 4. Any specific details or notes for the meeting?"
+                  },
+                  {
+                    "role": "user",
+                    "content": "November 16, 8 AM in the morning. Uh, just myself and my assistant in the office."
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Please provide the meeting"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Seeking to discuss about NSN."
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Just to confirm, here are the details for the meeting. Date, November sixteenth. Time, 8 AM. Participants, Francis and your assistant, Location, office. Agenda, discuss NSN. Is this correct? Shall I go ahead and schedule the meeting?"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Yeah. Please. Please do that."
+                  },
+                  {
+                    "role": "assistant",
+                    "tool_calls": [
+                      {
+                        "id": "call_6u7AVTsOxVOloXfbczjVLbDx",
+                        "type": "function",
+                        "function": {
+                          "name": "calendarAssistant",
+                          "arguments": "{\n  \"date\": \"2023-11-16\",\n  \"time\": \"08:00\",\n  \"email\": \"\",\n  \"action\": \"book_meeting\",\n  \"details\": \"Meeting with assistant to discuss NSN in the office.\"\n}"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "role": "tool",
+                    "tool_call_id": "call_6u7AVTsOxVOloXfbczjVLbDx",
+                    "content": "Tool Result Still Pending But Proceed Further If Possible."
+                  }
+                ]
+              },
+              "call": {
+                "id": "80cc086d-ff8a-4275-ab00-da71efc62e3f",
+                "orgId": "bb7e2160-51ec-4878-bdee-8d9970844235",
+                "createdAt": "2024-11-15T16:32:43.365Z",
+                "updatedAt": "2024-11-15T16:32:43.365Z",
+                "type": "webCall",
+                "monitor": {
+                  "listenUrl": "wss://phone-call-websocket.aws-us-west-2-backend-production3.vapi.ai/80cc086d-ff8a-4275-ab00-da71efc62e3f/listen",
+                  "controlUrl": "https://phone-call-websocket.aws-us-west-2-backend-production3.vapi.ai/80cc086d-ff8a-4275-ab00-da71efc62e3f/control"
+                },
+                "transport": {
+                  "assistantVideoEnabled": false
+                },
+                "webCallUrl": "https://vapi.daily.co/JLhKOYcmwlbk9A1DaoaF",
+                "status": "queued",
+                "assistantId": "dfdae1c4-2351-45e2-b9fa-994e4d6b6222",
+                "assistantOverrides": {
+                  "clientMessages": [
+                    "transfer-update"
+                  ]
+                }
+              },
+              "assistant": {
+                "id": "dfdae1c4-2351-45e2-b9fa-994e4d6b6222",
+                "orgId": "bb7e2160-51ec-4878-bdee-8d9970844235",
+                "name": "VA Demo",
+                "voice": {
+                  "voiceId": "726d5ae5-055f-4c3d-8355-d9677de68937",
+                  "provider": "cartesia",
+                  "fillerInjectionEnabled": false
+                },
+                "createdAt": "2024-11-15T14:45:53.970Z",
+                "updatedAt": "2024-11-15T16:32:38.276Z",
+                "model": {
+                  "model": "gpt-4o",
+                  "toolIds": [
+                    "1445e896-26ef-4ac8-855e-fa2c965c0316"
+                  ],
+                  "messages": [
+                    {
+                      "role": "system",
+                      "content": "You are Francis's personal assistant, Ava. You have access to his calendar and email and can help with tasks like checking availability, scheduling meetings, and sending confirmation emails. Always start by understanding the purpose of Francis's request and then select the appropriate tool or action.\n\n    If Francis asks to check his schedule: Retrieve his calendar events for the specified date or time range.\n    If Francis wants to schedule a meeting: Gather the date, time, participants, and details, then book it in the calendar.\n    If Francis needs an email confirmation sent: Collect the relevant details (recipient, message content) and send the email.\n    For any other task: Clarify the requirements and determine if they fit within your capabilities.\n\nAlways confirm the details of each action before proceeding, and let Francis know when a task is complete."
+                    }
+                  ],
+                  "provider": "openai",
+                  "temperature": 0.7,
+                  "tools": [
+                    {
+                      "id": "1445e896-26ef-4ac8-855e-fa2c965c0316",
+                      "createdAt": "2024-11-15T16:28:21.128Z",
+                      "updatedAt": "2024-11-15T16:28:21.128Z",
+                      "type": "function",
+                      "function": {
+                        "name": "calendarAssistant",
+                        "async": false,
+                        "parameters": {
+                          "type": "object",
+                          "required": [
+                            "action",
+                            "date",
+                            "time",
+                            "email",
+                            "details"
+                          ],
+                          "properties": {
+                            "date": {
+                              "type": "string",
+                              "description": "The date for the meeting or for retrieving events"
+                            },
+                            "time": {
+                              "type": "string",
+                              "description": "The time for the meeting"
+                            },
+                            "email": {
+                              "type": "string",
+                              "description": "The email address fro sending confirmatio"
+                            },
+                            "action": {
+                              "type": "string",
+                              "description": "book_meeting, get_events, send_email"
+                            },
+                            "details": {
+                              "type": "string",
+                              "description": "Additional details like meeting title or agenda"
+                            }
+                          }
+                        },
+                        "description": "Access calendar data (view and retrieve calendar events).\nBook meetings (create new calendar events).\nSend email confirmations after a meeting is scheduled."
+                      },
+                      "orgId": "bb7e2160-51ec-4878-bdee-8d9970844235",
+                      "server": {
+                        "url": "https://ai.gatuservices.info/webhook/25f999f0-dc2a-4217-9224-4f13104d8783"
+                      },
+                      "async": false
+                    }
+                  ]
+                },
+                "firstMessage": "Hello",
+                "endCallMessage": "Have a good day",
+                "transcriber": {
+                  "model": "nova-2",
+                  "language": "en",
+                  "provider": "deepgram"
+                },
+                "clientMessages": [
+                  "transcript",
+                  "hang",
+                  "function-call",
+                  "speech-update",
+                  "metadata",
+                  "transfer-update",
+                  "conversation-update"
+                ],
+                "serverMessages": [
+                  "tool-calls"
+                ],
+                "backchannelingEnabled": false,
+                "backgroundDenoisingEnabled": false
+              }
+            }
+          },
+          "webhookUrl": "https://ai.gatuservices.info/webhook/25f999f0-dc2a-4217-9224-4f13104d8783",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-11-15T17:37:32.000Z",
+  "versionId": "6632b589-8d9a-4f27-a9d8-944c882418d5"
+}
