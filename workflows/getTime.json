@@ -1,22 +1,22 @@
 {
   "active": true,
   "connections": {
-    "Webhook": {
+    "dateTime": {
       "main": [
         [
           {
-            "node": "dateTime",
+            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "dateTime": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "dateTime",
             "type": "main",
             "index": 0
           }
@@ -31,23 +31,6 @@
   },
   "name": "getTime",
   "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "45ff65fe-01ee-43d5-b2e8-7b26ba602fa8",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "id": "aa8fbdab-9ef8-4690-b2c8-bbad416dc389",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        560,
-        420
-      ],
-      "webhookId": "45ff65fe-01ee-43d5-b2e8-7b26ba602fa8"
-    },
     {
       "parameters": {
         "assignments": {
@@ -73,25 +56,322 @@
     },
     {
       "parameters": {
-        "options": {}
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "response",
+                "value": "successfull"
+              }
+            ]
+          },
+          "responseKey": "responseCode"
+        }
       },
       "id": "1363605a-2c2d-433e-aed4-72eb142b1de2",
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        1000,
+        980,
         420
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "45ff65fe-01ee-43d5-b2e8-7b26ba602fa8",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "aa8fbdab-9ef8-4690-b2c8-bbad416dc389",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        560,
+        420
+      ],
+      "webhookId": "45ff65fe-01ee-43d5-b2e8-7b26ba602fa8"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "ai.gatuservices.info",
+            "x-forwarded-scheme": "http",
+            "x-forwarded-proto": "http",
+            "x-forwarded-for": "34.212.162.26, 162.158.42.90",
+            "x-real-ip": "162.158.42.90",
+            "content-length": "4249",
+            "cf-ray": "8e3113fb9d68a347-SEA",
+            "tracestate": "dd=t.tid:673789a800000000;t.dm:-1;s:0;p:2f976fbf1da83e54",
+            "cf-ipcountry": "US",
+            "accept-encoding": "gzip, br",
+            "traceparent": "00-673789a8000000002f976fbf1da83e54-2f976fbf1da83e54-00",
+            "x-datadog-tags": "_dd.p.tid=673789a800000000",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "x-datadog-sampling-priority": "0",
+            "x-datadog-parent-id": "3429332507892923988",
+            "cf-connecting-ip": "34.212.162.26",
+            "cdn-loop": "cloudflare; loops=1",
+            "x-datadog-trace-id": "3429332507892923988",
+            "baggage": "sentry-environment=production,sentry-public_key=a0021577936aec367b16615ad816c078,sentry-trace_id=5c612fa14296433681cf770ee5daa4c6",
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "x-vapi-secret": "",
+            "user-agent": "axios/1.7.7",
+            "sentry-trace": "5c612fa14296433681cf770ee5daa4c6-8394a21942e04bb5"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "message": {
+              "timestamp": 1731692968170,
+              "type": "tool-calls",
+              "toolCalls": [
+                {
+                  "id": "call_l2d4s1tcYbrPNRGSlxXgxXIy",
+                  "type": "function",
+                  "function": {
+                    "name": "timeTeller",
+                    "arguments": {
+                      "action": true
+                    }
+                  }
+                }
+              ],
+              "toolCallList": [
+                {
+                  "id": "call_l2d4s1tcYbrPNRGSlxXgxXIy",
+                  "type": "function",
+                  "function": {
+                    "name": "timeTeller",
+                    "arguments": {
+                      "action": true
+                    }
+                  }
+                }
+              ],
+              "toolWithToolCallList": [
+                {
+                  "type": "function",
+                  "function": {
+                    "name": "timeTeller",
+                    "async": false,
+                    "parameters": {
+                      "type": "object",
+                      "required": [
+                        "action"
+                      ],
+                      "properties": {
+                        "action": {
+                          "type": "boolean",
+                          "description": "determines if the caller want to know the time; yes, no"
+                        }
+                      }
+                    },
+                    "description": "Use this tool to get the current date and time.\n\nRespond to the caller with the response."
+                  },
+                  "async": false,
+                  "server": {
+                    "url": "https://ai.gatuservices.info/webhook/45ff65fe-01ee-43d5-b2e8-7b26ba602fa8"
+                  },
+                  "messages": [],
+                  "toolCall": {
+                    "id": "call_l2d4s1tcYbrPNRGSlxXgxXIy",
+                    "type": "function",
+                    "function": {
+                      "name": "timeTeller",
+                      "arguments": {
+                        "action": true
+                      }
+                    }
+                  }
+                }
+              ],
+              "artifact": {
+                "messages": [
+                  {
+                    "role": "system",
+                    "message": "Your work is to tell the caller the current time and date.",
+                    "time": 1731692951982,
+                    "secondsFromStart": 0
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Hello. Would you like to know the time?",
+                    "time": 1731692954782,
+                    "endTime": 1731692956682,
+                    "secondsFromStart": 2.48,
+                    "duration": 1739.999755859375,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "Uh, Yeah. Sure.",
+                    "time": 1731692958072,
+                    "endTime": 1731692958832,
+                    "secondsFromStart": 5.77,
+                    "duration": 760
+                  },
+                  {
+                    "toolCalls": [
+                      {
+                        "id": "call_l2d4s1tcYbrPNRGSlxXgxXIy",
+                        "type": "function",
+                        "function": {
+                          "name": "timeTeller",
+                          "arguments": "{\"action\": true}"
+                        }
+                      }
+                    ],
+                    "role": "tool_calls",
+                    "message": "",
+                    "time": 1731692968170,
+                    "secondsFromStart": 6.698
+                  }
+                ],
+                "messagesOpenAIFormatted": [
+                  {
+                    "role": "system",
+                    "content": "Your work is to tell the caller the current time and date."
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Hello. Would you like to know the time?"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Uh, Yeah. Sure."
+                  },
+                  {
+                    "role": "assistant",
+                    "tool_calls": [
+                      {
+                        "id": "call_l2d4s1tcYbrPNRGSlxXgxXIy",
+                        "type": "function",
+                        "function": {
+                          "name": "timeTeller",
+                          "arguments": "{\"action\": true}"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "role": "tool",
+                    "tool_call_id": "call_l2d4s1tcYbrPNRGSlxXgxXIy",
+                    "content": "Tool Result Still Pending But Proceed Further If Possible."
+                  }
+                ]
+              },
+              "call": {
+                "id": "c80fa7f5-6df9-4902-8425-836efd5f4919",
+                "orgId": "bb7e2160-51ec-4878-bdee-8d9970844235",
+                "createdAt": "2024-11-15T17:49:11.213Z",
+                "updatedAt": "2024-11-15T17:49:11.213Z",
+                "type": "webCall",
+                "monitor": {
+                  "listenUrl": "wss://phone-call-websocket.aws-us-west-2-backend-production3.vapi.ai/c80fa7f5-6df9-4902-8425-836efd5f4919/listen",
+                  "controlUrl": "https://phone-call-websocket.aws-us-west-2-backend-production3.vapi.ai/c80fa7f5-6df9-4902-8425-836efd5f4919/control"
+                },
+                "transport": {
+                  "assistantVideoEnabled": false
+                },
+                "webCallUrl": "https://vapi.daily.co/Uxs3kBbyrg4TfmGuXr8N",
+                "status": "queued",
+                "assistantId": "750f7f67-6380-4641-8262-76b3a54159cb",
+                "assistantOverrides": {
+                  "clientMessages": [
+                    "transfer-update"
+                  ]
+                }
+              },
+              "assistant": {
+                "id": "750f7f67-6380-4641-8262-76b3a54159cb",
+                "orgId": "bb7e2160-51ec-4878-bdee-8d9970844235",
+                "name": "Time Teller",
+                "voice": {
+                  "voiceId": "248be419-c632-4f23-adf1-5324ed7dbf1d",
+                  "provider": "cartesia",
+                  "fillerInjectionEnabled": false
+                },
+                "createdAt": "2024-11-15T17:44:42.285Z",
+                "updatedAt": "2024-11-15T17:48:08.603Z",
+                "model": {
+                  "model": "gpt-3.5-turbo",
+                  "toolIds": [
+                    "b91f8c84-fcf3-424b-b7eb-30867a8c5420"
+                  ],
+                  "messages": [
+                    {
+                      "role": "system",
+                      "content": "Your work is to tell the caller the current time and date."
+                    }
+                  ],
+                  "provider": "openai",
+                  "temperature": 0.7,
+                  "tools": [
+                    {
+                      "id": "b91f8c84-fcf3-424b-b7eb-30867a8c5420",
+                      "createdAt": "2024-11-15T17:47:32.896Z",
+                      "updatedAt": "2024-11-15T17:47:36.737Z",
+                      "type": "function",
+                      "function": {
+                        "name": "timeTeller",
+                        "async": false,
+                        "parameters": {
+                          "type": "object",
+                          "required": [
+                            "action"
+                          ],
+                          "properties": {
+                            "action": {
+                              "type": "boolean",
+                              "description": "determines if the caller want to know the time; yes, no"
+                            }
+                          }
+                        },
+                        "description": "Use this tool to get the current date and time.\n\nRespond to the caller with the response."
+                      },
+                      "orgId": "bb7e2160-51ec-4878-bdee-8d9970844235",
+                      "server": {
+                        "url": "https://ai.gatuservices.info/webhook/45ff65fe-01ee-43d5-b2e8-7b26ba602fa8"
+                      },
+                      "async": false
+                    }
+                  ]
+                },
+                "firstMessage": "Hello, would you like to know the time?",
+                "transcriber": {
+                  "model": "nova-2",
+                  "language": "en",
+                  "provider": "deepgram"
+                },
+                "clientMessages": [
+                  "transfer-update"
+                ],
+                "backchannelingEnabled": false,
+                "backgroundDenoisingEnabled": false
+              }
+            }
+          },
+          "webhookUrl": "https://ai.gatuservices.info/webhook/45ff65fe-01ee-43d5-b2e8-7b26ba602fa8",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-11-15T17:49:03.000Z",
-  "versionId": "fe482a59-b14b-4777-a752-bf52919bcfb9"
+  "updatedAt": "2024-11-16T06:55:10.000Z",
+  "versionId": "2312de15-2c85-45e1-a3e0-b18d3b950447"
 }
