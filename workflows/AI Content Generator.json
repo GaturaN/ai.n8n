@@ -289,6 +289,17 @@
           }
         ]
       ]
+    },
+    "final_article_file": {
+      "main": [
+        [
+          {
+            "node": "upload_fiinalArticle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-26T19:44:46.487Z",
@@ -536,7 +547,7 @@
       "typeVersion": 3,
       "position": [
         4280,
-        360
+        320
       ]
     },
     {
@@ -1289,6 +1300,191 @@
           "name": "Bulkbox"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Overview\n### This workflow automates the generation of high-quality content using AI and integrates with tools like Google Drive and Google Sheets for content management and organization.\n\n## Key Features:\n- ### **Form-Based Content Input**: Collects user inputs via a form, including title, word count, keywords, and additional instructions.\n- ### **AI-Generated Content Outline**: Creates an outline using AI based on user inputs.\n- ### **Detailed Section Processing**: Each section of the content is refined individually.\n- ### **Content Aggregation**: Combines all sections into a cohesive article.\n- ### **Document Management**:\n      - Saves generated content and outlines to Google Drive.\n      - Updates links to generated content in Google Sheets.\n\n## Prerequisites:\n- ### Google Drive and Google Sheets API: Ensure the respective OAuth2 credentials are configured in n8n.\n- ### OpenAI API Key: Required for AI-powered content generation.",
+        "height": 534.5136001658811,
+        "width": 626.3622313971345,
+        "color": 4
+      },
+      "id": "202dfc30-15c9-4a60-b281-33a4f0fad97e",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1240,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "- ### Captures user inputs like title, word count, keywords, and additional instructions for content generation. This is the starting point of the workflow\n\n- ### Parses form inputs into variables for easy access and consistent use in the workflow",
+        "height": 269.1338026993484,
+        "width": 522.4076473360327,
+        "color": 2
+      },
+      "id": "397a506f-2a58-4cb1-a181-cf32b2d4a936",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Creates a folder in Google Drive to store the generated content and outline",
+        "height": 245.20095123019289,
+        "width": 152.8844206522747
+      },
+      "id": "deac2389-35af-4acc-9904-df539fff603f",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Sends user inputs to an AI model to generate a detailed content outline in Markdown format.\"\n",
+        "height": 203.07913264447978,
+        "width": 263.93285146915525
+      },
+      "id": "371fdd93-437c-456b-95a1-f14d0334595e",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        220,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Uploads the AI-generated outline to the Google Drive folder created earlier.",
+        "height": 193.50599205681746,
+        "width": 376.89591040356845
+      },
+      "id": "3f9c4cd6-c384-47da-ab90-4e87696da121",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        560,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Breaks the AI-generated outline into manageable sections. Each section will be individually processed to ensure clarity, structure, and relevance.",
+        "height": 159.0426859412338,
+        "width": 540.5966144525913
+      },
+      "id": "50ce135a-8fb6-4486-be7c-7ba0d066e6a2",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Refines each section using AI. Adds formatting, adjusts tone, and enhances readability. Ensures the content meets high-quality standards before merging into a full article.",
+        "height": 295.93859634480214,
+        "width": 1360.0574487564681,
+        "color": 7
+      },
+      "id": "5d272c75-a2bc-4847-95bd-2ba13555d7c5",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2140,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Aligns all sections in the correct order. Prepares the refined content for aggregation into a single, cohesive article",
+        "height": 299.4686919365027,
+        "width": 723.7577183524706,
+        "color": 7
+      },
+      "id": "1d8b9e13-1ba0-4298-aeef-9322e610128e",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3655.31702494026,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Joins all ordered sections into a unified article. Ensures the flow and structure of the final content remain consistent and logical",
+        "height": 198.29256235064872,
+        "width": 301.26809976103766
+      },
+      "id": "9c6cdb3b-1be2-48d1-b6c1-0e5438816b5b",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4500,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Converts the aggregated article into a downloadable text file. Uploads it to the Google Drive folder created earlier, ready for review and sharing.",
+        "height": 213.60958729090797,
+        "width": 320.41438093636225
+      },
+      "id": "bfc18c66-7d7b-48b1-9d87-d159b53ca4ec",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4940,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Records the generated outline and article links in a Google Sheets document. This ensures easy access and tracking of the generated content for future use.",
+        "height": 255.7314058766213,
+        "width": 192.13429706168935
+      },
+      "id": "e6378913-abed-41de-91d4-e30cc83fb3cf",
+      "name": "Sticky Note10",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        5340,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Next Steps: Automate Social Media Posting\n\n- ### Your content creation process is now complete! You can take automation to the next level by integrating this workflow with social media platforms such as Twitter, LinkedIn, or Facebook.\n    - Use the generated article to create tailored posts for each platform.\n    - Add nodes for social media integrations (e.g., Twitter, Facebook, or LinkedIn API).\n    - Schedule posts using a timestamp or trigger them based on specific events.\n\n### This enhancement allows you to seamlessly distribute your content across multiple channels, ensuring a wider reach and saving even more time!",
+        "height": 280.62157140454303,
+        "width": 570.2733502743432,
+        "color": 4
+      },
+      "id": "e6ebb536-2d4f-4c3a-88ab-6145aef59046",
+      "name": "Sticky Note11",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        5580,
+        300
+      ]
     }
   ],
   "pinData": {},
@@ -1298,6 +1494,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-11-07T09:47:12.000Z",
-  "versionId": "e5689e86-b81a-4ff2-abd0-158ee57a74d3"
+  "updatedAt": "2024-11-20T08:40:28.000Z",
+  "versionId": "111cf33d-e466-4a26-8d93-111d27d8dd55"
 }
