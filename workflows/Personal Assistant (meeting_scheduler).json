@@ -154,8 +154,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1,
       "position": [
-        1400,
-        740
+        1320,
+        720
       ],
       "credentials": {
         "openAiApi": {
@@ -303,7 +303,7 @@
       "typeVersion": 2,
       "position": [
         1060,
-        480
+        500
       ],
       "webhookId": "25f999f0-dc2a-4217-9224-4f13104d8783"
     },
@@ -761,6 +761,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-11-18T06:43:23.000Z",
-  "versionId": "6632b589-8d9a-4f27-a9d8-944c882418d5"
+  "updatedAt": "2024-11-27T09:18:32.000Z",
+  "versionId": "f0b8b866-99d7-4dd1-acad-f2290cee4582"
 }
