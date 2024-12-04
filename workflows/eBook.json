@@ -1,0 +1,18 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-12-03T21:32:53.121Z",
+  "id": "UONudSfsVG5VshZ8",
+  "meta": null,
+  "name": "eBook",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-03T21:32:53.121Z",
+  "versionId": "7a0e61ef-8c05-46c9-987c-18586eab5e59"
+}
