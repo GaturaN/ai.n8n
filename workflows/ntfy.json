@@ -1,0 +1,18 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-12-08T05:43:14.618Z",
+  "id": "bbx07KG9E5CW8s9z",
+  "meta": null,
+  "name": "ntfy",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-08T05:43:14.618Z",
+  "versionId": "745dac18-a01d-4294-b452-13019d2174cd"
+}
