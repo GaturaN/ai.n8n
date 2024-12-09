@@ -1,11 +1,56 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2024-12-08T05:43:14.618Z",
   "id": "bbx07KG9E5CW8s9z",
   "meta": null,
   "name": "ntfy",
-  "nodes": [],
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "3d9a2047-22f8-497d-a719-beb800711474",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.gatuservices.info/Test",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "263f3c90-0814-4f5b-9b93-9965c380bbba",
+      "name": "HTTP Request"
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -13,6 +58,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-12-08T05:43:14.618Z",
-  "versionId": "745dac18-a01d-4294-b452-13019d2174cd"
+  "updatedAt": "2024-12-09T11:17:58.000Z",
+  "versionId": "e6f78ee5-994b-4658-9c12-28b55eb09f40"
 }
