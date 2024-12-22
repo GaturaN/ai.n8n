@@ -1,0 +1,297 @@
+{
+  "active": false,
+  "connections": {
+    "firstResponse": {
+      "main": [
+        [
+          {
+            "node": "responseData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "responseData": {
+      "main": [
+        [
+          {
+            "node": "array_range",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form": {
+      "main": [
+        [
+          {
+            "node": "providedArray",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "array_range": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "providedArray": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-21T18:45:09.682Z",
+  "id": "b2Ds4gUAJ1Os3onK",
+  "meta": null,
+  "name": "Symmetric Difference",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Symmetric Difference",
+        "formDescription": "Provide the arrays:",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "How many arrays are you looking to provide?",
+              "fieldType": "number",
+              "placeholder": "3",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "21a17589-44d4-4934-a6b0-0f3b5c498733",
+      "name": "firstResponse",
+      "webhookId": "d47b50b2-e06f-444b-87cf-ca8f3fb4e148"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "93fbf9d8-9a82-4327-9493-f0a2253fd296",
+              "name": "number_arrays",
+              "value": "={{ $json['How many arrays are you looking to provide?'] }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "595945b0-bebe-483e-b086-6529958a2b61",
+      "name": "responseData"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Array",
+              "placeholder": "1,2,3,4",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        100
+      ],
+      "id": "87a48d4c-3914-4f87-8c10-1ac504f3f7c7",
+      "name": "Form",
+      "webhookId": "61aa34f9-0d87-4082-8238-e918f0713ea9"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "range",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        660,
+        0
+      ],
+      "id": "b6f2a5e7-b6b4-497d-b424-eee4242ad90a",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        880,
+        0
+      ],
+      "id": "bd83f7f1-aaa4-43c9-b0ef-313e9c6805bf",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "54868421-ad2a-482c-a96e-5ee403c93b26",
+              "name": "range",
+              "value": "={{  $json.number_arrays > 0 ? [...Array($json.number_arrays).keys()] : [] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        0
+      ],
+      "id": "215d6c2a-ac59-47a9-bd7e-496a3d66e253",
+      "name": "array_range"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f0d8b682-bd0f-4646-83fb-fa95460c9d41",
+              "name": "Array",
+              "value": "={{ $json.Array }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        100
+      ],
+      "id": "a226cf87-efcd-4055-a264-98b51a2db0bd",
+      "name": "providedArray"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        -100
+      ],
+      "id": "3208f42e-4982-494b-84ae-f42a55f8d97d",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "58b113ff-0663-41a6-a9a9-31abdebabeb3",
+              "name": "difference",
+              "value": "={{ \n  $json.data\n    .map(obj => obj.Array.split(',').map(Number)) // Convert to arrays of numbers\n    .reduce((acc, arr) => [\n      ...acc.filter(x => !arr.includes(x)),\n      ...arr.filter(x => !acc.includes(x))\n    ], []) // Calculate symmetric difference\n}}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        -100
+      ],
+      "id": "424b4624-aca6-411d-9c67-e058edcb0bb8",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-21T21:00:29.000Z",
+  "versionId": "93eb5f4c-8327-4711-bb2c-a8dd73f88b94"
+}
