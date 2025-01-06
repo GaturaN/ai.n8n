@@ -145,7 +145,7 @@
       "main": [
         [
           {
-            "node": "OneAtATime",
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -175,6 +175,24 @@
         [
           {
             "node": "OneAtATime",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "OneAtATime",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
             "type": "main",
             "index": 0
           }
@@ -214,7 +232,7 @@
       "name": "GitHub",
       "type": "n8n-nodes-base.github",
       "position": [
-        40,
+        260,
         500
       ],
       "typeVersion": 1,
@@ -251,7 +269,7 @@
       "name": "github_status",
       "type": "n8n-nodes-base.switch",
       "position": [
-        680,
+        900,
         640
       ],
       "typeVersion": 1
@@ -262,7 +280,7 @@
       "name": "same",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        920,
+        1140,
         440
       ],
       "typeVersion": 1
@@ -273,7 +291,7 @@
       "name": "different",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        920,
+        1140,
         640
       ],
       "typeVersion": 1
@@ -284,7 +302,7 @@
       "name": "new",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        920,
+        1140,
         820
       ],
       "typeVersion": 1
@@ -303,7 +321,7 @@
       "name": "GitHub Edit",
       "type": "n8n-nodes-base.github",
       "position": [
-        1100,
+        1320,
         640
       ],
       "typeVersion": 1,
@@ -327,7 +345,7 @@
       "name": "GitHub Create",
       "type": "n8n-nodes-base.github",
       "position": [
-        1100,
+        1320,
         820
       ],
       "typeVersion": 1,
@@ -347,7 +365,7 @@
       "name": "OneAtATime",
       "type": "n8n-nodes-base.splitInBatches",
       "position": [
-        -180,
+        40,
         660
       ],
       "typeVersion": 1
@@ -426,8 +444,8 @@
       "name": "Note2",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -200,
-        380
+        -140,
+        400
       ],
       "typeVersion": 1
     },
@@ -455,7 +473,7 @@
       "name": "n8n",
       "type": "n8n-nodes-base.n8n",
       "position": [
-        -420,
+        -380,
         660
       ],
       "typeVersion": 1,
@@ -472,7 +490,7 @@
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        260,
+        480,
         640
       ],
       "typeVersion": 2
@@ -485,11 +503,56 @@
       "name": "isDiffOrNew",
       "type": "n8n-nodes-base.code",
       "position": [
-        440,
+        660,
         640
       ],
       "typeVersion": 1,
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "74759a6b-f42b-4f8f-b1ee-77ed60622943",
+              "leftValue": "={{ $json.tags }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -380,
+        880
+      ],
+      "id": "d9738826-cfc6-4fc9-bb49-21539b9d29e4",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        900
+      ],
+      "id": "51816fb7-2889-478d-ab9b-2644424a847d",
+      "name": "No Operation, do nothing"
     }
   ],
   "pinData": {},
@@ -499,6 +562,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-29T15:10:13.000Z",
-  "versionId": "063abc2d-ee26-4f10-a7bd-9ce9891881da"
+  "updatedAt": "2025-01-06T16:14:46.000Z",
+  "versionId": "8022909e-484e-47b8-89ce-e24b39dd71f0"
 }
