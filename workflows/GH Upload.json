@@ -330,7 +330,8 @@
           "id": "X6bXppeDH36EAEvR",
           "name": "GitHub account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -354,7 +355,8 @@
           "id": "X6bXppeDH36EAEvR",
           "name": "GitHub account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -562,6 +564,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-01-06T16:14:46.000Z",
-  "versionId": "8022909e-484e-47b8-89ce-e24b39dd71f0"
+  "updatedAt": "2025-01-07T08:55:07.000Z",
+  "versionId": "993f74f5-23f4-4133-96a0-09a24fa4cdea"
 }
