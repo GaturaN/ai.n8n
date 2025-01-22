@@ -1,0 +1,183 @@
+{
+  "active": false,
+  "connections": {
+    "incoming_message": {
+      "main": [
+        [
+          {
+            "node": "type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "type": {
+      "main": [
+        [],
+        [],
+        [
+          {
+            "node": "set_text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-22T11:32:22.860Z",
+  "id": "IICER7dAijSHnUcC",
+  "meta": null,
+  "name": "Personal Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -620,
+        -80
+      ],
+      "id": "c1a6732c-929e-423b-aad5-cc4a5cd408d8",
+      "name": "incoming_message",
+      "webhookId": "88431426-e9de-4456-b6ea-121585566598",
+      "credentials": {
+        "telegramApi": {
+          "id": "ayMpCvQ69GjrbPdP",
+          "name": "gatu_pa_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "voice"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a25fb239-e25c-4536-8fa0-476ba7896eaf",
+                    "leftValue": "={{ $json.message.video_note }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "video"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1de633d6-777c-4a1a-a401-72ff55fbdc83",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "text"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -400,
+        -100
+      ],
+      "id": "886cba30-b1a0-41d8-b40d-2770dc53ca15",
+      "name": "type"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e1ef040a-54ca-4b0a-9699-ee974c828258",
+              "name": "text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -140,
+        -60
+      ],
+      "id": "65c3a1c0-a006-498e-b492-96a15fc7615a",
+      "name": "set_text"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-22T12:09:37.000Z",
+  "versionId": "253b2cab-3311-40fe-8282-40d89e58ce35"
+}
