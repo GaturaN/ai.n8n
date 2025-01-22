@@ -1,0 +1,3064 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Upload CV to google drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload CV to google drive": {
+      "main": [
+        [
+          {
+            "node": "applicant details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "applicant details": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "download CV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "download CV": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "shortlisted?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "shortlisted?": {
+      "main": [
+        [
+          {
+            "node": "Potential Hire",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Potential Hire": {
+      "main": [
+        [
+          {
+            "node": "generate questionnaires",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable2": {
+      "ai_tool": [
+        [
+          {
+            "node": "generate questionnaires",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "generate questionnaires": {
+      "main": [
+        [
+          {
+            "node": "questionnaires",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "questionnaires": {
+      "main": [
+        [
+          {
+            "node": "update questionnaires",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update questionnaires": {
+      "main": [
+        [
+          {
+            "node": "Personalize email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "job_posting": {
+      "ai_tool": [
+        [
+          {
+            "node": "Personalize email",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "candidate_insights": {
+      "ai_tool": [
+        [
+          {
+            "node": "Personalize email",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personalize email": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Book Meeting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "Book Meeting",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Book Meeting": {
+      "main": [
+        [
+          {
+            "node": "update phone meeting time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update phone meeting time": {
+      "main": [
+        [
+          {
+            "node": "Screening Questions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "job_posting1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Screening Questions",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "candidate_insights1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Screening Questions",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screening Questions": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "screening questions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-06T16:15:25.930Z",
+  "id": "eMxH0GjgfWEvBDic",
+  "meta": null,
+  "name": "HR Job Posting and Evaluation with AI",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Job Application",
+        "formDescription": "=Fill this for to apply for the role Automation Specialist:\n\nLocation: Remote\nExperience: Minimum 3 years\nEmployment Type: Full-time\n\nJob Description:\nWe are seeking a highly skilled Automation Specialist with at least 3 years of experience in designing and implementing workflow automation solutions. The ideal candidate will have expertise in tools such as n8n, Zapier, Make.com, or similar platforms, and a strong background in integrating APIs, streamlining processes, and enhancing operational efficiency.\n\nKey Responsibilities:\n\n    Develop and implement automated workflows to optimize business processes.\n    Integrate third-party APIs and systems to create seamless data flow.\n    Analyze, debug, and improve existing automation setups.\n    Collaborate with cross-functional teams to identify automation opportunities.\n    Monitor and maintain automation systems to ensure reliability.\n\nRequired Skills & Qualifications:\n\n    Proven 3+ years of experience in workflow automation and integration.\n    Proficiency with tools like n8n, Zapier, or Make.com.\n    Strong understanding of APIs, webhooks, and data transformation.\n    Familiarity with scripting languages (e.g., JavaScript or Python).\n    Excellent problem-solving and communication skills.\n\nPreferred Qualifications:\n\n    Experience with database management and cloud services.\n    Background in business process analysis or RPA tools.\n\nWhy Join Us?\n\n    Opportunity to work on cutting-edge automation projects.\n    Supportive and collaborative team environment.\n    Competitive salary and benefits package.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "First Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Last Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Phone",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Years of experience",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Upload your CV",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Submit",
+          "path": "automation-specialist-application",
+          "ignoreBots": false,
+          "useWorkflowTimezone": true
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -700,
+        -80
+      ],
+      "id": "450e15b2-bddf-4853-b44e-822facaac14d",
+      "name": "On form submission",
+      "webhookId": "18f7428c-9990-413f-aff3-bdcca1bbbe2d"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblllvQaRTSnEr17a",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tblllvQaRTSnEr17a"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.Name }}",
+            "Email address": "={{ $json.email }}",
+            "Phone": "={{ $json.Phone }}",
+            "CV Link": "={{ $json[\"CV link\"] }}",
+            "Applying for": "=[\"Automation Specialist\"]"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email address",
+              "displayName": "Email address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "No hire",
+                  "value": "No hire"
+                },
+                {
+                  "name": "Interviewing",
+                  "value": "Interviewing"
+                },
+                {
+                  "name": "Decision needed",
+                  "value": "Decision needed"
+                },
+                {
+                  "name": "Hire",
+                  "value": "Hire"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Applying for",
+              "displayName": "Applying for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "CV Link",
+              "displayName": "CV Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "JD CV score",
+              "displayName": "JD CV score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview",
+              "displayName": "Phone interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interviewer",
+              "displayName": "Phone interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview score",
+              "displayName": "Phone interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview notes",
+              "displayName": "Phone interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview",
+              "displayName": "Onsite interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interviewer",
+              "displayName": "Onsite interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview score",
+              "displayName": "Onsite interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview notes",
+              "displayName": "Onsite interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Attachments",
+              "displayName": "Attachments",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -60,
+        -80
+      ],
+      "id": "5005e9ba-a68a-4795-8a65-22374a182bdb",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "Upload_your_CV",
+        "name": "={{ $binary.Upload_your_CV.fileName }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1u_YBpqSU5TjNsu72sQKFMIesb62JKHXz",
+          "mode": "list",
+          "cachedResultName": "HR Test",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1u_YBpqSU5TjNsu72sQKFMIesb62JKHXz"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -480,
+        -80
+      ],
+      "id": "b291527b-9937-4388-a712-2b60dd292f65",
+      "name": "Upload CV to google drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bffff778-859a-4bb8-b973-39237ce7486e",
+              "name": "Name",
+              "value": "={{ $('On form submission').item.json['First Name'] + \" \" + $('On form submission').item.json['Last Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "cd6e7372-c65f-4e6f-9612-6ea513bb8e15",
+              "name": "Phone",
+              "value": "={{ $('On form submission').item.json.Phone }}",
+              "type": "number"
+            },
+            {
+              "id": "eb19138e-7ff3-4f0c-ad95-ac33f8835717",
+              "name": "email",
+              "value": "={{ $('On form submission').item.json.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "25172db9-91fb-45da-b036-ee9aea1e8b09",
+              "name": "Experience",
+              "value": "={{ $('On form submission').item.json[\"Years of experience\"] }}",
+              "type": "number"
+            },
+            {
+              "id": "64393285-3770-47e0-bbbb-3c5d5e14f1f4",
+              "name": "Applied On",
+              "value": "={{ $('On form submission').item.json.submittedAt }}",
+              "type": "string"
+            },
+            {
+              "id": "dc052fd6-f57d-4da1-9976-67fcd9496e58",
+              "name": "CV link",
+              "value": "={{ $json.webViewLink }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -260,
+        -80
+      ],
+      "id": "83a965f9-bdb1-42ca-9701-24a82438ea0e",
+      "name": "applicant details"
+    },
+    {
+      "parameters": {
+        "content": "## Grab User Details and Update in Airtable\n",
+        "height": 220,
+        "width": 760,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -720,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "41038c1c-876d-46a6-9dcc-f40c77e834df",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Download the CV and get the job description and requirements.\n- ### Send the details to ChatGPT to score the viability of the candidate",
+        "height": 460,
+        "width": 820
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        120,
+        -180
+      ],
+      "typeVersion": 1,
+      "id": "d0f85487-8e78-4cde-8ecb-a55ab94940cc",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.fields[\"CV Link\"] }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        140,
+        -80
+      ],
+      "id": "334c4580-a0e6-45f0-9b3a-3904eb80b3e8",
+      "name": "download CV",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        360,
+        -80
+      ],
+      "id": "b7d8013a-71bd-49a4-a58f-f63186e1b6d8",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Compare the following job description and resume. Assign a qualification score between 0 and 1, where 1 indicates the best match. Provide only the score and the reason for the score in less than 20 words.\nJob Description: Use Airtable tool to get the job description\nResume: \n{{ $json.text }}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        580,
+        -80
+      ],
+      "id": "22ba7844-9f20-41b1-96bb-f2e33e18d14a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        500,
+        120
+      ],
+      "id": "5f0317cb-35a5-4e57-938d-0d604c1f7f4f",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljhmLdPULqSya0d",
+          "mode": "list",
+          "cachedResultName": "Positions",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tbljhmLdPULqSya0d"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        700,
+        120
+      ],
+      "id": "d040091b-282b-4bb7-8a82-de3030c14b91",
+      "name": "Airtable1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"score\": 0.8,\n  \"reason\": \"Does not meet required number of experience in years\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        820,
+        120
+      ],
+      "id": "fba48717-a068-44de-a776-6e0c14ebd667",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "content": "## Update Airtable with score and reason for the score\n\n- ### if score is above 0.7, shortlist and continue flow.\n\n## Get questionnaires based on the JD and CV\n\n- ### Update the responses in Airtable",
+        "height": 600,
+        "width": 1200,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        960,
+        -340
+      ],
+      "typeVersion": 1,
+      "id": "2eef8181-3e4d-4c66-acd7-d440eb2f6748",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7b4950b2-d218-4911-89cd-22a60b7465d8",
+              "leftValue": "={{ $json.output.score }}",
+              "rightValue": 0.7,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        -80
+      ],
+      "id": "ed42fa6c-be05-4d62-aa1f-390b5fc471dd",
+      "name": "shortlisted?"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblllvQaRTSnEr17a",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tblllvQaRTSnEr17a"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Airtable').item.json.id }}",
+            "JD CV score": "={{ $json.output.score }}",
+            "CV Score Notes": "={{ $json.output.reason }}",
+            "Stage": "No hire"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email address",
+              "displayName": "Email address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "No hire",
+                  "value": "No hire"
+                },
+                {
+                  "name": "Interviewing",
+                  "value": "Interviewing"
+                },
+                {
+                  "name": "Decision needed",
+                  "value": "Decision needed"
+                },
+                {
+                  "name": "Hire",
+                  "value": "Hire"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Applying for",
+              "displayName": "Applying for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CV Link",
+              "displayName": "CV Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "JD CV score",
+              "displayName": "JD CV score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "CV Score Notes",
+              "displayName": "CV Score Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone interview",
+              "displayName": "Phone interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interviewer",
+              "displayName": "Phone interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview score",
+              "displayName": "Phone interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview notes",
+              "displayName": "Phone interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview",
+              "displayName": "Onsite interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interviewer",
+              "displayName": "Onsite interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview score",
+              "displayName": "Onsite interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview notes",
+              "displayName": "Onsite interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Attachments",
+              "displayName": "Attachments",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1240,
+        60
+      ],
+      "id": "6df70bee-6a9f-43f6-8c39-46663b572f5c",
+      "name": "Rejected",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblllvQaRTSnEr17a",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tblllvQaRTSnEr17a"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Airtable').item.json.id }}",
+            "JD CV score": "={{ $json.output.score }}",
+            "CV Score Notes": "={{ $json.output.reason }}",
+            "Stage": "Interviewing"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email address",
+              "displayName": "Email address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "No hire",
+                  "value": "No hire"
+                },
+                {
+                  "name": "Interviewing",
+                  "value": "Interviewing"
+                },
+                {
+                  "name": "Decision needed",
+                  "value": "Decision needed"
+                },
+                {
+                  "name": "Hire",
+                  "value": "Hire"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Applying for",
+              "displayName": "Applying for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CV Link",
+              "displayName": "CV Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "JD CV score",
+              "displayName": "JD CV score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "CV Score Notes",
+              "displayName": "CV Score Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone interview",
+              "displayName": "Phone interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interviewer",
+              "displayName": "Phone interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview score",
+              "displayName": "Phone interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview notes",
+              "displayName": "Phone interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview",
+              "displayName": "Onsite interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interviewer",
+              "displayName": "Onsite interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview score",
+              "displayName": "Onsite interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview notes",
+              "displayName": "Onsite interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Attachments",
+              "displayName": "Attachments",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1240,
+        -140
+      ],
+      "id": "888869bb-6fca-4d91-8428-cf5159d410e3",
+      "name": "Potential Hire",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljhmLdPULqSya0d",
+          "mode": "list",
+          "cachedResultName": "Positions",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tbljhmLdPULqSya0d"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        1560,
+        100
+      ],
+      "id": "8f59889d-dff7-4eef-85f4-7c6d9e171c17",
+      "name": "Airtable2",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Given the following job description and candidate CV, create 5 insightful interview questions to gather more information about the candidate's suitability for the role. The questions should focus on:\n\n    Specific projects the candidate has worked on.\n    Key responsibilities and achievements in their previous roles.\n    Skills relevant to the job description.\n    Problem-solving abilities and how they handled challenges.\n    Alignment with the company’s goals and values.\n\nProvide the questions in a clear, concise format.\n\nJob Description:\nUse the airtable tool to get the job description\n\nCandidate CV:\n{{ $('Extract from File').item.json.text }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        1460,
+        -140
+      ],
+      "id": "8358ab12-a0b9-4a21-b9eb-7054716b6f5b",
+      "name": "generate questionnaires",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "={{ $json.message.content.interview_questions[0].question }}",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "={{ $json.message.content.interview_questions[1].question }}",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "={{ $json.message.content.interview_questions[2].question }}",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "={{ $json.message.content.interview_questions[3].question }}",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "={{ $json.message.content.interview_questions[4].question }}",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "formTitle": "Questionnaires",
+          "formDescription": "Kindly fill in the following questions to proceed.",
+          "buttonLabel": "Submit"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        -140
+      ],
+      "id": "21ffd179-42d9-4da3-9f1b-e2bbeb9cdee7",
+      "name": "questionnaires",
+      "webhookId": "3f654280-b5d0-4392-824f-bc384d91a1df"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblllvQaRTSnEr17a",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tblllvQaRTSnEr17a"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Airtable').item.json.id }}",
+            "Questonnaires and responses": "={{ $('generate questionnaires').item.json.message.content.interview_questions[0].question }}: {{ $json['Can you describe one of the most complex automation projects you worked on, particularly detailing your role and the technologies you used?'] }}\n\n\n{{ $('generate questionnaires').item.json.message.content.interview_questions[1].question }}: {{ $json['What specific achievements in your previous roles do you believe demonstrate your ability to meet the responsibilities listed in the Automation Specialist position?'] }}\n\n\n{{ $('generate questionnaires').item.json.message.content.interview_questions[2].question }}: {{ $json['Given your experience with automation tools like n8n and APIs, can you provide an example of how you\\'ve successfully integrated different systems to improve operational efficiency?'] }}\n\n\n{{ $('generate questionnaires').item.json.message.content.interview_questions[3].question }}: {{ $json['Describe a challenging situation you faced during a project, how you approached the problem, and what the outcome was.'] }}\n\n\n{{ $('generate questionnaires').item.json.message.content.interview_questions[4].question }}: {{ $json['How do your values and career goals align with our company\\'s mission to optimize and enhance automation solutions?'] }}\n\n"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email address",
+              "displayName": "Email address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "No hire",
+                  "value": "No hire"
+                },
+                {
+                  "name": "Interviewing",
+                  "value": "Interviewing"
+                },
+                {
+                  "name": "Decision needed",
+                  "value": "Decision needed"
+                },
+                {
+                  "name": "Hire",
+                  "value": "Hire"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Applying for",
+              "displayName": "Applying for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CV Link",
+              "displayName": "CV Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "JD CV score",
+              "displayName": "JD CV score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CV Score Notes",
+              "displayName": "CV Score Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Questonnaires and responses",
+              "displayName": "Questonnaires and responses",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone interview",
+              "displayName": "Phone interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interviewer",
+              "displayName": "Phone interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview score",
+              "displayName": "Phone interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview notes",
+              "displayName": "Phone interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview",
+              "displayName": "Onsite interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interviewer",
+              "displayName": "Onsite interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview score",
+              "displayName": "Onsite interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview notes",
+              "displayName": "Onsite interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Attachments",
+              "displayName": "Attachments",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2040,
+        -140
+      ],
+      "id": "29a228ca-6b8e-458f-a030-372b50151a94",
+      "name": "update questionnaires",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljhmLdPULqSya0d",
+          "mode": "list",
+          "cachedResultName": "Positions",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tbljhmLdPULqSya0d"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        2300,
+        100
+      ],
+      "id": "9a72a172-4272-4715-8e57-75ca010bc0e5",
+      "name": "job_posting",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblllvQaRTSnEr17a",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tblllvQaRTSnEr17a"
+        },
+        "id": "={{ $('update questionnaires').item.json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        2420,
+        100
+      ],
+      "id": "28c210c8-5684-4683-a168-5a02b39eb0f2",
+      "name": "candidate_insights",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Craft a personalized email to the interviewee, expressing interest in continuing the conversation over a phone call. The email should mention strengths or achievements from their CV or questionnaire responses, and include a polite request to have the phone conversation. Ensure the tone is professional and warm.\n\nProvide an output of \nTo:\nSubject:\nEmail Content:\n\nInputs:\n\n    The candidate's CV.\n    The job description.\n    The candidate's questionnaire responses stored in Airtable.\n\n\nExample email:\nDear [Candidate's Name],\n\nThank you for submitting your application and responses to the questionnaire for the [Job Title] position. We were impressed by [specific strength or achievement from their CV or questionnaire, e.g., \"your experience in automating workflows using n8n, which aligns closely with our goals\"].\n\nWe’d love to continue the conversation to discuss your experience further. \n\nLooking forward to speaking with you soon.\n\n\n\nNOTE: \nSign off the email with\n\nRegards,\nFrancis"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        2260,
+        -140
+      ],
+      "id": "6e6f43f4-43a7-426f-b3c7-264a7980c771",
+      "name": "Personalize email",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b3d6e85e-c478-452d-aafc-c325dfbe2c9b",
+              "name": "To",
+              "value": "={{ $json.message.content.To }}",
+              "type": "string"
+            },
+            {
+              "id": "f24eb1d5-fa61-48ce-8685-a0b2022bf576",
+              "name": "Subject",
+              "value": "={{ $json.message.content.Subject }}",
+              "type": "string"
+            },
+            {
+              "id": "25de1423-b66a-4389-906f-8b0c9c1d3826",
+              "name": "Email Content",
+              "value": "={{ $json.message.content['Email Content'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2620,
+        -140
+      ],
+      "id": "ee3f1a4e-d262-461d-93c5-9aed81de9825",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fromEmail": "gatura@bulkbox.co.ke",
+        "toEmail": "={{ $json.To }}",
+        "subject": "={{ $json.Subject }}",
+        "emailFormat": "text",
+        "text": "={{ $json['Email Content'] }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2840,
+        -140
+      ],
+      "id": "7454b4ea-1b43-4a4a-8623-7848c13298c7",
+      "name": "Send Email",
+      "credentials": {
+        "smtp": {
+          "id": "FRchTiFJGPeC5YNE",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Personalize email and send\n\n## Schedule Meeting and update meeting time in AIrtable",
+        "height": 480,
+        "width": 1340,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2220,
+        -280
+      ],
+      "typeVersion": 1,
+      "id": "92be970b-8514-4842-bbc9-f6680681df60",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Check the interviewer's calendar for available 30-minute time slots within working hours (8 AM - 5 PM) the next day. Schedule the meeting and confirm the time with the candidate. Ensure that the meeting time is aligned with the candidate's and interviewer's availability.\n\nInputs:\n\n    The interviewer's calendar for scheduling.\n    Today's date: {{ $today }}\n\nUse the calendar tool to book the meeting\n\n\nGive back the follwoing information:\nStart time:\nEnd time:"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        3060,
+        -140
+      ],
+      "id": "38a7f43b-f7b2-4dda-8dea-045d637870e8",
+      "name": "Book Meeting",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "gaturanjenga@gmail.com",
+          "mode": "list",
+          "cachedResultName": "gaturanjenga@gmail.com"
+        },
+        "start": "={{ $fromAI(\"start_time\", \"The start time for the meeting\", \"string\", \"2025-01-01T09:00:00Z\") }}\n",
+        "end": "={{ $fromAI(\"end_time\", \"The end time for the meeting\", \"string\", \"2025-01-01T09:00:00Z\") }}",
+        "additionalFields": {
+          "location": "=Online"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        3160,
+        80
+      ],
+      "id": "b6a94b8c-8c92-49f2-931b-44d23f627152",
+      "name": "Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "nzPOQoEN0ibAA9xT",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblllvQaRTSnEr17a",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tblllvQaRTSnEr17a"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('update questionnaires').item.json.id }}",
+            "Phone interview": "={{ $json.message.content['Start time'] }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email address",
+              "displayName": "Email address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "No hire",
+                  "value": "No hire"
+                },
+                {
+                  "name": "Interviewing",
+                  "value": "Interviewing"
+                },
+                {
+                  "name": "Decision needed",
+                  "value": "Decision needed"
+                },
+                {
+                  "name": "Hire",
+                  "value": "Hire"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Applying for",
+              "displayName": "Applying for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CV Link",
+              "displayName": "CV Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "JD CV score",
+              "displayName": "JD CV score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CV Score Notes",
+              "displayName": "CV Score Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Questonnaires and responses",
+              "displayName": "Questonnaires and responses",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview",
+              "displayName": "Phone interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone interviewer",
+              "displayName": "Phone interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview score",
+              "displayName": "Phone interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview notes",
+              "displayName": "Phone interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview",
+              "displayName": "Onsite interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interviewer",
+              "displayName": "Onsite interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview score",
+              "displayName": "Onsite interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview notes",
+              "displayName": "Onsite interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Attachments",
+              "displayName": "Attachments",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        3440,
+        -140
+      ],
+      "id": "9ff2433f-c2f8-4716-aa22-92fb1e4028dd",
+      "name": "update phone meeting time",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Given the  job description, along with the candidate's CV and their responses to the questionnaires, generate a list of screening questions that will help gauge the candidate's suitability for the role. The questions should focus on understanding the candidate’s relevant experience, skills, and cultural fit. The questions should take into account both the job description and the candidate's background and responses. Provide a minimum of 5 questions.\n\nUse the tools to get the job description and the applicant's responses to the questionnaires.\n\nApplicant's CV:\n{{ $('Extract from File').item.json.text }}\n\n\nGive the output as various sentences as a paragraph with every new question in a new line:\nScreening Questions:"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        3660,
+        -140
+      ],
+      "id": "a9233b89-c4a4-4c68-bb88-ce34381f9c99",
+      "name": "Screening Questions",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljhmLdPULqSya0d",
+          "mode": "list",
+          "cachedResultName": "Positions",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tbljhmLdPULqSya0d"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        3680,
+        80
+      ],
+      "id": "de53c452-bd8f-4bdb-88a9-152f287bd796",
+      "name": "job_posting1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblllvQaRTSnEr17a",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tblllvQaRTSnEr17a"
+        },
+        "id": "={{ $('update questionnaires').item.json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        3880,
+        80
+      ],
+      "id": "dcca85af-d194-427c-83a1-3ef686e4e4c4",
+      "name": "candidate_insights1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appublMkWVQfHkZ09",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblllvQaRTSnEr17a",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tblllvQaRTSnEr17a"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('update phone meeting time').item.json.id }}",
+            "Phne interview screening questions": "={{ $json['Screening Questions'] }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email address",
+              "displayName": "Email address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "No hire",
+                  "value": "No hire"
+                },
+                {
+                  "name": "Interviewing",
+                  "value": "Interviewing"
+                },
+                {
+                  "name": "Decision needed",
+                  "value": "Decision needed"
+                },
+                {
+                  "name": "Hire",
+                  "value": "Hire"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Applying for",
+              "displayName": "Applying for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CV Link",
+              "displayName": "CV Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "JD CV score",
+              "displayName": "JD CV score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "CV Score Notes",
+              "displayName": "CV Score Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Questonnaires and responses",
+              "displayName": "Questonnaires and responses",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview",
+              "displayName": "Phone interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phne interview screening questions",
+              "displayName": "Phne interview screening questions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone interviewer",
+              "displayName": "Phone interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview score",
+              "displayName": "Phone interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone interview notes",
+              "displayName": "Phone interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview",
+              "displayName": "Onsite interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interviewer",
+              "displayName": "Onsite interviewer",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview score",
+              "displayName": "Onsite interview score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "0 – No hire",
+                  "value": "0 – No hire"
+                },
+                {
+                  "name": "1 – Probably no hire",
+                  "value": "1 – Probably no hire"
+                },
+                {
+                  "name": "2 – Worth consideration",
+                  "value": "2 – Worth consideration"
+                },
+                {
+                  "name": "3 – Good candidate",
+                  "value": "3 – Good candidate"
+                },
+                {
+                  "name": "4 – Please hire this person",
+                  "value": "4 – Please hire this person"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Onsite interview notes",
+              "displayName": "Onsite interview notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Attachments",
+              "displayName": "Attachments",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        4240,
+        -140
+      ],
+      "id": "092bc9a2-7d22-436c-a625-f182a55caf06",
+      "name": "screening questions",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d51edc4a-60cd-41fe-8cc3-afc3c266d588",
+              "name": "Screening Questions",
+              "value": "={{ $json.message.content['Screening Questions'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4020,
+        -140
+      ],
+      "id": "c466c71b-ab9d-41f0-9467-975f62a80ad6",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "content": "## Generate Screening Questions and post to Airtable",
+        "height": 420,
+        "width": 720
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3640,
+        -200
+      ],
+      "typeVersion": 1,
+      "id": "4bfab808-9353-4293-8e21-f8ca64095aaa",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Actions\n- ### Change the `Form Description` with the job description you are hiring for.\n- ### Make sure to check and change the prompts if need be to suit your use case.\n- ### Use the Simple Applicant Tracker template on Airtable to set up the tables required.",
+        "height": 460,
+        "width": 580
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1300,
+        -300
+      ],
+      "typeVersion": 1,
+      "id": "9635d334-8ff7-4c16-813e-d91a5765c252",
+      "name": "Sticky Note5"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Africa/Nairobi",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-01-22T11:32:11.000Z",
+  "versionId": "ba4460ba-78f2-4405-a2ce-89fa89e44d2b"
+}
