@@ -93,9 +93,9 @@
         "operation": "get",
         "workflowId": {
           "__rl": true,
-          "value": "BuohNSKBGD4Gz9M0",
+          "value": "eMxH0GjgfWEvBDic",
           "mode": "list",
-          "cachedResultName": "AI Content Generator (#BuohNSKBGD4Gz9M0)"
+          "cachedResultName": "HR job posting - main workflow (#eMxH0GjgfWEvBDic)"
         },
         "requestOptions": {}
       },
@@ -258,7 +258,7 @@
         "messages": {
           "values": [
             {
-              "content": "=WITHOUT CHANGING ANY OF THE NODES, I WANT YOU TO INCLUDE STICKY NODES THAT EXPPLAIN WHAT IS HAPPENING WITH INSTRUCTIONS OF WHAT THE USER OF THE WORKFLOW SHOULD DO:\n\nWorkflow Name:\n{{ $json.name }}\n\nWorkflow Data:\n{{ $json.nodes }}"
+              "content": "=Got it! Here’s a revised version of your prompt tailored for documentation purposes only, removing the sticky notes requirement:\n\nCREATE A DETAILED DOCUMENTATION FOR THE WORKFLOW FOLLOWING THESE GUIDELINES:\n\n    Provide a Detailed Description:\n        Write a clear and concise description of the workflow, outlining its functionality and expected outcomes.\n        Focus on making it informative and user-friendly, while also optimizing for discoverability (SEO).\n\n    Structure the Documentation:\n        Include the following sections for clarity:\n            Who is this for?: Specify the intended audience or users of the workflow.\n            What problem does this workflow solve?: Highlight the use case and why the workflow is useful.\n            What this workflow does: Provide an overview of the workflow’s functionality and outputs.\n            Setup: Detail any prerequisites (e.g., API keys, credentials, or integrations) and guide the user through the setup process.\n            How to customize this workflow: Offer suggestions or instructions for adapting the workflow to different needs.\n\n    Template Information:\n        Add placeholders to summarize the workflow’s key details:\n            Workflow Name: {{ $json.name }}\n            Workflow Data: {{ $json.nodes }}"
             }
           ]
         },
@@ -291,6 +291,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-11-11T06:48:03.000Z",
-  "versionId": "3e201b74-38c7-4014-81ec-138f90c2073c"
+  "updatedAt": "2025-01-22T07:37:22.000Z",
+  "versionId": "3468cace-f086-4d50-be63-22dbe856e838"
 }
