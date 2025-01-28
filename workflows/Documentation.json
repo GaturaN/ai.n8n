@@ -1,0 +1,52 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-01-28T16:58:42.793Z",
+  "id": "OIa2kqN3HwbGdm6o",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Documentation",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Document Workflow",
+        "formDescription": "Use this form to document the workflow and save it as a google doc.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Workflow json file",
+              "fieldType": "file",
+              "acceptFileTypes": ".json",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Preferred Titile",
+              "placeholder": "If left balnk, the AI will recommend a suitable title"
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "928b86d3-f1f8-4e2c-9729-4dcd6a9a5182",
+      "name": "On form submission",
+      "webhookId": "90706a89-d08d-4877-874b-57312b7938f0"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-28T17:01:02.000Z",
+  "versionId": "15bc082c-6336-40d6-8a60-4a1a8dbb9626"
+}
