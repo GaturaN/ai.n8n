@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Extract from File",
             "type": "main",
             "index": 0
           }
@@ -18,6 +18,28 @@
           {
             "node": "AI Agent",
             "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "json_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "json_data": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
             "index": 0
           }
         ]
@@ -55,7 +77,7 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -560,
+        -780,
         -60
       ],
       "id": "928b86d3-f1f8-4e2c-9729-4dcd6a9a5182",
@@ -65,13 +87,13 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "Hello, you are a helpful documentation bot. \n\nProcess the file attached and give a clear documentation answering the following questions.\n1. What is the purpose and usefulness of the workflow.\n2. What tools are required and how easy is it for someone to set up the workflow for themselves?\n3. What industry(ies) could benefit from using the workflow?\n4. What system has been used to build the workflow?",
+        "text": "=Hello, you are a helpful documentation bot. \n\nProcess the file attached and give a clear documentation answering the following questions.\n1. What is the purpose and usefulness of the workflow.\n2. What tools are required and how easy is it for someone to set up the workflow for themselves?\n3. What industry(ies) could benefit from using the workflow?\n\nJson Data:\n{{ $json.data }}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
       "position": [
-        -340,
+        -120,
         -60
       ],
       "id": "e87aa93d-1540-4bd4-beda-0eee75ab30b7",
@@ -84,8 +106,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.1,
       "position": [
-        -320,
-        160
+        -180,
+        200
       ],
       "id": "c044ce91-44a0-4cf6-9504-e58871c15931",
       "name": "OpenAI Chat Model",
@@ -95,6 +117,44 @@
           "name": "Bulkbox"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "binaryPropertyName": "Workflow_json_file",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -60
+      ],
+      "id": "e866efd8-8174-4910-a2c7-90688612026f",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d3c8c7e5-9feb-4a40-a44c-618cf827914f",
+              "name": "data",
+              "value": "={{ Object.entries($json.data) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -340,
+        -60
+      ],
+      "id": "d397f01a-140a-447e-afe9-0652f33281e7",
+      "name": "json_data"
     }
   ],
   "pinData": {},
@@ -104,6 +164,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-01-28T17:11:54.000Z",
-  "versionId": "1255d51f-2d28-4d1c-bc6a-356183bc67cb"
+  "updatedAt": "2025-01-29T06:42:58.000Z",
+  "versionId": "83de764b-9d29-4551-babb-416b1302b089"
 }
