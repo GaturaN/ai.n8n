@@ -148,8 +148,8 @@
       ]
     }
   },
-  "createdAt": "2024-10-09T01:24:58.606Z",
-  "id": "yxd35HtQTnhmziie",
+  "createdAt": "2024-10-09T01:25:02.865Z",
+  "id": "7qeIU9FjcH2E8e72",
   "meta": null,
   "name": "My workflow 7",
   "nodes": [
@@ -616,6 +616,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-09T01:24:58.606Z",
-  "versionId": "64b416fa-a155-42e5-b519-31d8a4b3134a"
+  "updatedAt": "2024-10-09T01:25:02.865Z",
+  "versionId": "d1ad4214-2353-4a1c-8269-18ec974f8681"
 }
