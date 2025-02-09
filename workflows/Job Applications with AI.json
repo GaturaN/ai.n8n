@@ -1,0 +1,121 @@
+{
+  "active": false,
+  "connections": {
+    "jd_email": {
+      "main": [
+        [
+          {
+            "node": "const",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-08T17:52:40.243Z",
+  "id": "Wd5YzxQ0WKWPjmqs",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Job Applications with AI",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Collect the job description and the email address for application\n",
+        "height": 260,
+        "width": 200
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -760,
+        -120
+      ],
+      "typeVersion": 1,
+      "id": "34c41f8a-3129-44ef-9146-c390e3be026e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "formTitle": "Job Application",
+        "formDescription": "Paste the job description in the fields below and provide the email where application is to be sent.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Job Description",
+              "fieldType": "textarea",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Job application email",
+              "fieldType": "email",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "path": "job-application-with-ai"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -520,
+        -40
+      ],
+      "id": "b0fe98d4-84b8-4217-8e7c-7d2a7a1daf94",
+      "name": "jd_email",
+      "webhookId": "d1b61687-f28b-4d1a-9df3-24e60d79100e"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "319bd73e-ed55-47c8-9518-01d26d24ba01",
+              "name": "job_description",
+              "value": "={{ $json['Job Description'] }}",
+              "type": "string"
+            },
+            {
+              "id": "0d8c9d75-d154-4fc4-9a9f-9fff6b12f56f",
+              "name": "job_email",
+              "value": "={{ $json['Job application email'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -340,
+        -40
+      ],
+      "id": "aacf009e-f23f-4756-9db3-d5c26377e755",
+      "name": "const"
+    }
+  ],
+  "pinData": {
+    "jd_email": [
+      {
+        "json": {
+          "Job Description": "Job Title: RPA and Generative AI Specialist\r\nLocation: United Kingdom (Remote/Flexible)\r\nAbout Us: We are an award-winning UK accounting firm, renowned for our commitment to \r\nexcellence and innovation in the financial sector. Our mission is to leverage cutting-edge \r\ntechnology to streamline accounting and tax preparation processes, ensuring our clients \r\nreceive the most efficient and accurate service possible.\r\nRole Overview: We are seeking a highly skilled RPA and Generative AI Specialist to join \r\nour dynamic team. The ideal candidate will have a proven track record in developing and \r\nimplementing intelligent bots specifically designed for the accounting, tax, and finance \r\nsectors. This role is pivotal in our journey to automate and enhance our service offerings \r\nusing advanced AI and RPA technologies.\r\nKey Responsibilities:\r\nDesign, develop, and deploy RPA solutions using tools such as Automation \r\nAnywhere, Anthropic Claude and Chat GPT\r\nCreate and implement generative AI models to automate complex accounting and tax \r\npreparation tasks.\r\nLead the development of our first three automation projects:\r\n1.Xero/Online Bookkeeping Reconciliation: Automate the reconciliation \r\nprocess to ensure accuracy and efficiency. (example here \r\nhttps://www.youtube.com/watch?v=QEfC2Vu3oqs and here \r\nhttps://www.youtube.com/watch?v=bhGanbzOuk8 and here \r\nhttps://www.youtube.com/watch?v=kRrbpam-cmo\r\n2.Tax Return Preparation: Develop bots to streamline the preparation and \r\nsubmission of tax returns. (example here \r\nhttps://www.fdintelligence.co.uk/sectors/)\r\n3.Conversational AI with Voice and Email/AI Agents: Implement AI-driven \r\nconversational interfaces to enhance client communication via voice, email \r\nand WhatsApp (see here https://www.salesape.ai/ and here \r\nhttps://midlandsbusinessrecovery.co.uk/\r\nRequirements:\r\nProven experience in developing RPA solutions using Automation Anywhere, \r\nAnthropic Claude or UI Path.\r\nStrong background in generative AI, LLM, AI Agents and Machine Learning Models.\r\nUnderstanding of the accounting, tax, and finance sectors.\r\nExperience in automating accounting and tax preparation workflows.\r\nExcellent problem-solving skills and the ability to work in a fast-paced environment.\r\nStrong communication and collaboration skills.\r\nA degree in Computer Science, Engineering, Finance, or a related field is preferred.\r\nJoin Us: Be part of a pioneering team that's transforming the future of accounting and tax \r\npreparation through intelligent automation. Together, we can achieve remarkable things",
+          "Job application email": "francnjenga99@gmail.com",
+          "submittedAt": "2025-02-08T13:23:19.367-05:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-08T18:25:43.000Z",
+  "versionId": "0a15b487-b44c-47d9-90b2-6babb13c53a6"
+}
