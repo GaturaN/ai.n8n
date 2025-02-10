@@ -11,6 +11,50 @@
           }
         ]
       ]
+    },
+    "const": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "previous_cvs": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-02-08T17:52:40.243Z",
@@ -96,6 +140,129 @@
       ],
       "id": "aacf009e-f23f-4756-9db3-d5c26377e755",
       "name": "const"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Hello,\n\nYou are tasked with writing a CV and a Cover Letter for the the following Job Description.\nYou have access to a google drive that contains my Past CVs, and to github where a majority of my projects are stored.\n\n\nThis is my github url:\n\nhttps://github.com/GaturaN\n\n",
+        "options": {
+          "systemMessage": "=The Job Description is as follows:\n\n{{ $json.job_description }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -120,
+        -40
+      ],
+      "id": "f9e734d4-f21c-4cf8-a99a-75e6c4f629e7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -200,
+        160
+      ],
+      "id": "ee836e73-8a26-49d6-9d98-d38ccdf70782",
+      "name": "GPT",
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Main Workflow\n",
+        "height": 440,
+        "width": 780,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        -140
+      ],
+      "typeVersion": 1,
+      "id": "ecdff39d-6603-449b-83f1-37cdb7386686",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "name": "previous_cvs",
+        "description": "Call this tool to analyze my previous CVs and come up with a summary of relevant projects best fit for the new job description.",
+        "workflowId": {
+          "__rl": true,
+          "value": "Wd5YzxQ0WKWPjmqs",
+          "mode": "list",
+          "cachedResultName": "Job Applications with AI"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        40,
+        180
+      ],
+      "id": "acf48280-361a-4bce-a08b-7a3ffa3207ba",
+      "name": "previous_cvs"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -500,
+        460
+      ],
+      "id": "92139b46-e474-49e2-be9c-c81d85c61953",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -320,
+        460
+      ],
+      "id": "68b34ee5-24ec-4dcd-8196-e980d940659b",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
     }
   ],
   "pinData": {
@@ -108,6 +275,13 @@
           "formMode": "test"
         }
       }
+    ],
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "query": "Please analyze my previous CVs to find any relevant experience and projects related to RPA solutions, generative AI, and automation in accounting and finance."
+        }
+      }
     ]
   },
   "settings": {
@@ -116,6 +290,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-02-08T18:25:43.000Z",
-  "versionId": "0a15b487-b44c-47d9-90b2-6babb13c53a6"
+  "updatedAt": "2025-02-10T11:27:16.000Z",
+  "versionId": "48fc589d-f88e-430e-9013-67b3cdd082dd"
 }
