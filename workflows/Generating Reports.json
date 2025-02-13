@@ -1,0 +1,975 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Discord1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Discord1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-13T13:45:45.206Z",
+  "id": "JchkulyBRwMyVOLw",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Generating Reports",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        -40
+      ],
+      "id": "923c9516-2fc2-4276-be7e-e0bbefc20019",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://internal.users.n8n.cloud/webhook/level2-erp",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "unique_id",
+              "value": "5f0f3c9590861996e011d15995de611e"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -280,
+        -140
+      ],
+      "id": "727aafba-7db6-4425-b644-a2405f79fdfd",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Lewvak8Bvny3RjQ0",
+          "name": "Level2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app1SAKXf4Yd6zKQO",
+          "mode": "list",
+          "cachedResultName": "begineer course",
+          "cachedResultUrl": "https://airtable.com/app1SAKXf4Yd6zKQO"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblKxVtHKKiaotNql",
+          "mode": "list",
+          "cachedResultName": "customers",
+          "cachedResultUrl": "https://airtable.com/app1SAKXf4Yd6zKQO/tblKxVtHKKiaotNql"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -280,
+        60
+      ],
+      "id": "92e1cd6b-c7fb-4308-97c6-c70761ec3b4d",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "customerID",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -40,
+        -40
+      ],
+      "id": "5658054e-7af2-4b71-84a9-3f5370d0b5b8",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "orderPrice",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        180,
+        -40
+      ],
+      "id": "8a02e876-5099-4751-98aa-beafbbd05a75",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5950b135-bffe-4a36-a5e8-aef75a8be672",
+              "leftValue": "={{ $json.region }}",
+              "rightValue": "Americas",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        -160
+      ],
+      "id": "428710e1-8480-4dc2-9f26-a43593bb8a93",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "mode": "each",
+        "options": {
+          "fileName": "={{ $json.orderID }}.json"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        -180
+      ],
+      "id": "5f4cc116-61fc-4f88-bc22-1150bd5ecd61",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "sendTo": "francnjenga99@gmail.com",
+        "subject": "Orders",
+        "message": "Find attached the order details",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        860,
+        -180
+      ],
+      "id": "e750f203-8c51-4be4-aa4d-66031e0e2fd0",
+      "name": "Gmail",
+      "webhookId": "98feb4dc-e694-4c8d-b759-9470abbb843e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Sl6Ly5PwfaJ7GBZC",
+          "name": "Google Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=I sent the file using email with the label ID {{ $json.id }}. My ID: 5f0f3c9590861996e011d15995de611e",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        -180
+      ],
+      "id": "a10f3561-5826-457a-98a3-a196aa240d52",
+      "name": "Discord",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "vQmh41hFBrXmKeFw",
+          "name": "Level 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 5,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        420,
+        20
+      ],
+      "id": "ec3cb536-e8dd-4a92-90b8-78219b3bff4e",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "497c40b0-e811-4e4c-b648-ab50422c5c7b",
+              "name": "customerEmail",
+              "value": "={{ $json.customerEmail }}",
+              "type": "string"
+            },
+            {
+              "id": "464d1ae0-110e-4845-bebf-865566d06cd3",
+              "name": "region",
+              "value": "={{ $json.region }}",
+              "type": "string"
+            },
+            {
+              "id": "f6a576ab-a24f-4c3a-ab46-7739ef1fb86f",
+              "name": "customerSince",
+              "value": "={{ $json.customerSince }}",
+              "type": "string"
+            },
+            {
+              "id": "deae68dd-b8cc-4ea1-8471-065de966871b",
+              "name": "orderPrice",
+              "value": "={{ $json.orderPrice }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        120
+      ],
+      "id": "0632b8bc-c8a3-4d91-9337-5ad8aff18184",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.customerSince }}",
+        "options": {
+          "includeInputFields": true
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        860,
+        120
+      ],
+      "id": "1576aee4-32ef-4a40-b668-a46458a94114",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "options": {
+          "fileName": "={{$runIndex > 0 ? 'file_low_orders':'file_high_orders'}}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1060,
+        120
+      ],
+      "id": "6bf223b6-2cee-4933-86ba-c9db7c541de9",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=I created the spreadsheet {{ $binary.data.fileName }}. My ID: 5f0f3c9590861996e011d15995de611e",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1260,
+        120
+      ],
+      "id": "44b4c776-b3f7-4f17-8541-bb0eacf09638",
+      "name": "Discord1",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "vQmh41hFBrXmKeFw",
+          "name": "Level 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Sort": [
+      {
+        "json": {
+          "orderID": 18,
+          "customerID": 5,
+          "employeeName": "Sarah",
+          "orderPrice": 192.3,
+          "orderStatus": "booked",
+          "id": "recEKOmLCDVVoNi17",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Canada",
+          "subregion": "North America",
+          "customerSince": "2021-06-09",
+          "region": "Americas",
+          "customerEmail": "customer5@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 5,
+          "customerID": 10,
+          "employeeName": "Amelie",
+          "orderPrice": 191.36,
+          "orderStatus": "booked",
+          "id": "recU0UYDwUQ6hC5ct",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Cuba",
+          "subregion": "Caribbean",
+          "region": "Americas",
+          "customerEmail": "customer10@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 12,
+          "customerID": 6,
+          "employeeName": "Mario",
+          "orderPrice": 168.48,
+          "orderStatus": "processing",
+          "id": "recoYZDT7PpGhmEiH",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Sweden",
+          "subregion": "Northern Europe",
+          "customerSince": "2021-09-09",
+          "region": "Europe",
+          "customerEmail": "customer6@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 6,
+          "customerID": 2,
+          "employeeName": "Mario",
+          "orderPrice": 165.65,
+          "orderStatus": "booked",
+          "id": "recwD1E6rzd8j75Ex",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Japan",
+          "subregion": "Eastern Asia",
+          "region": "Asia",
+          "customerEmail": "customer2@mail.jp"
+        }
+      },
+      {
+        "json": {
+          "orderID": 28,
+          "customerID": 6,
+          "employeeName": "Sarah",
+          "orderPrice": 165.65,
+          "orderStatus": "booked",
+          "id": "recoYZDT7PpGhmEiH",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Sweden",
+          "subregion": "Northern Europe",
+          "customerSince": "2021-09-09",
+          "region": "Europe",
+          "customerEmail": "customer6@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 10,
+          "customerID": 8,
+          "employeeName": "Sarah",
+          "orderPrice": 164.88,
+          "orderStatus": "booked",
+          "id": "recwgtN5ERUgC8KlS",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Germany",
+          "subregion": "Western Europe",
+          "customerSince": "2021-03-10",
+          "region": "Europe",
+          "customerEmail": "customer8@mail.de"
+        }
+      },
+      {
+        "json": {
+          "orderID": 8,
+          "customerID": 4,
+          "employeeName": "Mario",
+          "orderPrice": 163.38,
+          "orderStatus": "processing",
+          "id": "recsSgcU6y43YfO9T",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Brazil",
+          "subregion": "South America",
+          "region": "Americas",
+          "customerEmail": "customer4@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 2,
+          "customerID": 5,
+          "employeeName": "Mario",
+          "orderPrice": 161.1,
+          "orderStatus": "booked",
+          "id": "recEKOmLCDVVoNi17",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Canada",
+          "subregion": "North America",
+          "customerSince": "2021-06-09",
+          "region": "Americas",
+          "customerEmail": "customer5@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 21,
+          "customerID": 5,
+          "employeeName": "Mario",
+          "orderPrice": 160.08,
+          "orderStatus": "booked",
+          "id": "recEKOmLCDVVoNi17",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Canada",
+          "subregion": "North America",
+          "customerSince": "2021-06-09",
+          "region": "Americas",
+          "customerEmail": "customer5@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 27,
+          "customerID": 2,
+          "employeeName": "Mario",
+          "orderPrice": 153.73,
+          "orderStatus": "booked",
+          "id": "recwD1E6rzd8j75Ex",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Japan",
+          "subregion": "Eastern Asia",
+          "region": "Asia",
+          "customerEmail": "customer2@mail.jp"
+        }
+      },
+      {
+        "json": {
+          "orderID": 9,
+          "customerID": 10,
+          "employeeName": "Sarah",
+          "orderPrice": 153.01,
+          "orderStatus": "booked",
+          "id": "recU0UYDwUQ6hC5ct",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Cuba",
+          "subregion": "Caribbean",
+          "region": "Americas",
+          "customerEmail": "customer10@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 1,
+          "customerID": 8,
+          "employeeName": "Mario",
+          "orderPrice": 150.32,
+          "orderStatus": "processing",
+          "id": "recwgtN5ERUgC8KlS",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Germany",
+          "subregion": "Western Europe",
+          "customerSince": "2021-03-10",
+          "region": "Europe",
+          "customerEmail": "customer8@mail.de"
+        }
+      },
+      {
+        "json": {
+          "orderID": 30,
+          "customerID": 7,
+          "employeeName": "Sarah",
+          "orderPrice": 139.77,
+          "orderStatus": "booked",
+          "id": "recNkk0sIIAINdlut",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Australia",
+          "subregion": "Australia and New Zealand",
+          "customerSince": "2021-09-08",
+          "region": "Oceania",
+          "customerEmail": "customer7@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 13,
+          "customerID": 1,
+          "employeeName": "Mario",
+          "orderPrice": 138.99,
+          "orderStatus": "processing",
+          "id": "rec5pWm0m88m9Dboc",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "India",
+          "subregion": "Southern Asia",
+          "customerSince": "2021-12-10",
+          "region": "Asia",
+          "customerEmail": "customer1@mail.in"
+        }
+      },
+      {
+        "json": {
+          "orderID": 29,
+          "customerID": 6,
+          "employeeName": "Mario",
+          "orderPrice": 138.99,
+          "orderStatus": "booked",
+          "id": "recoYZDT7PpGhmEiH",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Sweden",
+          "subregion": "Northern Europe",
+          "customerSince": "2021-09-09",
+          "region": "Europe",
+          "customerEmail": "customer6@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 7,
+          "customerID": 9,
+          "employeeName": "Amelie",
+          "orderPrice": 135.02,
+          "orderStatus": "processing",
+          "id": "recRKjghkZ3krR95p",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Ukraine",
+          "subregion": "Eastern Europe",
+          "region": "Europe",
+          "customerEmail": "customer9@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 17,
+          "customerID": 8,
+          "employeeName": "Amelie",
+          "orderPrice": 133.79,
+          "orderStatus": "booked",
+          "id": "recwgtN5ERUgC8KlS",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Germany",
+          "subregion": "Western Europe",
+          "customerSince": "2021-03-10",
+          "region": "Europe",
+          "customerEmail": "customer8@mail.de"
+        }
+      },
+      {
+        "json": {
+          "orderID": 16,
+          "customerID": 4,
+          "employeeName": "Amelie",
+          "orderPrice": 124.97,
+          "orderStatus": "processing",
+          "id": "recsSgcU6y43YfO9T",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Brazil",
+          "subregion": "South America",
+          "region": "Americas",
+          "customerEmail": "customer4@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 3,
+          "customerID": 1,
+          "employeeName": "Samir",
+          "orderPrice": 111.19,
+          "orderStatus": "booked",
+          "id": "rec5pWm0m88m9Dboc",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "India",
+          "subregion": "Southern Asia",
+          "customerSince": "2021-12-10",
+          "region": "Asia",
+          "customerEmail": "customer1@mail.in"
+        }
+      },
+      {
+        "json": {
+          "orderID": 14,
+          "customerID": 9,
+          "employeeName": "Yoko",
+          "orderPrice": 108.7,
+          "orderStatus": "processing",
+          "id": "recRKjghkZ3krR95p",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Ukraine",
+          "subregion": "Eastern Europe",
+          "region": "Europe",
+          "customerEmail": "customer9@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 22,
+          "customerID": 10,
+          "employeeName": "Amelie",
+          "orderPrice": 102.58,
+          "orderStatus": "booked",
+          "id": "recU0UYDwUQ6hC5ct",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Cuba",
+          "subregion": "Caribbean",
+          "region": "Americas",
+          "customerEmail": "customer10@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 20,
+          "customerID": 2,
+          "employeeName": "Amelie",
+          "orderPrice": 101.71,
+          "orderStatus": "processing",
+          "id": "recwD1E6rzd8j75Ex",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Japan",
+          "subregion": "Eastern Asia",
+          "region": "Asia",
+          "customerEmail": "customer2@mail.jp"
+        }
+      },
+      {
+        "json": {
+          "orderID": 11,
+          "customerID": 3,
+          "employeeName": "Sarah",
+          "orderPrice": 90.56,
+          "orderStatus": "processing",
+          "id": "recyuiHvsZbwrAnnP",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "France",
+          "subregion": "Western Europe",
+          "customerSince": "2021-07-08",
+          "region": "Europe",
+          "customerEmail": "customer3@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 26,
+          "customerID": 7,
+          "employeeName": "Mario",
+          "orderPrice": 78.7,
+          "orderStatus": "processing",
+          "id": "recNkk0sIIAINdlut",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Australia",
+          "subregion": "Australia and New Zealand",
+          "customerSince": "2021-09-08",
+          "region": "Oceania",
+          "customerEmail": "customer7@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 4,
+          "customerID": 2,
+          "employeeName": "Amelie",
+          "orderPrice": 61.16,
+          "orderStatus": "booked",
+          "id": "recwD1E6rzd8j75Ex",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Japan",
+          "subregion": "Eastern Asia",
+          "region": "Asia",
+          "customerEmail": "customer2@mail.jp"
+        }
+      },
+      {
+        "json": {
+          "orderID": 24,
+          "customerID": 8,
+          "employeeName": "Mario",
+          "orderPrice": 55.9,
+          "orderStatus": "booked",
+          "id": "recwgtN5ERUgC8KlS",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Germany",
+          "subregion": "Western Europe",
+          "customerSince": "2021-03-10",
+          "region": "Europe",
+          "customerEmail": "customer8@mail.de"
+        }
+      },
+      {
+        "json": {
+          "orderID": 23,
+          "customerID": 3,
+          "employeeName": "Yoko",
+          "orderPrice": 48.37,
+          "orderStatus": "processing",
+          "id": "recyuiHvsZbwrAnnP",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "France",
+          "subregion": "Western Europe",
+          "customerSince": "2021-07-08",
+          "region": "Europe",
+          "customerEmail": "customer3@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 15,
+          "customerID": 9,
+          "employeeName": "Samir",
+          "orderPrice": 32.58,
+          "orderStatus": "processing",
+          "id": "recRKjghkZ3krR95p",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Ukraine",
+          "subregion": "Eastern Europe",
+          "region": "Europe",
+          "customerEmail": "customer9@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 25,
+          "customerID": 4,
+          "employeeName": "Sarah",
+          "orderPrice": 27.76,
+          "orderStatus": "processing",
+          "id": "recsSgcU6y43YfO9T",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Brazil",
+          "subregion": "South America",
+          "region": "Americas",
+          "customerEmail": "customer4@mail.com"
+        }
+      },
+      {
+        "json": {
+          "orderID": 19,
+          "customerID": 2,
+          "employeeName": "Samir",
+          "orderPrice": 24.07,
+          "orderStatus": "processing",
+          "id": "recwD1E6rzd8j75Ex",
+          "createdTime": "2025-01-13T13:43:25.000Z",
+          "customerCountry": "Japan",
+          "subregion": "Eastern Asia",
+          "region": "Asia",
+          "customerEmail": "customer2@mail.jp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "rlDAu6hTymSrjcLZ"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-07T08:57:03.836Z",
+      "updatedAt": "2025-01-07T08:57:03.836Z",
+      "id": "ghPmxhboxYRdpTkT",
+      "name": "Lvl 2 Tutorial"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-13T14:37:27.000Z",
+  "versionId": "1615f2ed-d80a-4e98-96c5-5970fe89aeb4"
+}
