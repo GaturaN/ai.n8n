@@ -1,0 +1,329 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "set_fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-13T13:29:50.753Z",
+  "id": "OJDCEEbNovDcntVm",
+  "meta": null,
+  "name": "Merging Data",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "37d08730-2109-40c1-9025-1fcdc3ac9ee4",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app1SAKXf4Yd6zKQO",
+          "mode": "list",
+          "cachedResultName": "begineer course",
+          "cachedResultUrl": "https://airtable.com/app1SAKXf4Yd6zKQO"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblKxVtHKKiaotNql",
+          "mode": "list",
+          "cachedResultName": "customers",
+          "cachedResultUrl": "https://airtable.com/app1SAKXf4Yd6zKQO/tblKxVtHKKiaotNql"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        180,
+        -140
+      ],
+      "id": "1e46e07f-5997-4517-b1f4-0358de80f4b2",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://restcountries.com/v3.1/all",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        200,
+        80
+      ],
+      "id": "3349d219-bec4-4c22-aab7-ebf84ab696ab",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "customerCountry",
+              "field2": "name.common"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        720,
+        -20
+      ],
+      "id": "fa5f77bd-e718-4ed6-b79a-b050d607aea6",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "71daa864-2380-4f97-a2e8-be1b610ff5f3",
+              "name": "name.common",
+              "value": "={{ $json.name.common }}",
+              "type": "string"
+            },
+            {
+              "id": "74e57d3d-50a3-49e0-8e8d-d2880765942a",
+              "name": "region",
+              "value": "={{ $json.region }}",
+              "type": "string"
+            },
+            {
+              "id": "d71bcac3-944b-45ad-80e4-e89b9709661c",
+              "name": "subregion",
+              "value": "={{ $json.subregion }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        420,
+        80
+      ],
+      "id": "81a66b27-1ca8-404f-a1ea-13948f9d5122",
+      "name": "set_fields"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app1SAKXf4Yd6zKQO",
+          "mode": "list",
+          "cachedResultName": "begineer course",
+          "cachedResultUrl": "https://airtable.com/app1SAKXf4Yd6zKQO"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblKxVtHKKiaotNql",
+          "mode": "list",
+          "cachedResultName": "customers",
+          "cachedResultUrl": "https://airtable.com/app1SAKXf4Yd6zKQO/tblKxVtHKKiaotNql"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "region": "={{ $json.region }}",
+            "subregion": "={{ $json.subregion }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "customerID",
+              "displayName": "customerID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "customerCountry",
+              "displayName": "customerCountry",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "customerEmail",
+              "displayName": "customerEmail",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "customerSince",
+              "displayName": "customerSince",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "region",
+              "displayName": "region",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "subregion",
+              "displayName": "subregion",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        920,
+        -20
+      ],
+      "id": "a782a822-f438-4307-9de7-58da84d2172a",
+      "name": "Airtable1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-07T08:57:03.836Z",
+      "updatedAt": "2025-01-07T08:57:03.836Z",
+      "id": "ghPmxhboxYRdpTkT",
+      "name": "Lvl 2 Tutorial"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-13T13:41:34.000Z",
+  "versionId": "b3c59e0b-4025-4bf5-bb91-bc9da4476c33"
+}
