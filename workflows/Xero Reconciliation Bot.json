@@ -1,0 +1,542 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "get_tenant_ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_tenant_ID": {
+      "main": [
+        [
+          {
+            "node": "tenant_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tenant_id": {
+      "main": [
+        [
+          {
+            "node": "get_accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_accounts": {
+      "main": [
+        [
+          {
+            "node": "get_bankTransactions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_bankTransactions": {
+      "main": [
+        [
+          {
+            "node": "unreconciled_transactions",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "get_invoices",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "unreconciled_transactions": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_payments": {
+      "main": [
+        []
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "IsReconciled?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-09T07:11:19.169Z",
+  "id": "qKhMoBdgxKD4d3nK",
+  "meta": null,
+  "name": "Xero Reconciliation Bot",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        80
+      ],
+      "id": "f9e09d12-0f8e-4067-83c8-18e03f0b2370",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## GENERAL WORKFLOW\n- ### GET Tenant ID\n  - Authenticate with Xero OAuth2\n  - Call `/connections` endpoint to retrieve available tenants\n  - Store tenant ID for subsequent requests\n  - Required in header: `Xero-tenant-id`\n\n- ### GET Bank Accounts\n  - Endpoint: `/api.xro.com/api.xro/2.0/Accounts`\n  - Filter for `Type == \"BANK\"`\n  - Store account IDs and details for reconciliation\n  - Required for mapping bank feeds to correct accounts\n\n- ### GET Bank Transactions\n  - Endpoint: `/api.xro.com/api.xro/2.0/BankTransactions`\n  - Filter params: `Status=AUTHORISED`\n  - Include date range parameters\n  - Paginate results if necessary\n  - Store transactions for matching\n\n- ### GET Bank Statement Lines \n  - **NOTE** - Currently Xero does not offer bank statement lines API\n  - **MUST GET A WORKAROUND FOR THIS**\n  - Endpoint: `/api.xro.com/api.xro/2.0/BankStatements`\n  - Import statement lines from bank feed\n  - Match format requirements for Xero\n  - Store for reconciliation matching\n\n- ### Process Matching Algorithm\n  - Compare bank transactions with statement lines\n  - Match based on:\n    - Exact amount matches\n    - Date within tolerance (±2 days)\n    - Description fuzzy matching\n    - Reference number if available\n  - Flag potential matches for review\n  - Store unmatched items separately\n\n- ### Create Reconciliation Records\n  - For each matched pair:\n    - POST to `/api.xro.com/api.xro/2.0/BankTransactions/{ID}/Payments`\n    - Include payment details and reconciliation flag\n    - Update status in local tracking system\n  - Handle batch processing for multiple matches\n\n- ### Error Handling & Logging\n  - Log all API responses\n  - Implement retry logic for failed calls\n  - Store unmatched transactions for manual review\n  - Track reconciliation success rates\n  - Monitor API rate limits\n\n- ### Reporting & Notifications\n  - Generate daily reconciliation summary\n  - Alert on:\n    - Unmatched transactions above threshold\n    - API errors\n    - Rate limit warnings\n    - Successful reconciliation completion\n  - Store metrics for performance monitoring\n\n- ### Cleanup & Maintenance\n  - Archive processed transactions\n  - Clean up temporary storage\n  - Update matching rules based on success rates\n  - Maintain audit trail of all actions\n  - Regular token refresh handling\n\n",
+        "height": 1400,
+        "width": 600,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -880,
+        -380
+      ],
+      "typeVersion": 1,
+      "id": "c86a5823-de2b-4cb5-9496-4ed7112bab91",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/connections",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "1777cd45-16eb-47af-92c1-bbeb7c507a69",
+      "name": "get_tenant_ID",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        40,
+        80
+      ],
+      "credentials": {
+        "xeroOAuth2Api": {
+          "id": "ogNv2lJWSPRBGZq4",
+          "name": "Xero account"
+        },
+        "oAuth2Api": {
+          "id": "d0N8cnpX8hHkSBFi",
+          "name": "Xero Tax Guys App"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9e217c89-7677-4255-a7ec-7d1ac3498679",
+              "name": "tenantId",
+              "value": "={{ $json.body[0].tenantId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        80
+      ],
+      "id": "6632489a-4411-4b3e-9a3a-3776f44e5d65",
+      "name": "tenant_id"
+    },
+    {
+      "parameters": {
+        "content": "## Get Tenant ID and store the value",
+        "height": 240,
+        "width": 360
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "6c71ee5a-0967-4810-a9d3-db2cf11cba1e",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/api.xro/2.0/Accounts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "Type==\"BANK\""
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Xero-tenant-id",
+              "value": "={{ $('tenant_id').item.json.tenantId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        80
+      ],
+      "id": "bcd1375b-84c9-4487-bf3b-c432c37152b0",
+      "name": "get_accounts",
+      "notesInFlow": true,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "d0N8cnpX8hHkSBFi",
+          "name": "Xero Tax Guys App"
+        }
+      },
+      "notes": "Required for mapping bank feeds to correct bank account"
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/api.xro/2.0/BankTransactions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "Status==\"AUTHORISED\""
+            },
+            {
+              "name": "order",
+              "value": "Date DESC"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Xero-tenant-id",
+              "value": "={{ $('tenant_id').item.json.tenantId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        80
+      ],
+      "id": "1b9142d4-746e-45b2-9dc3-d1fd3ce92d13",
+      "name": "get_bankTransactions",
+      "notesInFlow": true,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "d0N8cnpX8hHkSBFi",
+          "name": "Xero Tax Guys App"
+        }
+      },
+      "notes": "Required for mapping bank feeds to correct bank account"
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/api.xro/2.0/BankStatements",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "bankAccountID",
+              "value": "={{ $('get_accounts').item.json.Accounts[0].AccountID }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Xero-tenant-id",
+              "value": "={{ $('tenant_id').item.json.tenantId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -120,
+        -200
+      ],
+      "id": "8b448411-2af1-408e-94be-80c9059f7a96",
+      "name": "get_bankStatementlines",
+      "notesInFlow": true,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "d0N8cnpX8hHkSBFi",
+          "name": "Xero Tax Guys App"
+        }
+      },
+      "notes": "Required for mapping bank feeds to correct bank account"
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/api.xro/2.0/Invoices",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "Status==\"AUTHORISED\""
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Xero-tenant-id",
+              "value": "={{ $('tenant_id').item.json.tenantId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        240
+      ],
+      "id": "8a79a67c-743d-4e4a-ad76-b626b6503200",
+      "name": "get_invoices",
+      "notesInFlow": true,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "d0N8cnpX8hHkSBFi",
+          "name": "Xero Tax Guys App"
+        }
+      },
+      "notes": "Required for mapping bank feeds to correct bank account"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "77b8da73-6cea-4862-8cbd-3805b05ab911",
+              "name": "BankTransactions",
+              "value": "={{ $json.BankTransactions }}",
+              "type": "array"
+            },
+            {
+              "id": "2c7f49b6-ac8b-482c-b761-4304cd4f7d22",
+              "name": "nuber of unreconciled statements",
+              "value": "={{ $json.BankTransactions.length }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        80
+      ],
+      "id": "4862577e-4e0d-4777-9f39-1133cda1de7e",
+      "name": "unreconciled_transactions"
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/api.xro/2.0/Payments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "IsReconciled==false&&Status!=\"DELETED\""
+            },
+            {
+              "name": "pageSize",
+              "value": "200kk"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Xero-tenant-id",
+              "value": "={{ $('tenant_id').item.json.tenantId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        -160
+      ],
+      "id": "3bb2da69-a85f-471a-8c9c-71159583c801",
+      "name": "get_payments",
+      "notesInFlow": true,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "d0N8cnpX8hHkSBFi",
+          "name": "Xero Tax Guys App"
+        }
+      },
+      "notes": "Required for mapping bank feeds to correct bank account"
+    },
+    {
+      "parameters": {
+        "url": "https://api.xero.com/api.xro/2.0/BankTransactions/06648cbf-e534-414f-a982-b4bb5cedc72c",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Xero-tenant-id",
+              "value": "={{ $('tenant_id').item.json.tenantId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        420
+      ],
+      "id": "4932c1dd-3e21-4798-b5f0-e1bbda57b804",
+      "name": "get_bankTransactions(one)",
+      "notesInFlow": true,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "d0N8cnpX8hHkSBFi",
+          "name": "Xero Tax Guys App"
+        }
+      },
+      "notes": "Required for mapping bank feeds to correct bank account"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "BankTransactions",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        80
+      ],
+      "id": "fb130eaa-105c-4b2c-b31a-7eea494f994f",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3c7d9220-6e23-46ce-acda-c5dbd4cef07c",
+              "leftValue": "={{ $json.IsReconciled }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        80
+      ],
+      "id": "1df5be9e-3c1f-4fdf-8f56-ea677ccf244b",
+      "name": "IsReconciled?"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Africa/Nairobi",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-06T16:15:49.916Z",
+      "updatedAt": "2025-01-06T16:15:49.916Z",
+      "id": "VgdM7O2sWG650EH4",
+      "name": "Tax Guys"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-10T06:53:48.000Z",
+  "versionId": "7e890dab-7c22-41a7-b631-4c07b09c9eb9"
+}
