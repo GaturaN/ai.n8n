@@ -1,0 +1,81 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-10T16:44:04.433Z",
+  "id": "9Bl6xaK8zUHrmEm8",
+  "meta": null,
+  "name": "Portfolio",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6c6ce1f2-0931-4227-b410-4fe38ca20d3c",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "repository",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "GaturaN",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "ipay",
+          "mode": "list",
+          "cachedResultName": "ipay",
+          "cachedResultUrl": "https://github.com/GaturaN/ipay"
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "ce963c0b-6a56-4582-add7-e928d56c4f3d",
+      "name": "GitHub",
+      "credentials": {
+        "githubApi": {
+          "id": "X6bXppeDH36EAEvR",
+          "name": "GitHub account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-06T16:12:40.864Z",
+      "updatedAt": "2025-01-06T16:12:40.864Z",
+      "id": "X0dLANNITgq0nWem",
+      "name": "Dev"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-10T18:21:54.000Z",
+  "versionId": "44330f7e-353b-469d-a79b-0e41a6713d14"
+}
