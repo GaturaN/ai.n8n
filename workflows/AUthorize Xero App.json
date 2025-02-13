@@ -1,0 +1,42 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-01-07T17:42:18.616Z",
+  "id": "ZR98dojbUuqa9iIj",
+  "meta": null,
+  "name": "AUthorize Xero App",
+  "nodes": [
+    {
+      "parameters": {
+        "multipleMethods": true,
+        "path": "f918d4a4-9130-4300-88f4-06b0f3fc07cb",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "20dfe66a-87ae-4079-ab68-e002b984ec89",
+      "name": "Webhook",
+      "webhookId": "f918d4a4-9130-4300-88f4-06b0f3fc07cb"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-06T16:15:49.916Z",
+      "updatedAt": "2025-01-06T16:15:49.916Z",
+      "id": "VgdM7O2sWG650EH4",
+      "name": "Tax Guys"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2025-02-10T09:19:47.000Z",
+  "versionId": "ddfafcba-41eb-4505-b756-baa37bc3c361"
+}
