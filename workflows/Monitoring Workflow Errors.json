@@ -1,0 +1,94 @@
+{
+  "active": false,
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-13T14:34:23.645Z",
+  "id": "rlDAu6hTymSrjcLZ",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Monitoring Workflow Errors",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "790b627a-966c-4887-9500-430d576a2c6f",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=The workflow {{ $json.workflow.name }} failed, with the error message: {{ $json.execution.error.message }}. Last node executed: {{ $json.execution.lastNodeExecuted }}. Check this workflow execution here: {{ $json.execution.url }} My Unique ID: 5f0f3c9590861996e011d15995de611e",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "9954352d-226a-422a-ab51-1429306ea5f4",
+      "name": "Discord",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "vQmh41hFBrXmKeFw",
+          "name": "Level 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Error Trigger": [
+      {
+        "json": {
+          "execution": {
+            "id": 231,
+            "url": "https://ai.gatuservices.info/execution/workflow/1/231",
+            "retryOf": "34",
+            "error": {
+              "message": "Example Error Message",
+              "stack": "Stacktrace"
+            },
+            "lastNodeExecuted": "Node With Error",
+            "mode": "manual"
+          },
+          "workflow": {
+            "id": "1",
+            "name": "Example Workflow"
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-07T08:57:03.836Z",
+      "updatedAt": "2025-01-07T08:57:03.836Z",
+      "id": "ghPmxhboxYRdpTkT",
+      "name": "Lvl 2 Tutorial"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-13T14:37:02.000Z",
+  "versionId": "0fbbf42f-6313-439b-92be-8a2c85d9eaf2"
+}
