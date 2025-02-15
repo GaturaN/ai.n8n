@@ -1,0 +1,554 @@
+{
+  "active": false,
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log into n8n": {
+      "main": [
+        [
+          {
+            "node": "retry workflow automatically",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "retry workflow automatically": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Log into n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-15T16:38:15.208Z",
+  "id": "PxtzFqIdHmXFVW7j",
+  "meta": null,
+  "name": "My workflow 9",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Default Error Handler\n\nUpdate this to your preferred notification mechanism",
+        "height": 275.55257133074616,
+        "width": 304.75100332548016
+      },
+      "id": "8837a3e2-90f9-4c1f-a3b4-bfe6e6f7d361",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -800,
+        160
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "54bb48c2-f450-4f27-b90b-5ddd3810772b",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "position": [
+        -740,
+        260
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1WLxgJvPs8dTfO0IVzmiYbPLSLCfCc9dwe0EdoweU0Wc",
+          "mode": "list",
+          "cachedResultName": "n8n dashboard and monitor",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WLxgJvPs8dTfO0IVzmiYbPLSLCfCc9dwe0EdoweU0Wc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 964432264,
+          "mode": "list",
+          "cachedResultName": "Workflow Retry",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WLxgJvPs8dTfO0IVzmiYbPLSLCfCc9dwe0EdoweU0Wc/edit#gid=964432264"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "data",
+              "displayName": "data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "workflowId",
+              "displayName": "workflowId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "retryOf",
+              "displayName": "retryOf",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "finished",
+              "displayName": "finished",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "mode",
+              "displayName": "mode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "retrySuccessId",
+              "displayName": "retrySuccessId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "retry date",
+              "displayName": "retry date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Retry By",
+              "displayName": "Retry By",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "workflow name",
+              "displayName": "workflow name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "error message",
+              "displayName": "error message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {
+          "useAppend": false
+        }
+      },
+      "id": "12adfdf3-de6d-46fb-a16c-ba5e964da350",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        500,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dec4b7ff-58d3-4d4c-b8ac-bbc6ee94bf8b",
+              "name": "data",
+              "value": "={{ $json.data }}",
+              "type": "string"
+            },
+            {
+              "id": "875059a8-a2dd-4a89-b295-6333c3d01cc3",
+              "name": "workflowId",
+              "value": "={{ $('Edit Fields1').item.json.workflowid }}",
+              "type": "string"
+            },
+            {
+              "id": "62f78969-40a3-4597-9ea3-f18812d7cab3",
+              "name": "retryOf",
+              "value": "={{ $('Edit Fields1').item.json.executionretryOf }}",
+              "type": "string"
+            },
+            {
+              "id": "2f83954c-c5fc-4cd8-9489-8ffe977b3f6d",
+              "name": "id",
+              "value": "={{ $('Edit Fields1').item.json.executionid }}",
+              "type": "string"
+            },
+            {
+              "id": "31508c54-755a-4729-9258-66dd58cfd55a",
+              "name": "mode",
+              "value": "={{ $('Edit Fields1').item.json.executionmode }}",
+              "type": "string"
+            },
+            {
+              "id": "c27d393c-24f8-402c-9701-5d9b7175ea01",
+              "name": "retry date",
+              "value": "={{ $now}}",
+              "type": "string"
+            },
+            {
+              "id": "3ce205b7-3875-4603-a0cb-4334e77a53f6",
+              "name": "Retry By",
+              "value": "={{ $('Log into n8n').item.json.body.data.firstName + \" \" +$('Log into n8n').item.json.body.data.lastName }}",
+              "type": "string"
+            },
+            {
+              "id": "ae80ebd7-66c8-4976-961a-b34851072968",
+              "name": "workflow name",
+              "value": "={{ $('Error Trigger').item.json.workflow.name }}",
+              "type": "string"
+            },
+            {
+              "id": "104ed3a9-1152-4b21-a4c5-938dbc177290",
+              "name": "error message",
+              "value": "={{ $('Error Trigger').item.json.execution.error.message }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f09ee90b-59d8-48a8-8071-3844967fad22",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ \n\n(() => {\n  const instance = $json.n8n_instance;\n  const normalizedUrl = instance.endsWith('/') ? instance + 'rest/login' : instance + '/rest/login';\n  return normalizedUrl;\n})()\n}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "email",
+              "value": "={{ $json.username }}"
+            },
+            {
+              "name": "password",
+              "value": "={{ $json.password }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "b27117e9-f3fc-423c-bcdb-b9c05edd7851",
+      "name": "Log into n8n",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -60,
+        260
+      ],
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "271ec310-e97d-45ae-80d1-e561d0b651fb",
+              "name": "workflowname",
+              "value": "={{ $json.workflow.name }}",
+              "type": "string"
+            },
+            {
+              "id": "41993a18-ae41-4812-b58e-270b96f0969a",
+              "name": "workflowid",
+              "value": "={{ $json.workflow.id }}",
+              "type": "string"
+            },
+            {
+              "id": "cf7b7e4b-7580-47c9-9956-4b266525bf57",
+              "name": "executionid",
+              "value": "={{ $json.execution.id }}",
+              "type": "number"
+            },
+            {
+              "id": "635b5cc5-6d05-4270-9310-41e185412b5d",
+              "name": "executionurl",
+              "value": "={{ $json.execution.url }}",
+              "type": "string"
+            },
+            {
+              "id": "29580f96-de2d-4609-9436-269e4b021a4c",
+              "name": "executionretryOf",
+              "value": "={{ $json.execution.retryOf }}",
+              "type": "string"
+            },
+            {
+              "id": "3d553f79-7af2-4984-accd-e15a6f4a4e36",
+              "name": "executionmode",
+              "value": "={{ $json.execution.mode }}",
+              "type": "string"
+            },
+            {
+              "id": "27a9de34-5d5d-4bd7-97a7-fd41e6192baa",
+              "name": "username",
+              "value": "username",
+              "type": "string"
+            },
+            {
+              "id": "96cfb30c-0bff-4545-a58c-81b60e74f086",
+              "name": "password",
+              "value": "password",
+              "type": "string"
+            },
+            {
+              "id": "fc60713e-f9d9-42b4-89d3-60d7b20af773",
+              "name": "n8n_instance",
+              "value": "https://n8n.domain.com/",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "945828f7-f263-4910-a9a1-a8d5d4eeb948",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -520,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ \n\n$('Edit Fields1').item.json.n8n_instance.endsWith('/') \n  ? $('Edit Fields1').item.json.n8n_instance + 'rest/executions/' + $('Edit Fields1').item.json.executionid + '/retry' \n  : $('Edit Fields1').item.json.n8n_instance + '/rest/executions/' + $('Edit Fields1').item.json.executionid + '/retry'\n\n }}  ",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "cookie",
+              "value": "={{ $('Log into n8n').item.json.headers['set-cookie'][0] }}"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "loadWorkflow",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "id": "b0df168a-a77f-4d00-9ed4-e1947b486254",
+      "name": "retry workflow automatically",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        140,
+        260
+      ],
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## Retry workflow automatically",
+        "height": 80,
+        "width": 435
+      },
+      "id": "74778e18-2bce-450f-936d-519673d655df",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ece3ce61-0b4b-451d-a0cb-20d00145c40e",
+              "leftValue": "={{ $json.executionmode }}",
+              "rightValue": "retry",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -320,
+        260
+      ],
+      "id": "b9ff0ef7-35f0-4a5e-b04a-d8d9ea53a8bf",
+      "name": "Filter"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-15T16:38:15.208Z",
+  "versionId": "549f2af9-8c30-40c3-9a96-f4394ad04c1c"
+}
