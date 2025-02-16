@@ -159,7 +159,7 @@
       "main": [
         [
           {
-            "node": "CloudConvert",
+            "node": "draft_email",
             "type": "main",
             "index": 0
           }
@@ -176,7 +176,7 @@
   "nodes": [
     {
       "parameters": {
-        "content": "## Collect the job description and the email address for application\n",
+        "content": "## Collect the job description and the email address for application and company name\n",
         "height": 260,
         "width": 200
       },
@@ -208,6 +208,9 @@
             {
               "fieldLabel": "Company Applying To",
               "requiredField": true
+            },
+            {
+              "fieldLabel": "Email Subject"
             }
           ]
         },
@@ -264,7 +267,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Subject: Request for CV and Cover Letter Preparation\n\nHello,\n\nI need your assistance in crafting a tailored CV and Cover Letter for the following job opportunity. Below are the details:\n\nJob Description:\n{{ $json.job_description }}\n\nCompany Name: {{ $json.company }}\nPlease ensure the cover letter explicitly references the company and aligns with their values, mission, or industry.\n\nToday’s Date: {{ $today }}\n\nAdditional Resources:\n\n- Google Drive: You have access to my Google Drive, which contains my past CVs for reference.\n\n\nGuidelines:\n\n- Tailor the CV to highlight skills and experiences that align with the job description.\n\n- Ensure the cover letter is professional, concise, and demonstrates my enthusiasm for the role and the company.\n\n- Use the job description and company name to personalize both documents.\n\n",
+        "text": "=Subject: Request for CV and Cover Letter Preparation\n\nHello,\n\nI need your assistance in crafting a tailored CV and Cover Letter for the following job opportunity. Below are the details:\n\nJob Description:\n{{ $json.job_description }}\n\nCompany Name: {{ $json.company }}\nPlease ensure the cover letter explicitly references the company and aligns with their values, mission, or industry.\n\nToday’s Date: {{ $today }}\n\nAdditional Resources:\n\n- Google Drive: You have access to my Google Drive, which contains my past CVs for reference.\n\n\nGuidelines:\n\n- Tailor the CV to highlight skills and experiences that align with the job description.\n\n- Ensure the cover letter is professional, concise, and demonstrates my enthusiasm for the role and the company.\n\n- Use the job description and company name to personalize both documents.\n- Make sure the CV and the Cover Letter are separate.\n",
         "hasOutputParser": true,
         "options": {}
       },
@@ -573,43 +576,74 @@
     },
     {
       "parameters": {
-        "outputFormat": "pdf"
+        "content": "## Access all the previous CVs in a google drive, download and return their texts to the AI Agent.\n",
+        "height": 340,
+        "width": 1820,
+        "color": 5
       },
-      "type": "@cloudconvert/n8n-nodes-cloudconvert.cloudConvert",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.stickyNote",
       "position": [
-        660,
+        -600,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "65a26942-db9f-4546-bd18-3f7d945df82f",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "Job Application",
+        "message": "={{ $('cv_cover_letter').item.json[\"Cover Leter\"] }}",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "=data"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        680,
         -40
       ],
-      "id": "8fd40ebd-e50f-4820-a589-b167db5c099c",
-      "name": "CloudConvert",
+      "id": "a8310ffd-5151-4216-bc97-432689b744d3",
+      "name": "draft_email",
+      "webhookId": "151343bd-747c-49c3-ab0d-ae6bca3ef45b",
       "credentials": {
-        "cloudConvertOAuth2Api": {
-          "id": "DFGJeJnkgJHXCmfv",
-          "name": "CloudConvert account"
+        "gmailOAuth2": {
+          "id": "Sl6Ly5PwfaJ7GBZC",
+          "name": "Google Account"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Create a draft email for further processing and editing.",
+        "height": 280,
+        "width": 400
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        420,
+        -140
+      ],
+      "typeVersion": 1,
+      "id": "07c7c659-c7b8-440e-ba54-1f1cb30ba268",
+      "name": "Sticky Note3"
     }
   ],
-  "pinData": {
-    "jd_email": [
-      {
-        "json": {
-          "Job Description": "ob Title: RPA and Generative AI Specialist\r\n\\nLocation: United Kingdom (Remote/Flexible)\r\n\\nAbout Us: We are an award-winning UK accounting firm, renowned for our commitment to \r\n\\nexcellence and innovation in the financial sector. Our mission is to leverage cutting-edge \r\n\\ntechnology to streamline accounting and tax preparation processes, ensuring our clients \r\n\\nreceive the most efficient and accurate service possible.\r\n\\nRole Overview: We are seeking a highly skilled RPA and Generative AI Specialist to join \r\n\\nour dynamic team. The ideal candidate will have a proven track record in developing and \r\n\\nimplementing intelligent bots specifically designed for the accounting, tax, and finance \r\n\\nsectors. This role is pivotal in our journey to automate and enhance our service offerings \r\n\\nusing advanced AI and RPA technologies.\r\n\\nKey Responsibilities:\r\n\\nDesign, develop, and deploy RPA solutions using tools such as Automation \r\n\\nAnywhere, Anthropic Claude and Chat GPT\r\n\\nCreate and implement generative AI models to automate complex accounting and tax \r\n\\npreparation tasks.\r\n\\nLead the development of our first three automation projects:\r\n\\n1.Xero/Online Bookkeeping Reconciliation: Automate the reconciliation \r\n\\nprocess to ensure accuracy and efficiency. (example here \r\n\\nhttps://www.youtube.com/watch?v=QEfC2Vu3oqs and here \r\n\\nhttps://www.youtube.com/watch?v=bhGanbzOuk8 and here \r\n\\nhttps://www.youtube.com/watch?v=kRrbpam-cmo\r\n\\n2.Tax Return Preparation: Develop bots to streamline the preparation and \r\n\\nsubmission of tax returns. (example here \r\n\\nhttps://www.fdintelligence.co.uk/sectors/)\r\n\\n3.Conversational AI with Voice and Email/AI Agents: Implement AI-driven \r\n\\nconversational interfaces to enhance client communication via voice, email \r\n\\nand WhatsApp (see here https://www.salesape.ai/ and here \r\n\\nhttps://midlandsbusinessrecovery.co.uk/\r\n\\nRequirements:\r\n\\nProven experience in developing RPA solutions using Automation Anywhere, \r\n\\nAnthropic Claude or UI Path.\r\n\\nStrong background in generative AI, LLM, AI Agents and Machine Learning Models.\r\n\\nUnderstanding of the accounting, tax, and finance sectors.\r\n\\nExperience in automating accounting and tax preparation workflows.\r\n\\nExcellent problem-solving skills and the ability to work in a fast-paced environment.\r\n\\nStrong communication and collaboration skills.\r\n\\nA degree in Computer Science, Engineering, Finance, or a related field is preferred.\r\n\\nJoin Us: Be part of a pioneering team that's transforming the future of accounting and tax \r\n\\npreparation through intelligent automation. Together, we can achieve remarkable things",
-          "Job application email": "francnjenga99@gmail.com",
-          "Company Applying To": "Mapa technologies",
-          "submittedAt": "2025-02-15T13:23:02.570-05:00",
-          "formMode": "test"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-02-15T18:41:38.000Z",
-  "versionId": "3c4a5ea9-8b61-4bf5-8492-b487f76e68d5"
+  "updatedAt": "2025-02-16T11:26:34.000Z",
+  "versionId": "d53b1c09-fd98-41a3-bc79-073a38548602"
 }
