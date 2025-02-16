@@ -49,7 +49,117 @@
       "main": [
         [
           {
+            "node": "get_all_CVs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_all_CVs": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
             "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "cv_cover_letter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cv_cover_letter": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "CloudConvert",
             "type": "main",
             "index": 0
           }
@@ -94,6 +204,10 @@
               "fieldLabel": "Job application email",
               "fieldType": "email",
               "requiredField": true
+            },
+            {
+              "fieldLabel": "Company Applying To",
+              "requiredField": true
             }
           ]
         },
@@ -127,6 +241,12 @@
               "name": "job_email",
               "value": "={{ $json['Job application email'] }}",
               "type": "string"
+            },
+            {
+              "id": "178ed06e-05f3-4a09-816a-72e8c4ce8d74",
+              "name": "company",
+              "value": "={{ $json['Company Applying To'] }}",
+              "type": "string"
             }
           ]
         },
@@ -144,10 +264,9 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Hello,\n\nYou are tasked with writing a CV and a Cover Letter for the the following Job Description.\nYou have access to a google drive that contains my Past CVs, and to github where a majority of my projects are stored.\n\n\nThis is my github url:\n\nhttps://github.com/GaturaN\n\n",
-        "options": {
-          "systemMessage": "=The Job Description is as follows:\n\n{{ $json.job_description }}"
-        }
+        "text": "=Subject: Request for CV and Cover Letter Preparation\n\nHello,\n\nI need your assistance in crafting a tailored CV and Cover Letter for the following job opportunity. Below are the details:\n\nJob Description:\n{{ $json.job_description }}\n\nCompany Name: {{ $json.company }}\nPlease ensure the cover letter explicitly references the company and aligns with their values, mission, or industry.\n\nToday’s Date: {{ $today }}\n\nAdditional Resources:\n\n- Google Drive: You have access to my Google Drive, which contains my past CVs for reference.\n\n\nGuidelines:\n\n- Tailor the CV to highlight skills and experiences that align with the job description.\n\n- Ensure the cover letter is professional, concise, and demonstrates my enthusiasm for the role and the company.\n\n- Use the job description and company name to personalize both documents.\n\n",
+        "hasOutputParser": true,
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
@@ -220,7 +339,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2,
       "position": [
-        40,
+        -40,
         180
       ],
       "id": "acf48280-361a-4bce-a08b-7a3ffa3207ba",
@@ -244,15 +363,15 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "mode": "list",
-          "value": ""
+          "value": "={{ $json.id }}",
+          "mode": "id"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -320,
+        340,
         460
       ],
       "id": "68b34ee5-24ec-4dcd-8196-e980d940659b",
@@ -263,23 +382,224 @@
           "name": "Drive n8n"
         }
       }
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/drive/v3/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "'1bb3OeMwYDa6PbfE3mI56l2hwepVFXtkd' in parents"
+            },
+            {
+              "name": "key",
+              "value": "YOUR_API_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -280,
+        460
+      ],
+      "id": "7f6257f3-022d-49dc-bf40-259dbdb936ad",
+      "name": "get_all_CVs",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "files",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        460
+      ],
+      "id": "36f64b0d-56fb-4f99-bb88-2cebbbfbba87",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c76bc9d6-1bf0-4d8b-9429-0f1149ea1ada",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "6902d9c1-cd50-42d1-9209-0fc14edce631",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        460
+      ],
+      "id": "8742206d-abd3-4f2c-b594-ad1ab3fdf918",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        560,
+        460
+      ],
+      "id": "86fbe45e-b391-4692-8908-815153b70727",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "include": "specifiedFields",
+        "fieldsToInclude": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        780,
+        460
+      ],
+      "id": "33823186-a4df-4626-bd11-74b4f7823efa",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"CV\": \"tailored CV\",\n  \"Cover Leter\": \"tailored cover letter\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        100,
+        180
+      ],
+      "id": "54dad37c-3b45-4d48-afa5-201a62808c45",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1fec0445-127e-4143-8362-70d747c62d08",
+              "name": "response",
+              "value": "={{ $json.data[0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1000,
+        460
+      ],
+      "id": "4ddaefca-5e61-43e8-8ef3-9aa9987895c9",
+      "name": "response"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "845b0d62-f5f0-44ec-ab57-bf4be6e95ca7",
+              "name": "CV",
+              "value": "={{ $json.output.CV }}",
+              "type": "string"
+            },
+            {
+              "id": "75201636-2d14-4708-8e67-29f3a3f1ca33",
+              "name": "Cover Leter",
+              "value": "={{ $json.output['Cover Leter'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        -40
+      ],
+      "id": "5748cebd-94d8-4ea9-9c3f-b57daa675ded",
+      "name": "cv_cover_letter"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "CV",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        460,
+        -40
+      ],
+      "id": "8545a1ad-4999-4b1c-bc0b-dc61cee8051b",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "outputFormat": "pdf"
+      },
+      "type": "@cloudconvert/n8n-nodes-cloudconvert.cloudConvert",
+      "typeVersion": 1,
+      "position": [
+        660,
+        -40
+      ],
+      "id": "8fd40ebd-e50f-4820-a589-b167db5c099c",
+      "name": "CloudConvert",
+      "credentials": {
+        "cloudConvertOAuth2Api": {
+          "id": "DFGJeJnkgJHXCmfv",
+          "name": "CloudConvert account"
+        }
+      }
     }
   ],
   "pinData": {
     "jd_email": [
       {
         "json": {
-          "Job Description": "Job Title: RPA and Generative AI Specialist\r\nLocation: United Kingdom (Remote/Flexible)\r\nAbout Us: We are an award-winning UK accounting firm, renowned for our commitment to \r\nexcellence and innovation in the financial sector. Our mission is to leverage cutting-edge \r\ntechnology to streamline accounting and tax preparation processes, ensuring our clients \r\nreceive the most efficient and accurate service possible.\r\nRole Overview: We are seeking a highly skilled RPA and Generative AI Specialist to join \r\nour dynamic team. The ideal candidate will have a proven track record in developing and \r\nimplementing intelligent bots specifically designed for the accounting, tax, and finance \r\nsectors. This role is pivotal in our journey to automate and enhance our service offerings \r\nusing advanced AI and RPA technologies.\r\nKey Responsibilities:\r\nDesign, develop, and deploy RPA solutions using tools such as Automation \r\nAnywhere, Anthropic Claude and Chat GPT\r\nCreate and implement generative AI models to automate complex accounting and tax \r\npreparation tasks.\r\nLead the development of our first three automation projects:\r\n1.Xero/Online Bookkeeping Reconciliation: Automate the reconciliation \r\nprocess to ensure accuracy and efficiency. (example here \r\nhttps://www.youtube.com/watch?v=QEfC2Vu3oqs and here \r\nhttps://www.youtube.com/watch?v=bhGanbzOuk8 and here \r\nhttps://www.youtube.com/watch?v=kRrbpam-cmo\r\n2.Tax Return Preparation: Develop bots to streamline the preparation and \r\nsubmission of tax returns. (example here \r\nhttps://www.fdintelligence.co.uk/sectors/)\r\n3.Conversational AI with Voice and Email/AI Agents: Implement AI-driven \r\nconversational interfaces to enhance client communication via voice, email \r\nand WhatsApp (see here https://www.salesape.ai/ and here \r\nhttps://midlandsbusinessrecovery.co.uk/\r\nRequirements:\r\nProven experience in developing RPA solutions using Automation Anywhere, \r\nAnthropic Claude or UI Path.\r\nStrong background in generative AI, LLM, AI Agents and Machine Learning Models.\r\nUnderstanding of the accounting, tax, and finance sectors.\r\nExperience in automating accounting and tax preparation workflows.\r\nExcellent problem-solving skills and the ability to work in a fast-paced environment.\r\nStrong communication and collaboration skills.\r\nA degree in Computer Science, Engineering, Finance, or a related field is preferred.\r\nJoin Us: Be part of a pioneering team that's transforming the future of accounting and tax \r\npreparation through intelligent automation. Together, we can achieve remarkable things",
+          "Job Description": "ob Title: RPA and Generative AI Specialist\r\n\\nLocation: United Kingdom (Remote/Flexible)\r\n\\nAbout Us: We are an award-winning UK accounting firm, renowned for our commitment to \r\n\\nexcellence and innovation in the financial sector. Our mission is to leverage cutting-edge \r\n\\ntechnology to streamline accounting and tax preparation processes, ensuring our clients \r\n\\nreceive the most efficient and accurate service possible.\r\n\\nRole Overview: We are seeking a highly skilled RPA and Generative AI Specialist to join \r\n\\nour dynamic team. The ideal candidate will have a proven track record in developing and \r\n\\nimplementing intelligent bots specifically designed for the accounting, tax, and finance \r\n\\nsectors. This role is pivotal in our journey to automate and enhance our service offerings \r\n\\nusing advanced AI and RPA technologies.\r\n\\nKey Responsibilities:\r\n\\nDesign, develop, and deploy RPA solutions using tools such as Automation \r\n\\nAnywhere, Anthropic Claude and Chat GPT\r\n\\nCreate and implement generative AI models to automate complex accounting and tax \r\n\\npreparation tasks.\r\n\\nLead the development of our first three automation projects:\r\n\\n1.Xero/Online Bookkeeping Reconciliation: Automate the reconciliation \r\n\\nprocess to ensure accuracy and efficiency. (example here \r\n\\nhttps://www.youtube.com/watch?v=QEfC2Vu3oqs and here \r\n\\nhttps://www.youtube.com/watch?v=bhGanbzOuk8 and here \r\n\\nhttps://www.youtube.com/watch?v=kRrbpam-cmo\r\n\\n2.Tax Return Preparation: Develop bots to streamline the preparation and \r\n\\nsubmission of tax returns. (example here \r\n\\nhttps://www.fdintelligence.co.uk/sectors/)\r\n\\n3.Conversational AI with Voice and Email/AI Agents: Implement AI-driven \r\n\\nconversational interfaces to enhance client communication via voice, email \r\n\\nand WhatsApp (see here https://www.salesape.ai/ and here \r\n\\nhttps://midlandsbusinessrecovery.co.uk/\r\n\\nRequirements:\r\n\\nProven experience in developing RPA solutions using Automation Anywhere, \r\n\\nAnthropic Claude or UI Path.\r\n\\nStrong background in generative AI, LLM, AI Agents and Machine Learning Models.\r\n\\nUnderstanding of the accounting, tax, and finance sectors.\r\n\\nExperience in automating accounting and tax preparation workflows.\r\n\\nExcellent problem-solving skills and the ability to work in a fast-paced environment.\r\n\\nStrong communication and collaboration skills.\r\n\\nA degree in Computer Science, Engineering, Finance, or a related field is preferred.\r\n\\nJoin Us: Be part of a pioneering team that's transforming the future of accounting and tax \r\n\\npreparation through intelligent automation. Together, we can achieve remarkable things",
           "Job application email": "francnjenga99@gmail.com",
-          "submittedAt": "2025-02-08T13:23:19.367-05:00",
+          "Company Applying To": "Mapa technologies",
+          "submittedAt": "2025-02-15T13:23:02.570-05:00",
           "formMode": "test"
-        }
-      }
-    ],
-    "When Executed by Another Workflow": [
-      {
-        "json": {
-          "query": "Please analyze my previous CVs to find any relevant experience and projects related to RPA solutions, generative AI, and automation in accounting and finance."
         }
       }
     ]
@@ -290,6 +610,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-02-10T11:27:16.000Z",
-  "versionId": "48fc589d-f88e-430e-9013-67b3cdd082dd"
+  "updatedAt": "2025-02-15T18:41:38.000Z",
+  "versionId": "3c4a5ea9-8b61-4bf5-8492-b487f76e68d5"
 }
