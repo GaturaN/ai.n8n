@@ -1,0 +1,25 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-03-19T15:54:41.925Z",
+  "id": "0XkJmDbmdyA4Tl9C",
+  "meta": null,
+  "name": "AI Lead Generation from Product Description",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-06T16:12:40.864Z",
+      "updatedAt": "2025-01-06T16:12:40.864Z",
+      "id": "X0dLANNITgq0nWem",
+      "name": "Dev"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-19T15:54:48.000Z",
+  "versionId": "85602e3b-98fb-47f9-a7fa-de12f4e4e516"
+}
