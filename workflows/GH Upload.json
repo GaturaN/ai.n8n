@@ -481,8 +481,8 @@
       "typeVersion": 1,
       "credentials": {
         "n8nApi": {
-          "id": "mD9deQoldOjwf6Ue",
-          "name": "n8n account"
+          "id": "KH6RtlUHiFKqBMJV",
+          "name": "n8n account 2"
         }
       }
     },
@@ -558,13 +558,19 @@
       "name": "No Operation, do nothing"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Every 12 hours": [
+      {
+        "json": {}
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-02-13T15:07:20.000Z",
-  "versionId": "7128fbbb-8ae7-4c4a-ab32-a7e8fe23c21c"
+  "updatedAt": "2025-03-19T15:06:26.000Z",
+  "versionId": "6c11004f-9c8e-4f28-a431-17b9776b81ca"
 }
