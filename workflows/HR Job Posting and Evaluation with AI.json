@@ -2167,6 +2167,7 @@
       ],
       "id": "7454b4ea-1b43-4a4a-8623-7848c13298c7",
       "name": "Send Email",
+      "webhookId": "7f531adb-3261-4308-907a-1926d78ffcac",
       "credentials": {
         "smtp": {
           "id": "FRchTiFJGPeC5YNE",
@@ -3059,6 +3060,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-01-22T11:32:11.000Z",
-  "versionId": "ba4460ba-78f2-4405-a2ce-89fa89e44d2b"
+  "updatedAt": "2025-02-19T16:23:48.000Z",
+  "versionId": "3fa4f2aa-9ef1-4327-8e8a-fafbabae6b12"
 }
