@@ -1304,8 +1304,8 @@
     {
       "parameters": {
         "content": "## Overview\n### This workflow automates the generation of high-quality content using AI and integrates with tools like Google Drive and Google Sheets for content management and organization.\n\n## Key Features:\n- ### **Form-Based Content Input**: Collects user inputs via a form, including title, word count, keywords, and additional instructions.\n- ### **AI-Generated Content Outline**: Creates an outline using AI based on user inputs.\n- ### **Detailed Section Processing**: Each section of the content is refined individually.\n- ### **Content Aggregation**: Combines all sections into a cohesive article.\n- ### **Document Management**:\n      - Saves generated content and outlines to Google Drive.\n      - Updates links to generated content in Google Sheets.\n\n## Prerequisites:\n- ### Google Drive and Google Sheets API: Ensure the respective OAuth2 credentials are configured in n8n.\n- ### OpenAI API Key: Required for AI-powered content generation.",
-        "height": 534.5136001658811,
-        "width": 626.3622313971345,
+        "height": 695,
+        "width": 626,
         "color": 4
       },
       "id": "202dfc30-15c9-4a60-b281-33a4f0fad97e",
@@ -1494,6 +1494,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-11-20T08:40:28.000Z",
-  "versionId": "111cf33d-e466-4a26-8d93-111d27d8dd55"
+  "updatedAt": "2025-03-04T16:52:27.000Z",
+  "versionId": "d44e52a3-81d2-408a-866d-3d6e0e4c628a"
 }
