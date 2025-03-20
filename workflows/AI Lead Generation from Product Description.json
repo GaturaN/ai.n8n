@@ -1,11 +1,415 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "last_modified": {
+      "main": [
+        [
+          {
+            "node": "generate_leads?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "generate_leads?": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "urls",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "urls": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "scrape_google",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "scrape_google": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-03-19T15:54:41.925Z",
   "id": "0XkJmDbmdyA4Tl9C",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "AI Lead Generation from Product Description",
-  "nodes": [],
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## AI Lead Generation Requirements\n- ### Have an AT base where one can input their product description. \n- ### Make the input form based to enable one to fill in ll the correct and required details.\n- ### Have option to scrape for new leads.\n- ### Have New leads filled into a Leads database linked to the product.",
+        "height": 280,
+        "width": 460
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        -60
+      ],
+      "typeVersion": 1,
+      "id": "d47804fa-b2fa-4d60-8ddf-634c809351da",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "authentication": "airtableTokenApi",
+        "baseId": {
+          "__rl": true,
+          "value": "appHY0YnzqjD2li8E",
+          "mode": "id"
+        },
+        "tableId": {
+          "__rl": true,
+          "value": "tblhhTbob857tnDRu",
+          "mode": "id"
+        },
+        "triggerField": "=Last Modified",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.airtableTrigger",
+      "typeVersion": 1,
+      "position": [
+        40,
+        0
+      ],
+      "id": "aa935d4e-ac2f-431f-9416-73a9b8e37830",
+      "name": "last_modified",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9554a376-c4ab-42cd-8611-af1cccf671de",
+              "leftValue": "={{ $json.fields.Functions }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b1c5bb8e-9ed2-4145-b658-78539f1c61ee",
+              "leftValue": "={{ $json.fields.Functions }}",
+              "rightValue": "Generate Leads",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "3d6b7985-f378-4b9e-89fb-711a6154c38c",
+      "name": "generate_leads?",
+      "notesInFlow": true,
+      "notes": "\"functions\" !== empty && == \"Generate Lead\""
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        400,
+        120
+      ],
+      "id": "72c8a1a6-5e71-40fd-9883-4725f766e7f9",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "url": "https://www.google.com/search?client=ubuntu-sn&channel=fs&q=site%3Alinkedin.com%2Fin%2F+%28%22Kenya%22%29",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1420,
+        80
+      ],
+      "id": "831a537d-3abd-442d-834a-8ba2382c8b71",
+      "name": "scrape_google"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4",
+          "mode": "list",
+          "cachedResultName": "GPT-4"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Generate Google search URLs to find LinkedIn profiles based on the following data from Airtable. Only return the URLs as output—no explanations, disclaimers, or extra text. Format each URL as a numbered list.\n\nExample URL:\nhttps://www.google.com/search?client=ubuntu-sn&channel=fs&q=site%3Alinkedin.com%2Fin%2F+%28%22Kenya%22%29\n\n\nEnsure that:\n\n    The job titles are extracted from the \"Target Profiles\" field.\n    The countries are taken from both \"Country Company Operational\" and \"Target Audience.\"\n    The output strictly contains the URLs, one per line, in a numbered format."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        400,
+        -40
+      ],
+      "id": "e20942a7-47bf-433c-8047-712908c76ef7",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "appHY0YnzqjD2li8E",
+          "mode": "list",
+          "cachedResultName": "Malin's Project",
+          "cachedResultUrl": "https://airtable.com/appHY0YnzqjD2li8E"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblhhTbob857tnDRu",
+          "mode": "list",
+          "cachedResultName": "Product Overview",
+          "cachedResultUrl": "https://airtable.com/appHY0YnzqjD2li8E/tblhhTbob857tnDRu"
+        },
+        "id": "={{ $('generate_leads?').item.json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        580,
+        140
+      ],
+      "id": "fc3535c8-c21e-43b7-948a-19bb642e2037",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "92c71a1b-3684-4b06-bedf-d84397a35525",
+              "name": "message.content",
+              "value": "={{ $json.message.content.split(\"\\n\")\n  .map(line => line.replace(/^\\d+\\.\\s*/, \"\"))\n  .filter(line => line.trim() !== \"\")\n }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        760,
+        -40
+      ],
+      "id": "857c7d8f-b263-48eb-9f70-94fe385ea4f8",
+      "name": "urls"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "message.content",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        960,
+        -40
+      ],
+      "id": "26672908-5e5f-4d15-9e02-861276c8a735",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1180,
+        -40
+      ],
+      "id": "366a6196-3383-41a0-8201-ca892017d4be",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nconst regex = /https:\\/\\/(?:www\\.|[a-z]{2}\\.)linkedin\\.com\\/in\\/[^\\s\"'<&]+/g;\n\n// Extract HTML content\nconst htmlContent = $input.first().json.data;\n\n// Log the extracted content to verify\nconsole.log(\"HTML Content:\", htmlContent);\n\nif (!htmlContent) {\n  console.log(\"No HTML content found.\");\n  return [];\n}\n\n// Check if regex matches anything\nlet matches = htmlContent.match(regex);\nconsole.log(\"Found Matches:\", matches);\n\nif (matches) {\n  matches.forEach(url => {\n    const cleanUrl = url.split(/[&#]/)[0];\n    if (!results.includes(cleanUrl)) {\n      results.push(cleanUrl);\n    }\n  });\n}\n\nconsole.log(\"Final Results:\", results);\n\nreturn results.map(url => ({ json: { url } }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        80
+      ],
+      "id": "fd3ea5e8-d1b4-4d28-85f2-3105eb7c6619",
+      "name": "Code"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        40,
+        -300
+      ],
+      "id": "356cae4d-814a-4fe9-a2be-dca7c38713e9",
+      "name": "When clicking ‘Test workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "AIzaSyDvQneqBmwSLSsg5WBfV3liFV7OOhnmoQg"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"Explain how AI works\"\n        }\n      ]\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        -300
+      ],
+      "id": "0eb19b5c-827a-4a10-9271-60dfdb2dd9da",
+      "name": "HTTP Request",
+      "disabled": true
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -20,6 +424,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-03-19T15:54:48.000Z",
-  "versionId": "85602e3b-98fb-47f9-a7fa-de12f4e4e516"
+  "updatedAt": "2025-03-19T17:52:31.000Z",
+  "versionId": "52df17aa-f4a8-4884-a7ec-bec7a88d2a0e"
 }
