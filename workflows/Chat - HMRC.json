@@ -1,0 +1,396 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HMRC website": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "hmrc guidelines",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hmrc guidelines": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-24T17:58:14.843Z",
+  "id": "PibklBN5edmvUagq",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Chat - HMRC",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nWelcome to the Tax Guys. How can I assist you today?",
+        "options": {
+          "showWelcomeScreen": false,
+          "title": "Hi there! 👋"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        0
+      ],
+      "id": "3a6d59e7-83ab-4c0c-bd0c-cc15669b2a9c",
+      "name": "When chat message received",
+      "webhookId": "1f1c2809-bed2-4fc9-9560-2f06afa81cab"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        372,
+        0
+      ],
+      "id": "87f0daf7-60a2-4967-9612-715cc812d25d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        220,
+        220
+      ],
+      "id": "5eddec1f-0847-4900-b482-b2190cf93c74",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        340,
+        220
+      ],
+      "id": "91ac5745-6a8e-46f5-a0d7-ddc858ce3fd6",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        460,
+        220
+      ],
+      "id": "37455cbd-6062-4fa7-adb8-451ac40cf425",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {
+        "toolDescription": "interact with hmrc website.",
+        "url": "https://www.gov.uk/guidance/"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        580,
+        220
+      ],
+      "id": "337461c9-5908-4db0-87b1-8327ad1f4181",
+      "name": "HMRC website"
+    },
+    {
+      "parameters": {
+        "formTitle": "HMRC",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "HMRC pdf",
+              "fieldType": "file",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        860
+      ],
+      "id": "5303f9f6-ce7a-4a97-8b1e-e0a5cada5ee4",
+      "name": "On form submission",
+      "webhookId": "606e6d7d-c07f-49db-88c9-334b66c88d3f",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "hmrc-code",
+          "mode": "list",
+          "cachedResultName": "hmrc-code"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        236,
+        860
+      ],
+      "id": "98b6f4c1-32cc-461e-8ab1-260e36fe9c99",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "dimensions": 1024
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        220,
+        1080
+      ],
+      "id": "ed6d5852-7c28-4cb1-b33a-84d4d0949c29",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {
+          "splitPages": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        340,
+        1082.5
+      ],
+      "id": "268caf49-81c3-43c9-af94-2d22c8b12f7a",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 100
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        428,
+        1280
+      ],
+      "id": "144bd8db-5403-4add-b3ef-59b91339a6c3",
+      "name": "Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "options": {
+          "dimensions": 1024
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        788,
+        420
+      ],
+      "id": "212ba54a-b479-49ed-8afa-1bb5ae9fb782",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "VAT_Notice_70021",
+        "toolDescription": "Get hmrc guidelines",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "hmrc-code",
+          "mode": "list",
+          "cachedResultName": "hmrc-code"
+        },
+        "topK": 5,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        700,
+        222.5
+      ],
+      "id": "0c6a11ec-8545-42c0-8b53-9bb6bf67f503",
+      "name": "hmrc guidelines",
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-06T16:15:49.916Z",
+      "updatedAt": "2025-01-06T16:15:49.916Z",
+      "id": "VgdM7O2sWG650EH4",
+      "name": "Tax Guys"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2025-03-24T19:00:56.000Z",
+  "versionId": "4790b088-ea80-4d2a-9049-be2cddc4ce9a"
+}
