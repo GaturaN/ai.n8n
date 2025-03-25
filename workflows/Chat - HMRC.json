@@ -151,12 +151,14 @@
     },
     {
       "parameters": {
-        "options": {}
+        "options": {
+          "systemMessage": "=Today's date is {{ $today }}\nTime now is {{ $now }}\n\nWhen asked question to do with VAT or taxation, give the link/reference to the HMRC guide in the responses just like how most of the LLM do."
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.8,
       "position": [
-        372,
+        380,
         0
       ],
       "id": "87f0daf7-60a2-4967-9612-715cc812d25d",
@@ -379,7 +381,9 @@
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "timezone": "Europe/London",
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
   "tags": [
@@ -391,6 +395,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-03-24T19:00:56.000Z",
-  "versionId": "4790b088-ea80-4d2a-9049-be2cddc4ce9a"
+  "updatedAt": "2025-03-25T04:25:39.000Z",
+  "versionId": "0dab0564-2326-42da-ae85-4ee82273975f"
 }
