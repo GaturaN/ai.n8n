@@ -1,0 +1,553 @@
+{
+  "active": false,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Intent Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get_Events": {
+      "ai_tool": [
+        [
+          {
+            "node": "Intent Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacts": {
+      "ai_tool": [
+        [
+          {
+            "node": "Intent Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4o mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Intent Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Check Feedback",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Correction Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Calendar Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Intent Agent": {
+      "main": [
+        [
+          {
+            "node": "Set Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Intent": {
+      "main": [
+        [
+          {
+            "node": "HITL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HITL": {
+      "main": [
+        [
+          {
+            "node": "Check Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Feedback": {
+      "main": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Correction Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Correction Agent": {
+      "main": [
+        [
+          {
+            "node": "Set Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Event with Attendee": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Events": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calendar Agent": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-27T08:39:15.353Z",
+  "id": "ly3JC83hOpqGIHCa",
+  "meta": null,
+  "name": "Human in the Loop email",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1260,
+        360
+      ],
+      "id": "03863aaa-8e27-4d62-8f73-cece7bdd9526",
+      "name": "Telegram Trigger",
+      "webhookId": "45a20069-fe0a-4809-a434-62186e1427df"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=User query: {{ $json.message.text }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are a calendar assistant. Your job is to look at the incoming query and determine the intent.\n\n## Tools\nContacts - Use this tool to get contact information like email address. This tool must be used if the user requests to create an event with an attendee. If no attendee is specified, you don't need to use this tool.\nGet_Events - Use this to get events when the user wants to create, delete, or update an event. You should provide details about the event to confirm it is the right one to delete or update.\n\n## Rules\n- You must always get events using the 'Get_Events' tool to make sure there are no scheduling conflicts.\n- When you are asked to move, update, or delete an event, you must use 'Get_Events' to confirm the event. You must output the event details like date, time, and any attendee emails\n\n## Output\n- You must output the request from the user and ask any clarification questions.\n- Always output the email of the contact the user requested if requested.\n- If there are two records of contact information for a single name, output the email and the type of contact.\n\n## Final notes\nHere is the current date/time: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -1120,
+        360
+      ],
+      "id": "1ba03421-dc94-4af3-bc73-ab061012bc72",
+      "name": "Intent Agent"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "returnAll": true,
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', `12:01 AM of the day the user requested`, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', `11:59 PM of the day the user requested`, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -1120,
+        600
+      ],
+      "id": "aa73ac63-ece1-4621-bfc1-7c4624889108",
+      "name": "Get_Events"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        -980,
+        600
+      ],
+      "id": "20b419de-04fd-4bb7-866b-d53351be733d",
+      "name": "Contacts"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -460,
+        820
+      ],
+      "id": "108cfee2-ff69-4ab3-9d57-78f322bb1b87",
+      "name": "4o mini"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3ab6c175-d35c-48a3-a9db-5162f962d5f9",
+              "name": "intent",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -800,
+        360
+      ],
+      "id": "f19f1c10-4fa3-4747-bcd2-2eff46d97f6e",
+      "name": "Set Intent"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "message": "={{ $json.intent }}",
+        "responseType": "freeText",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -640,
+        360
+      ],
+      "id": "269d4724-3d50-4f3d-92cc-90e7a8c35e4d",
+      "name": "HITL",
+      "webhookId": "06135021-087d-4558-be06-94de90f2f053"
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.data.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Approved",
+              "description": "The human is confirming or agreeing with our request. This means they acknowledge that the provided information or action is correct and ready to proceed. Approval messages often include phrases like:\n\n\"Yes\"\n\"Looks good to me\"\n\"Send it\"\n\"Correct\"\n\"Approved\"\n\"That works\"\n\"Sounds good\"\n\"Go ahead\""
+            },
+            {
+              "category": "Denied",
+              "description": "The human is providing feedback that does not indicate approval. This could include requests for changes, corrections, or additional clarifications. A denial may also involve specifying a type of email, like 'business' or 'personal'.\n\nExamples \"Denied\" phrases:\n'business'\n'change the time'\n'personal'\n'delete both'\n'delete the first one'\n'today'\n'tomorrow'\n'february 22nd'"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        360
+      ],
+      "id": "5e94f02a-b6c9-4067-8f30-25815fc6f23b",
+      "name": "Check Feedback"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Original intent: {{ $('Set Intent').item.json.intent }}\n\nHuman feedback: {{ $json.data.text }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are a correction agent. Your job is to look at the original output, and correct it based on the human feedback.\n\n## Output\n- Your job is to output the new intent of the request. \n- Always include all of the details required like email address of attendees, time, date, summary, etc.\n- Ask a clarification question if necessary. If there is nothing to clarify, just ask \"Is this correct?\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        0,
+        520
+      ],
+      "id": "17496cad-4330-49ef-88ca-75d7241fb1cf",
+      "name": "Correction Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Set Intent').item.json.intent }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are a calendar assistant. Your responsibilities include creating, getting, and deleting events in the user's calendar.\n\n**Calendar Management Tools**  \n   - Use \"Create Event with Attendee\" when an event includes a participant.  \n   - Use \"Create Event\" for solo events.   \n   - Use \"Get Events\" to fetch calendar schedules when requested.\n   - Use \"Delete Event\" to delete an event. You must use \"Get Events\" first to get the ID of the event to delete.\n   - Use \"Update Event\" to update an event. You must use \"Get Events\" first to get the ID of the event to update.\n\n## Rules\n- Turn the incoming query into an action. Ignore clarification questions, just take action based on the intent you receive.\n\n## Final Notes\nHere is the current date/time: {{ $now }}\nIf a duration for an event isn't specified, assume it will be one hour."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7d489d7a-fe5a-424d-b102-6c613acbb3c6",
+      "name": "Calendar Agent"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        20,
+        260
+      ],
+      "id": "8214b4a9-ef58-458e-b0cf-e5c5f661e52b",
+      "name": "Create Event"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Attendees', ``, 'string') }}"
+          ],
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        140,
+        260
+      ],
+      "id": "fd2e8a9c-c748-4e21-bed4-f78083ed69a1",
+      "name": "Create Event with Attendee"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "updateFields": {
+          "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+          "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        380,
+        260
+      ],
+      "id": "d9ed0b71-3c5e-4cca-9b95-107faa332e3d",
+      "name": "Update Event"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "returnAll": true,
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', `12:01 AM of the day the user requested`, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', `11:59 PM of the day the user requested`, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        260,
+        260
+      ],
+      "id": "b594488a-0d5d-4300-ae3d-51690e48ef69",
+      "name": "Get Events"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        500,
+        260
+      ],
+      "id": "3c1c7fe7-e9f0-4c54-8ede-173716bf5d33",
+      "name": "Delete Event"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        320,
+        0
+      ],
+      "id": "3e3aa2ec-1ef1-48e1-96f6-eefa7a7ad1fa",
+      "name": "Response",
+      "webhookId": "2ab05328-c0b6-462c-a662-2264114c417f"
+    },
+    {
+      "parameters": {
+        "content": "# Nate Herk | AI Automation\n",
+        "height": 80,
+        "width": 520,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -860,
+        140
+      ],
+      "typeVersion": 1,
+      "id": "9b0043e1-5a42-4fe4-814d-4c4c285c81aa",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-27T08:39:31.000Z",
+  "versionId": "5bbe0836-12d8-4650-a259-ebfe134fedc7"
+}
