@@ -209,7 +209,13 @@
       ],
       "id": "03863aaa-8e27-4d62-8f73-cece7bdd9526",
       "name": "Telegram Trigger",
-      "webhookId": "45a20069-fe0a-4809-a434-62186e1427df"
+      "webhookId": "45a20069-fe0a-4809-a434-62186e1427df",
+      "credentials": {
+        "telegramApi": {
+          "id": "ayMpCvQ69GjrbPdP",
+          "name": "gatu_pa_bot"
+        }
+      }
     },
     {
       "parameters": {
@@ -233,8 +239,9 @@
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "mode": "list",
-          "value": ""
+          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Calendar', ``, 'string') }}",
+          "mode": "id",
+          "__regex": "(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)"
         },
         "returnAll": true,
         "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', `12:01 AM of the day the user requested`, 'string') }}",
@@ -248,7 +255,13 @@
         600
       ],
       "id": "aa73ac63-ece1-4621-bfc1-7c4624889108",
-      "name": "Get_Events"
+      "name": "Get_Events",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "nzPOQoEN0ibAA9xT",
+          "name": "Google Calendar account"
+        }
+      }
     },
     {
       "parameters": {
@@ -272,7 +285,13 @@
         600
       ],
       "id": "20b419de-04fd-4bb7-866b-d53351be733d",
-      "name": "Contacts"
+      "name": "Contacts",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
     },
     {
       "parameters": {
@@ -332,7 +351,13 @@
       ],
       "id": "269d4724-3d50-4f3d-92cc-90e7a8c35e4d",
       "name": "HITL",
-      "webhookId": "06135021-087d-4558-be06-94de90f2f053"
+      "webhookId": "06135021-087d-4558-be06-94de90f2f053",
+      "credentials": {
+        "telegramApi": {
+          "id": "ayMpCvQ69GjrbPdP",
+          "name": "gatu_pa_bot"
+        }
+      }
     },
     {
       "parameters": {
@@ -548,6 +573,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-03-27T08:39:31.000Z",
-  "versionId": "5bbe0836-12d8-4650-a259-ebfe134fedc7"
+  "updatedAt": "2025-03-27T17:24:25.000Z",
+  "versionId": "f7a8553d-d7f5-4d07-b5da-788acac627a3"
 }
