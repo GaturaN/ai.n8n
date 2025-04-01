@@ -1,0 +1,197 @@
+{
+  "active": false,
+  "connections": {
+    "Create Paginated Link1": {
+      "main": [
+        [
+          {
+            "node": "Scrape Google1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Separate Links1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Google1": {
+      "main": [
+        [
+          {
+            "node": "Separate Links1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Info1": {
+      "main": [
+        [
+          {
+            "node": "Create Paginated Link1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Set Info1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-31T07:46:58.157Z",
+  "id": "E63PFplOYXdHxgNo",
+  "meta": null,
+  "name": "My workflow 12",
+  "nodes": [
+    {
+      "parameters": {
+        "functionCode": "const inputLink = items[0].json.link;\nconst pageNumber = items[0].json.page;\n\n// Calculate the start parameter based on the page number\nconst startValue = (pageNumber - 1) * 10;\n\n// Check if the URL already has query parameters\nconst hasQueryParams = inputLink.includes('?');\n\n// Construct the pagination part\nconst paginationPart = `start=${startValue}`;\n\n// Append or replace the `start` parameter in the URL\nlet paginatedLink = '';\nif (hasQueryParams) {\n  if (inputLink.includes('start=')) {\n    paginatedLink = inputLink.replace(/(start=)[^&]+/, `$1${startValue}`);\n  } else {\n    paginatedLink = `${inputLink}&${paginationPart}`;\n  }\n} else {\n  paginatedLink = `${inputLink}?${paginationPart}`;\n}\n\n// Return the modified URL as output\nreturn [{ json: { paginatedLink } }];"
+      },
+      "name": "Create Paginated Link1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        240,
+        -240
+      ],
+      "id": "b5116038-68b8-4ceb-b942-8565eb336364"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kC-MfArB98RAcsUqBXqmPAeEsff0uEDuejx7z4a-iIw/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "Urls"
+          ],
+          "schema": [
+            {
+              "id": "Urls",
+              "displayName": "Urls",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "eaeb7425-19e2-4139-923d-4a8f26e425ea",
+      "name": "Google Sheets1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [
+        820,
+        -240
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "functionCode": "// This code processes a string to find and clean LinkedIn URLs including those from various countries.\nconst results = [];\nconst regex = /https:\\/\\/(?:www\\.|[a-z]{2}\\.)linkedin\\.com\\/in\\/[^\\s\"'<&]+/g;\n\n// Assuming the HTML content is directly in the data field of the item\nconst htmlContent = items[0].json.data;\n\n// Using regex to find all LinkedIn URLs in the HTML content\nlet matches = htmlContent.match(regex);\n\n// If matches are found, clean them up\nif (matches) {\n  matches.forEach(url => {\n    // Remove everything after the first '&' or '#'\n    const cleanUrl = url.split(/[&#]/)[0];\n    // Add URL to the results array if it's not already included\n    if (!results.includes(cleanUrl)) {\n      results.push(cleanUrl);\n    }\n  });\n}\n\n// Return the results as a new array of items\nreturn results.map(url => ({ json: { url } }));"
+      },
+      "name": "Separate Links1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        640,
+        -240
+      ],
+      "id": "4a4dca11-fd5e-426f-b4e7-17673b36edc2"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.paginatedLink }}",
+        "options": {}
+      },
+      "id": "5c87c8dc-9e59-4a6d-969d-04676f1360d8",
+      "name": "Scrape Google1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        440,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "link",
+              "stringValue": "https://www.google.com/search?q=site%3Alinkedin.com%2Fin%2F+%28%22Chief+Product+Officer%22%29+%28%22United+States%22%29+%28%22Automotive%22%29&sca_esv=c5f02fd2b2be415a&sxsrf=ACQVn0-34X-ugeniEQUP9_2eAdrC7zg8FA%3A1709610395290&ei=m5XmZaC0EYTdptQP0biH0AM&ved=0ahUKEwjg7cKCm9yEAxWErokEHVHcAToQ4dUDCBA&uact=5&oq=site%3Alinkedin.com%2Fin%2F+%28%22Chief+Product+Officer%22%29+%28%22United+States%22%29+%28%22Automotive%22%29&gs_lp=Egxnd3Mtd2l6LXNlcnAiUHNpdGU6bGlua2VkaW4uY29tL2luLyAoIkNoaWVmIFByb2R1Y3QgT2ZmaWNlciIpICgiVW5pdGVkIFN0YXRlcyIpICgiQXV0b21vdGl2ZSIpSABQAFgAcAB4AJABAJgBAKABAKoBALgBA8gBAPgBAZgCAKACAJgDAJIHAKAHAA&sclient=gws-wiz-serp"
+            },
+            {
+              "name": "page",
+              "stringValue": "=1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "96ff6a2b-e298-4f38-9a08-694e9c9dc1f2",
+      "name": "Set Info1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        60,
+        -240
+      ]
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        -240
+      ],
+      "id": "779c62d0-50e3-408e-8ad6-1b9e29d9f91c",
+      "name": "When clicking ‘Test workflow’"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-31T07:46:58.157Z",
+  "versionId": "64b26418-3043-4a2f-b7da-354d664122ee"
+}
