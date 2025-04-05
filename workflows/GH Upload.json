@@ -406,8 +406,9 @@
         "triggerTimes": {
           "item": [
             {
-              "mode": "everyX",
-              "value": 12
+              "mode": "everyWeek",
+              "hour": 0,
+              "weekday": "6"
             }
           ]
         }
@@ -570,6 +571,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-03-27T18:06:17.000Z",
-  "versionId": "f3578b99-ad84-40ae-a2f7-b98fb89f34ef"
+  "updatedAt": "2025-04-01T15:16:31.000Z",
+  "versionId": "fe180d6d-e90a-4670-8789-d060a083e386"
 }
