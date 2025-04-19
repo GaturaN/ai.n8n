@@ -1,0 +1,123 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "session_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "session_id": {
+      "main": [
+        [
+          {
+            "node": "chat_history",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-18T21:11:52.616Z",
+  "id": "znWHltgFJYaNmnuR",
+  "meta": null,
+  "name": "Retrieve Documents",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "session_id"
+            }
+          ]
+        }
+      },
+      "id": "c055762a-8fe7-4141-a639-df2372f30060",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        260,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ecb89504-12c8-49b4-83cc-c003d8400562",
+              "name": "session_id",
+              "value": "={{ $json.session_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        340
+      ],
+      "id": "44d4b027-f274-499b-a94c-de2ceba48a32",
+      "name": "session_id"
+    },
+    {
+      "parameters": {
+        "url": "=https://tax.gatuservices.info/api/v1/chats/{{ $json.session_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        340
+      ],
+      "id": "1d3d8b78-6a4b-4b9c-bd4d-7b7d3c9b35a4",
+      "name": "chat_history",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "JMTSF1QB6ohmz2Tv",
+          "name": "openwebui"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "session_id": "812eddf4-2952-4507-a7a9-a3ff6db805b6"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-18T21:23:26.000Z",
+  "versionId": "56cd2717-5c04-4179-b854-d4661181849f"
+}
