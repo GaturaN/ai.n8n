@@ -1,0 +1,37 @@
+{
+  "active": true,
+  "connections": {},
+  "createdAt": "2025-04-14T13:34:13.933Z",
+  "id": "ozHJ801FgQhKymGo",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 13",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "5cd244fa-175e-4db1-8597-559f9bfe2787",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "47fcbc6b-9a2b-403c-a0ab-29cbd4d37539",
+      "name": "Webhook",
+      "webhookId": "5cd244fa-175e-4db1-8597-559f9bfe2787"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-17T21:49:25.000Z",
+  "versionId": "db6544e4-60af-46c1-a8c3-017ef74a0f13"
+}
