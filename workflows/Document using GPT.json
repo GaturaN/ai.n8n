@@ -68,6 +68,39 @@
           }
         ]
       ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-10-01T18:56:13.378Z",
@@ -93,9 +126,9 @@
         "operation": "get",
         "workflowId": {
           "__rl": true,
-          "value": "eMxH0GjgfWEvBDic",
+          "value": "9KL8zH4gy1RpWZtR",
           "mode": "list",
-          "cachedResultName": "HR job posting - main workflow (#eMxH0GjgfWEvBDic)"
+          "cachedResultName": "ToDo App (#9KL8zH4gy1RpWZtR)"
         },
         "requestOptions": {}
       },
@@ -258,7 +291,7 @@
         "messages": {
           "values": [
             {
-              "content": "=Got it! Here’s a revised version of your prompt tailored for documentation purposes only, removing the sticky notes requirement:\n\nCREATE A DETAILED DOCUMENTATION FOR THE WORKFLOW FOLLOWING THESE GUIDELINES:\n\n    Provide a Detailed Description:\n        Write a clear and concise description of the workflow, outlining its functionality and expected outcomes.\n        Focus on making it informative and user-friendly, while also optimizing for discoverability (SEO).\n\n    Structure the Documentation:\n        Include the following sections for clarity:\n            Who is this for?: Specify the intended audience or users of the workflow.\n            What problem does this workflow solve?: Highlight the use case and why the workflow is useful.\n            What this workflow does: Provide an overview of the workflow’s functionality and outputs.\n            Setup: Detail any prerequisites (e.g., API keys, credentials, or integrations) and guide the user through the setup process.\n            How to customize this workflow: Offer suggestions or instructions for adapting the workflow to different needs.\n\n    Template Information:\n        Add placeholders to summarize the workflow’s key details:\n            Workflow Name: {{ $json.name }}\n            Workflow Data: {{ $json.nodes }}"
+              "content": "=CREATE A DETAILED DOCUMENTATION FOR THE WORKFLOW FOLLOWING THESE GUIDELINES:\n\n    Provide a Detailed Description:\n        Write a clear and concise description of the workflow, outlining its functionality and expected outcomes.\n        Focus on making it informative and user-friendly, while also optimizing for discoverability (SEO).\n\n    Structure the Documentation:\n        Include the following sections for clarity:\n            Who is this for?: Specify the intended audience or users of the workflow.\n            What problem does this workflow solve?: Highlight the use case and why the workflow is useful.\n            What this workflow does: Provide an overview of the workflow’s functionality and outputs.\n            Setup: Detail any prerequisites (e.g., API keys, credentials, or integrations) and guide the user through the setup process.\n            How to customize this workflow: Offer suggestions or instructions for adapting the workflow to different needs.\n\n    Template Information:\n        Add placeholders to summarize the workflow’s key details:\n            Workflow Name: {{ $json.name }}\n            Workflow Data: {{ $json.nodes }}"
             }
           ]
         },
@@ -282,15 +315,84 @@
           "name": "Bulkbox"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "629c0903-08a1-4504-aea8-95c2ec9300e0",
+              "name": "content",
+              "value": "={{ $json.choices[0].message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2040,
+        800
+      ],
+      "id": "2d3baba0-e097-4846-aa8d-9dab7bb25be7",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.content }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        800
+      ],
+      "id": "c6f55705-2e9f-4ac0-ac85-f0dba4848c49",
+      "name": "Information Extractor"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2200,
+        1020
+      ],
+      "id": "d8b6f1fc-bf6e-4237-8bc8-7c94715f3ff7",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Edit Fields2": [
+      {
+        "json": {
+          "content": "# Workflow Documentation: ToDo App\n\n## Detailed Description\nThe ToDo App workflow is designed to streamline task management through Telegram and Google Tasks integration. This workflow allows users to create, update, and manage tasks via Telegram messages, leveraging AI capabilities to enhance user interaction. The expected outcome is a seamless experience where users can manage their tasks efficiently without needing to switch between applications.\n\n## Who is this for?\nThis workflow is intended for:\n- **Individuals** looking for an efficient way to manage their tasks directly from Telegram.\n- **Teams** that require a collaborative task management solution integrated with Google Tasks.\n- **Developers** interested in automating task management processes using n8n and Telegram.\n\n## What problem does this workflow solve?\nManaging tasks can often be cumbersome, especially when switching between different applications. This workflow addresses the following problems:\n- **Fragmented Task Management**: Users can manage tasks directly from Telegram, reducing the need to switch to Google Tasks.\n- **Inefficient Communication**: By integrating AI, users can interact with the task management system in a conversational manner, making it more intuitive.\n- **Task Updates**: Users can easily update task statuses and details through simple messages, enhancing productivity.\n\n## What this workflow does\nThe ToDo App workflow performs the following functions:\n1. **Incoming Message Handling**: Listens for messages sent to a Telegram bot.\n2. **Task Creation**: Allows users to create new tasks based on their messages.\n3. **Task Updates**: Users can update existing tasks by sending specific commands.\n4. **Task Retrieval**: Retrieves today's and upcoming tasks from Google Tasks.\n5. **Voice Note Transcription**: Supports voice messages, converting them into text for task management.\n6. **AI Assistance**: Utilizes an AI agent to assist users in managing their tasks effectively.\n\n## Setup\n### Prerequisites\nBefore setting up the workflow, ensure you have the following:\n- **n8n Account**: Sign up for an n8n account if you don't have one.\n- **Telegram Bot**: Create a Telegram bot and obtain the API token.\n- **Google Tasks API**: Set up Google Tasks API and obtain OAuth2 credentials.\n- **OpenAI API Key**: Sign up for OpenAI and obtain an API key for AI functionalities.\n\n### Setup Process\n1. **Create a New Workflow**: Log in to your n8n account and create a new workflow.\n2. **Add Telegram Trigger**: Use the Telegram Trigger node to listen for incoming messages.\n   - Input your Telegram bot API token.\n3. **Integrate Google Tasks**: Add Google Tasks nodes to create, update, and retrieve tasks.\n   - Input your Google Tasks OAuth2 credentials.\n4. **Add AI Agent**: Integrate the AI agent node to handle task-related queries.\n   - Input your OpenAI API key.\n5. **Configure Webhooks**: Set up webhooks for the MCP server to handle task actions.\n6. **Test the Workflow**: Send test messages to your Telegram bot to ensure everything is functioning correctly.\n\n## How to customize this workflow\nTo adapt the ToDo App workflow to different needs, consider the following customizations:\n- **Change Task Management Platform**: If you prefer a different task management tool, replace the Google Tasks nodes with your preferred service's API.\n- **Modify AI Responses**: Adjust the AI agent's system message to change how it interacts with users.\n- **Add Additional Commands**: Expand the workflow by adding more commands for different task management functionalities (e.g., deleting tasks).\n- **Integrate Other Messaging Platforms**: If you want to use a different messaging service, replace the Telegram nodes with the appropriate nodes for that service.\n\n## Conclusion\nThe ToDo App workflow provides a powerful solution for managing tasks through Telegram, enhancing productivity and user experience. By following the setup instructions and customization options, users can tailor the workflow to meet their specific needs, making task management more efficient and accessible."
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-01-22T07:37:22.000Z",
-  "versionId": "3468cace-f086-4d50-be63-22dbe856e838"
+  "updatedAt": "2025-04-22T04:26:31.000Z",
+  "versionId": "04c018fe-30d4-4a6f-b775-8dfced5dde9e"
 }
