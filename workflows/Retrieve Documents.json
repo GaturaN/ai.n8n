@@ -22,6 +22,90 @@
           }
         ]
       ]
+    },
+    "chat_history": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Get_File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get_File": {
+      "main": [
+        [
+          {
+            "node": "file_values",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "file_values": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "output1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-18T21:11:52.616Z",
@@ -101,13 +185,204 @@
           "name": "openwebui"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d735c858-2824-45e3-a2d5-a6f564a03304",
+              "name": "files",
+              "value": "={{ $json.chat.files }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        920,
+        340
+      ],
+      "id": "47226eda-d99b-4864-a346-40cd61e74cdc",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "files",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        340
+      ],
+      "id": "31676021-a796-4091-8197-034326a1faae",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "url": "=https://tax.gatuservices.info/api/v1/files/{{ $json.file.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1580,
+        340
+      ],
+      "id": "648c1b92-55c6-4712-82de-f03702aa508c",
+      "name": "Get_File",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "JMTSF1QB6ohmz2Tv",
+          "name": "openwebui"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2d003bf5-e4bb-42a9-b0aa-02e32fa83211",
+              "name": "filename",
+              "value": "={{ $json.filename }}",
+              "type": "string"
+            },
+            {
+              "id": "a8555321-3fbb-45de-be65-08b42c8ed305",
+              "name": "content",
+              "value": "={{ $json.data.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1800,
+        340
+      ],
+      "id": "a45f89e7-5012-42c8-9a55-554ba850db45",
+      "name": "file_values"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2020,
+        340
+      ],
+      "id": "12da8dd0-db3a-4493-a2c2-658b9d389c19",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "921695a9-7e69-4a59-b40c-4e7647b249e4",
+              "name": "response",
+              "value": "={{ $json.data }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2240,
+        340
+      ],
+      "id": "32fd7d4f-baca-4fff-95df-513d122b4396",
+      "name": "output"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0c29b03d-dd2e-442c-a2ad-70ab61e55524",
+              "leftValue": "={{ $json.files }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1140,
+        340
+      ],
+      "id": "98b57364-1b62-45c5-86d8-9b10adebc25e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "921695a9-7e69-4a59-b40c-4e7647b249e4",
+              "name": "response",
+              "value": "No files found",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1380,
+        560
+      ],
+      "id": "e350f6a6-0b2a-406e-b9fc-c2fb2a499fc2",
+      "name": "output1"
     }
   ],
   "pinData": {
     "When Executed by Another Workflow": [
       {
         "json": {
-          "session_id": "812eddf4-2952-4507-a7a9-a3ff6db805b6"
+          "session_id": "afda2ab5-7ae9-4ba0-a9ab-262d10e46c57"
         }
       }
     ]
@@ -118,6 +393,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-18T21:23:26.000Z",
-  "versionId": "56cd2717-5c04-4179-b854-d4661181849f"
+  "updatedAt": "2025-04-21T03:10:00.000Z",
+  "versionId": "facdfc65-05b2-40cb-9361-0bf0ebf901ee"
 }
