@@ -1,0 +1,576 @@
+{
+  "active": false,
+  "connections": {
+    "Type": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Click": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack": {
+      "main": [
+        [
+          {
+            "node": "Return IDs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Session": {
+      "main": [
+        [
+          {
+            "node": "Window",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load URL": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "End session": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start browser": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude 3.5 Haiku": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-21T03:21:58.703Z",
+  "id": "lwwcpmrNt7LkVBEL",
+  "meta": null,
+  "name": "My workflow 14",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.Prompt }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# Agent goal\nYou are a smart, advanced web agent connected with tools that allow you to manage a remote web browser. Your goal is to fulfill the human's request.\n\n## Start the browser\nYou should always start by using the `Start browser` tool to get the `sessionId` and `windowId` required by other tools.\n\n## Use the `Query` tool\nYou don't have access to the browser screen but you can call the `Query` tool to get knowladge and hints of the current browser window. This tool accepts queries in natural language and can output information in plain text, markdown or JSON.\n\n## Use the `Click` tool\nUse the `Click` tool to click on an element on the web page. Describe the element in details in the \"Element Description\" field.\n\n## Use the `Type` tool\nUse the `Type` tool to type in text boxes. Describe the text box in \"Element Description\" field and the text to type in the \"Text\" field.\n\n### Examples for how to use the `Query` tool\n- Ask something about the current page:\n  \"Is the user logged in? Answer with Yes or No\"\n- Retrieve information:\n  \"Extract all the posts in the page, include the title and copy, output in JSON format\"\n- Get hints on the UI:\n  \"Is there a link to the contact form? If yes, describe the element in detail\"\n\n\n## Important\n- Start by calling `Start browser` to begin using the browser and provide the initial URL\n- The human ONLY sees your last message\n- Make sure to include all the important information requested by the human in your LAST message\n- Call `End session` with the `sessionId` once you have finished using the browser\n\n",
+          "maxIterations": 20,
+          "returnIntermediateSteps": false,
+          "passthroughBinaryImages": true
+        }
+      },
+      "id": "01adec98-6628-4885-bf3f-572e1cbbf684",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        0,
+        0
+      ],
+      "retryOnFail": true,
+      "typeVersion": 1.8,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Click on any element in the window",
+        "resource": "interaction",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Create session` tool\", 'string') }}",
+        "windowId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Window_ID', \"The `windowId` returned by the `Open window` tool\", 'string') }}",
+        "elementDescription": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Element_Description', `Describe in detail the element to click on, e.g. The menu item \"about us\" at the top of the page`, 'string') }}",
+        "additionalFields": {
+          "waitForNavigation": "load"
+        }
+      },
+      "id": "32a7d68e-02ea-4c78-b2f5-35792084b1b0",
+      "name": "Click",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        -220,
+        220
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Query the page, ask and extract information",
+        "resource": "extraction",
+        "operation": "query",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Create session` tool\", 'string') }}",
+        "windowId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Window_ID', \"The `windowId` returned by the `Open window` tool\", 'string') }}",
+        "prompt": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt', `Ask anything and request to extract information from the current page, e.g. \"Is there any sign-up form? yes or no\"`, 'string') }}",
+        "additionalFields": {}
+      },
+      "id": "cf9adbee-27a2-499a-a8ed-40c36e82da21",
+      "name": "Query",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        -100,
+        220
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Load a URL into the browser window",
+        "resource": "window",
+        "operation": "load",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Create session` tool\", 'string') }}",
+        "windowId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Window_ID', \"The `windowId` returned by the `Open window` tool\", 'string') }}",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "id": "e65942fd-8534-41b3-9a8d-4eb7f157c6a5",
+      "name": "Load URL",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        40,
+        220
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "terminate",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Create session` tool\", 'string') }}"
+      },
+      "id": "0f67f287-76d5-43c6-bb1e-b115e60747b7",
+      "name": "End session",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        160,
+        220
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Type text into the page's element described",
+        "resource": "interaction",
+        "operation": "type",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Create session` tool\", 'string') }}",
+        "windowId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Window_ID', \"The `windowId` returned by the `Open window` tool\", 'string') }}",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', ``, 'string') }}",
+        "pressEnterKey": true,
+        "elementDescription": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Element_Description', `Describe in detail the element to type into, e.g. The search box at the top of the page`, 'string') }}",
+        "additionalFields": {}
+      },
+      "id": "604d4aca-d8a3-4335-93ce-721b49d4f19e",
+      "name": "Type",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        280,
+        220
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "name": "Start_Browser",
+        "description": "Start a new browser session and window",
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "TS1wT16JCcy1Dt9Q",
+          "cachedResultName": "DEMOS — Web Agent 0.1 - AA"
+        },
+        "workflowInputs": {
+          "value": {
+            "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('url', `URL to load in the browser window`, 'string') }}",
+            "profile_name": "={{ $json['Airtop Profile Name (for sites that require authentication)'] }}"
+          },
+          "schema": [
+            {
+              "id": "url",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "url",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "profile_name",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "profile_name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "url"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "980485eb-5b70-4f4d-afc1-efe3e25a1558",
+      "name": "Start browser",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        400,
+        220
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-3-5-haiku-20241022",
+          "cachedResultName": "Claude 3.5 Haiku"
+        },
+        "options": {}
+      },
+      "id": "fd54f5d8-6436-4785-abfe-a8e7777b8156",
+      "name": "Claude 3.5 Haiku",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "position": [
+        -340,
+        220
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "formTitle": "Instruction for the Web AI Agent",
+        "formDescription": "Provide detailed instructions to the web AI agent. Use an [Airtop Profile](https://docs.airtop.ai/guides/how-to/saving-a-profile) for websites that need login.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Prompt",
+              "fieldType": "textarea",
+              "placeholder": "e.g. Find the top 10 products in producthunt.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Airtop Profile Name (for sites that require authentication)",
+              "placeholder": "e.g. my-airtop-profile"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "33f47c36-cbd8-4856-8051-df0d8e6c9805",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        -560,
+        100
+      ],
+      "webhookId": "dbbb8b5a-a81c-4cde-9f46-f4808d7f0dc4",
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "C08E83RDJN9",
+          "cachedResultName": "n8n-debug"
+        },
+        "text": "={{ $json.data.liveViewUrl }}",
+        "otherOptions": {}
+      },
+      "id": "9f39598b-5fd7-482a-bb68-6db042fb4f72",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "position": [
+        300,
+        660
+      ],
+      "webhookId": "72d47d9c-6860-4248-8e83-7790264fdaf2",
+      "typeVersion": 2.3,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Note\nThis sub-workflow simplifies the session management for the agent",
+        "height": 300,
+        "width": 220,
+        "color": 5
+      },
+      "id": "abc53073-8572-4027-a39a-2266a5ab5b13",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -440,
+        520
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"results\": {\n\t\t\t\"type\": \"string\",\n            \"description\": \"Synthesis of the agent's results. Must include all the relevant information related to the user's request\"\n\t\t}\n\t}\n}"
+      },
+      "id": "dc63d6c5-a6c7-41b9-abb8-1d2c8fd02969",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "position": [
+        520,
+        220
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e1d6ab7c-2f45-44fd-9457-bb3046fad4c5",
+              "name": "output",
+              "type": "string",
+              "value": "={{ $json.output.results }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c5b277ae-9a71-4ff6-89e0-2c9937a96003",
+      "name": "Output",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        720,
+        100
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "profileName": "={{ $json.profile_name }}"
+      },
+      "id": "5cfceb4b-c653-4e38-9dc8-1b4340a805d2",
+      "name": "Session",
+      "type": "n8n-nodes-base.airtop",
+      "position": [
+        -160,
+        660
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "window",
+        "url": "={{ $('When Executed by Another Workflow').item.json.url }}",
+        "getLiveView": true,
+        "additionalFields": {}
+      },
+      "id": "9f46b626-0a85-4633-8b9e-ba952b08c4f5",
+      "name": "Window",
+      "type": "n8n-nodes-base.airtop",
+      "position": [
+        80,
+        660
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n### See the agent in action\nEnable this Slack node to receive the URL for the Live View in a message\n\n",
+        "height": 340,
+        "width": 220,
+        "color": 7
+      },
+      "id": "57c54822-9b26-43a0-b3dd-3ffe5a31dc01",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        320,
+        720
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0a0680af-39bd-4bc7-b9cd-84c1766c79a1",
+              "name": "sessionId",
+              "type": "string",
+              "value": "={{ $('Session').item.json.sessionId }}"
+            },
+            {
+              "id": "13940ee8-c1d4-4718-a7b4-176c44c097b7",
+              "name": "windowId",
+              "type": "string",
+              "value": "={{ $('Window').item.json.data.windowId }}"
+            },
+            {
+              "id": "a0f2005c-2cd2-4a8d-891b-a4759b72a124",
+              "name": "output",
+              "type": "string",
+              "value": "Session and window created successfully"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "592aca10-0923-4d94-a30f-5fc78a4f7ce3",
+      "name": "Return IDs",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        520,
+        660
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "url"
+            },
+            {
+              "name": "profile_name"
+            }
+          ]
+        }
+      },
+      "id": "393d1cac-6886-4b08-98d9-7d2cc876ed83",
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -380,
+        660
+      ],
+      "typeVersion": 1.1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-22T03:10:51.000Z",
+  "versionId": "e3d0db44-100e-48b4-83a1-34e0d6ea54ca"
+}
