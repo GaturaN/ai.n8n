@@ -1,0 +1,401 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Airtop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtop": {
+      "main": [
+        [
+          {
+            "node": "Airtop1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtop1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtop2": {
+      "main": [
+        [
+          {
+            "node": "Airtop3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtop3": {
+      "main": [
+        [
+          {
+            "node": "Airtop4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtop4": {
+      "main": [
+        [
+          {
+            "node": "Airtop8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtop5": {
+      "main": [
+        []
+      ]
+    },
+    "Airtop6": {
+      "main": [
+        [
+          {
+            "node": "Airtop5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Airtop5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtop6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtop8": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Airtop2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-22T06:15:06.753Z",
+  "id": "coUEnRtcijB0lMvq",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 15",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -180
+      ],
+      "id": "e99f43c8-4575-4f2b-aeb9-c8098d23da49",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "profileName": "Nashon"
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        220,
+        -180
+      ],
+      "id": "6413c400-c3c0-4813-b3b0-c37bccc87176",
+      "name": "Airtop",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "window",
+        "url": "https://go.xero.com/app/!7-!Wg/dashboard",
+        "getLiveView": true,
+        "additionalFields": {
+          "waitUntil": "complete"
+        }
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        440,
+        -180
+      ],
+      "id": "ed5b7407-1e4b-47f1-8161-34bb4fadd534",
+      "name": "Airtop1",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "interaction",
+        "operation": "type",
+        "text": "mwanginashon720@gmail.com",
+        "elementDescription": "the entry box labeled \"Email address\"",
+        "additionalFields": {
+          "waitForNavigation": "load"
+        }
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        880,
+        -180
+      ],
+      "id": "fedbf6b7-79ad-474c-92fa-15f61f9ef1d4",
+      "name": "Airtop2",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "interaction",
+        "operation": "type",
+        "text": "A1234567@",
+        "elementDescription": "the entry box labeled \"Password\"",
+        "additionalFields": {
+          "waitForNavigation": "load"
+        }
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        -180
+      ],
+      "id": "f7088f29-6764-4e78-8c3d-8f205ab6c779",
+      "name": "Airtop3",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "interaction",
+        "elementDescription": "the blue \"Log in\" button",
+        "additionalFields": {
+          "waitForNavigation": "load"
+        }
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        -180
+      ],
+      "id": "f018a429-98e1-4993-8079-44636d0c9d1c",
+      "name": "Airtop4",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "interaction",
+        "elementDescription": "the blue button \"Reconcile x items\" under the Business Bank Account card",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        2200,
+        -180
+      ],
+      "id": "a0983a0f-4b30-459f-95cd-3e6b88a067e9",
+      "name": "Airtop5",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "window",
+        "url": "https://go.xero.com/app/!7-!Wg/dashboard",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        1980,
+        -105
+      ],
+      "id": "8b4a563b-b4b9-4078-89b0-03616c9cc05a",
+      "name": "Airtop6",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "41873c6d-ea88-44e7-ad8b-dabb75cc28db",
+              "leftValue": true,
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1760,
+        -180
+      ],
+      "id": "08f92ba0-92aa-4e94-86f5-3fd11f8d6fcc",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "terminate",
+        "sessionId": "=a4a29264-c994-4d34-a91b-340f0108c0ce"
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        220,
+        20
+      ],
+      "id": "6f491223-4a1c-45e1-b5e0-01f57562d50b",
+      "name": "Airtop7",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "extraction",
+        "operation": "query",
+        "prompt": "Is this the dashboard page? Only return \"True\" if it is and \"False\" if it is not.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.airtop",
+      "typeVersion": 1,
+      "position": [
+        1540,
+        -180
+      ],
+      "id": "d19caeff-0df5-46ed-a041-b2fa8ca5c037",
+      "name": "Airtop8",
+      "credentials": {
+        "airtopApi": {
+          "id": "pqLaAPPvEKPPIcHN",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        -180
+      ],
+      "id": "363aab86-9599-4a8e-a025-c46a752e4a93",
+      "name": "Wait",
+      "webhookId": "b24a372f-ae56-4e73-bde6-e86bfa4bef3f"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-22T13:41:05.000Z",
+  "versionId": "9a67fe46-4b77-47dd-83ec-7755753244cd"
+}
