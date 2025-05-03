@@ -325,7 +325,7 @@
     {
       "parameters": {
         "formTitle": "Job Application",
-        "formDescription": "=Fill this for to apply for the role Automation Specialist:\n\nLocation: Remote\nExperience: Minimum 3 years\nEmployment Type: Full-time\n\nJob Description:\nWe are seeking a highly skilled Automation Specialist with at least 3 years of experience in designing and implementing workflow automation solutions. The ideal candidate will have expertise in tools such as n8n, Zapier, Make.com, or similar platforms, and a strong background in integrating APIs, streamlining processes, and enhancing operational efficiency.\n\nKey Responsibilities:\n\n    Develop and implement automated workflows to optimize business processes.\n    Integrate third-party APIs and systems to create seamless data flow.\n    Analyze, debug, and improve existing automation setups.\n    Collaborate with cross-functional teams to identify automation opportunities.\n    Monitor and maintain automation systems to ensure reliability.\n\nRequired Skills & Qualifications:\n\n    Proven 3+ years of experience in workflow automation and integration.\n    Proficiency with tools like n8n, Zapier, or Make.com.\n    Strong understanding of APIs, webhooks, and data transformation.\n    Familiarity with scripting languages (e.g., JavaScript or Python).\n    Excellent problem-solving and communication skills.\n\nPreferred Qualifications:\n\n    Experience with database management and cloud services.\n    Background in business process analysis or RPA tools.\n\nWhy Join Us?\n\n    Opportunity to work on cutting-edge automation projects.\n    Supportive and collaborative team environment.\n    Competitive salary and benefits package.",
+        "formDescription": "=Automation Support Specialist\nJob Description for Your Role at AI Automation Society\nAbout AI Automation Society\n\nAI Automation Society operates two thriving Skool communities—one free with ~50,000 members and a paid group with 1,100+ members—dedicated to helping people build AI automations that perform hours of work in seconds.\n\nOur core belief? The future isn’t about outworking everyone—it’s about building and controlling automations that work for you. We’re here to train the next generation of automation specialists and eliminate boring, repetitive tasks, all while building a wildly successful business.\nRole Summary\n\nAs an Automation Support Specialist, you will serve as the go-to technical problem solver for members—primarily handling issues within n8n. Most support requests arrive as screenshots or Loom videos. Your job is to quickly understand the issue, ask relevant follow-up questions, and deliver a solution—within one hour of active work.\n\nYour support directly impacts member success, satisfaction, and retention by ensuring their automations run smoothly.\nHow This Role Supports the Community\nCommunity Need\tYour Lever\tVerifiable Metric\nFast support for automation issues\tRespond within 24 hours with clarifying questions or first-step guidance\tMedian First-Response Time – ≤ 24h (weekdays)\nReliable fixes, delivered fast\tProvide a clear solution (text or Loom) within 1 hour\tOne-Hour Resolution Rate – ≥ 80%\nA clear sense of closure\tAsk members to rate the solution from 1–10 via a comment\tAverage Satisfaction Score – ≥ 8.0\nCore Responsibilities\nDaily (Mon–Fri)\n\n    Monitor the “Automation Help” channel in the paid Skool group\n\n    Respond to new requests within 24 hours\n\n    Troubleshoot issues using screenshots, messages, or Looms\n\n    Deliver a clear fix (text or Loom) within 1 hour of active work\n\n    Ask members to rate your solution (1–10) via comment after resolution\n\nWeekly\n\n    Enter three key metrics in a Google Sheet every Friday:\n\n        Median First-Response Time\n\n        One-Hour Resolution Rate\n\n        Satisfaction Score\n\n    Update the \"Known Issues\" thread when recurring bugs arise\n\nMonthly\n\n    Post a written “Automation Insights” summary:\n\n        Top issues solved\n\n        Patterns identified\n\n        One actionable improvement idea\n\nResults & Targets (after a 4-week ramp-up)\nMetric\tTarget\tSource\nMedian First-Response Time\t≤ 24h\tSkool timestamps\nOne-Hour Resolution Rate\t≥ 80%\tSkool thread activity records\nSatisfaction Score (1–10)\t≥ 8.0 average\tMember comment ratings\nRequirements\n\n    ✅ Deep experience with n8n—able to debug complex workflows using screenshots and logs\n\n    ✅ Proficient with APIs, authentication (OAuth2, API keys), and automation bottlenecks\n\n    ✅ Strong written English—clear, concise, and helpful\n\n    ✅ Comfortable explaining fixes via short Loom videos\n\n    ✅ Patient, calm under pressure, and enthusiastic about solving problems\n\nOpportunities for Advancement\n\n    Automation Lead (6–12 months):\n    Lead a growing automation support team, refine internal systems, and shape community education.\n\n    Template Contributor:\n    Submit your own automation templates. If accepted, you'll be paid and featured on our YouTube channel.\n\nCompensation & Logistics\n\n    Type: Contract-to-hire\n\n    Hours: 10–15 hours/week to start (with growth potential)\n\n    Rate: $30/hour ($300–$450 per week initially)\n\n    Bonus: Performance-based, tied to your scorecard\n\n    Future Potential: Strong path to full-time (~$60,000/year)\n\n    Tools Provided: Skool admin access, Loom Pro, n8n sandbox\n\n    Your Setup: Stable internet connection and a good headset",
         "formFields": {
           "values": [
             {
@@ -665,7 +665,9 @@
               "readOnly": false,
               "removed": true
             }
-          ]
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
         },
         "options": {
           "typecast": true
@@ -894,6 +896,7 @@
           "cachedResultName": "Positions",
           "cachedResultUrl": "https://airtable.com/appublMkWVQfHkZ09/tbljhmLdPULqSya0d"
         },
+        "filterByFormula": "{Name} = \"Automation Support Specialist\"",
         "options": {}
       },
       "type": "n8n-nodes-base.airtableTool",
@@ -3060,6 +3063,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-02-19T16:23:48.000Z",
-  "versionId": "3fa4f2aa-9ef1-4327-8e8a-fafbabae6b12"
+  "updatedAt": "2025-05-01T10:44:11.000Z",
+  "versionId": "e8102004-9e58-4787-ae3f-0a9f8e7630b3"
 }
