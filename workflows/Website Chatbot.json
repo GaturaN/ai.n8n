@@ -1,0 +1,929 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tax_guidelines_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "company_knowledge_base",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_lead": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "lead_exists": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "When chat message received",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "company_knowledge_base": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_lead": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tax_guys_website": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-30T07:53:19.344Z",
+  "id": "w3YmFmKzUkRBiIlY",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Website Chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {
+          "allowedOrigins": "*",
+          "loadPreviousSession": "memory",
+          "responseMode": "lastNode"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -420,
+        40
+      ],
+      "id": "7f85a6fa-e674-40c3-a9aa-0b02c4da2c7d",
+      "name": "When chat message received",
+      "webhookId": "12e6d2c5-4642-4a8b-a22b-cd3cc0262879"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Today's date: {{ $today.format('yyyy-MM-dd') }}\nCurrent time: {{ new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: 'numeric', minute: '2-digit' }) }}\n\n```\nYou are a friendly UK accounting firm's customer service agent for \"The Tax Guys.\" Your primary goal is to gently guide qualified prospects toward booking a meeting with our accounting associates.\n\nCRITICAL: YOU MUST CALL BOTH THE \"company_knowledge_base\" AND \"tax_guys_website\" TOOLS AT THE BEGINNING OF EVERY CONVERSATION AND BEFORE EVERY RESPONSE. These tools contain essential information about services, pricing, and company details that you need for accurate responses.\n\nRESPONSE GUIDELINES:\n- Keep all responses under 300 characters\n- Ask only one question at a time\n- Use a soft-spoken, warm, and helpful tone\n- Be concise and direct, but never pushy\n\nYOUR MAIN OBJECTIVES:\n1. Naturally collect name and email information through casual conversation\n2. Identify the prospect's needs and industry to determine if they're a good fit\n3. For qualified leads, encourage booking a meeting with an accounting associate\n4. Provide helpful HMRC resources rather than direct tax advice\n5. Update our database with accurate lead information after each interaction\n\nTOOLS YOU MUST USE IN EVERY INTERACTION:\n1. \"company_knowledge_base\" - MUST BE CALLED FIRST to get current service offerings, pricing, and company information\n2. \"tax_guys_website\" - MUST BE CALLED SECOND to access website content, service pages, and resources to reference\n3. \"lead_exists\" - Check if a lead already exists in our database using their email\n4. \"create_contact\" - Create a new contact with collected information (name, email, industry, needs, conversation notes)\n5. \"update_contact\" - Update existing contact information including conversation summary, service inquired about, and booking status\n\nLEAD INFORMATION COLLECTION:\n- Casually collect name and email within natural conversation:\n  * \"I'd be happy to share some resources about that. What email would work best for you?\"\n  * \"So I can address you properly going forward, may I ask your name?\"\n  * \"To keep track of our conversation, could I get your name and the best email to reach you?\"\n  * \"If we find we can help with your situation, what would be the best email to send information to?\"\n\nCONVERSATION FLOW:\n1. Begin with a warm greeting: \"Hello! I'm [Your Name] from The Tax Guys. How can I assist you with your accounting or tax needs today?\"\n\n2. Naturally gather basic information:\n   - Business type and industry\n   - Current accounting challenges\n   - Specific needs (bookkeeping, tax planning, payroll, etc.)\n   - Timeline for support\n\n3. For qualified leads (businesses in our target sectors):\n   - Highlight our expertise in their specific industry\n   - Explain how our services could address their specific challenges\n   - Suggest a meeting: \"Based on what you've shared, I think our accounting team could really help with [specific need]. Would you be interested in a brief consultation with one of our associates who specializes in [their industry]?\"\n\n4. For general tax questions:\n   - DO NOT provide specific tax advice\n   - Say: \"While I can't provide specific tax advice, I can point you to some helpful HMRC resources about [topic].\"\n   - Provide relevant HMRC links\n   - ALSO direct to Tax Guys resources: \"We also have some helpful information about this on our website here: [Tax Guys website link]\"\n   - Follow up with: \"Our accounting associates can provide more personalized guidance. Would you like to schedule a quick consultation?\"\n\n5. After meaningful interaction, always update the database:\n   - Use \"lead_exists\" to check if they're already in our system\n   - Use \"create_contact\" for new leads with all collected information\n   - Use \"update_contact\" for existing leads with conversation summary, services inquired about, and booking status\n\nHANDLING DIFFERENT SCENARIOS:\n\nFor price inquiries:\n- ALWAYS check current pricing from the company_knowledge_base tool first,and the tax_guys_website pricing page. If possible quote the prices and different packages from there.\n- Provide general pricing guidance: \"Based on our current rates, services for businesses in your sector typically start from £X per month, but the exact fee depends on your specific needs and complexity.\"\n- Direct to website pricing: \"You can also view our service packages on our website here: [Tax Guys pricing page link from tax_guys_website tool]\"\n- Emphasize value: \"We focus on helping businesses save on tax while ensuring full compliance.\"\n- Suggest a consultation: \"For a personalized quote, a quick chat with one of our specialists would be best. Would you like to arrange that?\"\n\nFor unsuitable leads:\n- Be helpful but honest: \"While we might not be the perfect fit for your current needs, I'm happy to point you toward some resources that could help.\"\n- Always provide both options: \"Here's an HMRC guide about [topic]: [HMRC link] and we also have some information on our website here: [Tax Guys website link]\"\n- Leave the door open: \"If your business circumstances change, we'd be delighted to help in the future.\"\n\nBOOKING PROCESS:\n- For interested leads: \"Great! Would you prefer to schedule via our online calendar, or would you like me to find some times our team is available?\"\n- For hesitant leads: \"I understand you might want to think about it. Would it be helpful if I sent some information about our services to your email for you to review?\"\n\nTOOL USAGE REMINDER:\n- ALWAYS call the \"company_knowledge_base\" tool FIRST in every interaction\n- ALWAYS call the \"tax_guys_website\" tool SECOND in every interaction\n- NEVER provide information about services, pricing, or company details without checking these tools first\n- ALWAYS update contact information after meaningful interactions using the appropriate contact tool\n\nAlways maintain a helpful, warm tone throughout the conversation, focusing on understanding the prospect's needs rather than pushing for a quick conversion.\n```"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        408,
+        40
+      ],
+      "id": "061f7984-60ae-4c69-8063-7d638582fa4a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {
+          "responseFormat": "text",
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -44,
+        260
+      ],
+      "id": "af2e599b-0381-4aa1-bad3-904c7f7aed1a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Search the gov.uk website to find relevant information about the question asked",
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "key",
+              "valueProvider": "fieldValue",
+              "value": "AIzaSyADGxS-RljTk1hyFGPZCOWm8lBO5KhjVHA"
+            },
+            {
+              "name": "cx",
+              "valueProvider": "fieldValue",
+              "value": "97835d820941d4912"
+            },
+            {
+              "name": "q"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        196,
+        260
+      ],
+      "id": "b36a8a51-fdd2-45a4-9f05-49eefd76eb0e",
+      "name": "tax_guidelines_search"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        76,
+        260
+      ],
+      "id": "bffa3caf-b910-4cef-b59d-cc817752b8fb",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        316,
+        260
+      ],
+      "id": "bd793c86-03c9-41c9-86ce-b0f23b63d969",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        436,
+        260
+      ],
+      "id": "a8fbf4a3-9022-4bbe-b395-a63f0bd17533",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {
+        "content": "- [ ] Connect to gmail to get agent available time.\n- [ ] Connect to database to input lead details and summary of the conversation.\n- [ ] Embed the chatbot on a dummy website for testing.",
+        "height": 180,
+        "width": 380
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -820,
+        -100
+      ],
+      "typeVersion": 1,
+      "id": "26ce059c-95d8-46f3-972b-f3cc0461ae15",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        720,
+        -600
+      ],
+      "id": "d78794e5-b0f6-46f1-9bd2-9b791538b07f",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1Miu_YYH6hzKDWQ-qjZCfalpku8XX4StvAvN9WZ-mmK0",
+          "mode": "list",
+          "cachedResultName": "Lead Generation System Prompt",
+          "cachedResultUrl": "https://docs.google.com/document/d/1Miu_YYH6hzKDWQ-qjZCfalpku8XX4StvAvN9WZ-mmK0/edit?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -200,
+        -880
+      ],
+      "id": "f98ec6a5-45ab-44a5-9e27-4601928da7bb",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "tax-guys-website-lead-generation",
+          "mode": "list",
+          "cachedResultName": "tax-guys-website-lead-generation"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.1,
+      "position": [
+        36,
+        -880
+      ],
+      "id": "f9779c2f-f06e-4319-be0f-e9bca8cd2f24",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        20,
+        -660
+      ],
+      "id": "e9bb2675-6bed-4166-81fc-2e6d9566064d",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {
+          "splitPages": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -657.5
+      ],
+      "id": "6bfec8e6-4898-4be3-8887-22051f1c273b",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 100
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        228,
+        -460
+      ],
+      "id": "f2c62198-24d5-497b-8017-b51f207379e6",
+      "name": "Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "content": "## Upload Documents To Vector Database",
+        "height": 640,
+        "width": 960
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -492,
+        -960
+      ],
+      "typeVersion": 1,
+      "id": "e96a855f-99bc-46c1-8c92-a90d893f7c87",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        884,
+        460
+      ],
+      "id": "abe54970-7a48-4029-afd1-87e550e87063",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appIYPFPi2yY2Ux2c",
+          "mode": "list",
+          "cachedResultName": "The Tax Guys",
+          "cachedResultUrl": "https://airtable.com/appIYPFPi2yY2Ux2c"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblyEaNOO1KFMwXMw",
+          "mode": "list",
+          "cachedResultName": "Website Leads",
+          "cachedResultUrl": "https://airtable.com/appIYPFPi2yY2Ux2c/tblyEaNOO1KFMwXMw"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Email', ``, 'string') }}",
+            "First Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('First_Name', ``, 'string') }}",
+            "Last Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Last_Name', ``, 'string') }}",
+            "Notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Notes', `Summary of the conversation with the user.`, 'string') }}",
+            "Booked Call?": "={{ $fromAI(\"BookedCall\", \"whether the user booked a call\", \"boolean\") }}",
+            "Services Inquired": "={{ $fromAI(\"service\", \"The service inquired by the user. Could be one of Bookkeeping, Payroll, Tax PLanning, Other\", \"string\")}}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Services Inquired",
+              "displayName": "Services Inquired",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Bookkeeping",
+                  "value": "Bookkeeping"
+                },
+                {
+                  "name": "Tax Planning",
+                  "value": "Tax Planning"
+                },
+                {
+                  "name": "Payroll",
+                  "value": "Payroll"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booked Call?",
+              "displayName": "Booked Call?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        556,
+        260
+      ],
+      "id": "10a250ac-eb33-4f85-926e-9be8b19a8210",
+      "name": "create_lead",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appIYPFPi2yY2Ux2c",
+          "mode": "list",
+          "cachedResultName": "The Tax Guys",
+          "cachedResultUrl": "https://airtable.com/appIYPFPi2yY2Ux2c"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblyEaNOO1KFMwXMw",
+          "mode": "list",
+          "cachedResultName": "Website Leads",
+          "cachedResultUrl": "https://airtable.com/appIYPFPi2yY2Ux2c/tblyEaNOO1KFMwXMw"
+        },
+        "filterByFormula": "={Email} = \"{{ $fromAI(\"email\", \"email address of the user\") }}\"",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        676,
+        260
+      ],
+      "id": "859b017f-2a6f-488b-ad43-25f268230bff",
+      "name": "lead_exists",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -420,
+        -420
+      ],
+      "id": "3eb6721e-f131-4d7e-a5d2-ce9b3d8220f1",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -332,
+        260
+      ],
+      "id": "b7ac0c18-9170-4870-8b9b-a322304dc240",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "company_knowledge_base",
+        "toolDescription": "Work with this data to ensure you are following protocal and giving relevant answers.",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "tax-guys-website-lead-generation",
+          "mode": "list",
+          "cachedResultName": "tax-guys-website-lead-generation"
+        },
+        "topK": 6,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.1,
+      "position": [
+        796,
+        262.5
+      ],
+      "id": "3f90e84e-1476-471d-b05a-a004c3bb228f",
+      "name": "company_knowledge_base",
+      "credentials": {
+        "pineconeApi": {
+          "id": "R5yo0MgikqxTgmhY",
+          "name": "My Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appIYPFPi2yY2Ux2c",
+          "mode": "list",
+          "cachedResultName": "The Tax Guys",
+          "cachedResultUrl": "https://airtable.com/appIYPFPi2yY2Ux2c"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblyEaNOO1KFMwXMw",
+          "mode": "list",
+          "cachedResultName": "Website Leads",
+          "cachedResultUrl": "https://airtable.com/appIYPFPi2yY2Ux2c/tblyEaNOO1KFMwXMw"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('id__using_to_match_', ``, 'string') }}",
+            "Email": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Email', ``, 'string') }}",
+            "First Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('First_Name', ``, 'string') }}",
+            "Last Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Last_Name', ``, 'string') }}",
+            "Services Inquired": "={{ $fromAI(\"service\", \"The service inquired by the user. Could be one of Bookkeeping, Payroll, Tax PLanning, Other\", \"string\")}}",
+            "Booked Call?": "={{ $fromAI(\"BookedCall\", \"whether the user booked a call, only yes or no accepted\", \"boolean\") }}",
+            "Notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Notes', `Summary of the conversation with the user. `, 'string') }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Services Inquired",
+              "displayName": "Services Inquired",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Bookkeeping",
+                  "value": "Bookkeeping"
+                },
+                {
+                  "name": "Tax Planning",
+                  "value": "Tax Planning"
+                },
+                {
+                  "name": "Payroll",
+                  "value": "Payroll"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booked Call?",
+              "displayName": "Booked Call?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Yes",
+                  "value": "Yes"
+                },
+                {
+                  "name": "No",
+                  "value": "No"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        1092,
+        260
+      ],
+      "id": "4c2bea23-b564-4cf8-8054-d3925f31c85c",
+      "name": "update_lead",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gQtK3HX661rFA6KW",
+          "name": "gaturanjenga account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Search the tax_guys website to get any necessary information about the company. ",
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "key",
+              "valueProvider": "fieldValue",
+              "value": "AIzaSyADGxS-RljTk1hyFGPZCOWm8lBO5KhjVHA"
+            },
+            {
+              "name": "cx",
+              "valueProvider": "fieldValue",
+              "value": "5540a20fc8d204e62"
+            },
+            {
+              "name": "q"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        1220,
+        260
+      ],
+      "id": "d4f28223-7d44-4aa7-ba4c-b36bf2ebb82f",
+      "name": "tax_guys_website"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/London",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-05-02T06:34:38.000Z",
+  "versionId": "149f9a06-ee90-4095-9825-bdd1a37a247f"
+}
