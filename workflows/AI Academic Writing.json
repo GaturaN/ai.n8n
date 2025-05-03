@@ -1,0 +1,358 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "google_scholar": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "output": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-01T11:45:08.946Z",
+  "id": "hN3DoptdkE0qQ9Ny",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "AI Academic Writing",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Write with AI",
+        "formDescription": "=Give the following details accurately to get the best results.\n",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "How many words?",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Choose the correct format",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "APA"
+                  },
+                  {
+                    "option": "MLA"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Instructions",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "appendAttribution": false,
+          "ignoreBots": true
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8b21b2d9-b9fd-4651-baa2-5738b8e98672",
+      "name": "On form submission",
+      "webhookId": "c5ae145b-acb2-47d2-af0f-cf750428c31d"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b62f1182-adee-492a-9ab3-f618fbf062d6",
+              "name": "How many words?",
+              "value": "={{ $json['How many words?'] }}",
+              "type": "number"
+            },
+            {
+              "id": "093f3346-5c55-4c11-8425-edbe06650a8d",
+              "name": "Choose the correct format",
+              "value": "={{ $json['Choose the correct format'] }}",
+              "type": "string"
+            },
+            {
+              "id": "4bc1be86-c83b-49a6-9d71-53812b83dad9",
+              "name": "Instructions",
+              "value": "={{ $json.Instructions }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "4c2ed802-3add-4ee0-b7de-10dce7a63e37",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json['How many words?'] }}\n\n{{ $json['Choose the correct format'] }}\n\n{{ $json.Instructions }}",
+        "options": {
+          "systemMessage": "=You are an expert in writing Academic Papers.\n\nYou have been provided instructions on the paper you are to write including the number of words you must adhere to, and the formatting style.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        440,
+        0
+      ],
+      "id": "dc92a316-c8f9-4cee-af39-282d5503cf53",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        220
+      ],
+      "id": "71a7e1da-7a56-4742-a910-44bae9720392",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "https://ai.gatuservices.info/mcp/da7d8cc0-1a76-4ade-a288-5686ecdb5f7c/sse"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        40,
+        660
+      ],
+      "id": "593f9299-6d80-42e6-b36a-4433e7754dfe",
+      "name": "MCP Client"
+    },
+    {
+      "parameters": {
+        "path": "da7d8cc0-1a76-4ade-a288-5686ecdb5f7c"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        460
+      ],
+      "id": "cdd79d70-0a90-4407-90a4-f8e648a3caa7",
+      "name": "MCP Server Trigger",
+      "webhookId": "da7d8cc0-1a76-4ade-a288-5686ecdb5f7c"
+    },
+    {
+      "parameters": {
+        "description": "Use the think tool before submission of the output to make sure that all necessary requirements have been met."
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        820,
+        240
+      ],
+      "id": "b76ed750-aa55-42ee-a2e9-2612304b7aaa",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get the latest academic articles related to the topic and use as reference.",
+        "url": "=https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q={{$fromAI(\"title\", \"title of research papers related to the topic\", \"string\")}}&btnG="
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        600,
+        980
+      ],
+      "id": "1fd0d7d0-ac3c-4e5c-81dc-982d97c2a38f",
+      "name": "google_scholar"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        640,
+        240
+      ],
+      "id": "36f3e941-4883-451b-9112-f179863187a9",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e392c002-9923-4a44-b2ac-e0470a41e4a0",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        0
+      ],
+      "id": "9a3b5f40-6316-4d30-a6ad-1af3ac107ef7",
+      "name": "output"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Your Article",
+        "completionMessage": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        0
+      ],
+      "id": "eeee637d-bce0-435d-aabf-5af2ada691fe",
+      "name": "Form",
+      "webhookId": "4469a274-905f-4900-af4d-3a4d219cdea7"
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "How many words?": 300,
+          "Choose the correct format": "APA",
+          "Instructions": "Assignment Type:\r\nResearch Paper\r\nService:\r\nWriting\r\nPages/Words:\r\n2 pages / 550 words (Double spacing)\r\nEducation Level:\r\nUniversity\r\nLanguage:\r\nEnglish (UK) \r\nAssignment Topic:\r\nInflation and monetary policy in developed economies: Implications for asset markets.\r\nSubject:\r\nInvesting and Financial Markets\r\nCitation Style:\r\nChicago/Turabian\r\n\r\n\r\n*FOCUS ON \r\nHigh interest rate and Australian stock and Australian housing markets \r\n\r\nDeveloped economies are passing through a period of high inflation. Monetary authorities in\r\nAustralia,  are following tight monetary policies by raising\r\ninterest rate. \r\nWhile preparing the assignment consider the following: \r\n➢ How does high interest rate affect asset market? \r\n➢ Are asset markets responding rationally?\r\n\r\nMinimum resources/skills needed to prepare this assignment \r\n➢ Interest rate and asset/share valuation (from corporate finance and introduction to\r\nfinance) \r\n➢ How is interest rate determined? (Chapter 5 of Bodie et al) \r\n➢ Recent media news/publications\r\n\r\nThe assignment must be appropriately referenced using Chicago reference style APA\r\n\r\nAdditional guidelines \r\n(1) Use Times New Roman font size 12, with 1.5 line spacing and 2.54 centimetres margin\r\nin each side. \r\n(2) Graphs/Diagrams/Tables must be clearly labelled, explained and referred to within the\r\nmain text of the essay. \r\n(3) Write in the third person. Do not use “I”. For example, do not include phrases such as,\r\n“In this essay I will discuss.....”. Instead try, “This essay will analyse…”",
+          "submittedAt": "2025-05-01T07:55:12.599-04:00",
+          "formMode": "test"
+        }
+      }
+    ],
+    "AI Agent": [
+      {
+        "json": {
+          "output": "# Inflation and Monetary Policy in Developed Economies: Implications for Asset Markets\n\nThis essay will analyse the effects of high interest rates on asset markets in developed economies, with a specific focus on Australia. In recent years, Australia, like many developed nations, has navigated through periods of high inflation. Monetary authorities in the country have adopted tight monetary policies, which include raising interest rates. This paper delves into how these high interest rates influence the Australian stock and housing markets and examines whether the asset markets are responding rationally to these changes.\n\n## The Economic Context of High Interest Rates\n\nHigh inflation rates catalyse central banks, such as the Reserve Bank of Australia (RBA), to implement contractionary monetary policies. These policies typically involve increasing interest rates to curb spending and to stabilize inflation. According to monetary policy frameworks, higher interest rates should theoretically lead to lower inflation by reducing consumption and investment (Monetary policy). The Australian economy, particularly influenced by high household debt and a dynamic housing market, tends to exhibit pronounced reactions to these shifts in monetary policy.\n\nIn a typical scenario, increasing interest rates raise the cost of borrowing, making mortgages and other loans more expensive. This shift can lead to decreased consumer spending, particularly in the housing sector, where prospective buyers may be deterred by unaffordable mortgage payments. For instance, as interest rates have risen, there has been observable cooling in the Australian housing market as buyers reconsider their financial commitments (Australian housing market). Home values can thus stagnate or even decline in response to escalating interest rates, directly affecting their appreciation rates.\n\n## The Impact on Asset Valuation\n\nThe relationship between interest rates and asset valuation is critical. According to valuation principles, higher interest rates generally decrease the present value of future cash flows associated with investments, making equities and real estate less attractive (Valuation). This is primarily due to the discounted cash flow model, where higher discount rates result in lowered valuations of companies and asset portfolios (Bodie et al.). Moreover, in the context of the Australian stock market, higher interest rates can lead to a reduction in corporate profits, as increased borrowing costs erode margins. \n\nInvestors may also shift their preferences away from equities towards fixed-income securities that offer safer returns in a rising-rate environment. This shift can lead to increased stock market volatility, with observable declines in share prices as investor sentiment turns pessimistic (Interest rate insurance). \n\n## Rationality of Market Reactions\n\nA pertinent question arises regarding the rationality of asset market responses to high interest rates. Behavioral finance suggests that markets are not always rational and can often overreact to changes in monetary policy (Behavioral finance). In the Australian context, while initial declines in asset values following rate hikes may seem rational, market fluctuations can become exaggerated due to investor sentiment and expectations about future economic conditions.\n\nFor instance, during periods of rising interest rates, markets may overreact by selling off assets more aggressively, leading to mispricing. This mispricing creates opportunities for investors who may take advantage of undervalued stocks and properties, thus potentially leading to price corrections over time. \n\n## Conclusion\n\nIn conclusion, high interest rates play a crucial role in shaping the Australian asset markets, particularly in the stock and housing sectors. As monetary authorities pursue tight monetary policies in response to inflationary pressures, the implications are profound. Higher borrowing costs can curtail demand, dampening asset valuations and leading to increased market volatility. While the mechanisms at play suggest rational responses to rate changes, the complexities of human behavior introduce elements of irrationality, resulting in potential mispricing in asset markets. Continued analysis is essential as investors navigate these fluctuating economic landscapes, particularly in a climate marked by uncertainty.\n\n### References\n\n- Bodie, Zvi, Alex Kane, and Alan J. Marcus. *Investments*. 10th ed. New York: McGraw-Hill, 2014.\n- \"Monetary policy.\" Wikipedia, last modified March 2, 2023. https://en.wikipedia.org/wiki/Monetary_policy.\n- \"Valuation (finance).\" Wikipedia, last modified March 2, 2023. https://en.wikipedia.org/wiki/Valuation_(finance).\n- \"Economy of Australia.\" Wikipedia, last modified March 2, 2023. https://en.wikipedia.org/wiki/Economy_of_Australia. \n\n**Note:** All graphs, diagrams, and tables should be appropriately labelled and included as necessary in the body of the text, in accordance with the formatting guidelines provided."
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-01T12:43:59.000Z",
+  "versionId": "d060c3dd-3f36-4d8e-8559-01315ea46472"
+}
