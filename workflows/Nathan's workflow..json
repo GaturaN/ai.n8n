@@ -1,0 +1,845 @@
+{
+  "active": true,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "myContacts": {
+      "main": [
+        [
+          {
+            "node": "workEmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        []
+      ]
+    },
+    "Code1": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML": {
+      "main": [
+        []
+      ]
+    },
+    "Customer Datastore (n8n training)": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Customer Datastore (n8n training)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request4": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-28T20:14:36.539Z",
+  "id": "eFL3g4vZMBcxxzoB",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Nathan's workflow.",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://internal.users.n8n.cloud/webhook/custom-erp",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "unique_id",
+              "value": "d7fc09c821e6a6922d19519076538162"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        20
+      ],
+      "id": "33dc0f1c-3f23-400d-b2fb-8f03a800fed0",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "jEWpP4jkhOYeMg1F",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appNexX9Npkimvsdm",
+          "mode": "list",
+          "cachedResultName": "beginner course.",
+          "cachedResultUrl": "https://airtable.com/appNexX9Npkimvsdm"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl1VyOe0C8WIHAR0",
+          "mode": "list",
+          "cachedResultName": "processingOrders",
+          "cachedResultUrl": "https://airtable.com/appNexX9Npkimvsdm/tbl1VyOe0C8WIHAR0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "orderID": "={{ $json.orderID }}",
+            "employeeName": "={{ $json.employeeName }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "orderID",
+              "displayName": "orderID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "employeeName",
+              "displayName": "employeeName",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        640,
+        20
+      ],
+      "id": "89595da6-0c38-4eaa-87a4-878693fd77c3",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gtfKMnMkjoGJpYfR",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "146a69c8-bf52-4cc1-a65b-e5c3972f9267",
+              "leftValue": "={{ $json.orderStatus }}",
+              "rightValue": "processing",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "76eabe38-3432-4076-85ae-91b2526fc4c2",
+              "leftValue": "={{ $json.employeeName }}",
+              "rightValue": "Mario",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        200,
+        20
+      ],
+      "id": "e8f5867e-a251-466e-964c-9060dab540b0",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1173ed0b-d33a-4065-8524-e16f9b5b8e71",
+              "name": "orderID",
+              "value": "={{ $json.orderID }}",
+              "type": "number"
+            },
+            {
+              "id": "fd32f6cc-1834-423a-b5b2-f733872c47f5",
+              "name": "employeeName",
+              "value": "={{ $json.employeeName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        420,
+        20
+      ],
+      "id": "1744a75a-f073-4753-b4bc-688958741bd4",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "let items = $input.all();\nlet totalBooked = items.length;\nlet bookedSum = 0;\n\nfor (let i=0; i < items.length; i++) {\n  bookedSum = bookedSum + items[i].json.orderPrice;\n}\n\nreturn [{ json: {totalBooked, bookedSum} }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        220
+      ],
+      "id": "602fbe68-9811-47bb-a8f1-ca62aa34f3af",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=This week we've {{$json[\"totalBooked\"]}} booked orders with a total value of {{$json[\"bookedSum\"]}}. My Unique ID: {{ $('HTTP Request').params[\"headerParameters\"][\"parameters\"][0][\"value\"] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        640,
+        220
+      ],
+      "id": "9b79d474-15e1-475a-9a81-8b97bc0f1851",
+      "name": "Discord",
+      "webhookId": "7afa7351-0edb-442b-b4bb-985df6b58efa",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "McEyH9QYVbez2997",
+          "name": "Discord Webhook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -240,
+        20
+      ],
+      "id": "5fbad6af-025e-4ef4-ba84-6fb1242d9529",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        -180
+      ],
+      "id": "13863fb2-c5c8-41b0-b242-2aaabd239761",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "jsCode": "var myContacts = [\n\t{\n\t\tjson: {\n\t\t\tname: 'Alice',\n\t\t\temail: {\n\t\t\t\tpersonal: 'alice@home.com',\n\t\t\t\twork: 'alice@wonderland.org'\n\t\t\t},\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tname: 'Bob',\n\t\t\temail: {\n\t\t\t\tpersonal: 'bob@mail.com',\n\t\t\t\twork: 'contact@thebuilder.com'\n\t\t\t\t},\n\t\t}\n\t},\n];\n\nreturn myContacts;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        -440
+      ],
+      "id": "8219fbfb-7410-492e-a580-2e2f61ee21d5",
+      "name": "myContacts"
+    },
+    {
+      "parameters": {
+        "jsCode": "let items = $input.all();\nitems[0].json.workEmail = items[0].json.email['work'];\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        -440
+      ],
+      "id": "8935b1e6-edc6-4a51-a0bd-445f79649ee6",
+      "name": "workEmail"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -1960
+      ],
+      "id": "a9b308f0-043e-4343-9e6f-e743c81ef908",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://pokeapi.co/api/v2/pokemon",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        -700
+      ],
+      "id": "6c084f5b-19dc-4416-939e-3783f7e5b65c",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "results",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        220,
+        -900
+      ],
+      "id": "b131052a-6595-41ce-81fe-59d6173ebc76",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "jsCode": "let items = $input.all();\nreturn items[0].json.results.map(item => {\n\treturn {\n\t\tjson: item\n\t}\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        200,
+        -700
+      ],
+      "id": "536cfadc-fd17-4b74-bfe0-32429f53cee8",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "url": "https://blog.n8n.io/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        -1160
+      ],
+      "id": "ff6f8282-72d7-4bcc-9923-72b2cec6c5c6",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "title",
+              "cssSelector": ".post .item-title",
+              "returnValue": "html"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        140,
+        -1160
+      ],
+      "id": "1decaf3e-f358-40cb-9641-8d8a26a5da1f",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "mode": "jsonToxml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        220,
+        -520
+      ],
+      "id": "6ddbb6d2-90d3-4507-8b17-d6ae05fd4ee3",
+      "name": "XML"
+    },
+    {
+      "parameters": {
+        "operation": "getAllPeople",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -1420
+      ],
+      "id": "5d07691b-66cd-4bab-922d-475d790253b4",
+      "name": "Customer Datastore (n8n training)"
+    },
+    {
+      "parameters": {
+        "operation": "roundDate",
+        "date": "={{ $json.created }}",
+        "outputFieldName": "new-date",
+        "options": {
+          "includeInputFields": true
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        140,
+        -1420
+      ],
+      "id": "ccfdc7bb-5b93-4037-89d4-c49698da53b2",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3b79b3ed-f2a7-4b9f-9521-66e4b3764a9a",
+              "leftValue": "={{ $json[\"new-date\"] }}",
+              "rightValue": "1960-01-01T00:00:00",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        360,
+        -1420
+      ],
+      "id": "15fcf5a1-ccac-46ef-a717-4bc51a78ee51",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        580,
+        -1520
+      ],
+      "id": "c67e3643-9dc0-4fd8-a8c7-f0950cf467af",
+      "name": "Wait",
+      "webhookId": "acad2bde-c065-4097-a8c4-85610a402c42"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b3f3ddd9-d44c-4ed2-848b-b0f2ae6f91df",
+              "name": "outputValue",
+              "value": "={{ $json[\"new-date\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        -1520
+      ],
+      "id": "22268786-294a-4716-9d12-393b56839fd1",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -260,
+        -1420
+      ],
+      "id": "d3a108f4-8178-4ca9-b79f-53ead37f8c62",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "url": "https://media.kaspersky.com/pdf/Kaspersky_Lab_Whitepaper_Anti_blocker.pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        -1800
+      ],
+      "id": "7462d1ca-c0c4-4c13-a0e5-ef56678111d7",
+      "name": "HTTP Request3"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -1800
+      ],
+      "id": "9c9839a4-13d7-4a94-8246-8a70768f1c0e",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "url": "https://poetrydb.org/random/1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -40,
+        -1960
+      ],
+      "id": "46baab2f-7f8c-40cc-878a-b04ca97bb213",
+      "name": "HTTP Request4"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        180,
+        -1960
+      ],
+      "id": "88278d3c-d839-4bf8-9c98-cdfd1a2ef910",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/home/test.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -1960
+      ],
+      "id": "4d848418-60e8-4058-8fe4-cdd631001756",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "fileSelector": "Desktop/test.txt",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        620,
+        -1960
+      ],
+      "id": "ac4daf3c-2747-4d93-9c52-addf85c63ef6",
+      "name": "Read/Write Files from Disk1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    },
+    "node:Schedule Trigger1": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-04-30T16:57:41.000Z",
+  "versionId": "35ffbcd4-b853-47a0-835a-90ce17c8054d"
+}
