@@ -16,19 +16,8 @@
       "main": [
         [
           {
-            "node": "name&nodes",
+            "node": "Convert to File",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Information Extractor",
-            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -60,7 +49,40 @@
       "main": [
         [
           {
-            "node": "Notion",
+            "node": "Google Docs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "name&nodes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Docs": {
+      "main": [
+        [
+          {
+            "node": "Google Docs1",
             "type": "main",
             "index": 0
           }
@@ -103,7 +125,8 @@
     },
     {
       "parameters": {
-        "content": "## Manual Documentation\n\n- Can document active and inactive workflows\n",
+        "content": "## Manual Documentation\n\n- Can document active and inactive workflows\n\n\n## MAKE USE OF GITHUB\n",
+        "height": 280,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -149,49 +172,11 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        300,
-        -20
+        520,
+        -280
       ],
       "id": "b7379bc4-4d48-4e65-b241-67e83b7f507c",
       "name": "Convert to File"
-    },
-    {
-      "parameters": {
-        "text": "={{ $json.content }}",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
-      "typeVersion": 1,
-      "position": [
-        360,
-        -760
-      ],
-      "id": "abc77729-56a9-4fbd-aef8-57ffdcd1d7ea",
-      "name": "Information Extractor"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o-mini"
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        320,
-        -400
-      ],
-      "id": "3a54425e-1c03-44ca-b4e6-eb1c3547b82d",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "lcpI0YZU9bebg3uW",
-          "name": "OpenAi account"
-        }
-      }
     },
     {
       "parameters": {
@@ -200,13 +185,19 @@
             {
               "id": "905bf60f-dc86-490c-a362-6abb4239ef16",
               "name": "name",
-              "value": "={{ $json.name }}",
+              "value": "={{ $('get_workflow').item.json.name }}",
               "type": "string"
             },
             {
               "id": "2bc2ecc5-0d31-4e35-bf68-30149b3599a9",
               "name": "nodes",
-              "value": "={{ $json.nodes }}",
+              "value": "={{ $('get_workflow').item.json.nodes }}",
+              "type": "string"
+            },
+            {
+              "id": "2f2b02c5-fed4-4f54-935a-f5fe9d98beec",
+              "name": "webViewLinkFIle",
+              "value": "={{ $json.webViewLink }}",
               "type": "string"
             }
           ]
@@ -218,7 +209,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        540,
+        960,
         -280
       ]
     },
@@ -248,7 +239,7 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.5,
       "position": [
-        740,
+        1160,
         -280
       ],
       "credentials": {
@@ -275,7 +266,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1100,
+        1520,
         -280
       ],
       "id": "9eeee91b-a5d1-41e5-b72d-2e2e86516972",
@@ -283,32 +274,89 @@
     },
     {
       "parameters": {
-        "resource": "databasePage",
-        "databaseId": {
+        "name": "={{ $('get_workflow').item.json.name }}",
+        "driveId": {
           "__rl": true,
-          "mode": "url",
-          "value": "",
-          "__regex": "(?:https|http)://www\\.notion\\.so/(?:[a-z0-9-]{2,}/)?([0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12})"
+          "mode": "list",
+          "value": "My Drive"
         },
-        "propertiesUi": {
-          "propertyValues": [
-            {}
-          ]
+        "folderId": {
+          "__rl": true,
+          "value": "1JzPqPOHBpWBOGk8aWOrVzKM-oq9SPs_3",
+          "mode": "list",
+          "cachedResultName": "n8n Documentation",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1JzPqPOHBpWBOGk8aWOrVzKM-oq9SPs_3"
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.notion",
-      "typeVersion": 2.2,
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
       "position": [
-        1320,
+        740,
         -280
       ],
-      "id": "cd56fc2b-a227-4f26-952e-4bbe8633702b",
-      "name": "Notion",
+      "id": "e4e6c4d5-6e33-46a7-b1f6-18ecf15c0b6f",
+      "name": "Google Drive",
       "credentials": {
-        "notionApi": {
-          "id": "eU3a6XL7bcWzXDzB",
-          "name": "My Workspace"
+        "googleDriveOAuth2Api": {
+          "id": "MHcgKR744VHXSe3X",
+          "name": "Drive n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "folderId": "1JzPqPOHBpWBOGk8aWOrVzKM-oq9SPs_3",
+        "title": "={{ $('name&nodes').item.json.name }}"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1740,
+        -280
+      ],
+      "id": "c817ca4f-76bf-4842-9e8e-c5e1b4ab5509",
+      "name": "Google Docs",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "zF1VnrEp6I9Pfxn8",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('set_generated_documentation').item.json.content }}"
+            },
+            {
+              "object": "pageBreak",
+              "action": "insert"
+            },
+            {
+              "action": "insert",
+              "text": "={{ $('Google Drive').item.json.webViewLink }}\n\n\n\n\n{{ $('name&nodes').item.json.nodes }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1960,
+        -280
+      ],
+      "id": "aa15df6f-7416-4f42-a20d-4d1cd1320702",
+      "name": "Google Docs1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "zF1VnrEp6I9Pfxn8",
+          "name": "Google Docs account"
         }
       }
     }
@@ -320,6 +368,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-23T09:44:47.000Z",
-  "versionId": "c9475439-e87f-47c0-826b-98b78045f250"
+  "updatedAt": "2025-04-27T20:29:19.000Z",
+  "versionId": "f846ffc1-fc35-4b96-b589-640fbe947a17"
 }
