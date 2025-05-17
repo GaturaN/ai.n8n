@@ -1,0 +1,731 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Parse structured data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trello1": {
+      "main": [
+        [
+          {
+            "node": "extract just the tasks array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Project Data": {
+      "main": [
+        [
+          {
+            "node": "Trello: creating a board",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse structured data": {
+      "main": [
+        [
+          {
+            "node": "Parse Project Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Trello1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trello: creating a board": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extract just the tasks array": {
+      "main": [
+        [
+          {
+            "node": "Trello",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-14T10:26:08.616Z",
+  "id": "k5qBdJ9C17IQEum6",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Project Manager",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/project-input",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -7020,
+        -120
+      ],
+      "id": "65e4c0ea-2537-4829-8466-0b7c83f7f406",
+      "name": "Webhook",
+      "webhookId": "f679e19e-414a-44ca-af8d-474ccc53c182"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"projectName\": \"AI Project Automation\",\n  \"objectives\": \"Streamline task assignments using AI\",\n  \"stakeholders\": [\"Sarah Mwangi\", \"Product Team\", \"Client X\"],\n  \"timeline\": \"Q3 2025\",\n  \"budget\": \"$15,000\",\n  \"resources\": [\"2 Developers\", \"1 PM\", \"GPT-4\"]\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6800,
+        -120
+      ],
+      "id": "fee4c18a-9703-4733-81d3-3e930fbeda57",
+      "name": "Edit Fields",
+      "notes": "collecting variables"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7f073b6d-e0f0-49c4-b123-52c3ca2e9617",
+              "leftValue": "={{ $('Webhook').item.json.body['Project Name '] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "aa0c73c3-09ca-41ee-a46e-e8996a916ba3",
+              "leftValue": "={{ $('Webhook').item.json.body['  Project Objectives  '] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "5704fb0d-4795-4f06-afc0-456213cf4885",
+              "leftValue": "={{ $('Webhook').item.json.body['  Stakeholder Information '] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "5605a937-cfcc-4f00-9693-bb3c128b22f0",
+              "leftValue": "={{ $('Webhook').item.json.body['  Budget Considerations  '] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "c157f9f3-bd53-4caf-97a6-e0f7d0e8c02c",
+              "leftValue": "={{ $('Webhook').item.json.body['  Resources Available  '] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -6580,
+        -120
+      ],
+      "id": "889f9e29-ed34-4ea3-8a57-f0d27b34132f",
+      "name": "If",
+      "notes": "making sure all values are gotten"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"Missing required fields\": \"Please provide project name, objectives, and timeline.\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -6360,
+        -20
+      ],
+      "id": "03d93a08-9306-4e2b-b76f-e1e6a2fd8971",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// convert arrays like stakeholders and resources to comma-separated strings\nconsole.log('Incoming data:', $json);\nreturn {\n  json: {\n    projectName: $json[\"projectName\"],\n    objectives: $json[\"objectives\"],\n    stakeholders: Array.isArray($json[\"stakeholders\"])\n      ? $json[\"stakeholders\"].join(\", \")\n      : $json[\"stakeholders\"],\n    timeline: $json[\"timeline\"],\n    budget: (() => {\n      const raw = $json[\"budget\"] || \"\";\n      const digitsOnly = raw.match(/\\d+/g); // Match all digit groups\n      return digitsOnly ? parseInt(digitsOnly.join(\"\")) : 0;\n    })(),\n    resources: Array.isArray($json[\"resources\"])\n      ? $json[\"resources\"].join(\", \")\n      : $json[\"resources\"]\n  }\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6360,
+        -220
+      ],
+      "id": "27a9a09c-2913-4291-baae-3fe226ad4d83",
+      "name": "Code",
+      "notes": "change arrays to string and budget to integer"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "appMGTdEB5qD56XmI",
+          "mode": "list",
+          "cachedResultName": "AI Projects",
+          "cachedResultUrl": "https://airtable.com/appMGTdEB5qD56XmI"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblqtOU161XkEgqTH",
+          "mode": "list",
+          "cachedResultName": "ProjectInputs",
+          "cachedResultUrl": "https://airtable.com/appMGTdEB5qD56XmI/tblqtOU161XkEgqTH"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Project Name": "={{ $json.projectName }}",
+            "Project Objectives": "={{ $json.objectives }}",
+            "Stakeholder Information": "={{ $json.stakeholders }}",
+            "Timeline": "={{ $json.timeline }}",
+            "Budget Considerations": "={{ $json.budget }}",
+            "Resources Available": "={{ $json.resources }}"
+          },
+          "matchingColumns": [
+            "id",
+            "Project Name",
+            "Project Objectives",
+            "Stakeholder Information",
+            "Timeline",
+            "Budget Considerations",
+            "Resources Available"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Project Name",
+              "displayName": "Project Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Project Objectives",
+              "displayName": "Project Objectives",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Stakeholder Information",
+              "displayName": "Stakeholder Information",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Timeline",
+              "displayName": "Timeline",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Budget Considerations",
+              "displayName": "Budget Considerations",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resources Available",
+              "displayName": "Resources Available",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -6140,
+        -220
+      ],
+      "id": "cd3a2d39-aa72-4721-b034-d5a95b61d63d",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "WwKYeKDKPmYhlkE2",
+          "name": "Airtable Personal Access Token account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"message\": \"Project details saved successfully to Airtable.\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -5920,
+        -220
+      ],
+      "id": "7e9d9cc2-abc9-4b01-9e0c-9c20f27e2c46",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an expert project manager. Given the following project details, generate:\n\n1. Project Overview : Provide a clear and concise summary of the project, including its purpose, scope, and expected impact.\n2. Objectives : List and elaborate objectives of the project. Ensure each objective is specific, measurable, achievable, relevant, and time-bound (SMART).\n3. Key Milestones (with timeline)\n4. Task Breakdown\n5. Dependencies between tasks\n6. Suggested Resource Allocation\n7. Top 3 Risk: to 3 risk Factors and how to mitigate them\n8. Success Criteria\nmake sure to use these headings according to above project details repectively: Project Overview,Objectives,Key Milestones,  Tasks, Dependencies,Resource Allocation,Top 3 Risk, Success Criteria\n\nProject Name: {{ $json.fields['Project Name'] }}\nObjectives: {{ $json.fields['Project Objectives'] }}\nStakeholders: {{ $json.fields['Stakeholder Information'] }}\nTimeline: {{ $json.fields.Timeline }}\nBudget: {{ $json.fields['Budget Considerations'] }}\nResources Available: {{ $json.fields['Resources Available'] }}\n\nPlease format your answer with headings for each section using `## Heading`.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -5700,
+        -220
+      ],
+      "id": "2aee18d9-1a79-4e3c-a1b2-fefb1b9884c7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -5672,
+        0
+      ],
+      "id": "bccc6950-012d-4d79-83cf-33e107e2608d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "zfZI4wAWHtBjN4ut",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.id }}",
+        "contextWindowLength": 17
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -5552,
+        0
+      ],
+      "id": "4f59124f-8dda-423b-a89a-2f356638f71e",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f33a2fcd-8fc1-4df5-8283-a356fc6b2b9c",
+              "name": "=output",
+              "value": "={{ $json.output}}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": "={{ false }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -5324,
+        -220
+      ],
+      "id": "e7488fd1-579c-4c70-865d-1c673c427ae5",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "resource": "list",
+        "idBoard": "={{ $('Trello: creating a board').item.json.id }}",
+        "name": "={{ $json.name }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        -4224,
+        -220
+      ],
+      "id": "d660e992-2963-4662-84b6-41478901cb59",
+      "name": "Trello1",
+      "credentials": {
+        "trelloApi": {
+          "id": "AA2ZEokpp6qil0Fe",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const jsonData = $input.first().json;\nconst projectData = jsonData.projectPlan;\n\n// Extract key project information\nreturn {\n  json: {\n    projectName:$('Respond to Webhook1').first().json.fields['Project Name'] ,\n    overview: projectData.overview,\n    milestones: projectData.milestones,\n    tasks: projectData.tasks,\n    dependencies: projectData.dependencies,\n    resource: projectData.resources,\n    risks: projectData.risks,\n    success_creteria: projectData.successCriteria\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -4884,
+        -220
+      ],
+      "id": "aefe9aff-5d3c-4b4c-9633-46baf833faa5",
+      "name": "Parse Project Data"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "/**\n * Main function to parse AI response and generate project visualizations\n */\nfunction processAIResponse() {\n  try {\n    // Get the AI output directly from global.get('$json.output') or directly use the output\n    // Modify this line to match how your AI agent node's output is accessible\n    const outputText = $json.output || '';\n    \n    // Parse the project plan from the AI output\n    const projectPlan = parseProjectPlan(outputText);\n    \n    // Return structured data with visualizations\n    return { \n      json: { \n        projectPlan, \n        ganttChart: generateGanttChart(projectPlan), \n        dependencyDiagram: generateDependencyDiagram(projectPlan), \n        resourceChart: generateResourceAllocationChart(projectPlan), \n        report: generateProjectReport(projectPlan) \n      } \n    };\n  } catch (error) {\n    return { error: `Failed to process AI response: ${error.message}` };\n  }\n}\n/**\n * Parse project plan from the AI output text\n * @param {string} text - Raw AI output text\n * @returns {Object} Structured project plan data\n */\nfunction parseProjectPlan(text) {\n  // Initialize project plan structure\n  const projectPlan = {\n    overview: '',\n    objectives: [],\n    milestones: [],\n    tasks: [],\n    dependencies: [],\n    resources: [],\n    risks: [],\n    successCriteria: []\n  };\n\n  // Extract project overview\n  const overviewMatch = text.match(/## Project Overview\\n([\\s\\S]*?)(?=\\n## )/);\n  if (overviewMatch) {\n    projectPlan.overview = overviewMatch[1].trim();\n  }\n\n  // Extract objectives\n  const objectivesMatch = text.match(/## Objectives\\n([\\s\\S]*?)(?=\\n## )/);\n  if (objectivesMatch) {\n    const objectivesText = objectivesMatch[1];\n    const objectiveMatches = objectivesText.matchAll(/\\d+\\.\\s+\\*\\*Objective \\d+:\\s+(.*?)\\*\\*\\n([\\s\\S]*?)(?=\\n\\d+\\.\\s+\\*\\*Objective|\\n## |$)/g);\n    \n    for (const match of objectiveMatches) {\n      const title = match[1].trim();\n      const details = match[2].trim();\n      \n      // Extract SMART criteria\n      const specific = extractSMARTCriteria(details, 'Specific');\n      const measurable = extractSMARTCriteria(details, 'Measurable');\n      const achievable = extractSMARTCriteria(details, 'Achievable');\n      const relevant = extractSMARTCriteria(details, 'Relevant');\n      const timeBound = extractSMARTCriteria(details, 'Time-bound');\n      \n      projectPlan.objectives.push({\n        title,\n        specific,\n        measurable,\n        achievable,\n        relevant,\n        timeBound\n      });\n    }\n  }\n\n  // Extract milestones\n  const milestonesMatch = text.match(/## Key Milestones\\n([\\s\\S]*?)(?=\\n## |$)/);\n  if (milestonesMatch) {\n    const milestonesText = milestonesMatch[1];\n    const milestoneMatches = milestonesText.matchAll(/\\d+\\.\\s+\\*\\*Milestone \\d+:\\s+(.*?)\\*\\*\\s*-\\s*(.+?)(?=\\n\\d+\\.|$)/g);\n    \n    for (const match of milestoneMatches) {\n      const name = match[1].trim();\n      const date = match[2].trim();\n      \n      projectPlan.milestones.push({\n        name,\n        date,\n        id: `M${projectPlan.milestones.length + 1}`\n      });\n    }\n  }\n\n  // Extract tasks\n  const tasksMatch = text.match(/## Tasks\\n([\\s\\S]*?)(?=\\n## |$)/);\n  if (tasksMatch) {\n    const tasksText = tasksMatch[1];\n    const phaseMatches = tasksText.matchAll(/- \\*\\*Phase \\d+:\\s+(.*?)\\*\\*\\n([\\s\\S]*?)(?=- \\*\\*Phase|\\n## |$)/g);\n    \n    let taskId = 1;\n    for (const phaseMatch of phaseMatches) {\n      const phaseName = phaseMatch[1].trim();\n      const phaseTasks = phaseMatch[2];\n      \n      const taskMatches = phaseTasks.matchAll(/Task (\\d+\\.\\d+):\\s+(.*?)(?=\\n|$)/g);\n      for (const taskMatch of taskMatches) {\n        const taskNumber = taskMatch[1];\n        const taskDescription = taskMatch[2].trim();\n        \n        projectPlan.tasks.push({\n          id: `T${taskId}`,\n          number: taskNumber,\n          description: taskDescription,\n          phase: phaseName\n        });\n        \n        taskId++;\n      }\n    }\n  }\n\n  // Extract dependencies\n  const dependenciesMatch = text.match(/## Dependencies\\n([\\s\\S]*?)(?=\\n## |$)/);\n  if (dependenciesMatch) {\n    const dependenciesText = dependenciesMatch[1];\n    const dependencyLines = dependenciesText.split('\\n').filter(line => line.trim().length > 0);\n    \n    for (const line of dependencyLines) {\n      // Extract task references from dependency descriptions\n      const taskMatches = line.match(/Task (\\d+\\.\\d+)/g) || [];\n      \n      if (taskMatches.length >= 2) {\n        const predecessor = taskMatches[0].replace('Task ', '');\n        const successor = taskMatches[1].replace('Task ', '');\n        \n        const predecessorTask = projectPlan.tasks.find(task => task.number === predecessor);\n        const successorTask = projectPlan.tasks.find(task => task.number === successor);\n        \n        if (predecessorTask && successorTask) {\n          projectPlan.dependencies.push({\n            from: predecessorTask.id,\n            to: successorTask.id,\n            description: line.trim()\n          });\n        }\n      }\n    }\n  }\n\n  // Extract risks\n  const risksMatch = text.match(/## Top 3 Risks\\n([\\s\\S]*?)(?=\\n## |$)/);\n  if (risksMatch) {\n    const risksText = risksMatch[1];\n    const riskMatches = risksText.matchAll(/\\d+\\.\\s+\\*\\*Risk:\\s+(.*?)\\*\\*\\n\\s+- \\*\\*Mitigation\\*\\*:\\s+(.*?)(?=\\n\\d+\\.|$)/gs);\n    \n    for (const match of riskMatches) {\n      const risk = match[1].trim();\n      const mitigation = match[2].trim();\n      \n      projectPlan.risks.push({\n        risk,\n        mitigation\n      });\n    }\n  }\n\n  // Extract success criteria\n  const successCriteriaMatch = text.match(/## Success Criteria\\n([\\s\\S]*?)(?=\\n## |$)/);\n  if (successCriteriaMatch) {\n    const criteriaText = successCriteriaMatch[1];\n    const criteriaLines = criteriaText.split('\\n- ').slice(1);\n    \n    for (const line of criteriaLines) {\n      if (line.trim()) {\n        projectPlan.successCriteria.push(line.trim());\n      }\n    }\n  }\n\n  // Try to extract resources from the text\n  // (This is a best-effort extraction since resources weren't explicitly defined in the example)\n  const resourceMatches = text.match(/(\\d+\\s+developers|GPT-4)/g) || [];\n  const uniqueResources = [...new Set(resourceMatches)];\n  projectPlan.resources = uniqueResources.map(resource => ({ name: resource }));\n\n  return projectPlan;\n}\n\n/**\n * Extract SMART criteria from objective details\n */\nfunction extractSMARTCriteria(details, criteriaType) {\n  const match = details.match(new RegExp(`- \\\\*\\\\*${criteriaType}\\\\*\\\\*:\\\\s+(.*?)(?=\\\\n|$)`));\n  return match ? match[1].trim() : '';\n}\n\n/**\n * Generate a Mermaid Gantt chart from the project plan\n */\nfunction generateGanttChart(projectPlan) {\n  let ganttChart = 'gantt\\n';\n  ganttChart += '    title Project Timeline\\n';\n  ganttChart += '    dateFormat YYYY-MM-DD\\n';\n  ganttChart += '    axisFormat %b %d\\n\\n';\n  \n  // Add milestones\n  if (projectPlan.milestones.length > 0) {\n    ganttChart += '    section Milestones\\n';\n    \n    projectPlan.milestones.forEach(milestone => {\n      // Convert date format (e.g., August 1, 2025 -> 2025-08-01)\n      const dateParts = milestone.date.match(/(\\w+)\\s+(\\d+),\\s+(\\d+)/);\n      let formattedDate = milestone.date;\n      \n      if (dateParts) {\n        const month = getMonthNumber(dateParts[1]);\n        const day = dateParts[2].padStart(2, '0');\n        const year = dateParts[3];\n        formattedDate = `${year}-${month}-${day}`;\n      }\n      \n      ganttChart += `    ${milestone.name} : milestone, ${milestone.id}, ${formattedDate}, 1d\\n`;\n    });\n  }\n  \n  // Group tasks by phase\n  const phases = [...new Set(projectPlan.tasks.map(task => task.phase))];\n  \n  phases.forEach(phase => {\n    ganttChart += `    section ${phase}\\n`;\n    \n    const phaseTasks = projectPlan.tasks.filter(task => task.phase === phase);\n    phaseTasks.forEach(task => {\n      // For this example, we'll use task IDs for dates since actual dates aren't provided\n      // In a real scenario, you would use actual dates\n      const taskIndex = projectPlan.tasks.indexOf(task);\n      const startDate = getEstimatedDate(projectPlan.milestones[0].date, taskIndex * 7);\n      const duration = '7d';\n      \n      ganttChart += `    ${task.description} : ${task.id}, ${startDate}, ${duration}\\n`;\n      \n      // Add dependencies\n      const dependencies = projectPlan.dependencies.filter(dep => dep.to === task.id);\n      if (dependencies.length > 0) {\n        const dependencyIds = dependencies.map(dep => dep.from).join(', ');\n        ganttChart += `    ${task.id} after ${dependencyIds}\\n`;\n      }\n    });\n  });\n  \n  return ganttChart;\n}\n\n/**\n * Generate a dependency diagram using Mermaid\n */\nfunction generateDependencyDiagram(projectPlan) {\n  let diagram = 'flowchart TD\\n';\n  \n  // Add all tasks as nodes\n  projectPlan.tasks.forEach(task => {\n    diagram += `    ${task.id}[${task.description}]\\n`;\n  });\n  \n  // Add dependencies as connections\n  projectPlan.dependencies.forEach(dep => {\n    diagram += `    ${dep.from} --> ${dep.to}\\n`;\n  });\n  \n  // Add milestones\n  projectPlan.milestones.forEach(milestone => {\n    diagram += `    ${milestone.id}((${milestone.name}))\\n`;\n  });\n  \n  // Connect tasks to milestones (simplified connection based on phases)\n  const phaseToMilestone = {\n    'Research and Planning': 'M1',\n    'Development': 'M2',\n    'Testing': 'M3',\n    'Training and Deployment': 'M4',\n    'Evaluation': 'M5'\n  };\n  \n  const phases = [...new Set(projectPlan.tasks.map(task => task.phase))];\n  phases.forEach(phase => {\n    const milestoneId = phaseToMilestone[phase];\n    if (milestoneId) {\n      const lastTaskInPhase = projectPlan.tasks.filter(task => task.phase === phase).pop();\n      if (lastTaskInPhase) {\n        diagram += `    ${lastTaskInPhase.id} -.-> ${milestoneId}\\n`;\n      }\n    }\n  });\n  \n  return diagram;\n}\n\n/**\n * Generate resource allocation chart data\n */\nfunction generateResourceAllocationChart(projectPlan) {\n  // This function would prepare data for visualizing resource allocation\n  // Since we don't have detailed resource assignments per task in the original data,\n  // we'll create a simplified representation\n  \n  const resources = projectPlan.resources.map(resource => resource.name);\n  const phases = [...new Set(projectPlan.tasks.map(task => task.phase))];\n  \n  const data = [];\n  \n  resources.forEach(resource => {\n    const resourceData = {\n      resource: resource,\n      allocations: []\n    };\n    \n    phases.forEach(phase => {\n      // Create simulated allocation data\n      // In a real scenario, you would use actual allocation data\n      const taskCount = projectPlan.tasks.filter(task => task.phase === phase).length;\n      const allocation = resource.includes('developer') ? (taskCount * 25) : (taskCount * 15);\n      \n      resourceData.allocations.push({\n        phase: phase,\n        percentage: Math.min(allocation, 100)\n      });\n    });\n    \n    data.push(resourceData);\n  });\n  \n  return {\n    resources: resources,\n    phases: phases,\n    data: data\n  };\n}\n\n/**\n * Generate a comprehensive project report in Markdown format\n */\nfunction generateProjectReport(projectPlan) {\n  let report = `# Project Plan: AI Project Automation\\n\\n`;\n  \n  // Overview\n  report += `## Overview\\n${projectPlan.overview}\\n\\n`;\n  \n  // Objectives\n  report += `## Objectives\\n`;\n  projectPlan.objectives.forEach((objective, index) => {\n    report += `### Objective ${index + 1}: ${objective.title}\\n`;\n    report += `- **Specific**: ${objective.specific}\\n`;\n    report += `- **Measurable**: ${objective.measurable}\\n`;\n    report += `- **Achievable**: ${objective.achievable}\\n`;\n    report += `- **Relevant**: ${objective.relevant}\\n`;\n    report += `- **Time-bound**: ${objective.timeBound}\\n\\n`;\n  });\n  \n  // Milestones\n  report += `## Key Milestones\\n`;\n  projectPlan.milestones.forEach((milestone, index) => {\n    report += `- **Milestone ${index + 1}**: ${milestone.name} - ${milestone.date}\\n`;\n  });\n  report += `\\n`;\n  \n  // Tasks\n  report += `## Tasks\\n`;\n  const phases = [...new Set(projectPlan.tasks.map(task => task.phase))];\n  phases.forEach(phase => {\n    report += `### Phase: ${phase}\\n`;\n    const phaseTasks = projectPlan.tasks.filter(task => task.phase === phase);\n    phaseTasks.forEach(task => {\n      report += `- **Task ${task.number}**: ${task.description}\\n`;\n    });\n    report += `\\n`;\n  });\n  \n  // Dependencies\n  report += `## Dependencies\\n`;\n  projectPlan.dependencies.forEach(dependency => {\n    const fromTask = projectPlan.tasks.find(task => task.id === dependency.from);\n    const toTask = projectPlan.tasks.find(task => task.id === dependency.to);\n    report += `- Task ${fromTask.number} must be completed before Task ${toTask.number}\\n`;\n  });\n  report += `\\n`;\n  \n  // Risks\n  report += `## Risks and Mitigations\\n`;\n  projectPlan.risks.forEach((risk, index) => {\n    report += `### Risk ${index + 1}: ${risk.risk}\\n`;\n    report += `- **Mitigation**: ${risk.mitigation}\\n\\n`;\n  });\n  \n  // Success Criteria\n  report += `## Success Criteria\\n`;\n  projectPlan.successCriteria.forEach((criteria, index) => {\n    report += `${index + 1}. ${criteria}\\n`;\n  });\n  \n  return report;\n}\n\n/**\n * Helper function to convert month name to number\n */\nfunction getMonthNumber(monthName) {\n  const months = {\n    'January': '01', 'February': '02', 'March': '03', 'April': '04',\n    'May': '05', 'June': '06', 'July': '07', 'August': '08',\n    'September': '09', 'October': '10', 'November': '11', 'December': '12'\n  };\n  \n  return months[monthName] || '01';\n}\n\n/**\n * Helper function to calculate estimated dates based on offsets\n */\nfunction getEstimatedDate(baseDate, daysOffset) {\n  const dateParts = baseDate.match(/(\\w+)\\s+(\\d+),\\s+(\\d+)/);\n  if (!dateParts) return '2025-08-01';\n  \n  const month = getMonthNumber(dateParts[1]);\n  const day = parseInt(dateParts[2]);\n  const year = parseInt(dateParts[3]);\n  \n  const date = new Date(year, parseInt(month) - 1, day);\n  date.setDate(date.getDate() + daysOffset);\n  \n  const newYear = date.getFullYear();\n  const newMonth = String(date.getMonth() + 1).padStart(2, '0');\n  const newDay = String(date.getDate()).padStart(2, '0');\n  \n  return `${newYear}-${newMonth}-${newDay}`;\n}\n\n// Return the processed data\nreturn processAIResponse();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -5104,
+        -220
+      ],
+      "id": "028a5319-b93b-4f76-8d71-37d36c601077",
+      "name": "Parse structured data"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Parse Project Data').first().json.milestones.map(m => {\n  return {\n    json: {\n      name: m.name,           \n      idBoard:$input.first().json.id\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -4444,
+        -220
+      ],
+      "id": "5597c025-6a8c-4dc8-8db6-31ea150a85a8",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "resource": "board",
+        "name": "={{ $json.projectName }}",
+        "description": "={{ $json.overview }}",
+        "additionalFields": {
+          "prefs_background": "blue"
+        }
+      },
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        -4664,
+        -220
+      ],
+      "id": "ae25f440-6ace-4909-b707-9cfec883e282",
+      "name": "Trello: creating a board",
+      "credentials": {
+        "trelloApi": {
+          "id": "AA2ZEokpp6qil0Fe",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Parse Project Data').first().json.tasks.map(task => {\n  return {\n    json: {\n      boardid: $('Trello: creating a board').first().json.id,\n      id: task.id,\n      number: task.number,\n      description: task.description,\n      phase: task.phase\n    }\n  }\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -4004,
+        -220
+      ],
+      "id": "66f94cd8-8f7b-4c03-914f-c182bc2e1c20",
+      "name": "extract just the tasks array"
+    },
+    {
+      "parameters": {
+        "listId": "={{ $json.boardid }}",
+        "name": "={{ $json.id }} {{ $json.description }}",
+        "description": "=Phase: {{ $json.phase }}, ID: {{ $json.id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        -3780,
+        -220
+      ],
+      "id": "b1c0e6f0-2977-4f47-8bc2-0304ac6e6cfa",
+      "name": "Trello",
+      "credentials": {
+        "trelloApi": {
+          "id": "AA2ZEokpp6qil0Fe",
+          "name": "Trello account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "ai.gatuservices.info",
+            "x-forwarded-scheme": "http",
+            "x-forwarded-proto": "http",
+            "x-forwarded-for": "107.178.203.161, 172.68.23.168",
+            "x-real-ip": "172.68.23.168",
+            "content-length": "265",
+            "content-type": "application/json",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "accept-encoding": "gzip, br",
+            "user-agent": "Mozilla/5.0 (compatible; Google-Apps-Script; beanserver; +https://script.google.com; id: UAEmdDd9AxXFMPGVyq0qAhf_jRS0vEXh0bA)",
+            "cf-ray": "93fc5ff52fbb7534-SEA",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "107.178.203.161",
+            "cf-ipcountry": "US"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "Project Name ": "AI Project Automation",
+            "  Project Objectives  ": "Streamline task assignments using AI",
+            "  Stakeholder Information ": "Sarah Mwangi, Product Team, Client X",
+            "  Budget Considerations  ": "Q3 2025",
+            "  Resources Available  ": "2 Developers\n1 PM\nGPT-4"
+          },
+          "webhookUrl": "https://ai.gatuservices.info/webhook-test/project-input",
+          "executionMode": "test"
+        }
+      }
+    ],
+    "Edit Fields1": [
+      {
+        "json": {
+          "output": "## Project Overview\nThe AI Project Automation initiative aims to optimize the process of task assignments within the Product Team for Client X through the implementation of an advanced AI-driven tool. This project seeks to automate routine task allocations, leveraging machine learning techniques to improve efficiency and reduce manual errors. The scope encompasses the development of the AI solution, training for team members, and establishing performance metrics to measure success post-implementation. The expected impact includes increased productivity, enhanced team morale, decreased workload on team members, and timely project delivery, thereby improving overall client satisfaction.\n\n## Objectives\n1. **Objective 1: Develop and Implement the AI Task Assignment Tool**\n   - **Specific**: Create an AI solution that automates task assignments based on team members’ skills and workload.\n   - **Measurable**: Success is determined by the successful development and deployment of the tool.\n   - **Achievable**: Utilize existing resources (2 developers and GPT-4) to complete development tasks.\n   - **Relevant**: Directly aligns with the project's aim to enhance operational efficiency.\n   - **Time-bound**: Complete development by October 15, 2025.\n\n2. **Objective 2: Train the Product Team on Effective Usage of the AI Tool**\n   - **Specific**: Provide comprehensive training for the Product Team.\n   - **Measurable**: At least 90% of team members should complete the training, demonstrated by a follow-up quiz.\n   - **Achievable**: Leverage available resources for training activities.\n   - **Relevant**: Ensures the successful adoption and utilization of the tool.\n   - **Time-bound**: Training to be completed by October 30, 2025.\n\n3. **Objective 3: Evaluate Performance Improvement After Tool Implementation**\n   - **Specific**: Measure the tool's impact on task assignment efficiency and project timelines.\n   - **Measurable**: Aim for a 20% reduction in task assignment time and a 15% increase in project delivery speed.\n   - **Achievable**: Collect baseline data to compare performance before and after implementation.\n   - **Relevant**: Essential for understanding the tool's effectiveness.\n   - **Time-bound**: Conduct evaluations within three months post-implementation, by January 30, 2026.\n\n## Key Milestones\n1. **Milestone 1: Project Kick-off Meeting** - August 1, 2025\n2. **Milestone 2: Completion of AI Tool Development** - October 15, 2025\n3. **Milestone 3: Completion of Training Sessions** - October 30, 2025\n4. **Milestone 4: Deployment of the AI Tool** - November 1, 2025\n5. **Milestone 5: Initial Performance Evaluation** - January 30, 2026\n\n## Tasks\n- **Phase 1: Research and Planning**\n  - Task 1.1: Analyze existing task assignment processes.\n  - Task 1.2: Define user requirements with stakeholders.\n\n- **Phase 2: Development**\n  - Task 2.1: Design the AI tool architecture.\n  - Task 2.2: Develop the user interface.\n  - Task 2.3: Implement the AI algorithm for task assignments.\n\n- **Phase 3: Testing**\n  - Task 3.1: Conduct unit testing for individual components.\n  - Task 3.2: Perform integration testing of the entire system.\n  - Task 3.3: Gather feedback from the Product Team for adjustments.\n\n- **Phase 4: Training and Deployment**\n  - Task 4.1: Develop training materials and documentation.\n  - Task 4.2: Deliver training sessions to the Product Team.\n  - Task 4.3: Roll out the AI tool for live use.\n\n- **Phase 5: Evaluation**\n  - Task 5.1: Measure KPIs following implementation.\n  - Task 5.2: Analyze outcomes and prepare a report for stakeholders.\n\n## Dependencies\n- Task 1.2 (Define user requirements) must be completed before Task 2.1 (Design AI tool architecture).\n- Task 2.2 (Develop user interface) must be completed before Task 2.3 (Implement AI algorithm).\n- Testing tasks (3.1-3.3) depend on completion of development tasks (2.1-2.3).\n- Task 4.1 (Training materials) must be ready before Task 4.2 (Training sessions).\n- Performance evaluation (5.1) is contingent on the successful deployment of the AI tool (Task 4.3).\n\n## Top 3 Risks\n1. **Risk: Technical Challenges During Development**\n   - **Mitigation**: Conduct regular code reviews and updates; allocate time buffers within the schedule for unexpected issues, and develop a contingency plan for technical hurdles.\n\n2. **Risk: Resistance to Change from Team Members**\n   - **Mitigation**: Involve team members throughout the development process, gather their feedback early, and emphasize the benefits of the new tool during training sessions to encourage acceptance.\n\n3. **Risk: Budget Overruns**\n   - **Mitigation**: Monitor project spending closely against planned budgets, identify potential overruns early, and maintain an emergency fund within the budget for unexpected costs.\n\n## Success Criteria\n- Successful delivery of the AI Task Assignment Tool within the established timeline and budget.\n- Demonstration of a minimum of 90% attendance in training sessions and positive feedback from participants.\n- Achievement of targeted improvements: at least a 20% reduction in task assignment time and a 15% increase in project delivery speed within three months post-implementation.\n- Satisfaction ratings from stakeholders, including Sarah Mwangi and Client X, reflecting improved workflow and efficiency in project management."
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-16T20:46:52.000Z",
+  "versionId": "74e5eea7-655f-4086-92c7-72b4d4e20dd9"
+}
