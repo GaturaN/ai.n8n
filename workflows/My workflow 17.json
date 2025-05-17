@@ -1,0 +1,269 @@
+{
+  "active": true,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "variables": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "output": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-11T14:10:53.650Z",
+  "id": "DyJpLpSKsy64lP4L",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 17",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "203a0268-cb45-4c47-85a8-bed1c2a1e153",
+      "name": "Telegram Trigger",
+      "webhookId": "86d729e7-cdd8-40b7-993b-d7d0f37bb497",
+      "credentials": {
+        "telegramApi": {
+          "id": "t3OEj5IQBzPuGmfy",
+          "name": "sarah mwangi bot Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "862ece41-e5ff-4f37-8c11-66427d84221c",
+              "name": "id",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "number"
+            },
+            {
+              "id": "5566168c-264f-4925-9f8d-dc809e5d8b72",
+              "name": "text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "39cf9342-de66-4373-a901-0a1df968d438",
+      "name": "variables"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "You are a helpful assistant in charge of my emails, please help accordingly."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        420,
+        -20
+      ],
+      "id": "4417963e-accd-47b3-a492-98da7d8ca447",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        320,
+        200
+      ],
+      "id": "c1c7a862-b96b-4baf-9cdd-70e39fff15cc",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "zfZI4wAWHtBjN4ut",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d8281707-b1c8-424b-9a45-6b9d6674e343",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        0
+      ],
+      "id": "fc733304-2dd5-4926-a025-f55735a4a5d2",
+      "name": "output"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('variables').item.json.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1020,
+        0
+      ],
+      "id": "cb3fa94b-3648-4896-8dd1-58a7cf198ab2",
+      "name": "Telegram",
+      "webhookId": "da5c2cf7-f1d0-48fc-b31c-78b593a1a819",
+      "credentials": {
+        "telegramApi": {
+          "id": "t3OEj5IQBzPuGmfy",
+          "name": "sarah mwangi bot Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('variables').item.json.id }}",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        520,
+        220
+      ],
+      "id": "f84085f9-58fb-4101-a1d5-3e6a7e3003c0",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 534121428,
+          "message": {
+            "message_id": 2,
+            "from": {
+              "id": 5325258124,
+              "is_bot": false,
+              "first_name": "Sarah",
+              "last_name": "Mwangi",
+              "language_code": "en"
+            },
+            "chat": {
+              "id": 5325258124,
+              "first_name": "Sarah",
+              "last_name": "Mwangi",
+              "type": "private"
+            },
+            "date": 1746972740,
+            "text": "Hello"
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-05-15T09:00:21.000Z",
+  "versionId": "4f1106b5-8b87-4d77-9611-8f351f85cd1d"
+}
