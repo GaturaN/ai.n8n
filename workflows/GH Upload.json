@@ -237,6 +237,7 @@
       ],
       "typeVersion": 1,
       "alwaysOutputData": true,
+      "webhookId": "82cd3abe-9ad5-47a5-a184-9ac6fd9bffac",
       "credentials": {
         "githubApi": {
           "id": "X6bXppeDH36EAEvR",
@@ -325,6 +326,7 @@
         640
       ],
       "typeVersion": 1,
+      "webhookId": "bce2221b-2036-4620-a1c9-88bfb263f4bf",
       "credentials": {
         "githubApi": {
           "id": "X6bXppeDH36EAEvR",
@@ -350,6 +352,7 @@
         820
       ],
       "typeVersion": 1,
+      "webhookId": "feb0ba26-c9b1-4b26-aea4-0dc5c9c5a4a4",
       "credentials": {
         "githubApi": {
           "id": "X6bXppeDH36EAEvR",
@@ -406,9 +409,8 @@
         "triggerTimes": {
           "item": [
             {
-              "mode": "everyWeek",
-              "hour": 0,
-              "weekday": "6"
+              "mode": "everyX",
+              "value": 48
             }
           ]
         }
@@ -571,6 +573,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-01T15:16:31.000Z",
-  "versionId": "fe180d6d-e90a-4670-8789-d060a083e386"
+  "updatedAt": "2025-05-18T09:35:49.000Z",
+  "versionId": "f9c94dab-bbd0-4bf4-b0c8-29ade293e00a"
 }
