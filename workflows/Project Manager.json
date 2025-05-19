@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Edit Fields2",
             "type": "main",
             "index": 0
           }
@@ -14,13 +14,7 @@
     },
     "Edit Fields": {
       "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "If": {
@@ -183,6 +177,28 @@
           }
         ]
       ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-05-14T10:26:08.616Z",
@@ -217,8 +233,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -6800,
-        -120
+        -6980,
+        -540
       ],
       "id": "fee4c18a-9703-4733-81d3-3e930fbeda57",
       "name": "Edit Fields",
@@ -676,6 +692,65 @@
           "name": "Trello account"
         }
       }
+    },
+    {
+      "parameters": {
+        "formTitle": "Project Creation Tool",
+        "formDescription": "Input the required parameters to get the project created...",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Project Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Project Objectives",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Stakeholder Information",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Budget Considerations",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Resources Available",
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -7020,
+        100
+      ],
+      "id": "c0ae33ba-67b7-4834-9ae5-5ce5747cb0b3",
+      "name": "On form submission",
+      "webhookId": "2c0729af-bf78-4cfc-9266-742dea5974b6"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"projectName\": \"{{ $json.body['Project Name '] || $json['Project Name']}}\",\n  \"objectives\": \"{{ $json.body['  Project Objectives  '] || $json['Project Objectives']}}\",\n  \"stakeholders\": [{{ $json.body['  Stakeholder Information '] || $json['Stakeholder Information']}}],\n  \"timeline\": \"Q3 2025\",\n  \"budget\": \"{{ $json.body['  Budget Considerations  '] || $json['Budget Considerations']}}\",\n  \"resources\": [{{ $json.body['  Resources Available  '] || $json['Resources Available']}}]\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6760,
+        0
+      ],
+      "id": "5dd7f198-82b6-4e10-8d20-ed439fe8122b",
+      "name": "Edit Fields2",
+      "notes": "collecting variables"
     }
   ],
   "pinData": {
@@ -718,6 +793,19 @@
           "output": "## Project Overview\nThe AI Project Automation initiative aims to optimize the process of task assignments within the Product Team for Client X through the implementation of an advanced AI-driven tool. This project seeks to automate routine task allocations, leveraging machine learning techniques to improve efficiency and reduce manual errors. The scope encompasses the development of the AI solution, training for team members, and establishing performance metrics to measure success post-implementation. The expected impact includes increased productivity, enhanced team morale, decreased workload on team members, and timely project delivery, thereby improving overall client satisfaction.\n\n## Objectives\n1. **Objective 1: Develop and Implement the AI Task Assignment Tool**\n   - **Specific**: Create an AI solution that automates task assignments based on team members’ skills and workload.\n   - **Measurable**: Success is determined by the successful development and deployment of the tool.\n   - **Achievable**: Utilize existing resources (2 developers and GPT-4) to complete development tasks.\n   - **Relevant**: Directly aligns with the project's aim to enhance operational efficiency.\n   - **Time-bound**: Complete development by October 15, 2025.\n\n2. **Objective 2: Train the Product Team on Effective Usage of the AI Tool**\n   - **Specific**: Provide comprehensive training for the Product Team.\n   - **Measurable**: At least 90% of team members should complete the training, demonstrated by a follow-up quiz.\n   - **Achievable**: Leverage available resources for training activities.\n   - **Relevant**: Ensures the successful adoption and utilization of the tool.\n   - **Time-bound**: Training to be completed by October 30, 2025.\n\n3. **Objective 3: Evaluate Performance Improvement After Tool Implementation**\n   - **Specific**: Measure the tool's impact on task assignment efficiency and project timelines.\n   - **Measurable**: Aim for a 20% reduction in task assignment time and a 15% increase in project delivery speed.\n   - **Achievable**: Collect baseline data to compare performance before and after implementation.\n   - **Relevant**: Essential for understanding the tool's effectiveness.\n   - **Time-bound**: Conduct evaluations within three months post-implementation, by January 30, 2026.\n\n## Key Milestones\n1. **Milestone 1: Project Kick-off Meeting** - August 1, 2025\n2. **Milestone 2: Completion of AI Tool Development** - October 15, 2025\n3. **Milestone 3: Completion of Training Sessions** - October 30, 2025\n4. **Milestone 4: Deployment of the AI Tool** - November 1, 2025\n5. **Milestone 5: Initial Performance Evaluation** - January 30, 2026\n\n## Tasks\n- **Phase 1: Research and Planning**\n  - Task 1.1: Analyze existing task assignment processes.\n  - Task 1.2: Define user requirements with stakeholders.\n\n- **Phase 2: Development**\n  - Task 2.1: Design the AI tool architecture.\n  - Task 2.2: Develop the user interface.\n  - Task 2.3: Implement the AI algorithm for task assignments.\n\n- **Phase 3: Testing**\n  - Task 3.1: Conduct unit testing for individual components.\n  - Task 3.2: Perform integration testing of the entire system.\n  - Task 3.3: Gather feedback from the Product Team for adjustments.\n\n- **Phase 4: Training and Deployment**\n  - Task 4.1: Develop training materials and documentation.\n  - Task 4.2: Deliver training sessions to the Product Team.\n  - Task 4.3: Roll out the AI tool for live use.\n\n- **Phase 5: Evaluation**\n  - Task 5.1: Measure KPIs following implementation.\n  - Task 5.2: Analyze outcomes and prepare a report for stakeholders.\n\n## Dependencies\n- Task 1.2 (Define user requirements) must be completed before Task 2.1 (Design AI tool architecture).\n- Task 2.2 (Develop user interface) must be completed before Task 2.3 (Implement AI algorithm).\n- Testing tasks (3.1-3.3) depend on completion of development tasks (2.1-2.3).\n- Task 4.1 (Training materials) must be ready before Task 4.2 (Training sessions).\n- Performance evaluation (5.1) is contingent on the successful deployment of the AI tool (Task 4.3).\n\n## Top 3 Risks\n1. **Risk: Technical Challenges During Development**\n   - **Mitigation**: Conduct regular code reviews and updates; allocate time buffers within the schedule for unexpected issues, and develop a contingency plan for technical hurdles.\n\n2. **Risk: Resistance to Change from Team Members**\n   - **Mitigation**: Involve team members throughout the development process, gather their feedback early, and emphasize the benefits of the new tool during training sessions to encourage acceptance.\n\n3. **Risk: Budget Overruns**\n   - **Mitigation**: Monitor project spending closely against planned budgets, identify potential overruns early, and maintain an emergency fund within the budget for unexpected costs.\n\n## Success Criteria\n- Successful delivery of the AI Task Assignment Tool within the established timeline and budget.\n- Demonstration of a minimum of 90% attendance in training sessions and positive feedback from participants.\n- Achievement of targeted improvements: at least a 20% reduction in task assignment time and a 15% increase in project delivery speed within three months post-implementation.\n- Satisfaction ratings from stakeholders, including Sarah Mwangi and Client X, reflecting improved workflow and efficiency in project management."
         }
       }
+    ],
+    "On form submission": [
+      {
+        "json": {
+          "Project Name": "Ai Automation",
+          "Project Objectives": "Stremaline automation using AI",
+          "Stakeholder Information": "Francis Njenga",
+          "Budget Considerations": "40000",
+          "Resources Available": "n8n",
+          "submittedAt": "2025-05-18T06:18:30.364-04:00",
+          "formMode": "test"
+        }
+      }
     ]
   },
   "settings": {
@@ -726,6 +814,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-05-16T20:46:52.000Z",
-  "versionId": "74e5eea7-655f-4086-92c7-72b4d4e20dd9"
+  "updatedAt": "2025-05-18T10:22:58.000Z",
+  "versionId": "8cca5b26-cc13-4653-94dc-076cba294410"
 }
