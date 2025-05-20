@@ -212,6 +212,7 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "/project-input",
+        "responseMode": "responseNode",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
@@ -814,6 +815,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-05-18T10:22:58.000Z",
-  "versionId": "8cca5b26-cc13-4653-94dc-076cba294410"
+  "updatedAt": "2025-05-19T23:01:47.000Z",
+  "versionId": "d81d8d43-de70-4886-a1ef-96b491e0bb6a"
 }
