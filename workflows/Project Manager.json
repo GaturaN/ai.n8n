@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Webhook": {
       "main": [
@@ -583,7 +583,7 @@
       "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        -4224,
+        -4004,
         -220
       ],
       "id": "d660e992-2963-4662-84b6-41478901cb59",
@@ -629,7 +629,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -4444,
+        -4224,
         -220
       ],
       "id": "5597c025-6a8c-4dc8-8db6-31ea150a85a8",
@@ -647,7 +647,7 @@
       "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        -4664,
+        -4444,
         -220
       ],
       "id": "ae25f440-6ace-4909-b707-9cfec883e282",
@@ -666,7 +666,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -4004,
+        -3784,
         -220
       ],
       "id": "66f94cd8-8f7b-4c03-914f-c182bc2e1c20",
@@ -682,7 +682,7 @@
       "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        -3780,
+        -3560,
         -220
       ],
       "id": "b1c0e6f0-2977-4f47-8bc2-0304ac6e6cfa",
@@ -740,7 +740,7 @@
     {
       "parameters": {
         "mode": "raw",
-        "jsonOutput": "={\n  \"projectName\": \"{{ $json.body['Project Name '] || $json['Project Name']}}\",\n  \"objectives\": \"{{ $json.body['  Project Objectives  '] || $json['Project Objectives']}}\",\n  \"stakeholders\": [{{ $json.body['  Stakeholder Information '] || $json['Stakeholder Information']}}],\n  \"timeline\": \"Q3 2025\",\n  \"budget\": \"{{ $json.body['  Budget Considerations  '] || $json['Budget Considerations']}}\",\n  \"resources\": [{{ $json.body['  Resources Available  '] || $json['Resources Available']}}]\n}\n",
+        "jsonOutput": "={\n  \"projectName\": \"AI Project Automation\",\n  \"objectives\": \"Streamline task assignments using AI\",\n  \"stakeholders\": [\"Sarah Mwangi\", \"Product Team\", \"Client X\"],\n  \"timeline\": \"Q3 2025\",\n  \"budget\": \"$15,000\",\n  \"resources\": [\"2 Developers\", \"1 PM\", \"GPT-4\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.set",
@@ -814,7 +814,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-05-19T23:01:47.000Z",
-  "versionId": "d81d8d43-de70-4886-a1ef-96b491e0bb6a"
+  "triggerCount": 2,
+  "updatedAt": "2025-05-21T07:32:19.000Z",
+  "versionId": "03837b62-1ff2-47fb-b77d-bed20f420c18"
 }
