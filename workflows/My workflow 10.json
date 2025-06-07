@@ -48,6 +48,7 @@
   },
   "createdAt": "2025-03-28T12:01:02.989Z",
   "id": "rx9OyyRhDaDWCWU9",
+  "isArchived": false,
   "meta": null,
   "name": "My workflow 10",
   "nodes": [
