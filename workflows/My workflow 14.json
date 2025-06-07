@@ -158,6 +158,7 @@
   },
   "createdAt": "2025-04-21T03:21:58.703Z",
   "id": "lwwcpmrNt7LkVBEL",
+  "isArchived": false,
   "meta": null,
   "name": "My workflow 14",
   "nodes": [
