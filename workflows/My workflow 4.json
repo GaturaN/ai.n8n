@@ -225,6 +225,7 @@
   },
   "createdAt": "2024-09-15T07:25:03.181Z",
   "id": "cuF23wUsEoAKTZeX",
+  "isArchived": false,
   "meta": null,
   "name": "My workflow 4",
   "nodes": [
