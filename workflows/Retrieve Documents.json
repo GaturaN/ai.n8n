@@ -110,6 +110,7 @@
   },
   "createdAt": "2025-04-18T21:11:52.616Z",
   "id": "znWHltgFJYaNmnuR",
+  "isArchived": false,
   "meta": null,
   "name": "Retrieve Documents",
   "nodes": [
