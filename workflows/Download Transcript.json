@@ -1,0 +1,100 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-09T08:57:56.913Z",
+  "id": "E5wgJ72fe3AwnKEP",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Download Transcript",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "33d5e2da-a12a-4bec-a909-9e622cf52479",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT message\nFROM public.bot_chat_history\nWHERE session_id = '{{ $json.session_id }}';\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        440,
+        0
+      ],
+      "id": "8073b3c6-ddee-4243-9aa3-09d8e7942e11",
+      "name": "Postgres",
+      "credentials": {
+        "postgres": {
+          "id": "pNBukHv5aQEiS4bs",
+          "name": "tax_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0dbe545a-d8bd-44d2-a95f-9ac7cb797d0f",
+              "name": "session_id",
+              "value": "c55a088c-36f1-4001-ab7f-f763abc90153",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "9a6df356-0791-45f1-a92c-905cae3647cd",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-09T11:24:59.000Z",
+  "versionId": "b299f669-fb2e-4994-9ecb-58aac8f4acb0"
+}
