@@ -1,0 +1,65 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-22T11:47:10.994Z",
+  "id": "7SXnZChBZRIFwDQs",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 19",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        -96
+      ],
+      "id": "d57c5d19-6f88-49ac-a73a-ff8f9a0744e0",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://mail.zoho.com/api/accounts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -320,
+        -96
+      ],
+      "id": "280fa1d0-e20c-4936-ae26-6a442402b5f7",
+      "name": "HTTP Request",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "zxiCuspsidheSqS0",
+          "name": "Zoho APIs"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-22T11:47:10.994Z",
+  "versionId": "cf163e78-73ca-4340-b537-5468620ec2bf"
+}
