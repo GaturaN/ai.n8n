@@ -5,7 +5,18 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
             "type": "main",
             "index": 0
           }
@@ -16,7 +27,9 @@
   "createdAt": "2025-07-22T11:47:10.994Z",
   "id": "7SXnZChBZRIFwDQs",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "My workflow 19",
   "nodes": [
     {
@@ -32,25 +45,38 @@
     },
     {
       "parameters": {
-        "url": "https://mail.zoho.com/api/accounts",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "oAuth2Api",
+        "operation": "executeQuery",
+        "query": "SELECT message\nFROM public.bot_chat_history\nWHERE session_id = 'c21ad698-dbab-4a7f-a6f7-0d45eead1494';\n",
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
       "position": [
         -320,
         -96
       ],
-      "id": "280fa1d0-e20c-4936-ae26-6a442402b5f7",
-      "name": "HTTP Request",
+      "id": "c48a947f-3799-44e4-9e62-749d3c3ee9a8",
+      "name": "Execute a SQL query",
       "credentials": {
-        "oAuth2Api": {
-          "id": "zxiCuspsidheSqS0",
-          "name": "Zoho APIs"
+        "postgres": {
+          "id": "pNBukHv5aQEiS4bs",
+          "name": "tax_bot"
         }
       }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        -96
+      ],
+      "id": "2929d625-8cd3-456c-88a0-1ea3657fa113",
+      "name": "Aggregate"
     }
   ],
   "pinData": {},
@@ -60,6 +86,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-22T11:47:10.994Z",
-  "versionId": "cf163e78-73ca-4340-b537-5468620ec2bf"
+  "updatedAt": "2025-07-23T13:01:37.000Z",
+  "versionId": "ef82a067-de77-41da-b764-a3f77c251eb9"
 }
