@@ -1,0 +1,431 @@
+{
+  "active": true,
+  "connections": {
+    "get_main_cv_for_applicant1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_all_main_cvs1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_specific_cv1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_reference1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_soft_skill1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_technical_skill1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_all_professional_experiences1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_specific_professional_experience1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_professional_experience1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-24T03:02:54.616Z",
+  "id": "iwuagkMbDmzygIzu",
+  "isArchived": false,
+  "meta": null,
+  "name": "Job Search Application MCP",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "b4291216-3832-4746-b1b9-11ed9330b783"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        32,
+        -32
+      ],
+      "id": "43a84fad-fda9-4ba1-a396-a5a5c5421456",
+      "name": "MCP Server Trigger1",
+      "webhookId": "b4291216-3832-4746-b1b9-11ed9330b783"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Main%20CV",
+        "documentName": "={{ $fromAI('cv_document_name', 'Provide the document name/ID of the main CV to retrieve', 'string') }}"
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        192
+      ],
+      "id": "bb3bf08f-ca73-40b1-a14f-89bac5149227",
+      "name": "get_main_cv_for_applicant1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "docType": "Main%20CV",
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        192
+      ],
+      "id": "485043c3-807e-4483-b465-e5fc019a4b80",
+      "name": "get_all_main_cvs1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "docType": "AI%20Generated%20CV",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "applicant",
+              "value": "={{ $fromAI('applicant_name', 'Provide the full name of the job applicant', 'string') }}"
+            },
+            {
+              "field": "education_background_section",
+              "value": "={{ $fromAI('education_section', 'Format the education background including degrees, institutions, graduation dates, and relevant coursework', 'string') }}"
+            },
+            {
+              "field": "links",
+              "value": "={{ $fromAI('professional_links', 'Include professional links such as LinkedIn profile, GitHub, portfolio website, or other relevant URLs', 'string') }}"
+            },
+            {
+              "field": "professional_experience_section",
+              "value": "={{ $fromAI('experience_section', 'Format the professional experience section with job titles, companies, dates, and key achievements relevant to the target job', 'string') }}"
+            },
+            {
+              "field": "technical_skills",
+              "value": "={{ $fromAI('technical_skills_list', 'List technical skills relevant to the job including programming languages, frameworks, tools, and technologies', 'string') }}"
+            },
+            {
+              "field": "soft_skills",
+              "value": "={{ $fromAI('soft_skills_list', 'List soft skills and interpersonal abilities relevant to the job such as leadership, communication, problem-solving', 'string') }}"
+            },
+            {
+              "field": "reference",
+              "value": "={{ $fromAI('references_section', 'Format the references section with names, titles, companies, and contact information of professional references', 'string') }}"
+            },
+            {
+              "field": "profile",
+              "value": "={{ $fromAI('professional_profile', 'Write a compelling professional profile/summary that highlights key qualifications and career objectives tailored to the target job', 'string') }}"
+            },
+            {
+              "field": "project",
+              "value": "={{ $fromAI('projects_section', 'Format the projects section including project names, descriptions, technologies used, and outcomes/achievements', 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        192
+      ],
+      "id": "790f2d9e-6b54-4f25-8365-1902b34728d2",
+      "name": "create_specific_cv1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "docType": "References",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "company",
+              "value": "={{ $fromAI('reference_company', 'Provide the company name where the reference currently works or worked', 'string') }}"
+            },
+            {
+              "field": "designation",
+              "value": "={{ $fromAI('reference_job_title', 'Provide the job title or position of the reference person', 'string') }}"
+            },
+            {
+              "field": "email",
+              "value": "={{ $fromAI('reference_email', 'Provide the professional email address of the reference', 'string') }}"
+            },
+            {
+              "field": "full_name",
+              "value": "={{ $fromAI('reference_full_name', 'Provide the complete full name of the reference person', 'string') }}"
+            },
+            {
+              "field": "phone_number",
+              "value": "={{ $fromAI('reference_phone', 'Provide the professional phone number of the reference with country code if applicable', 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        0,
+        192
+      ],
+      "id": "0d0b8443-bb5e-411a-9d76-b39ef5b1e456",
+      "name": "create_reference1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "docType": "Soft%20Skills",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "description",
+              "value": "={{ $fromAI('soft_skill_description', 'Provide a detailed description of the soft skill including examples of how it has been demonstrated or applied', 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        128,
+        192
+      ],
+      "id": "f0d3e6cf-be8d-47f2-b0f1-d0ff74f8879a",
+      "name": "create_soft_skill1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "docType": "Technical%20Skills",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "description",
+              "value": "={{ $fromAI('technical_skill_description', 'Provide a detailed description of the technical skill including proficiency level, years of experience, and specific applications or projects where it was used', 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        256,
+        192
+      ],
+      "id": "5197c8c1-097d-4967-a0a4-2b2f72f8c28b",
+      "name": "create_technical_skill1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "docType": "Professional%20Experience",
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        400,
+        192
+      ],
+      "id": "3fb7d5f4-ca16-474c-b7c1-327696ab18b5",
+      "name": "get_all_professional_experiences1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "docType": "Professional%20Experience",
+        "documentName": "={{ $fromAI('experience_document_name', 'Provide the document name/ID of the specific professional experience to retrieve', 'string') }}"
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        528,
+        192
+      ],
+      "id": "145b4f20-0963-480a-9c65-c3ed39e32cf2",
+      "name": "get_specific_professional_experience1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "docType": "Professional%20Experience",
+        "properties": {
+          "customProperty": [
+            {
+              "field": "company",
+              "value": "={{ $fromAI('employer_company', 'Provide the complete company name where the professional experience was gained', 'string') }}"
+            },
+            {
+              "field": "country",
+              "value": "={{ $fromAI('work_country', 'Provide the country where this work experience took place', 'string') }}"
+            },
+            {
+              "field": "detailed_responsibilities",
+              "value": "={{ $fromAI('job_responsibilities', 'Provide a detailed list of responsibilities, achievements, and key contributions in this role', 'string') }}"
+            },
+            {
+              "field": "from",
+              "value": "={{ $fromAI('start_date', 'Provide the start date of this employment in YYYY-MM-DD format', 'string') }}"
+            },
+            {
+              "field": "job_title",
+              "value": "={{ $fromAI('position_title', 'Provide the exact job title or position held at this company', 'string') }}"
+            },
+            {
+              "field": "present",
+              "value": "={{ $fromAI('is_current_job', 'Indicate if this is the current job (true/false or 1/0)', 'string') }}"
+            },
+            {
+              "field": "short_description",
+              "value": "={{ $fromAI('role_summary', 'Provide a brief 2-3 sentence summary of the role and its key focus areas', 'string') }}"
+            },
+            {
+              "field": "to",
+              "value": "={{ $fromAI('end_date', 'Provide the end date of this employment in YYYY-MM-DD format, or leave empty if current job', 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.erpNextTool",
+      "typeVersion": 1,
+      "position": [
+        656,
+        192
+      ],
+      "id": "75f47062-d640-45fe-bf92-013e1e2c37ae",
+      "name": "create_professional_experience1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "Fj02D0guf7bhkpOE",
+          "name": "ERP.gatuservices.info"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-24T03:03:12.000Z",
+  "versionId": "44273b2c-af61-4fde-a0af-921ce343346a"
+}
