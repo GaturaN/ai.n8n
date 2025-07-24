@@ -1,0 +1,391 @@
+{
+  "active": false,
+  "connections": {
+    "Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacts": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIn Comment Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-23T06:08:46.570Z",
+  "id": "BMxeLnlndEYDWVJW",
+  "isArchived": false,
+  "meta": {
+    "templateId": "5552",
+    "templateCredsSetupCompleted": true
+  },
+  "name": "AI Personal Assistant with GPT-4o: Email, Calendar, Search & CRM Integration",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7eb478cd-d204-44ac-9891-18e5fc2bf77b",
+      "name": "Calculator",
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "position": [
+        576,
+        592
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger1').item.json.message.text }}",
+        "options": {
+          "systemMessage": "=# ROLE\n\nYou are an AI agent called Ava.\n\nYour job is to orchestrate the activities between different agents and then formulate a friendly response back to the user.\n\nYou should never write emails, create contacts, create content, create calendar events, create summaries yourself. Your job is to call agents and tools in the correct sequence.\n\nThink carefully about the sequence of events. Some tools might first require you to call another tool in order to pass it the correct information.\n\n\nThe tools are:\n- Calendar\n- Contacts\n- Gmail\n- Google Search \n- Calculator\n\n\n# ADDITIONAL INFORMATION\n- You are talking to Jordan\n- The current date and time is {{  $now.toString() }}\n- Time zone is EST (Ottawa)\n\n\n\n# RULES",
+          "returnIntermediateSteps": true
+        }
+      },
+      "id": "fc51ac2b-72f0-479e-b012-a089007bf816",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        592,
+        240
+      ],
+      "typeVersion": 1.8,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "name": "Calendar",
+        "description": "Use this tool for any Calendar related actions.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "tC8OSGmmiBE9kvnt",
+          "cachedResultName": "🤖 Calendar Agent"
+        },
+        "workflowInputs": {
+          "value": {},
+          "schema": [],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "64593c21-7a6a-4404-8188-4718002db01f",
+      "name": "Calendar",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        816,
+        592
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "name": "Gmail",
+        "description": "Use this tool for any email related actions.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "mh7GGdzmesTrHGxU",
+          "cachedResultName": "🤖 Gmail Agent"
+        },
+        "workflowInputs": {
+          "value": {},
+          "schema": [],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "853f816a-05a1-4af5-8bb8-a6a8a44c5c3a",
+      "name": "Gmail",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        912,
+        592
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "91c2a746-3071-4624-9f84-ff5d57929778",
+      "name": "Response",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1072,
+        240
+      ],
+      "webhookId": "5dced4b9-5066-4036-a4d4-14fc07edd53c",
+      "typeVersion": 1.2,
+      "credentials": {
+        "telegramApi": {
+          "id": "xGa63r97jLQr4Brk",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {
+          "download": true
+        }
+      },
+      "id": "1cbc8229-217e-448a-883e-39d5a75b4f6b",
+      "name": "Telegram Trigger1",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "position": [
+        368,
+        240
+      ],
+      "webhookId": "47bfd98b-694c-484d-9760-d2532dfdcdc4",
+      "typeVersion": 1.1,
+      "credentials": {
+        "telegramApi": {
+          "id": "xGa63r97jLQr4Brk",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger1').item.json.message.chat.id }}",
+        "contextWindowLength": 7
+      },
+      "id": "22b9e60b-85ec-4f82-85e9-98f81af0df03",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        448,
+        592
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "name": "Contacts",
+        "description": "Use this tool for any contacts related actions.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "ydXdT3mvOkaFRYKS",
+          "cachedResultName": "🤖 Contacts Agent"
+        },
+        "workflowInputs": {
+          "value": {
+            "aNumber": 0
+          },
+          "schema": [
+            {
+              "id": "query",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "query",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aNumber",
+              "type": "number",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "aNumber",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "e17861fb-c3a7-4665-b194-165b40e4fddd",
+      "name": "Contacts",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        1008,
+        592
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o",
+        "options": {}
+      },
+      "id": "ef9df397-d620-47e3-a318-6b7e15115344",
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "position": [
+        320,
+        592
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openRouterApi": {
+          "id": "l8Wv3Rv9zyp95S8P",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Use this tool for any LinkedIn Comment related action.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "a3bvZDBy1bGKYKXt",
+          "cachedResultName": "LinkedIn Comment Agent"
+        },
+        "workflowInputs": {
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "schema": [
+            {
+              "id": "query",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "query",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aNumber",
+              "type": "number",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "aNumber",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "9a9a0d85-0eb5-41a5-80bc-2800f99143d9",
+      "name": "LinkedIn Comment Agent",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        1136,
+        592
+      ],
+      "typeVersion": 2.2
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-23T06:22:40.000Z",
+  "versionId": "f9d24c58-0e34-4b8b-976a-afdc09b76f8f"
+}
