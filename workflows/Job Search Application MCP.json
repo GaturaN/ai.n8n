@@ -330,7 +330,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        400,
+        384,
         192
       ],
       "id": "3fb7d5f4-ca16-474c-b7c1-327696ab18b5",
@@ -351,7 +351,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        528,
+        512,
         192
       ],
       "id": "145b4f20-0963-480a-9c65-c3ed39e32cf2",
@@ -406,7 +406,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        656,
+        640,
         192
       ],
       "id": "75f47062-d640-45fe-bf92-013e1e2c37ae",
@@ -426,6 +426,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-24T03:03:12.000Z",
-  "versionId": "44273b2c-af61-4fde-a0af-921ce343346a"
+  "updatedAt": "2025-07-24T06:07:32.000Z",
+  "versionId": "ff0fc0f7-2520-49b2-97d3-476453de891f"
 }
