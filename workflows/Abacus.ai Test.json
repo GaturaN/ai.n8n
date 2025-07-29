@@ -1,12 +1,405 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "Extract Parameters": {
+      "main": [
+        [
+          {
+            "node": "Call Abacus Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Abacus Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Check Response": {
+      "main": [
+        [
+          {
+            "node": "Format Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Success Response": {
+      "main": [
+        [
+          {
+            "node": "Merge Responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Error Response": {
+      "main": [
+        [
+          {
+            "node": "Merge Responses",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Responses": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Extract Parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-07-27T16:41:03.610Z",
   "id": "AcaLbERmHTyf3cdh",
   "isArchived": false,
   "meta": null,
   "name": "Abacus.ai Test",
-  "nodes": [],
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "user_message",
+              "name": "user_message",
+              "value": "={{ $json.body.message || $json.query.message || 'Hello' }}",
+              "type": "string"
+            },
+            {
+              "id": "conversation_id",
+              "name": "conversation_id",
+              "value": "={{ $json.body.conversation_id || $json.query.conversation_id || 'default-conversation' }}",
+              "type": "string"
+            },
+            {
+              "id": "agent_id",
+              "name": "agent_id",
+              "value": "={{ $json.body.agent_id || $json.query.agent_id || 'your-agent-id-here' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a79baee8-37d8-43eb-b60e-3f76737f454c",
+      "name": "Extract Parameters",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -720,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://apps.abacus.ai/api/executeAgent?deploymentToken=<deployment_token>&deploymentId=<deployment_id>",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "arguments",
+              "value": "[\"Show me the average, min and max cement value when the water column is larger than 200\"]"
+            },
+            {
+              "name": "keywordArguments",
+              "value": "{}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ae1b1220-9ebf-4289-a04d-824dcb4e2b76",
+      "name": "Call Abacus Agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -496,
+        256
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "success_condition",
+              "leftValue": "={{ $('Call Abacus Agent').item.json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "86c00642-8d02-4288-bed6-0d0652f2607d",
+      "name": "Check Response",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -272,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "response",
+              "name": "response",
+              "value": "={{ $('Call Abacus Agent').item.json.result || $('Call Abacus Agent').item.json.response || 'Response received from Abacus.AI' }}",
+              "type": "string"
+            },
+            {
+              "id": "conversation_id",
+              "name": "conversation_id",
+              "value": "={{ $('Extract Parameters').item.json.conversation_id }}",
+              "type": "string"
+            },
+            {
+              "id": "timestamp",
+              "name": "timestamp",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            },
+            {
+              "id": "status",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ee3e9d87-7404-42ea-ac7d-0c8c0490a4f4",
+      "name": "Format Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -48,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "error_message",
+              "name": "error_message",
+              "value": "={{ $('Call Abacus Agent').item.json.error || 'Failed to get response from Abacus.AI' }}",
+              "type": "string"
+            },
+            {
+              "id": "conversation_id",
+              "name": "conversation_id",
+              "value": "={{ $('Extract Parameters').item.json.conversation_id }}",
+              "type": "string"
+            },
+            {
+              "id": "timestamp",
+              "name": "timestamp",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            },
+            {
+              "id": "status",
+              "name": "status",
+              "value": "error",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "40229608-d074-4882-865c-6175f0e75138",
+      "name": "Format Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -48,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\n  \"success\": $json.status === 'success',\n  \"response\": $json.response || $json.error_message,\n  \"conversation_id\": $json.conversation_id,\n  \"timestamp\": $json.timestamp,\n  \"status\": $json.status\n} }}",
+        "options": {}
+      },
+      "id": "83e456db-f8e6-4029-b176-ffe55783e1a4",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        400,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "fbf3d152-72dc-4658-9f1c-9b7b6b006b3f",
+      "name": "Merge Responses",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        176,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -928,
+        256
+      ],
+      "id": "b52cb13f-359b-408c-b7ba-c946d315a73a",
+      "name": "When chat message received",
+      "webhookId": "e9e382b8-f7b3-4ca2-a58a-78f574d15951"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        432
+      ],
+      "id": "d2dea448-449c-41b1-a1a0-a9b99268d717",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.abacus.ai/api/v0/createAgent",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apiKey",
+              "value": "s2_b141e2fdc5f5464e8083c6582fc42aa3"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"projectId\": \"{{ $json.result[0].projectId }}\",\n  \"name\": \"example_agent\",\n  \"description\": \"Sherlock Holmes AI Agent\",\n  \"workflowGraph\": {\n    \"nodes\": [\n      {\n        \"name\": \"node_1\",\n        \"input_mappings\": [\n          {\n            \"name\": \"query\",\n            \"variable_type\": \"USER_INPUT\",\n            \"is_required\": true\n          }\n        ],\n        \"output_mappings\": [\n          {\n            \"name\": \"output\",\n            \"variable_type\": \"STRING\"\n          }\n        ],\n        \"input_schema\": {\n          \"title\": \"Input\",\n          \"type\": \"object\",\n          \"required\": [\n            \"query\"\n          ],\n          \"properties\": {\n            \"query\": {\n              \"type\": \"string\",\n              \"title\": \"Query\"\n            }\n          }\n        },\n        \"output_schema\": {\n          \"title\": \"Output\",\n          \"type\": \"object\",\n          \"properties\": {\n            \"output\": {\n              \"type\": \"string\",\n              \"title\": \"Answer\"\n            }\n          }\n        },\n        \"function_name\": \"node_func\",\n        \"source_code\": \"def node_func(query):\\n    from abacusai import ApiClient\\n    character = \\\"Sherlock Holmes\\\"\\n    return ApiClient().evaluate_prompt(prompt=query, system_message=f\\\"respond like {character}\\\").content\"\n      }\n    ],\n    \"edges\": []\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -544,
+        432
+      ],
+      "id": "3d22e431-b331-4592-b6ca-a0353992a8a2",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "url": "https://api.abacus.ai/api/v0/listProjects",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apiKey",
+              "value": "s2_b141e2fdc5f5464e8083c6582fc42aa3"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -752,
+        432
+      ],
+      "id": "02d5187a-2483-458f-a1b0-a739ea953d86",
+      "name": "HTTP Request1"
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -14,6 +407,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-27T16:41:03.610Z",
-  "versionId": "ec89b30e-6bc1-495c-9ce0-2dce8829eadf"
+  "updatedAt": "2025-07-28T05:14:33.000Z",
+  "versionId": "bbdebc68-239e-4fe6-8301-ffbae130073c"
 }
