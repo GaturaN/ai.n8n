@@ -5,7 +5,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -16,7 +16,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -27,7 +27,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -38,7 +38,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -49,7 +49,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -60,7 +60,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -71,7 +71,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -82,7 +82,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -93,7 +93,7 @@
       "ai_tool": [
         [
           {
-            "node": "MCP Server Trigger1",
+            "node": "MCP Server Trigger",
             "type": "ai_tool",
             "index": 0
           }
@@ -104,23 +104,11 @@
   "createdAt": "2025-07-24T03:02:54.616Z",
   "id": "iwuagkMbDmzygIzu",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Job Search Application MCP",
   "nodes": [
-    {
-      "parameters": {
-        "path": "b4291216-3832-4746-b1b9-11ed9330b783"
-      },
-      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
-      "typeVersion": 2,
-      "position": [
-        32,
-        -32
-      ],
-      "id": "43a84fad-fda9-4ba1-a396-a5a5c5421456",
-      "name": "MCP Server Trigger1",
-      "webhookId": "b4291216-3832-4746-b1b9-11ed9330b783"
-    },
     {
       "parameters": {
         "operation": "get",
@@ -130,7 +118,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        -384,
+        -416,
         192
       ],
       "id": "bb3bf08f-ca73-40b1-a14f-89bac5149227",
@@ -152,7 +140,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        -256,
+        -288,
         192
       ],
       "id": "485043c3-807e-4483-b465-e5fc019a4b80",
@@ -211,7 +199,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        -128,
+        -160,
         192
       ],
       "id": "790f2d9e-6b54-4f25-8365-1902b34728d2",
@@ -254,7 +242,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        0,
+        -32,
         192
       ],
       "id": "0d0b8443-bb5e-411a-9d76-b39ef5b1e456",
@@ -281,7 +269,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        128,
+        96,
         192
       ],
       "id": "f0d3e6cf-be8d-47f2-b0f1-d0ff74f8879a",
@@ -308,7 +296,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        256,
+        224,
         192
       ],
       "id": "5197c8c1-097d-4967-a0a4-2b2f72f8c28b",
@@ -330,7 +318,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        384,
+        352,
         192
       ],
       "id": "3fb7d5f4-ca16-474c-b7c1-327696ab18b5",
@@ -351,7 +339,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        512,
+        480,
         192
       ],
       "id": "145b4f20-0963-480a-9c65-c3ed39e32cf2",
@@ -406,7 +394,7 @@
       "type": "n8n-nodes-base.erpNextTool",
       "typeVersion": 1,
       "position": [
-        640,
+        608,
         192
       ],
       "id": "75f47062-d640-45fe-bf92-013e1e2c37ae",
@@ -417,15 +405,38 @@
           "name": "ERP.gatuservices.info"
         }
       }
+    },
+    {
+      "parameters": {
+        "authentication": "bearerAuth",
+        "path": "562ffc95-cf8e-4d4d-8t6y-29b3ff22d5ee"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        -192
+      ],
+      "id": "ec96a1bc-c962-469d-986b-72df77f9d217",
+      "name": "MCP Server Trigger",
+      "webhookId": "562ffc95-cf8e-4d4d-8f5b-29b3ff22d5ee",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "lAb4aTzmCtMvwVbQ",
+          "name": "Job Applicant Token"
+        }
+      }
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "timezone": "Africa/Nairobi",
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-24T06:07:32.000Z",
-  "versionId": "ff0fc0f7-2520-49b2-97d3-476453de891f"
+  "updatedAt": "2025-07-29T13:55:36.000Z",
+  "versionId": "49c902ab-c800-4f23-92e2-b0b31c4b62b2"
 }
