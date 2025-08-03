@@ -1,0 +1,19 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-08-02T09:59:05.945Z",
+  "id": "pkvkWewbxdzyZDLt",
+  "isArchived": false,
+  "meta": null,
+  "name": "Connect Subject",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-02T09:59:27.000Z",
+  "versionId": "2f66547e-5025-4455-a358-be19e5b2e5d0"
+}
