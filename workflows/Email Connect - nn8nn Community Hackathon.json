@@ -1,0 +1,880 @@
+{
+  "active": true,
+  "connections": {
+    "Connect Webhook": {
+      "main": [
+        [
+          {
+            "node": "variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "variables": {
+      "main": [
+        [
+          {
+            "node": "Platform Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message and wait for response": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Connect Email": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "first email message": {
+      "main": [
+        [
+          {
+            "node": "Call Connect Subject",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Create A Subject",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Connect Subject": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Send message and wait for response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Call Connect Subject1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Connect Subject1": {
+      "main": [
+        [
+          {
+            "node": "Connect Email Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Connect Email Variables": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "First Email": {
+      "main": [
+        [
+          {
+            "node": "first email message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Connect Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Platform Route": {
+      "main": [
+        [
+          {
+            "node": "First Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-02T09:18:15.409Z",
+  "id": "vPu3DDdESpgAXu8W",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Email Connect - nn8nn Community Hackathon",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Email Connect \n### Requirements\n- ### Initiator\n- ### Target\n- ### Reason\n",
+        "height": 272,
+        "width": 432
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -608,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "e0c48003-b8da-445c-a394-737c0cdf237f",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "formTitle": "Connect",
+        "formDescription": "This form connects a user to a another user",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Initiator Name",
+              "placeholder": "John Doe",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Initiator Email",
+              "fieldType": "email",
+              "placeholder": "john@doe.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Target Name",
+              "placeholder": "Jane Doe",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Target Email",
+              "fieldType": "email",
+              "placeholder": "jane@doe.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Reason for connecting",
+              "fieldType": "textarea",
+              "placeholder": "Give a detailed reason why initiator should connect with target.",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Platform",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Email"
+                  },
+                  {
+                    "option": "Whatsapp"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Connect",
+          "path": "connect-me-to-target",
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "The connect has been initiated. Follow along in the email."
+            }
+          },
+          "ignoreBots": true,
+          "useWorkflowTimezone": true
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -144,
+        48
+      ],
+      "id": "aac812ad-ecdf-4f1d-a845-5499ab9c1e82",
+      "name": "Connect Webhook",
+      "webhookId": "dae45189-d630-4b94-9375-a32c4729ac1a"
+    },
+    {
+      "parameters": {
+        "content": "## Craft and send email to target and wait for response\n",
+        "height": 224,
+        "width": 384,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        464,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "3ea1e5c8-f335-45f8-b0a9-ebbe02f8c951",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1af6e50-8e6b-465c-a483-500b81fb714b",
+              "name": "Initiator Name",
+              "value": "={{ $json[\"Initiator Name\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "d43bc234-a854-4e87-bd33-bb00ca56869f",
+              "name": "Initiator Email",
+              "value": "={{ $json[\"Initiator Email\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "abd20442-fe32-4bfd-a96a-64ad2c534a88",
+              "name": "Target Name",
+              "value": "={{ $json[\"Target Name\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "40bce379-3baa-40d7-b36c-be8ee2474a87",
+              "name": "Target Email",
+              "value": "={{ $json[\"Target Email\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "53ee14e3-b1aa-443c-99a5-35df8a83cfa1",
+              "name": "Reason for connecting",
+              "value": "={{ $json[\"Reason for connecting\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "2a45a8fc-0ec6-4091-8ed6-75dfcfeb2413",
+              "name": "Platform",
+              "value": "={{ $json.Platform }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        48
+      ],
+      "id": "24923a38-5218-4152-8627-11009bd32f87",
+      "name": "variables"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "={{ $('variables').item.json[\"Target Email\"] }}",
+        "subject": "={{ $('Edit Fields1').item.json.Subject }}",
+        "message": "={{ $('Edit Fields1').item.json[\"Email body\"] }}",
+        "responseType": "customForm",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Connect?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Reason"
+            }
+          ]
+        },
+        "options": {
+          "messageButtonLabel": "Respond",
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1584,
+        48
+      ],
+      "id": "2b45eea8-dae3-41ce-9dbc-86628f26ebb9",
+      "name": "Send message and wait for response",
+      "webhookId": "258d4915-7d76-4708-9c3b-860924827be8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Sl6Ly5PwfaJ7GBZC",
+          "name": "Gatura Njenga"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4a4d7621-386c-4ecf-8cab-df8c9309602b",
+              "name": "Connect",
+              "value": "={{ $json.data[\"Connect?\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "c324db4a-4a0f-4597-846a-cbfb43249669",
+              "name": "Reason",
+              "value": "={{ $json.data.Reason }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1808,
+        48
+      ],
+      "id": "822d3996-d1bf-48ae-b73d-f9421cbf2dd9",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=# Mutual Connector Agent Prompt\n\nYou are a professional mutual connector agent designed to facilitate meaningful business connections. Your task is to craft personalized, professional HTML-formatted emails that introduce two individuals who could benefit from connecting with each other.\n\n## Email Generation Guidelines\n\n### HTML Template Format\n**MANDATORY**: Use this exact HTML structure for all emails:\n\n\n<p>Hi [Person 1 Name] and [Person 2 Name],</p>\n\n<p>[Main introduction paragraph with friendly tone and appropriate emojis]</p>\n\n<ul>\n  <li>[Introduction of Person 1 to Person 2 with relevant background]</li>\n  <li>[Introduction of Person 2 to Person 1 with relevant background]</li>\n  <li>[Mutual benefit or connection opportunity]</li>\n</ul>\n\n<p>[Closing paragraph with next steps and call-to-action]</p>\n\n<p>Kind regards,<br>\n[Your name as connector]<br>\n\n\n### Content Requirements\n- **Word Limit**: Between 120-180 words (excluding HTML tags)\n- **Tone**: Professional yet warm and friendly\n- **Emojis**: Include 2-3 appropriate professional emojis (🤝, 💡, 🚀, 📈, etc.)\n- **Personalization**: Reference specific details about both parties when available\n\n### Email Structure\n1. **Greeting**: Professional salutation to both parties by name\n2. **Introduction Context**: Brief, engaging intro about why you're connecting them\n3. **Bullet Points**: Use the template's `<ul>` format to highlight:\n   - Introduction of Person 1 to Person 2 (skills, experience, background)\n   - Introduction of Person 2 to Person 1 (skills, experience, background)\n   - Clear mutual benefits and connection opportunity\n4. **Next Steps**: Suggest how they should proceed with clear call-to-action\n5. **Professional Closing**: Use template signature format\n\n### Tone and Style\n- Professional yet warm and approachable\n- Concise but informative\n- Respectful of both parties' time\n- Enthusiastic about the potential connection\n- Creates excitement about mutual collaboration\n\n### Personalization Elements\n- Reference both parties' specific expertise, companies, or achievements\n- Mention relevant industry context or shared interests\n- Tailor the connection opportunity to both parties' known needs\n- Use industry-appropriate language and terminology\n- Highlight complementary skills or mutual benefits\n\n### HTML Formatting Standards\n- Use semantic HTML structure from the template\n- Maintain clean, readable formatting\n- Ensure email-safe HTML practices\n- Include proper spacing with `<p>` and `<ul>` tags\n- Keep professional appearance\n- Make any links clickable and accessible\n\n### Content Guidelines\n- Focus on mutual benefit rather than one-sided requests\n- Position the introduction as valuable for both parties\n- Highlight relevant expertise and complementary needs\n- Create genuine excitement about potential collaboration\n- Maintain confidentiality and professionalism\n- Avoid overly sales-y language\n- Include clear, actionable next steps\n\n## Output Requirements\nGenerate a complete HTML email that includes:\n- HTML email using the exact template structure\n- Friendly, personalized content between 120-180 words\n- 2-3 appropriate professional emojis\n- Clear mutual value proposition\n- Actionable next steps for both parties\n- Easy way for them to connect directly\n\n## Key Success Factors\n- **Mutual benefit focus**: Emphasizes value for both parties\n- **Personalized introductions**: Specific details about each person's background\n- **Clear value proposition**: Articulates why this connection makes sense\n- **Friendly professionalism**: Warm tone with appropriate emojis\n- **Actionable guidance**: Clear next steps for moving forward\n- **Concise communication**: Well-structured, focused content\n\n## Example Process\nWhen you receive the input variables, analyze the connection reason and craft an email that:\n1. Positions the introduction as mutually beneficial\n2. Highlights relevant expertise and complementary needs\n3. Creates excitement about the potential collaboration\n4. Provides clear next steps for both parties\n5. Uses the mandatory HTML template structure\n\nRemember: Your goal is to create connections that lead to meaningful professional relationships and successful collaborations by facilitating introductions that clearly benefit both parties.\n\n- ALWAYS SIGN OFF WITH\nKind Regards\nGatura Njenga",
+              "role": "assistant"
+            },
+            {
+              "content": "=Initiator Name: {{ $('variables').item.json[\"Initiator Name\"] }}\nInitiator Email: {{ $('variables').item.json[\"Initiator Email\"] }}\n\nTarget Name: {{ $('variables').item.json[\"Target Name\"] }}\nTarget Email: {{ $('variables').item.json[\"Target Email\"] }}\n\nReason for Connecting: {{ $('variables').item.json[\"Reason for connecting\"] }}"
+            },
+            {
+              "content": "=This is the response from the target.\n\nAccepted Connection?  {{ $json.Connect }}\n\nREASON: {{ $json.Reason }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        2256,
+        -48
+      ],
+      "id": "44083213-0d93-4228-87cc-4c839d7069bb",
+      "name": "Connect Email",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('variables').item.json[\"Target Email\"] }}",
+        "subject": "Connection Confirmed!",
+        "message": "={{ $('Connect Email').item.json.message.content }}",
+        "options": {
+          "appendAttribution": false,
+          "ccList": "={{ $('variables').item.json[\"Initiator Email\"] }}",
+          "senderName": "Connector Agent"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        3328,
+        -48
+      ],
+      "id": "93c21eea-d237-4f5b-9412-fc674575cd9c",
+      "name": "Send a message",
+      "webhookId": "7fd38ac5-6f2d-4294-9823-7f74ae061750",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Sl6Ly5PwfaJ7GBZC",
+          "name": "Gatura Njenga"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "16c01c10-eee0-4e06-b894-d18ab4fd0f43",
+              "name": "content",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        912,
+        48
+      ],
+      "id": "afa7fab4-b699-47d1-824b-3e6289eaff04",
+      "name": "first email message"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "vPu3DDdESpgAXu8W",
+          "mode": "list",
+          "cachedResultName": "Email Connect - nn8nn Community Hackathon"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1136,
+        48
+      ],
+      "name": "Call Connect Subject",
+      "id": "ceb1f3bd-c52c-4afc-896f-6e57c7072bfb"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are an expert in coming up with email subjects. Given the following intent and email to be sent, come up with a professional, and friendly subject. I only want one subject.",
+              "role": "assistant"
+            },
+            {
+              "content": "={{ $json.content }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        144,
+        -208
+      ],
+      "id": "61d290c1-38ef-4068-a136-8628ebed81bf",
+      "name": "Create A Subject",
+      "credentials": {
+        "openAiApi": {
+          "id": "0Q6M4JEKewP9VKl8",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "content",
+              "type": "any"
+            }
+          ]
+        }
+      },
+      "id": "3a954245-fdf8-4a95-ad1d-e34c83bd0e05",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -80,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "419d222c-9a3c-41c7-b3a8-3afe03b96f86",
+              "name": "Subject",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            },
+            {
+              "id": "a9c0eb79-330d-4dc7-82db-c6f9c575ff1f",
+              "name": "Email body",
+              "value": "={{ $('first email message').item.json.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1360,
+        48
+      ],
+      "id": "f5b4c3ad-130e-4f47-8d7e-206a319b9066",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "vPu3DDdESpgAXu8W",
+          "mode": "list",
+          "cachedResultName": "Email Connect - nn8nn Community Hackathon"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "content": "={{ $json.message.content }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        2880,
+        -48
+      ],
+      "name": "Call Connect Subject1",
+      "id": "50cc092f-9e39-46fb-b1ef-f64297f48e17"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fec441d6-0514-4e26-a228-3891a9b1ecb0",
+              "name": "message.content",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2656,
+        -48
+      ],
+      "id": "5058313f-b640-4e97-8b1a-83e33f625743",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0189225f-3c7c-4498-91e6-22ae1aedee4e",
+              "name": "subject",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            },
+            {
+              "id": "cfab78d3-605e-4978-a7ff-5f9f9b34aed9",
+              "name": "Message",
+              "value": "={{ $('Edit Fields2').item.json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3104,
+        -48
+      ],
+      "id": "76420230-c0bb-4381-a80e-cf82c3502a3c",
+      "name": "Connect Email Variables"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=# First Contact Mutual Connector Agent Prompt\n\nYou are a professional mutual connector agent designed to facilitate meaningful business connections. Your task is to craft personalized, professional HTML-formatted emails that are sent ONLY to the target person, informing them of interest from an initiator without including the initiator in the email.\n\n## Email Generation Guidelines\n\n### HTML Template Format\n**MANDATORY**: Use this exact HTML structure for all emails:\n\n\n<p>Hi [Target Name],</p>\n\n<p>[Main content paragraph with friendly tone and appropriate emojis]</p>\n\n<ul>\n  <li>[Key point about initiator]</li>\n  <li>[What they're seeking from target]</li>\n  <li>[Potential benefit or opportunity]</li>\n</ul>\n\n<p>[Closing paragraph with call-to-action]</p>\n\n<p>Kind regards,<br>\n[Your name as connector]<br>\n\n\n### Content Requirements\n- **Word Limit**: Maximum 150 words (excluding HTML tags)\n- **Tone**: Professional yet warm and friendly\n- **Emojis**: Include 2-3 appropriate professional emojis (🤝, 💡, 🚀, 📈, etc.)\n- **Personalization**: Reference specific details about both parties when available\n\n### Email Structure\n1. **Personal Greeting**: Address target by name with friendly tone\n2. **Connection Interest**: Brief, engaging intro about someone wanting to connect\n3. **Bullet Points**: Use the template's `<ul>` format to highlight:\n   - Who the initiator is (without contact details)\n   - What they're looking for from the target\n   - Potential mutual benefits\n4. **Permission Request**: Ask if they'd be interested in an introduction\n5. **Professional Closing**: Use template signature format\n\n### Personalization Elements\n- Reference target's specific expertise, company, or recent achievements\n- Mention relevant industry context or mutual connections\n- Tailor the opportunity description to target's known interests\n- Use industry-appropriate language and terminology\n\n### Privacy and Consent Rules\n- **CRITICAL**: Only send to the target - never include the initiator\n- Never reveal initiator's contact information\n- Make declining easy and pressure-free  \n- Only share contact details after target expresses interest\n- Respect target's right to full control over the process\n\n### HTML Formatting Standards\n- Use semantic HTML structure from the template\n- Maintain clean, readable formatting\n- Ensure email-safe HTML practices\n- Include proper spacing with `<p>` and `<ul>` tags\n- Keep professional appearance\n\n## Output Requirements\nGenerate a complete HTML email that includes:\n- HTML email using the exact template structure\n- Friendly, personalized content under 150 words\n- 2-3 appropriate professional emojis\n- Clear, low-pressure call-to-action\n\n## Key Success Factors\n- **Single recipient focus**: Only target receives this email\n- **Permission-based approach**: Asks consent before introduction\n- **Privacy protection**: Safeguards initiator's contact information  \n- **Personalized messaging**: References specific details about target\n- **Friendly professionalism**: Warm tone with appropriate emojis\n- **Concise communication**: Under 150 words, well-structured\n\nRemember: Your goal is to create an engaging, personalized first contact that respects privacy while generating genuine interest in a potential valuable connection.\n\n- ALWAYS SIGN OFF WITH\nKind Regards\nGatura Njenga",
+              "role": "assistant"
+            },
+            {
+              "content": "=Initiator Name: {{ $json[\"Initiator Name\"] }}\nInitiator Email: {{ $json['Initiator Email'] }}\n\nTarget Name: {{ $json['Target Name'] }}\nTarget Email: {{ $json['Target Email'] }}\n\nReason for Connecting: {{ $json['Reason for connecting'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        512,
+        48
+      ],
+      "id": "a5ca3346-35dd-4f8f-9f0f-cc707b080de0",
+      "name": "First Email",
+      "credentials": {
+        "openAiApi": {
+          "id": "lcpI0YZU9bebg3uW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Subject Generator\n",
+        "width": 544,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -104,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "5bd6817f-d54b-4057-8a63-e59a57a07450",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Send Connect Email after Confirm\n",
+        "height": 288,
+        "width": 608,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1776,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "f60b2efc-d18a-458b-955c-1a6eeaed73f8",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "869a4acb-ea51-4ed4-bd36-025312f8c5b1",
+              "leftValue": "={{ $json.Connect }}",
+              "rightValue": "Yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2032,
+        48
+      ],
+      "id": "8f49a0ed-d739-4466-b636-9741337b6a3f",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2352,
+        144
+      ],
+      "id": "8c11edd8-492f-4cd2-9c6f-3fd0795c51f5",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3bf499c6-1e27-4af0-845f-5a6fc4be8116",
+              "leftValue": "={{ $json.Platform }}",
+              "rightValue": "Email",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        288,
+        48
+      ],
+      "id": "4bdd4768-b6af-497a-a73b-118593b85256",
+      "name": "Platform Route"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-08-02T12:00:02.000Z",
+  "versionId": "314167b8-14e9-4ffd-9f27-04ca561e7e47"
+}
