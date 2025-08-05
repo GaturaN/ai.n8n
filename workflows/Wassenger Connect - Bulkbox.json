@@ -1,0 +1,471 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "GetDeviceContacts chat-contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GetDeviceContacts chat-contacts1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "Contacts": {
+      "main": [
+        [
+          {
+            "node": "get_contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetDeviceContacts chat-contacts": {
+      "main": [
+        [
+          {
+            "node": "Split",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetDeviceContacts chat-contacts1": {
+      "main": [
+        [
+          {
+            "node": "Split1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_contact": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "UpdateContactMetadata chat-contacts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-05T01:29:58.760Z",
+  "id": "c2tAM2Ex3x44rBSW",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Wassenger Connect - Bulkbox",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        208
+      ],
+      "id": "131782e4-d1b8-4e3b-9569-f75258b7a665",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "chat-contacts",
+        "operation": "updateContactMetadata",
+        "device": "67a9e56099962c58eb22e309",
+        "contactId": "={{ $json.wid }}",
+        "metadata": {
+          "metadataValues": [
+            {
+              "key": "activity_status",
+              "value": "Active"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        192
+      ],
+      "id": "0ba0b8f1-e501-4ebb-b1e0-f074e2188913",
+      "name": "UpdateContactMetadata chat-contacts",
+      "credentials": {
+        "wassengerApiKey": {
+          "id": "9Wc1dWUKbMqBh3FD",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10756b60-b505-47ec-b811-121054b11537",
+              "name": "wid",
+              "value": "={{ $json.wid }}",
+              "type": "string"
+            },
+            {
+              "id": "7f3719a9-143b-452b-a413-f6d4614b880f",
+              "name": "phone",
+              "value": "={{ $json.phone.slice(-8) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        208
+      ],
+      "id": "b7d86f7d-649c-49ea-a43f-f16ca4651997",
+      "name": "Contacts"
+    },
+    {
+      "parameters": {
+        "jsCode": "// If the array is in items[0].json.contacts\nconst contacts = items[0].json; \n\nreturn contacts.map((contact, index) => {\n  return {\n    json: contact,\n    index: index\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        112
+      ],
+      "id": "049a0386-d942-4603-9089-ab8019665b89",
+      "name": "Split"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -384,
+        -112
+      ],
+      "id": "753ad8cb-4be1-4acc-809b-872fc993570b",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "resource": "chat-contacts",
+        "device": "67a9e56099962c58eb22e309",
+        "filters": {
+          "size": 500,
+          "page": 0
+        }
+      },
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        112
+      ],
+      "id": "7cdb8773-507c-4e7d-a28f-0d7b06bcf826",
+      "name": "GetDeviceContacts chat-contacts",
+      "credentials": {
+        "wassengerApiKey": {
+          "id": "9Wc1dWUKbMqBh3FD",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat-contacts",
+        "device": "67a9e56099962c58eb22e309",
+        "filters": {
+          "size": 500,
+          "page": 1
+        }
+      },
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        304
+      ],
+      "id": "7f7028d6-a3c5-4838-81e5-0f95089f4ec8",
+      "name": "GetDeviceContacts chat-contacts1",
+      "credentials": {
+        "wassengerApiKey": {
+          "id": "9Wc1dWUKbMqBh3FD",
+          "name": "Bulkbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// If the array is in items[0].json.contacts\nconst contacts = items[0].json; \n\nreturn contacts.map((contact, index) => {\n  return {\n    json: contact,\n    index: index\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        304
+      ],
+      "id": "277c12ca-26c1-4dbe-9c7a-39d59a710b0e",
+      "name": "Split1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        288,
+        208
+      ],
+      "id": "45e1caf3-59d3-4157-81d3-b9f84cc7ee83",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit_page_length",
+              "value": "10000"
+            },
+            {
+              "name": "fields",
+              "value": "[\"name\", \"email_id\", \"mobile_no\", \"custom_activity_status\", \"custom_spend_tier\", \"custom_product_mix\"]]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        208
+      ],
+      "id": "43fd7553-a506-4b1f-ac0d-3e8c1f2c97ce",
+      "name": "get_contact",
+      "credentials": {
+        "erpNextApi": {
+          "id": "NJkjMcKDrcEg8BIu",
+          "name": "Bulkbox Prod"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        512,
+        208
+      ],
+      "id": "f37882c4-dc1d-4cb9-ac42-d8de85ea4077",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1184,
+        208
+      ],
+      "id": "c923530d-629f-4658-b3e1-b6af08de60e2",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "aad82d4b-4dbf-4725-84a8-5898d1f5de5b",
+              "leftValue": "={{ $json.mobile_no }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1392,
+        208
+      ],
+      "id": "c6615a7c-4056-42b9-83e9-77cbbbfba746",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b2ecba97-85df-48a8-b5dd-91dec9a10aab",
+              "leftValue": "={{ $json.mobile_no }}",
+              "rightValue": "={{ $('Contacts').item.json.phone }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1600,
+        208
+      ],
+      "id": "a23f7627-e870-4760-afee-36ee3e0a9b8f",
+      "name": "If"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-05T03:15:01.000Z",
+  "versionId": "2a627a77-fae8-41bf-af20-e1aaa2dde0b3"
+}
