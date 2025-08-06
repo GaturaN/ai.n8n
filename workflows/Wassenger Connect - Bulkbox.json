@@ -457,6 +457,45 @@
       ],
       "id": "a23f7627-e870-4760-afee-36ee3e0a9b8f",
       "name": "If"
+    },
+    {
+      "parameters": {
+        "url": "=https://portal.bulkbox.cloud/api/resource/Customer",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "erpNextApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit_page_length",
+              "value": "10000"
+            },
+            {
+              "name": "fields",
+              "value": "[\"name\", \"email_id\", \"mobile_no\", \"custom_activity_status\", \"custom_spend_tier\", \"custom_product_mix\"]]"
+            },
+            {
+              "name": "filters",
+              "value": "[[\"mobile_no\"],[\"like\"],[\"%97%\"]]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -448,
+        656
+      ],
+      "id": "df979e7b-1411-426c-96ba-657740177735",
+      "name": "get_contact1",
+      "credentials": {
+        "erpNextApi": {
+          "id": "NJkjMcKDrcEg8BIu",
+          "name": "Bulkbox Prod"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -466,6 +505,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-08-05T03:15:01.000Z",
-  "versionId": "2a627a77-fae8-41bf-af20-e1aaa2dde0b3"
+  "updatedAt": "2025-08-05T06:40:41.000Z",
+  "versionId": "0e60f060-330e-4be7-9dc4-d6eac3412c6e"
 }
