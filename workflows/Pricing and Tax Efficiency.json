@@ -1,19 +1,496 @@
 {
-  "active": false,
-  "connections": {},
+  "active": true,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Initial Qualification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form": {
+      "main": [
+        [
+          {
+            "node": "Final Qualification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Form1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form1": {
+      "main": [
+        [
+          {
+            "node": "Email Offer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initial Qualification": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final Qualification": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Offer": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Form2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-08-13T04:33:28.398Z",
   "id": "xpob6URJ9TGbxfSH",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Pricing and Tax Efficiency",
-  "nodes": [],
-  "pinData": {},
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Save Tax Under 60 Seconds",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "What is your name?",
+              "placeholder": "John Doe",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What is your email address?",
+              "placeholder": "john@doe.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What is your concern?",
+              "placeholder": "Describe your situation and we can help you analyze and save tax",
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        -16
+      ],
+      "id": "39c419d6-696d-478b-a05a-2406debed58a",
+      "name": "On form submission",
+      "webhookId": "33026e6d-350e-40f7-b6c6-1681d049ce76"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7e718774-028b-4944-a5f7-710383f4fc17",
+              "name": "name",
+              "value": "={{ $json[\"What is your name?\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "83ed9704-0d6a-4cb8-b08c-40f80887c827",
+              "name": "email address",
+              "value": "={{ $json[\"What is your email address?\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "e97a47c4-5382-4884-b9eb-3dcd92f20bff",
+              "name": "concern",
+              "value": "={{ $json[\"What is your concern?\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        96,
+        -16
+      ],
+      "id": "b5336d6e-b9c5-4422-8485-b7c5a63401d5",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "42e8a7de-44a2-4c2f-82ae-79d9a6861353",
+              "name": "Critical Questions",
+              "value": "={{ $json.message.content[\"Critical Questions\"] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        656,
+        -16
+      ],
+      "id": "30643e04-90fa-476b-8cb8-2534709aeae9",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "={{ $json[\"Critical Questions\"][0] }}",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "={{ $json[\"Critical Questions\"][1] }}",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "={{ $json[\"Critical Questions\"][2] }}",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        864,
+        -16
+      ],
+      "id": "7b17c2db-b261-4380-add9-0548777fe6ef",
+      "name": "Form",
+      "webhookId": "4fa4b5e1-a99e-4211-a303-6df3e222bbec"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "066dabe2-0d4f-4790-a7fe-b8a3373706b1",
+              "name": "Strategic Follow-Up Questions",
+              "value": "={{ $json.message.content['Strategic Follow-Up Questions'] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1424,
+        -16
+      ],
+      "id": "33d305d0-03d7-4376-88c5-1413d0270ff3",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "={{ $json['Strategic Follow-Up Questions'][0] }}",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "={{ $json['Strategic Follow-Up Questions'][1] }}",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "={{ $json['Strategic Follow-Up Questions'][2] }}",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        1616,
+        -16
+      ],
+      "id": "29fe8972-ccd3-4983-89df-52880ccd7a5b",
+      "name": "Form1",
+      "webhookId": "4fa4b5e1-a99e-4211-a303-6df3e222bbec"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=# Agent 1: Initial Qualification Agent\n\n## Role\nYou are a UK tax qualification specialist. Your role is to analyze initial client enquiries and formulate the 3 most important questions to understand their tax situation and identify potential savings opportunities.\n\n## Instructions\nWhen you receive a client enquiry, analyze their situation and create exactly 3 strategic questions that will:\n1. Quantify their current tax exposure\n2. Identify their biggest pain points\n3. Uncover the most valuable tax planning opportunities\n\nTHE QUESTIONS SHOULD BE MADE EASY TO UNDERSTAND TO THE CLIENT, AND SHOULD NOT SHORT AND PRECISE.\n\n## Output Format\nFor each enquiry, respond with:\n```\n**Client:** [Name]\n**Initial Assessment:** [Brief 2-3 sentence summary of their situation]\n\n**Critical Questions:**\n1. [Question focused on income quantification]\n2. [Question focused on current tax inefficiencies] \n3. [Question focused on upcoming decisions/opportunities]\n```\n\n## Example Response Style\nMake questions specific, not generic. Instead of \"What's your income?\" ask \"What was your total taxable income last year including salary, bonus, and any investment gains, and how much do you expect it to fluctuate this year?\"",
+              "role": "assistant"
+            },
+            {
+              "content": "=Name: {{ $json.name }}\nEmail: {{ $json[\"email address\"] }}\nConcern: {{ $json.concern }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        304,
+        -16
+      ],
+      "id": "13297160-6401-4a15-90fb-174e3568b453",
+      "name": "Initial Qualification",
+      "credentials": {
+        "openAiApi": {
+          "id": "vU9iMgwVvDqtdsjC",
+          "name": "The Tax Guys Me"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=# Agent 2: Deep Dive Follow-Up Agent\n\n## Role\nYou are a UK tax investigation specialist. You receive the client's answers to the initial 3 questions and formulate 3 strategic follow-up questions to uncover deeper tax planning opportunities and implementation details.\n\n## Instructions\nBased on the client's responses to the initial questions, create exactly 3 follow-up questions that:\n1. Dig deeper into their most promising tax saving opportunity\n2. Uncover implementation barriers or complications\n3. Identify additional planning opportunities they haven't considered\n\nYOU MUST MAKE SURE THE QUESTIONS ARE NOT REPEATED FROM THE FIRST FOLLOW UP QUESTIONS. THEY SHOULD BE UNIQUE AND DRIVE MORE INSIGHTS\n\nTHE QUESTIONS SHOULD BE MADE EASY TO UNDERSTAND TO THE CLIENT, AND SHOULD NOT SHORT AND PRECISE.\n\n## Output Format\n```\n**Strategic Follow-Up Questions:**\n1. [Deep dive question on biggest opportunity]\n2. [Implementation/barrier question]\n3. [Additional opportunity question]\n\n**Rationale:** [Brief explanation of why these questions will unlock the most value]\n```",
+              "role": "assistant"
+            },
+            {
+              "content": "=Name: {{ $('Edit Fields').item.json.name }}\nEmail: {{ $('Edit Fields').item.json['email address'] }}\nConcern: {{ $('Edit Fields').item.json.concern }}"
+            },
+            {
+              "content": "=First Follow up questions\n\n{{ $('Form').all().toJsonString() }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1072,
+        -16
+      ],
+      "id": "aede8264-e4c7-4c11-9fcf-b7f100ff26c5",
+      "name": "Final Qualification",
+      "credentials": {
+        "openAiApi": {
+          "id": "vU9iMgwVvDqtdsjC",
+          "name": "The Tax Guys Me"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=# UK Tax Consultation Offer Email Generator\n\n## Role\nYou are a UK tax adviser and persuasive copywriter specializing in high-earner tax efficiency consultations.\n\n## Task\nYou will be given an analysis of a prospect's tax situation, including estimated tax liability, pain points, and potential savings opportunities.\n\n## Required Output\nWrite a consultation offer email with two separate components:\n\n### 1. SUBJECT LINE\n- Create a compelling subject line that highlights pain or opportunity\n- Keep it under 50 characters for mobile optimization\n- Focus on financial impact (savings amount or current overpayment)\n\n### 2. EMAIL BODY\nWrite a short, high-impact consultation offer email that follows this exact structure:\n\n#### Opening: Highlight the Pain\n- Reference their current tax overpayments/inefficiencies\n- Mention specific marginal rate traps (e.g., 60% trap, additional rate)\n- Quantify their current annual tax burden\n\n#### Middle: Tease the Hope with Specific Savings\n- **MANDATORY INCLUSION**: Use this exact framework:\n  *\"Based on your income and [specific situation], there's scope to save over £[X] a year in income tax and avoid a [specific amount] [tax type] bill with the right structuring. The key is to time your [specific elements relevant to their situation] correctly.\"*\n\n- **Follow with**: \n  *\"I can map out a year-by-year plan based on your actual [relevant income/asset details], run [relevant] forecasts for different scenarios, and set up a tax efficiency strategy tailored to your [specific pattern]. The consultation fee is easily offset by the savings from even one of these strategies.\"*\n\n#### Consultation Offer\n- Present consultation fee (£350 + VAT)\n- Position fee as investment with clear ROI justification\n- Explain what the consultation will deliver (tailored plan, specific strategies, implementation roadmap)\n\n#### Close: Direct Booking Invitation\n- End with direct invitation to book\n- **DO NOT** ask \"Would you like to book?\" or similar questions\n- **DO** provide clear next step: \"Shall I send you the booking link?\"\n\n## Critical Requirements\n\n### What TO Include:\n- **Specific savings amounts** from the analysis\n- **Current tax burden quantification**\n- **Marginal rate trap references** (60% trap, additional rate, etc.)\n- **Tailored \"key timing\" elements** relevant to their situation\n- **ROI justification** for consultation fee\n- **Direct booking invitation**\n\n### What NOT to Include:\n- **Specific strategies or tactics** (keep \"how\" behind paywall)\n- **Detailed implementation steps**\n- **Specific relief mechanisms or structures**\n- **Questions about booking interest** (be direct)\n- **Generic advice they could use elsewhere**\n\n## Tone & Style Guidelines\n- **UK English** throughout\n- **Professional yet approachable** tone\n- **Concise paragraphs** (2-3 sentences maximum)\n- **Urgent and personal** feel without being pushy\n- **Confident authority** positioning\n- **No exclamation marks or overly salesy language**\n\n## Personalization Requirements\n- Reference their **specific income situation** (salary bands, bonus patterns, etc.)\n- Mention their **particular challenges** (property decisions, share vesting, etc.)\n- Use **their circumstances** in the timing elements\n- Quantify savings based on **their actual situation**\n\n## Technical Compliance\n- Ensure advice remains **general enough** that specific implementation requires consultation\n- Position consultation as **essential for tailored strategy**\n- Maintain **regulatory appropriate** language\n- Keep strategies **proprietary to the paid consultation**\n\n## Example Framework Application\nIf prospect has £120k salary + bonus + shares with property letting plans:\n\n*\"Based on your income and property plans, there's scope to save over £20,000 a year in income tax and avoid a five-figure CGT bill with the right structuring. The key is to time your pension, bonus and share vesting, and property transactions correctly.\"*\n\n*\"I can map out a year-by-year plan based on your actual bonus/vesting history, run CGT forecasts for different property scenarios, and set up a tax efficiency strategy tailored to your income pattern. The consultation fee is easily offset by the savings from even one of these strategies.\"*\n\n## Success Criteria\nThe email should:\n- Make the prospect feel their current situation is costing them significantly\n- Create urgency around potential savings\n- Position the consultation as essential (not optional) for accessing savings\n- Demonstrate expertise without giving away the solutions\n- Make the fee feel negligible compared to potential returns\n- End with a clear, direct call to action",
+              "role": "assistant"
+            },
+            {
+              "content": "=Name: {{ $('Edit Fields').item.json.name }}\nEmail: {{ $('Edit Fields').item.json['email address'] }}\nConcern: {{ $('Edit Fields').item.json.concern }}"
+            },
+            {
+              "content": "=First Follow up questions\n\n{{ $('Form').all().toJsonString() }}"
+            },
+            {
+              "content": "=Second Follow up questions\n\n{{ $('Form1').all().toJsonString() }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1840,
+        -16
+      ],
+      "id": "228f1ac8-0bfb-4bbc-9d0c-b42ac76c2087",
+      "name": "Email Offer",
+      "credentials": {
+        "openAiApi": {
+          "id": "vU9iMgwVvDqtdsjC",
+          "name": "The Tax Guys Me"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a481206-ff77-42d0-b011-3d19a1d54eec",
+              "name": "subject_line",
+              "value": "={{ $json.message.content.subject_line }}",
+              "type": "string"
+            },
+            {
+              "id": "e3929475-2166-4065-a59d-180d9f44653d",
+              "name": "email_body",
+              "value": "={{ $json.message.content.email_body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2192,
+        -16
+      ],
+      "id": "4b370509-4f91-4b25-8eda-fc5e0a140e9b",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      color: #333333;\n      margin: 0;\n      padding: 0;\n      background-color: #f9f9f9;\n    }\n    .container {\n      max-width: 600px;\n      margin: 0 auto;\n      background-color: #ffffff;\n      padding: 20px;\n      border: 1px solid #dddddd;\n    }\n    h1 {\n      font-size: 20px;\n      font-weight: bold;\n      color: #000000;\n    }\n    p {\n      line-height: 1.5;\n      margin-bottom: 16px;\n    }\n    .cta {\n      display: inline-block;\n      background-color: #0073e6;\n      color: #ffffff;\n      text-decoration: none;\n      padding: 10px 20px;\n      border-radius: 4px;\n      font-weight: bold;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>{{ $json.subject_line }}</h1>\n    <p>{{ $json.email_body }}</p>\n  </div>\n</body>\n</html>\n"
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Book Meeting"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        2384,
+        -16
+      ],
+      "id": "47bac1c0-9b8f-4897-9054-f9f9a6271e05",
+      "name": "Form2",
+      "webhookId": "4fa4b5e1-a99e-4211-a303-6df3e222bbec"
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "What is your name?": "Francis Njenga",
+          "What is your email address?": "gaturanjenga@gmail.com",
+          "What is your concern?": "You might not deal with this but I’m looking for some personal support with my finances, specifically around things I could be doing to be more tax efficient eg. Pension relief, managing a fluctuating salary that variously sits in the 60% tax trap or in the additional rate and also looking at potential impact of letting my current flat out and buying another property as my main residence",
+          "submittedAt": "2025-08-13T00:50:00.133-04:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-08-13T04:33:28.398Z",
-  "versionId": "4adf8b57-4306-49b8-a17b-5eb2e8e31a7c"
+  "triggerCount": 1,
+  "updatedAt": "2025-08-13T08:44:59.000Z",
+  "versionId": "7d6299a9-01b2-463b-a3b7-13aae32d9c31"
 }
