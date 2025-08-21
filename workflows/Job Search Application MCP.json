@@ -434,6 +434,15 @@
     "timezone": "Africa/Nairobi",
     "callerPolicy": "workflowsFromSameOwner"
   },
+  "shared": [
+    {
+      "createdAt": "2025-07-24T03:02:54.627Z",
+      "updatedAt": "2025-07-24T03:02:54.627Z",
+      "role": "workflow:owner",
+      "workflowId": "iwuagkMbDmzygIzu",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
