@@ -992,6 +992,15 @@
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner"
   },
+  "shared": [
+    {
+      "createdAt": "2024-10-22T06:19:30.164Z",
+      "updatedAt": "2024-10-22T06:19:30.164Z",
+      "role": "workflow:owner",
+      "workflowId": "8RLPBaJREDnMZAwQ",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": []
