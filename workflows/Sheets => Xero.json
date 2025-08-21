@@ -504,6 +504,15 @@
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner"
   },
+  "shared": [
+    {
+      "createdAt": "2024-08-30T08:15:32.925Z",
+      "updatedAt": "2024-08-30T08:15:32.925Z",
+      "role": "workflow:owner",
+      "workflowId": "SXqt7nC1B8Jrx1ZS",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
   "staticData": {
     "node:Google Sheets Trigger": {
       "documentId": "1vGRraKIqht0FAHkC7btVD-7aqPjy_SbJWkU15mL5ti0",
