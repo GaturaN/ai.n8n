@@ -599,6 +599,15 @@
   ],
   "pinData": {},
   "settings": {},
+  "shared": [
+    {
+      "createdAt": "2025-02-10T09:36:09.618Z",
+      "updatedAt": "2025-02-10T09:36:09.618Z",
+      "role": "workflow:owner",
+      "workflowId": "aUTaw4gisNDQefYE",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
