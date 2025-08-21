@@ -66,6 +66,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "createdAt": "2024-10-25T21:19:42.559Z",
+      "updatedAt": "2024-10-25T21:19:42.559Z",
+      "role": "workflow:owner",
+      "workflowId": "uEPzHBqXMVZIZSwN",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
   "staticData": {
     "node:Microsoft Outlook Trigger": {
       "lastTimeChecked": "2024-10-25T17:20:55.608-04:00"
