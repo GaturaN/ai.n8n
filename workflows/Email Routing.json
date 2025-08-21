@@ -598,6 +598,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "createdAt": "2024-10-01T12:41:07.681Z",
+      "updatedAt": "2024-10-01T12:41:07.681Z",
+      "role": "workflow:owner",
+      "workflowId": "D9YJr7DXAumczK9I",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
   "staticData": {
     "node:incoming_message": {
       "incoming_message": {
