@@ -642,6 +642,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "createdAt": "2025-02-08T17:52:40.527Z",
+      "updatedAt": "2025-02-08T17:52:40.527Z",
+      "role": "workflow:owner",
+      "workflowId": "Wd5YzxQ0WKWPjmqs",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
