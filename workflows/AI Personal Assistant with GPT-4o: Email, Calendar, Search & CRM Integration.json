@@ -383,6 +383,15 @@
   ],
   "pinData": {},
   "settings": {},
+  "shared": [
+    {
+      "createdAt": "2025-07-23T06:08:46.591Z",
+      "updatedAt": "2025-07-23T06:08:46.591Z",
+      "role": "workflow:owner",
+      "workflowId": "BMxeLnlndEYDWVJW",
+      "projectId": "f251Vm1elXSHvMcm"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
