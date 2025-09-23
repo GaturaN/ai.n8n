@@ -1,0 +1,523 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "ICP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base Url": {
+      "main": [
+        [
+          {
+            "node": "Departments",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Seniority",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Data Points",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Countries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Departments": {
+      "main": [
+        [
+          {
+            "node": "All departments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seniority": {
+      "main": [
+        [
+          {
+            "node": "All Seniority",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Points": {
+      "main": [
+        [
+          {
+            "node": "All Data Points",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Countries": {
+      "main": [
+        [
+          {
+            "node": "All Countries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ICP": {
+      "main": [
+        [
+          {
+            "node": "Base Url",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "All Filters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All departments": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All Seniority": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "All Data Points": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "All Countries": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Contact Filters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All Filters": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-22T12:28:00.683Z",
+  "id": "hR7OnPWfEESsf640",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Outbound Engine Test",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        240
+      ],
+      "id": "0f1ca044-9683-4479-a7ca-803a44ef575a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "45490933-9c16-4785-a116-f2186fe07aff",
+              "name": "url",
+              "value": "https://api.lusha.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -80,
+        240
+      ],
+      "id": "af43cb60-fca0-4910-8fa2-cbec1fb840e2",
+      "name": "Base Url"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}/prospecting/filters/contacts/departments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        144,
+        -48
+      ],
+      "id": "cd664b44-f1e7-4a3b-8424-88c06428fca8",
+      "name": "Departments",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "2Z687Ffn4pFBfReH",
+          "name": "Lusha - Francis Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}/prospecting/filters/contacts/seniority",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        144,
+        144
+      ],
+      "id": "25cbc80e-421a-4397-a774-8f14e8a6a0ed",
+      "name": "Seniority",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "2Z687Ffn4pFBfReH",
+          "name": "Lusha - Francis Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}/prospecting/filters/contacts/existing_data_points",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        144,
+        336
+      ],
+      "id": "2e947f63-6840-438d-9ab1-bb305a8a3d7b",
+      "name": "Data Points",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "2Z687Ffn4pFBfReH",
+          "name": "Lusha - Francis Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}/prospecting/filters/contacts/all_countries",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        144,
+        528
+      ],
+      "id": "28b60f7a-2222-4442-a8ff-ba285e28eabe",
+      "name": "Countries",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "2Z687Ffn4pFBfReH",
+          "name": "Lusha - Francis Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "70e7012c-e7dd-4e8d-94c0-51bd6049a193",
+              "name": "ICP",
+              "value": "Ideal Customer Profile (ICP) for The/Studio\nPrimary Target: E-commerce & Direct-to-Consumer Brands\nCompany Criteria:\n\nIndustry: E-commerce, Consumer Goods, Retail, Fashion, Beauty, Home & Garden\nCompany Size: 10-500 employees\nRevenue Range: $1M - $50M annually\nGeographic Location: United States, Canada, United Kingdom, Australia\nTechnology Stack: Shopify, WooCommerce, Magento (indicates e-commerce focus)\n\nDecision Maker Profile:\n\nJob Titles:\n\nFounder / Co-Founder\nChief Executive Officer (CEO)\nChief Marketing Officer (CMO)\nMarketing Director\nBrand Manager\nProduct Manager\nHead of Marketing\n\n\nSeniority Level: C-Level, VP-Level, Director-Level\nDepartment: Marketing, Executive, Product, Procurement\n\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -304,
+        240
+      ],
+      "id": "d8b41716-d10f-40a6-8530-c1acc218bdcf",
+      "name": "ICP"
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        592,
+        208
+      ],
+      "id": "1b8b6c78-f04a-472c-8e41-eabc2af8d8ee",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "departments",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        368,
+        -48
+      ],
+      "id": "e6c327e4-7d1d-4584-aa77-bc8bcf3e13d9",
+      "name": "All departments"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "Seniority Levels",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        368,
+        144
+      ],
+      "id": "9b48fa32-54d0-4d17-9228-020fb4460eeb",
+      "name": "All Seniority"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "dataPoints",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        368,
+        336
+      ],
+      "id": "861fdd92-fd4f-4e7c-ba40-f482207cfab1",
+      "name": "All Data Points"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "countries",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        368,
+        528
+      ],
+      "id": "38f6ae2d-58a4-4816-ab8a-89168302700e",
+      "name": "All Countries"
+    },
+    {
+      "parameters": {
+        "content": "## Contact Filters\n",
+        "height": 768,
+        "width": 512,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        48,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "fe89adf2-6b97-448c-8012-1555e70a4144",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a helpful ICP filter manager. Based on the details below for the expocted ICP, and the data, respond with the most relevant filters for ICP.\nOnly output the necessary filters in each category without any other information or reasoning\n\n_______________\n\nICP\n{{ $('ICP').item.json.ICP }}\n\n_________________\nData: \n\nDepartments:\n{{ $json.data[0].departments }}\n\nSeniority Levels:\n{{ $json.data[1]['Seniority Levels'].toJsonString() }}\n\nCountries:\n{{ $json.data[3].countries.toJsonString() }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1088,
+        256
+      ],
+      "id": "72e0a6d6-5129-4656-ae8d-e17b1ea429e6",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "V1B9cu9hFEfOiXML",
+          "name": "TS Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        832,
+        240
+      ],
+      "id": "468e327b-f0b6-426a-8a82-01135b4aef5f",
+      "name": "All Filters"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4960a272-d568-42c3-874c-2bd61c25341b",
+              "name": "departments",
+              "value": "={{ $json.message.content.departments || $json.message.content.Departments }}",
+              "type": "array"
+            },
+            {
+              "id": "22c4aa16-62bd-49b5-9c05-f383da9f710b",
+              "name": "seniority_levels",
+              "value": "={{ $json.message.content.seniority_levels || $json.message.content['Seniority Levels'] }}",
+              "type": "array"
+            },
+            {
+              "id": "dc966fce-e1ee-4bc5-9590-597576ddad88",
+              "name": "countries",
+              "value": "={{ $json.message.content.countries || $json.message.content.Countries }}",
+              "type": "array"
+            },
+            {
+              "id": "99c9e623-9d6f-4136-8bce-651c8acc2e70",
+              "name": "data_points",
+              "value": "={{ $('Data Points').all() }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1440,
+        256
+      ],
+      "id": "de1d784e-17ff-4ffc-8ab8-44d5020fc5c8",
+      "name": "Contact Filters"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-22T12:28:00.696Z",
+      "updatedAt": "2025-09-22T12:28:00.696Z",
+      "role": "workflow:owner",
+      "workflowId": "hR7OnPWfEESsf640",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-22T12:31:28.000Z",
+  "versionId": "13a22c21-e9dc-4efe-8a41-8129a61806dd"
+}
