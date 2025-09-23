@@ -1,0 +1,64 @@
+{
+  "active": false,
+  "connections": {
+    "HubSpot Trigger": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-09-22T12:12:58.243Z",
+  "id": "ibQc5JGhfpfte8qr",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 20",
+  "nodes": [
+    {
+      "parameters": {
+        "eventsUi": {
+          "eventValues": [
+            {
+              "name": "conversation.privacyDeletion"
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.hubspotTrigger",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        16
+      ],
+      "id": "6e0c5e56-1806-431e-a9b9-bba7183de8cc",
+      "name": "HubSpot Trigger",
+      "webhookId": "a6854412-4acb-4754-af89-258775cfb570",
+      "credentials": {
+        "hubspotDeveloperApi": {
+          "id": "NXIRu4IVuUnL3HGo",
+          "name": "TS Main App Connected"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-22T12:12:58.249Z",
+      "updatedAt": "2025-09-22T12:12:58.249Z",
+      "role": "workflow:owner",
+      "workflowId": "ibQc5JGhfpfte8qr",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-22T12:20:24.000Z",
+  "versionId": "eb90039e-543e-4aab-b73e-5a46b657b9d4"
+}
