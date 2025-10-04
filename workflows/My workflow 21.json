@@ -1,0 +1,129 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-02T16:04:57.622Z",
+  "id": "wgLQLnB9WArxZSB0",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 21",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9f15ccf3-3f10-4535-a8a2-51228224956b",
+      "name": "When chat message received",
+      "webhookId": "23e8064e-a2d2-4bd9-a183-a1d72dce34f4"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Use the tool provided to sdearch for the name of the ceo of the following company."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "6133c503-3bfc-4412-8d83-36151c91980c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        208
+      ],
+      "id": "3ee6d98c-21ea-446d-8c36-f6a6bd1b579a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "V1B9cu9hFEfOiXML",
+          "name": "TS Account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "226553c0-6fe7-4660-bc13-ad0d2d4e4cf4",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-02T16:04:57.633Z",
+      "updatedAt": "2025-10-02T16:04:57.633Z",
+      "role": "workflow:owner",
+      "workflowId": "wgLQLnB9WArxZSB0",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-03T06:16:32.000Z",
+  "versionId": "8694a82b-e706-40e7-8f08-e04bf8ebd47c"
+}
