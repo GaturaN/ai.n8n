@@ -1,0 +1,95 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "get_agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-15T06:53:05.141Z",
+  "id": "BTIdd9D0TvkSr9Vs",
+  "isArchived": false,
+  "meta": null,
+  "name": "Call Agent Review",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "doc_id"
+            },
+            {
+              "name": "audio_id"
+            }
+          ]
+        }
+      },
+      "id": "c055762a-8fe7-4141-a639-df2372f30060",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        192,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.elevenlabs.io/v1/convai/agents/agent_id",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xi-api-key",
+              "value": "xi-api-key"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        304
+      ],
+      "id": "428b0e9d-c464-4e41-b9d1-4a62efa84133",
+      "name": "get_agent"
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "doc_id": "1d7pSzwB17boCUix4DyRh_xsf1-rtP2wQlm57h8mBoxE",
+          "audio_id": "1Pdp2v4__FCiuztgMMzZA1BB9bibzk6SQ"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-15T06:53:05.157Z",
+      "updatedAt": "2025-10-15T06:53:05.157Z",
+      "role": "workflow:owner",
+      "workflowId": "BTIdd9D0TvkSr9Vs",
+      "projectId": "FYVdBnr1QQmYogvE"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-15T08:54:33.000Z",
+  "versionId": "f4d7bb34-f765-4bf2-8233-3227e3267883"
+}
